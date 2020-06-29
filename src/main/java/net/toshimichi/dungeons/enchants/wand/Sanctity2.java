@@ -7,6 +7,8 @@ import net.toshimichi.dungeons.enchants.Title;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Sanctity2 implements Enchant {
     @Override
@@ -46,7 +48,7 @@ public class Sanctity2 implements Enchant {
     }
 
     @Override
-    public Class<? extends Enchanter> getEnchanter() {
-        return SanctityEnchanter.class;
+    public Enchanter getEnchanter(Player player, ItemStack itemStack) {
+        return new SanctityEnchanter(this, player, itemStack);
     }
 }

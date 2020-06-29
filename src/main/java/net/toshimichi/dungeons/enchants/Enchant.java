@@ -1,7 +1,9 @@
 package net.toshimichi.dungeons.enchants;
 
 import net.toshimichi.dungeons.lang.Locale;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * 単一のエンチャントを表します.
@@ -62,8 +64,10 @@ public interface Enchant {
     /**
      * エンチャントの実行クラスを返します.
      *
+     * @param player エンチャントを適用するプレイヤー
+     * @param itemStack エンチャントのついたアイテム
      * @return エンチャントの実行クラス
      */
-    Class<? extends Enchanter> getEnchanter();
+    Enchanter getEnchanter(Player player, ItemStack itemStack);
 
 }

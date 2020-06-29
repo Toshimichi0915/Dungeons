@@ -5,7 +5,6 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  * エンチャントの実行クラスです.
- * インスタンスのコンストラクタは {@link Enchant} {@link org.bukkit.entity.Player} {@link org.bukkit.inventory.ItemStack} を引数に持っていなければなりません.
  */
 abstract public class Enchanter {
 

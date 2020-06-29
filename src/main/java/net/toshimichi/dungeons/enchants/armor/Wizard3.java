@@ -6,6 +6,8 @@ import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.Title;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Wizard3 implements Enchant {
     @Override
@@ -44,7 +46,7 @@ public class Wizard3 implements Enchant {
     }
 
     @Override
-    public Class<? extends Enchanter> getEnchanter() {
-        return WizardEnchanter.class;
+    public Enchanter getEnchanter(Player player, ItemStack itemStack) {
+        return new WizardEnchanter(this, player, itemStack);
     }
 }

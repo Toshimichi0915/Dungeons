@@ -40,16 +40,6 @@ public class SimpleEnchantManager implements EnchantManager {
         enchanters.put(player, set);
     }
 
-    private Enchanter newEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
-        Class<? extends Enchanter> clazz = enchant.getEnchanter();
-        try {
-            Constructor<? extends Enchanter> constructor = clazz.getDeclaredConstructor(Enchant.class, Player.class, ItemStack.class);
-            return constructor.newInstance(enchant, player, itemStack);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            return null;
-        }
-    }
-
     private void removeEnchants(Player player, ItemStack itemStack) {
         Set<Enchanter> set = enchanters.get(player);
         if (set == null) return;
@@ -66,7 +56,7 @@ public class SimpleEnchantManager implements EnchantManager {
     private void applyEnchants(Player player, ItemStack itemStack) {
         getEnchants(itemStack)
                 .stream()
-                .map(a -> newEnchanter(a, player, itemStack))
+                .map(a -> a.getEnchanter(player, itemStack))
                 .filter(Objects::nonNull)
                 .forEach(a -> {
                     a.enable();

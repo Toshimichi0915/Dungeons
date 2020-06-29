@@ -1,0 +1,11 @@
+name: @name@
+version: @version@
+main: net.toshimichi.dungeons.DungeonsPlugin
+api-version: 1.15
+depend: ["WorldEdit", "FastAsyncWorldEdit"]
+
+commands:
+  dungeons:
+    usage: /dungeons [args]
+    description: "Dungeonsの管理用コマンド"
+    permission: net.toshimichi.dungeons.help

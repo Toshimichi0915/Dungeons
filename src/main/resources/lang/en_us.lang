@@ -1,0 +1,6 @@
+general.lang.name=英語
+general.lang.native=English
+general.lang.recommendation=Your language is now set to {current}. Would you like your language to {recommend}?
+general.lang.change=Your language has been changed to English
+general.yes=Yes
+general.no=No

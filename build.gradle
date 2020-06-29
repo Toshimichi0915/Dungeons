@@ -1,0 +1,36 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+}
+
+group 'net.toshimichi'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal();
+//    maven {
+//        url "https://papermc.io/repo/repository/maven-public/"
+    maven {
+        url 'http://ci.athion.net/job/FastAsyncWorldEdit/ws/mvn/'
+    }
+}
+
+dependencies {
+//    compile 'com.destroystokyo.paper:paper-api:1.15.2-R0.1-SNAPSHOT'
+    compile 'com.boydti:fawe-api:latest'
+    compile 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
+    testCompile 'junit:junit:4.12'
+}
+
+processResources {
+    filter(ReplaceTokens, tokens: [name: rootProject.name, version: version])
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+

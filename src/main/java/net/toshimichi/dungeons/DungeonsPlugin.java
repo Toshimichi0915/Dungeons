@@ -1,8 +1,8 @@
 package net.toshimichi.dungeons;
 
 import net.toshimichi.dungeons.commands.DungeonsCommand;
-import net.toshimichi.dungeons.economy.Economy;
-import net.toshimichi.dungeons.economy.SimpleEconomy;
+import net.toshimichi.dungeons.misc.Economy;
+import net.toshimichi.dungeons.misc.SimpleEconomy;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.SimpleEnchantManager;
 import net.toshimichi.dungeons.enchants.armor.*;

@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.economy;
+package net.toshimichi.dungeons.misc;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;

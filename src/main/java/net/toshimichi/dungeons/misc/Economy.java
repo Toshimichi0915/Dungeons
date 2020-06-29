@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.economy;
+package net.toshimichi.dungeons.misc;
 
 import java.util.UUID;
 

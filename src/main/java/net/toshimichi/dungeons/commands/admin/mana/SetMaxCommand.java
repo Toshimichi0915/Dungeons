@@ -5,7 +5,7 @@ import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.entity.Player;
 
-public class SetMaxManaCommand implements PlayerCommand {
+public class SetMaxCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         DungeonsPlugin.getManaManager().setMaxMana(player, arguments.getInt(0, "最大魔力"));
@@ -18,6 +18,6 @@ public class SetMaxManaCommand implements PlayerCommand {
 
     @Override
     public String getPermission() {
-        return "net.toshimichi.dungeons.mana.setmaxmana";
+        return "net.toshimichi.dungeons.mana.setmax";
     }
 }

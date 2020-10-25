@@ -10,8 +10,8 @@ public class ManaCommand extends BranchCommand {
     @Override
     protected Map<String, SubCommand> getSubCommands() {
         HashMap<String, SubCommand> map = new HashMap<>();
-        map.put("setmana", new SetManaCommand());
-        map.put("setmaxmana", new SetMaxManaCommand());
+        map.put("set", new SetCommand());
+        map.put("setmax", new SetMaxCommand());
         return map;
     }
 

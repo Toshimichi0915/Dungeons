@@ -38,7 +38,7 @@ public class IpCommand implements SubCommand {
         }
         Player finalTarget = target;
         async(() -> {
-            String ip = finalTarget.getAddress().getHostName();
+            String ip = finalTarget.getAddress().getHostString();
             boolean available = api.isAvailable();
             IpStackInfo info = null;
             if (available) {
@@ -50,7 +50,7 @@ public class IpCommand implements SubCommand {
                 }
             }
             if (!available) {
-                sync(() -> sender.sendMessage("Ipに関する情報は現在使用不可能です"));
+                sync(() -> sender.sendMessage("IPに関する情報は現在使用不可能です"));
                 return;
             }
             if (info.getIp() == null)

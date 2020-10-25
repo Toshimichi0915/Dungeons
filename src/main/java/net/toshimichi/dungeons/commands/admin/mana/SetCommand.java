@@ -5,7 +5,7 @@ import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.entity.Player;
 
-public class SetManaCommand implements PlayerCommand {
+public class SetCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         DungeonsPlugin.getManaManager().setMana(player, arguments.getInt(0, "魔力"));
@@ -18,6 +18,6 @@ public class SetManaCommand implements PlayerCommand {
 
     @Override
     public String getPermission() {
-        return "net.toshimichi.dungeons.mana.setmana";
+        return "net.toshimichi.dungeons.mana.set";
     }
 }

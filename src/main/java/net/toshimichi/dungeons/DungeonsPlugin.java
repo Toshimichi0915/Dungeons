@@ -139,6 +139,7 @@ public class DungeonsPlugin extends JavaPlugin {
 
         getCommand("dungeons").setExecutor(new DungeonsCommand());
 
+        Bukkit.getPluginManager().registerEvents(new EnchantListener(), this);
         Bukkit.getPluginManager().registerEvents(new HpBarListener(), this);
         Bukkit.getPluginManager().registerEvents(new StashListener(), this);
         Bukkit.getPluginManager().registerEvents(new EconomyListener(), this);

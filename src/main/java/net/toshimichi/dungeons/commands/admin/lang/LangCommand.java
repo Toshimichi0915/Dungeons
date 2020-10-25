@@ -12,6 +12,7 @@ public class LangCommand extends BranchCommand {
         HashMap<String, SubCommand> map = new HashMap<>();
         map.put("ip", new IpCommand());
         map.put("check", new CheckCommand());
+        map.put("set", new SetCommand());
         return map;
     }
 

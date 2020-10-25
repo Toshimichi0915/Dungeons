@@ -57,6 +57,19 @@ public class LocaleBuilder {
     }
 
     /**
+     * 文字列を置き換えます.
+     * 置き換えは {@link #build()} 時に行われます.
+     *
+     * @param from 置き換え元
+     * @param to   置き換え後
+     * @return このインスタンス
+     */
+    public LocaleBuilder replace(String from, String to) {
+        replaceMap.put(from, () -> to);
+        return this;
+    }
+
+    /**
      * メッセージを送るプレイヤーを設定します.
      *
      * @param player プレイヤー

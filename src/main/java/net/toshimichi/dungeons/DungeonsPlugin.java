@@ -119,19 +119,19 @@ public class DungeonsPlugin extends JavaPlugin {
             copyLang("ja_jp");
             copyLang("en_us");
             Locale jaLocale = getLocale("ja_jp");
-            Locale enLoclae = getLocale("en_us");
+            Locale enLocale = getLocale("en_us");
             locales.add(jaLocale);
-            locales.add(enLoclae);
+            locales.add(enLocale);
             defaultLocale = jaLocale;
             if (ipStackApi.isAvailable()) {
                 defaultFactory = new IpStackLocaleFactory("ja_jp", jaLocale, "ja");
                 factories.add(defaultFactory);
-                factories.add(new IpStackLocaleFactory("en_us", enLoclae, "en"));
+                factories.add(new IpStackLocaleFactory("en_us", enLocale, "en"));
             }
             if (defaultFactory == null)
                 defaultFactory = new OptionLocaleFactory("ja_jp", jaLocale, "ja_jp");
             factories.add(new OptionLocaleFactory("ja_jp", jaLocale, "ja_jp"));
-            factories.add(new OptionLocaleFactory("en_us", enLoclae, "en_us"));
+            factories.add(new OptionLocaleFactory("en_us", enLocale, "en_us"));
         } catch (IOException e) {
             e.printStackTrace();
         }

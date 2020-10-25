@@ -1,7 +1,8 @@
 general.lang.name=日本語
 general.lang.native=日本語
+general.lang.english=Japanese
 general.lang.recommendation=言語は {current} に設定されています. {recommend} に変更しますか?
-general.lang.change=言語が日本語に変更されました
+general.lang.change=言語が {lang} に変更されました
 general.yes=はい
 general.no=いいえ
 enchant.sharpness.1=ダメージが&c8%&7上昇

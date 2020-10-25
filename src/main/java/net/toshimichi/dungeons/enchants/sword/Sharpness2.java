@@ -28,7 +28,7 @@ public class Sharpness2 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 1;
+        return 50;
     }
 
     @Override

@@ -18,6 +18,7 @@ public class EnchantCommand extends BranchCommand {
         result.put("nonce", new NonceCommand());
         result.put("applied", new AppliedCommand());
         result.put("refresh", new RefreshCommand());
+        result.put("lang", new LangCommand());
         return result;
     }
 

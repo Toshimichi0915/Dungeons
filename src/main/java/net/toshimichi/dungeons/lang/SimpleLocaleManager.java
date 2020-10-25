@@ -7,8 +7,6 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.WeakHashMap;
 
 public class SimpleLocaleManager implements LocaleManager {
@@ -45,12 +43,15 @@ public class SimpleLocaleManager implements LocaleManager {
         this.factories = factories;
     }
 
+    @Override
     public synchronized Locale getLocale(String locale) {
         for (LocaleFactory factory : factories) {
             if (factory.getName().equals(locale))
                 return factory.getLocale();
+            if (locale.equals(factory.getLocale().get("general.lang.english")))
+                return factory.getLocale();
         }
-        return def.getLocale();
+        return null;
     }
 
     @Override

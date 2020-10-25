@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -70,13 +70,7 @@ public class SanctityEnchanter extends Enchanter implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         if (!e.getPlayer().equals(getPlayer())) return;
-        if (tryUse())
-            e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onAttack(EntityDamageByEntityEvent e) {
-        if (!e.getDamager().equals(getPlayer())) return;
+        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (tryUse())
             e.setCancelled(true);
     }

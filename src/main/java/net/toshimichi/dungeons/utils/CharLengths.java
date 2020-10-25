@@ -1,5 +1,7 @@
 package net.toshimichi.dungeons.utils;
 
+import org.bukkit.ChatColor;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -120,17 +122,19 @@ public enum CharLengths {
 
     /**
      * 文字列の長さを調べます.
+     *
      * @param str 調べる文字列
      * @return 表示上のピクセル単位の長さ
      */
     public static int getLength(String str) {
         if (str.isEmpty()) return 0;
+        str = ChatColor.stripColor(str);
         char[] array = str.toCharArray();
 
         int result = 0;
-        for (int i = 0; i < array.length; i++) {
+        for (char value : array) {
             result += 1;
-            Integer length = map.get(array[i]);
+            Integer length = map.get(value);
             if (length != null) result += length;
             else result += 8; //平仮名, 漢字もしくはカタカナ
         }

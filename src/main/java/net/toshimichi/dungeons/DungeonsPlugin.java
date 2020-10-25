@@ -1,8 +1,6 @@
 package net.toshimichi.dungeons;
 
 import net.toshimichi.dungeons.commands.DungeonsCommand;
-import net.toshimichi.dungeons.misc.Economy;
-import net.toshimichi.dungeons.misc.SimpleEconomy;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.SimpleEnchantManager;
 import net.toshimichi.dungeons.enchants.armor.*;
@@ -15,10 +13,9 @@ import net.toshimichi.dungeons.enchants.wand.Sanctity3;
 import net.toshimichi.dungeons.lang.*;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
-import net.toshimichi.dungeons.misc.ManaManager;
-import net.toshimichi.dungeons.misc.SimpleManaManager;
-import net.toshimichi.dungeons.misc.Stash;
+import net.toshimichi.dungeons.misc.*;
 import net.toshimichi.dungeons.runnable.BossBarChatRunnable;
+import net.toshimichi.dungeons.runnable.EnchantRunnable;
 import net.toshimichi.dungeons.runnable.ManaBarRunnable;
 import net.toshimichi.dungeons.runnable.ManaRegenRunnable;
 import net.toshimichi.dungeons.utils.Lottery;
@@ -142,7 +139,6 @@ public class DungeonsPlugin extends JavaPlugin {
 
         getCommand("dungeons").setExecutor(new DungeonsCommand());
 
-        Bukkit.getPluginManager().registerEvents(new EnchantListener(), this);
         Bukkit.getPluginManager().registerEvents(new HpBarListener(), this);
         Bukkit.getPluginManager().registerEvents(new StashListener(), this);
         Bukkit.getPluginManager().registerEvents(new EconomyListener(), this);
@@ -153,6 +149,7 @@ public class DungeonsPlugin extends JavaPlugin {
         Bukkit.getOnlinePlayers().forEach(enchantManager::refresh);
 
         Bukkit.getScheduler().runTaskTimer(this, new ManaBarRunnable(), 1, 1);
+        Bukkit.getScheduler().runTaskTimer(this, new EnchantRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new ManaRegenRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, enchantManager::tick, 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new BossBarChatRunnable(), 1, 1);

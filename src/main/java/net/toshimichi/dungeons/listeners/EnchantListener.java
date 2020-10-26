@@ -1,15 +1,17 @@
 package net.toshimichi.dungeons.listeners;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.enchants.EnchantManager;
+import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * エンチャント関連のリスナー
@@ -40,5 +42,21 @@ public class EnchantListener implements Listener {
         if (!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
         for (Player p : Bukkit.getOnlinePlayers())
             DungeonsPlugin.getEnchantManager().disable(p);
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        ItemStack[] inv = InventoryUtils.getPrimaryItemStacks(e.getEntity());
+        EnchantManager manager = DungeonsPlugin.getEnchantManager();
+        for (ItemStack itemStack : inv) {
+            int originalLives = manager.getLives(itemStack);
+            if (originalLives == -1) {
+                continue;
+            } else if (originalLives == 1) {
+                e.getEntity().getInventory().removeItem(itemStack);
+                continue;
+            }
+            manager.setLives(itemStack, originalLives - 1);
+        }
     }
 }

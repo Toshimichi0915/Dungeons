@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants;
 import net.md_5.bungee.api.ChatColor;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.lang.Locale;
+import net.toshimichi.dungeons.utils.InventoryUtils;
 import net.toshimichi.dungeons.utils.Nonce;
 import net.toshimichi.dungeons.utils.RomanNumber;
 import org.bukkit.Material;
@@ -67,7 +68,7 @@ public class SimpleEnchantManager implements EnchantManager {
     @Override
     public void refresh(Player player) {
         PlayerInventory inv = player.getInventory();
-        ItemStack[] checkList = new ItemStack[]{inv.getItemInMainHand(), inv.getItemInOffHand(), inv.getHelmet(), inv.getChestplate(), inv.getLeggings(), inv.getBoots()};
+        ItemStack[] checkList = InventoryUtils.getPrimaryItemStacks(player);
         Set<ItemStack> removed = new HashSet<>();
         getEnchanters(player).stream()
                 .map(Enchanter::getItemStack)

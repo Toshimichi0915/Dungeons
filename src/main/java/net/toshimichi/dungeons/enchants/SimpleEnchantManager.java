@@ -15,8 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class SimpleEnchantManager implements EnchantManager {
@@ -205,6 +203,8 @@ public class SimpleEnchantManager implements EnchantManager {
     }
 
     private int getIntData(ItemStack itemStack, String label) {
+        if (itemStack == null) return -1;
+        if (!itemStack.hasItemMeta()) return -1;
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) return -1;
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
@@ -214,6 +214,8 @@ public class SimpleEnchantManager implements EnchantManager {
     }
 
     private void setIntData(ItemStack itemStack, String label, int data) {
+        if (itemStack == null) return;
+        if (!itemStack.hasItemMeta()) return;
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) return;
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
@@ -270,7 +272,7 @@ public class SimpleEnchantManager implements EnchantManager {
     @Override
     public void setLocale(ItemStack itemStack, Locale locale) {
         ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) return;
+        if (meta == null) return;
         if (locale != null && locale.get("general.lang.name") != null)
             meta.getPersistentDataContainer().set(new NamespacedKey(DungeonsPlugin.getPlugin(), "locale"), PersistentDataType.STRING, locale.get("general.lang.name"));
         else

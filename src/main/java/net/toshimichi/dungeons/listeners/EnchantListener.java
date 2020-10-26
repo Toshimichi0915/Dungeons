@@ -8,10 +8,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Arrays;
 
 /**
  * エンチャント関連のリスナー
@@ -58,5 +61,11 @@ public class EnchantListener implements Listener {
             }
             manager.setLives(itemStack, originalLives - 1);
         }
+    }
+
+    @EventHandler
+    public void onUse(PlayerItemDamageEvent e) {
+        if (Arrays.asList(InventoryUtils.getPrimaryItemStacks(e.getPlayer())).contains(e.getItem()))
+            e.setCancelled(true);
     }
 }

@@ -1,8 +1,7 @@
 name: @name@
 version: @version@
 main: net.toshimichi.dungeons.DungeonsPlugin
-api-version: 1.15
-depend: ["WorldEdit", "FastAsyncWorldEdit"]
+api-version: @api@
 
 commands:
   dungeons:

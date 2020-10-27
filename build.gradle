@@ -32,7 +32,7 @@ dependencies {
 }
 
 processResources {
-    filter(ReplaceTokens, tokens: [name: rootProject.name, version: version])
+    filter(ReplaceTokens, tokens: [name: rootProject.name, version: version, api: api])
 }
 
 shadowJar {

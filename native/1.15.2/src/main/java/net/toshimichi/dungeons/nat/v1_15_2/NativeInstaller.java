@@ -4,7 +4,6 @@ import net.toshimichi.dungeons.nat.api.CooldownUtils;
 import net.toshimichi.dungeons.nat.api.Installer;
 import net.toshimichi.dungeons.nat.api.LocaleLanguage;
 import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
@@ -12,7 +11,12 @@ import org.bukkit.plugin.ServicesManager;
 public class NativeInstaller implements Installer {
     @Override
     public boolean isAvailable() {
-        return Bukkit.getVersion().equals("1.15.2");
+        try {
+            Class.forName("org.bukkit.craftbukkit.v1_15_R1.CraftServer");
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

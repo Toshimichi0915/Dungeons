@@ -25,7 +25,7 @@ public class EnchantCommand extends BranchCommand {
 
     @Override
     public String getDescription() {
-        return "エンチャント管理用コマンド";
+        return "エンチャント管理用コマンドです";
     }
 
     @Override

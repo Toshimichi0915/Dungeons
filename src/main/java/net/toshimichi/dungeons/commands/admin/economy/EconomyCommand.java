@@ -17,7 +17,7 @@ public class EconomyCommand extends BranchCommand {
 
     @Override
     public String getDescription() {
-        return "Economy関連のコマンド";
+        return "Economy関連のコマンドです";
     }
 
     @Override

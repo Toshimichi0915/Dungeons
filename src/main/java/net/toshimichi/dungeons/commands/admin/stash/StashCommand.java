@@ -20,7 +20,7 @@ public class StashCommand extends BranchCommand {
 
     @Override
     public String getDescription() {
-        return "Stash関係のコマンド";
+        return "Stash関係のコマンドです";
     }
 
     @Override

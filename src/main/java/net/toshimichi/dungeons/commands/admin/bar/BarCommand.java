@@ -18,7 +18,7 @@ public class BarCommand extends BranchCommand {
 
     @Override
     public String getDescription() {
-        return "BossBarのデバッグ用コマンド";
+        return "BossBarのデバッグ用コマンドです";
     }
 
     @Override

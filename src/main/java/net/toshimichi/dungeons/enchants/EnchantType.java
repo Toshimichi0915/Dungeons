@@ -1,9 +1,9 @@
 package net.toshimichi.dungeons.enchants;
 
 public enum EnchantType {
-    SWORD, BOW, WAND, HELMET, CHESTPLATE, LEGGINGS, BOOTS, ARTIFACT;
+    SWORD, BOW, WAND, HELMET, CHEST_PLATE, LEGGINGS, BOOTS, SHIELD, ARTIFACT;
 
     public static EnchantType[] getArmor() {
-        return new EnchantType[]{HELMET, CHESTPLATE, LEGGINGS, BOOTS};
+        return new EnchantType[]{HELMET, CHEST_PLATE, LEGGINGS, BOOTS};
     }
 }

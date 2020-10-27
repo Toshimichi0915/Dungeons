@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.WeakHashMap;
 
-public class SimpleLocaleManager implements LocaleManager {
+public class YamlLocaleManager implements LocaleManager {
 
     private LocaleFactory def;
     private File baseDir;
@@ -18,7 +18,7 @@ public class SimpleLocaleManager implements LocaleManager {
     private WeakHashMap<Player, Locale> suggestedLocaleMap = new WeakHashMap<>();
 
     private File getFile(Player player) {
-        return new File(baseDir, player.getUniqueId() + ".yml");
+        return new File(baseDir, player.getUniqueId() + ".yaml");
     }
 
     private YamlConfiguration getYaml(Player player) {
@@ -37,7 +37,7 @@ public class SimpleLocaleManager implements LocaleManager {
         return conf;
     }
 
-    public SimpleLocaleManager(LocaleFactory def, File baseDir, LocaleFactory... factories) {
+    public YamlLocaleManager(LocaleFactory def, File baseDir, LocaleFactory... factories) {
         this.def = def;
         this.baseDir = baseDir;
         this.factories = factories;

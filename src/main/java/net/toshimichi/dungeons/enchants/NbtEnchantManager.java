@@ -17,7 +17,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
-public class SimpleEnchantManager implements EnchantManager {
+public class NbtEnchantManager implements EnchantManager {
 
     private final EnchantDataType enchantDataType;
     private final Set<Enchant> enchants = new HashSet<>();
@@ -28,7 +28,7 @@ public class SimpleEnchantManager implements EnchantManager {
      *
      * @param arr エンチャントの一覧
      */
-    public SimpleEnchantManager(Enchant... arr) {
+    public NbtEnchantManager(Enchant... arr) {
         enchantDataType = new EnchantDataType(arr);
         enchants.addAll(Arrays.asList(arr));
     }

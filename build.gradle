@@ -1,7 +1,9 @@
 import org.apache.tools.ant.filters.ReplaceTokens
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'net.toshimichi'
@@ -10,6 +12,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         url = "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -20,11 +23,28 @@ repositories {
 }
 
 dependencies {
-    implementation "org.spigotmc:spigot-api:$spigot"
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation project(':native:api')
+    runtime project(':native:1.15.2')
+    shadow "org.spigotmc:spigot-api:$spigot"
 }
 
 processResources {
     filter(ReplaceTokens, tokens: [name: rootProject.name, version: version])
+}
+
+shadowJar {
+    dependencies {
+        exclude dependency('net.md-5:.*:.*')
+        exclude dependency('org.spigotmc:.*:.*')
+    }
+
+    def packageName = 'net.toshimichi.dungeons.shadow'
+    relocate 'org.apache', "${packageName}.org.apache"
+    relocate 'com.google', "${packageName}.com.google"
+    relocate 'org.yaml', "${packageName}.org.yaml"
 }
 
 subprojects {

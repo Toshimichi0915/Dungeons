@@ -20,7 +20,7 @@ public class SimpleManaManager implements ManaManager {
     }
 
     private File getFile(Player player) {
-        File f = new File(baseDir, player.getUniqueId() + ".yml");
+        File f = new File(baseDir, player.getUniqueId() + ".yaml");
         if (!f.exists()) {
             try {
                 f.getParentFile().mkdirs();

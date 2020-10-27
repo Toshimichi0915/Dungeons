@@ -2,31 +2,33 @@ package net.toshimichi.dungeons.commands.admin.stash;
 
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_15_R1.LocaleLanguage;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
+import net.toshimichi.dungeons.nat.api.LocaleLanguage;
+import net.toshimichi.dungeons.nat.api.NbtItemStack;
+import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
 import net.toshimichi.dungeons.utils.RomanNumber;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.ServicesManager;
 
 import java.util.List;
 import java.util.Map;
 
 public class CheckCommand implements PlayerCommand {
 
-    private net.minecraft.server.v1_15_R1.ItemStack getNMSItemStack(ItemStack itemStack) {
-        return CraftItemStack.asNMSCopy(itemStack);
-    }
-
     private TextComponent getTextComponent(ItemStack itemStack) {
-        net.minecraft.server.v1_15_R1.ItemStack nmsItemStack = getNMSItemStack(itemStack);
-        String name = nmsItemStack.getName().getText();
+        ServicesManager services = Bukkit.getServicesManager();
+        NbtItemStackFactory factory = services.load(net.toshimichi.dungeons.nat.api.NbtItemStackFactory.class);
+        NbtItemStack nbtItemStack = factory.newNbtItemStack(itemStack);
+        LocaleLanguage lang = services.load(net.toshimichi.dungeons.nat.api.LocaleLanguage.class);
+        String name = nbtItemStack.getName();
         TextComponent result = new TextComponent(name + ChatColor.GRAY + " x" + itemStack.getAmount());
         StringBuilder builder = new StringBuilder(name);
         builder.append('\n');
@@ -41,7 +43,7 @@ public class CheckCommand implements PlayerCommand {
             }
             for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
                 builder.append(ChatColor.GRAY);
-                builder.append(LocaleLanguage.a().a("enchantment.minecraft." + entry.getKey().getKey().getKey().toLowerCase()));
+                builder.append(lang.getMessage("enchantment.minecraft." + entry.getKey().getKey().getKey().toLowerCase()));
                 builder.append(' ');
                 builder.append(RomanNumber.convert(entry.getValue()));
             }

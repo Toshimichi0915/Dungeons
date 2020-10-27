@@ -1,9 +1,8 @@
 package net.toshimichi.dungeons.lang.ipstack;
 
-import com.boydti.fawe.object.collection.SoftHashMap;
 import com.google.gson.*;
-import net.toshimichi.dungeons.DungeonsPlugin;
-import org.bukkit.craftbukkit.libs.org.apache.commons.io.IOUtils;
+import org.apache.commons.collections4.map.ReferenceMap;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,12 +10,18 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
+import static org.apache.commons.collections4.map.AbstractReferenceMap.ReferenceStrength;
 
 /**
  * IpStackの機能を提供します.
  */
 public class IpStackApi {
-    private final SoftHashMap<String, IpStackInfo> map = new SoftHashMap<>();
+
+
+    private final Map<String, IpStackInfo> map =
+            new ReferenceMap<>(ReferenceStrength.SOFT, ReferenceStrength.SOFT);
     private final String accessKey;
 
     public IpStackApi(String accessKey) {
@@ -27,7 +32,7 @@ public class IpStackApi {
         URL url = new URL("http://api.ipstack.com/check?access_key=" + accessKey);
         URLConnection co = url.openConnection();
         StringWriter writer = new StringWriter();
-        try(InputStream in = co.getInputStream()) {
+        try (InputStream in = co.getInputStream()) {
             IOUtils.copy(in, writer, StandardCharsets.UTF_8);
         }
         return new Gson().fromJson(writer.toString(), JsonObject.class);
@@ -88,7 +93,7 @@ public class IpStackApi {
         URLConnection co = url.openConnection();
 
         StringWriter writer = new StringWriter();
-        try(InputStream in = co.getInputStream()) {
+        try (InputStream in = co.getInputStream()) {
             IOUtils.copy(in, writer, StandardCharsets.UTF_8);
         }
         String str = writer.toString();

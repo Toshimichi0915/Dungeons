@@ -1,11 +1,8 @@
 package net.toshimichi.dungeons.lang;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
-import net.toshimichi.dungeons.lang.Locale;
-import net.toshimichi.dungeons.lang.LocaleFactory;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLanguage;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -38,8 +35,8 @@ public class IpStackLocaleFactory implements LocaleFactory {
         try {
             IpStackInfo info = DungeonsPlugin.getIpStackApi().getInfo(player.getAddress().getHostName());
             Set<IpStackLanguage> languages = info.getLocation().getLanguages();
-            for(IpStackLanguage lang : languages) {
-                if(lang.getCode().equals(code))
+            for (IpStackLanguage lang : languages) {
+                if (lang.getCode().equals(code))
                     return true;
             }
             return false;

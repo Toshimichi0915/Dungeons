@@ -2,7 +2,7 @@ package net.toshimichi.dungeons;
 
 import net.toshimichi.dungeons.commands.DungeonsCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
-import net.toshimichi.dungeons.enchants.SimpleEnchantManager;
+import net.toshimichi.dungeons.enchants.NbtEnchantManager;
 import net.toshimichi.dungeons.enchants.armor.*;
 import net.toshimichi.dungeons.enchants.bow.MegaLongbow1;
 import net.toshimichi.dungeons.enchants.bow.MegaLongbow2;
@@ -20,27 +20,32 @@ import net.toshimichi.dungeons.lang.*;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
 import net.toshimichi.dungeons.misc.*;
+import net.toshimichi.dungeons.nat.api.Installer;
 import net.toshimichi.dungeons.runnable.BossBarChatRunnable;
 import net.toshimichi.dungeons.runnable.EnchantRunnable;
 import net.toshimichi.dungeons.runnable.ManaBarRunnable;
 import net.toshimichi.dungeons.runnable.ManaRegenRunnable;
 import net.toshimichi.dungeons.utils.Lottery;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.craftbukkit.libs.org.apache.commons.io.IOUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DungeonsPlugin extends JavaPlugin {
 
+    private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;
-    private static SimpleEnchantManager enchantManager;
+    private static NbtEnchantManager enchantManager;
     private static SimpleManaManager manaManager;
     private static SimpleEconomy economy;
     private static Stash stash;
@@ -48,6 +53,8 @@ public class DungeonsPlugin extends JavaPlugin {
     private static LocaleManager localeManager;
     private static Set<Locale> locales;
     private static Locale defaultLocale;
+    private File confFile;
+    private YamlConfiguration conf;
 
     public static JavaPlugin getPlugin() {
         return plugin;
@@ -103,12 +110,61 @@ public class DungeonsPlugin extends JavaPlugin {
     }
 
     @Override
+    public void saveDefaultConfig() {
+        try {
+            FileUtils.copyInputStreamToFile(getResource("config.yaml"), confFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        if (conf == null)
+            reloadConfig();
+        return conf;
+    }
+
+    @Override
+    public void reloadConfig() {
+        try (InputStreamReader reader = new InputStreamReader(getResource("config.yaml"), charset)) {
+            conf = new YamlConfiguration();
+            conf.load(reader);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onEnable() {
+        confFile = new File(getDataFolder(), "config.yaml");
         saveDefaultConfig();
         plugin = this;
         ConfigurationSerialization.registerClass(Lottery.class);
 
-        enchantManager = new SimpleEnchantManager(
+        //Inject natives
+        YamlConfiguration nativeConf = new YamlConfiguration();
+        try (InputStreamReader reader = new InputStreamReader(getResource("injection.yaml"), charset)) {
+            nativeConf.load(reader);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+        for (String className : nativeConf.getStringList("native")) {
+            Object o;
+            try {
+                o = Class.forName(className).newInstance();
+                if (!(o instanceof Installer)) continue;
+
+                Installer installer = (Installer) o;
+                if (!installer.isAvailable()) continue;
+                installer.install(Bukkit.getServicesManager(), this);
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Start manager classes
+        enchantManager = new NbtEnchantManager(
                 new Sharpness1(), new Sharpness2(), new Sharpness3(),
                 new GottaGoFast1(), new GottaGoFast2(), new GottaGoFast3(),
                 new Sanctity1(), new Sanctity2(), new Sanctity3(),
@@ -121,6 +177,7 @@ public class DungeonsPlugin extends JavaPlugin {
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
         locales = new HashSet<>();
 
+        //Install lang files
         Set<LocaleFactory> factories = new HashSet<>();
         LocaleFactory defaultFactory = null;
         try {
@@ -143,10 +200,12 @@ public class DungeonsPlugin extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        localeManager = new SimpleLocaleManager(defaultFactory, new File(getDataFolder(), "locale"), factories.toArray(new LocaleFactory[0]));
+        localeManager = new YamlLocaleManager(defaultFactory, new File(getDataFolder(), "locale"), factories.toArray(new LocaleFactory[0]));
 
+        //Install commands
         getCommand("dungeons").setExecutor(new DungeonsCommand());
 
+        //Register event listeners and runners
         Bukkit.getPluginManager().registerEvents(new EnchantListener(), this);
         Bukkit.getPluginManager().registerEvents(new HpBarListener(), this);
         Bukkit.getPluginManager().registerEvents(new StashListener(), this);

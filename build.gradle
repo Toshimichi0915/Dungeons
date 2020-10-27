@@ -11,23 +11,37 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    mavenLocal();
-//    maven {
-//        url "https://papermc.io/repo/repository/maven-public/"
     maven {
-        url 'http://ci.athion.net/job/FastAsyncWorldEdit/ws/mvn/'
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
     }
 }
 
 dependencies {
-//    compile 'com.destroystokyo.paper:paper-api:1.15.2-R0.1-SNAPSHOT'
-    compile 'com.boydti:fawe-api:latest'
-    compile 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
-    testCompile 'junit:junit:4.12'
+    implementation "org.spigotmc:spigot-api:$spigot"
 }
 
 processResources {
     filter(ReplaceTokens, tokens: [name: rootProject.name, version: version])
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+        }
+    }
+    dependencies {
+        compile "org.spigotmc:spigot-api:$spigot"
+    }
 }
 
 compileJava.options.encoding = 'UTF-8'

@@ -109,7 +109,7 @@ public class LocaleBuilder {
 
         if (result == null)
             result = DungeonsPlugin.getDefaultLocale().get(key);
-        if (result == null)
+        if (result == null && player != null)
             result = mng.getSuggestedLocale(player).get(key);
         if (result == null)
             result = key;

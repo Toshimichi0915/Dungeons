@@ -34,7 +34,7 @@ public class SpringInsideEnchanter extends Enchanter implements Listener {
         HandlerList.unregisterAll(this);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onBlock(EntityDamageByEntityEvent e) {
         if (!getPlayer().equals(e.getEntity())) return;
         if (!getPlayer().isBlocking()) return;

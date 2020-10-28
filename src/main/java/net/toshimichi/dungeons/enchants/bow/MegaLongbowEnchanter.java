@@ -36,7 +36,7 @@ public class MegaLongbowEnchanter extends Enchanter implements Listener {
         HandlerList.unregisterAll(this);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onShot(EntitySpawnEvent e) {
         if (!(e.getEntity() instanceof Arrow)) return;
         Arrow arrow = (Arrow) e.getEntity();

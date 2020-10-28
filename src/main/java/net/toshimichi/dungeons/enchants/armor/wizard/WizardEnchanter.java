@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.armor;
+package net.toshimichi.dungeons.enchants.armor.wizard;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;

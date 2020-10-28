@@ -4,7 +4,6 @@ import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.Title;
-import net.toshimichi.dungeons.enchants.armor.WizardEnchanter;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.ChatColor;

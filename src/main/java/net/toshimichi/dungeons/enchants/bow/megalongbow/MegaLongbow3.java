@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.bow;
+package net.toshimichi.dungeons.enchants.bow.megalongbow;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -10,30 +10,30 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Volley2 implements Enchant {
+public class MegaLongbow3 implements Enchant {
     @Override
     public int getId() {
-        return 7;
+        return 5;
     }
 
     @Override
     public String getName() {
-        return ChatColor.LIGHT_PURPLE + "RARE! " + ChatColor.BLUE + "Volley II";
+        return ChatColor.LIGHT_PURPLE + "RARE! " + ChatColor.BLUE + "Mega Longbow III";
     }
 
     @Override
     public int getLevel() {
-        return 2;
+        return 3;
     }
 
     @Override
     public int getRarity() {
-        return 10;
+        return 3;
     }
 
     @Override
     public String getDescription(Locale locale) {
-        return new LocaleBuilder("enchant.volley.2").locale(locale).build();
+        return new LocaleBuilder("enchant.megalongbow.3").locale(locale).build();
     }
 
     @Override
@@ -48,6 +48,6 @@ public class Volley2 implements Enchant {
 
     @Override
     public Enchanter getEnchanter(Player player, ItemStack itemStack) {
-        return new VolleyEnchanter(this, player, itemStack);
+        return new MegaLongbowEnchanter(this, player, itemStack);
     }
 }

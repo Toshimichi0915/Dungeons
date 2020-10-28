@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.armor;
+package net.toshimichi.dungeons.enchants.armor.gottagofast;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -9,30 +9,31 @@ import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Wizard1 implements Enchant {
+public class GottaGoFast3 implements Enchant {
     @Override
     public int getId() {
-        return 4;
+        return 2;
     }
 
     @Override
     public String getName() {
-        return "Wizard I";
+        return "Gotta Go Fast III";
     }
 
     @Override
     public int getLevel() {
-        return 1;
+        return 3;
     }
 
     @Override
     public int getRarity() {
-        return 30;
+        return 10;
     }
 
     @Override
     public String getDescription(Locale locale) {
-        return new LocaleBuilder("enchant.wizard.1").locale(locale).build();
+//        return "移動速度が" + ChatColor.YELLOW + "20%" + ChatColor.GRAY + "増加";
+        return new LocaleBuilder("enchant.gottagofast.3").locale(locale).build();
     }
 
     @Override
@@ -47,6 +48,6 @@ public class Wizard1 implements Enchant {
 
     @Override
     public Enchanter getEnchanter(Player player, ItemStack itemStack) {
-        return new WizardEnchanter(this, player, itemStack);
+        return new GottaGoFastEnchanter(this, player, itemStack);
     }
 }

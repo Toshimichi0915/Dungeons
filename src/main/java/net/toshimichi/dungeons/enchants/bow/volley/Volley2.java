@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.armor;
+package net.toshimichi.dungeons.enchants.bow.volley;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -6,47 +6,48 @@ import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.Title;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Wizard3 implements Enchant {
+public class Volley2 implements Enchant {
     @Override
     public int getId() {
-        return 4;
+        return 7;
     }
 
     @Override
     public String getName() {
-        return "Wizard III";
+        return ChatColor.LIGHT_PURPLE + "RARE! " + ChatColor.BLUE + "Volley II";
     }
 
     @Override
     public int getLevel() {
-        return 3;
+        return 2;
     }
 
     @Override
     public int getRarity() {
-        return 30;
+        return 10;
     }
 
     @Override
     public String getDescription(Locale locale) {
-        return new LocaleBuilder("enchant.wizard.3").locale(locale).build();
+        return new LocaleBuilder("enchant.volley.2").locale(locale).build();
     }
 
     @Override
     public EnchantType[] getEnchantType() {
-        return EnchantType.getArmor();
+        return new EnchantType[]{EnchantType.BOW};
     }
 
     @Override
     public Title getTitle() {
-        return Title.COMMON;
+        return Title.RARE;
     }
 
     @Override
     public Enchanter getEnchanter(Player player, ItemStack itemStack) {
-        return new WizardEnchanter(this, player, itemStack);
+        return new VolleyEnchanter(this, player, itemStack);
     }
 }

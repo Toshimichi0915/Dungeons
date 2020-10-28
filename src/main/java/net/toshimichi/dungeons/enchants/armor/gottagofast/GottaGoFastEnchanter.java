@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.armor;
+package net.toshimichi.dungeons.enchants.armor.gottagofast;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;

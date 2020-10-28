@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.bow;
+package net.toshimichi.dungeons.enchants.bow.megalongbow;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;

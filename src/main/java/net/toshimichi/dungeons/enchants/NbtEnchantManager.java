@@ -161,6 +161,8 @@ public class NbtEnchantManager implements EnchantManager {
             category = "Wand";
         else if (type == Material.BOW)
             category = "Bow";
+        else if (type == Material.SHIELD)
+            category = "Shield";
         else
             category = "Artifact";
 

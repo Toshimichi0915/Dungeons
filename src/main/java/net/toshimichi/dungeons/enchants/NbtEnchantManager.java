@@ -128,8 +128,10 @@ public class NbtEnchantManager implements EnchantManager {
                 color = ChatColor.GREEN;
             else if (tier == 2)
                 color = ChatColor.YELLOW;
-            else
+            else if(tier == 3)
                 color = ChatColor.RED;
+            else
+                color = ChatColor.LIGHT_PURPLE;
         }
 
         int lives = getLives(itemStack);

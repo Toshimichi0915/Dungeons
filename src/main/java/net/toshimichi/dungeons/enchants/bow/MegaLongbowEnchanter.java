@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.util.Vector;
 
 public class MegaLongbowEnchanter extends Enchanter implements Listener {
 
@@ -43,7 +44,10 @@ public class MegaLongbowEnchanter extends Enchanter implements Listener {
         ProjectileSource source = arrow.getShooter();
         if (source == null) return;
         if (!getPlayer().equals(source)) return;
-        arrow.setVelocity(getPlayer().getLocation().getDirection().normalize().multiply(3));
+        Vector vector = arrow.getVelocity().normalize();
+        vector.setY(getPlayer().getEyeLocation().getDirection().getY());
+        vector.normalize().multiply(3);
+        arrow.setVelocity(vector);
         arrow.setCritical(true);
 
         int level;

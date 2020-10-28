@@ -23,3 +23,6 @@ enchant.megalongbow.3=射るときに矢が加速し, 跳躍力上昇(レベル4
 enchant.springinside.1=ガード時, 相手の攻撃力の&c 10% &7を反射
 enchant.springinside.2=ガード時, 相手の攻撃力の&c 20% &7を反射
 enchant.springinside.3=ガード時, 相手の攻撃力の&c 30% &7を反射
+enchant.volley.1=矢を2本同時発射
+enchant.volley.2=矢を3本同時発射
+enchant.volley.3=矢を4本同時発射

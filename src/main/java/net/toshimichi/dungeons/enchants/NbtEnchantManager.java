@@ -6,7 +6,6 @@ import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import net.toshimichi.dungeons.utils.Nonce;
 import net.toshimichi.dungeons.utils.RomanNumber;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -154,15 +153,23 @@ public class NbtEnchantManager implements EnchantManager {
         }
 
         String category;
-        Material type = itemStack.getType();
-        if (type == Material.GOLDEN_SWORD)
+        EnchantType type = EnchantType.getEnchantType(itemStack);
+        if (type == EnchantType.SWORD)
             category = "Sword";
-        else if (type == Material.STICK)
+        else if (type == EnchantType.WAND)
             category = "Wand";
-        else if (type == Material.BOW)
+        else if (type == EnchantType.BOW)
             category = "Bow";
-        else if (type == Material.SHIELD)
+        else if (type == EnchantType.SHIELD)
             category = "Shield";
+        else if (type == EnchantType.HELMET)
+            category = "Helmet";
+        else if (type == EnchantType.CHESTPLATE)
+            category = "Chestplate";
+        else if (type == EnchantType.LEGGINGS)
+            category = "Leggings";
+        else if (type == EnchantType.BOOTS)
+            category = "Boots";
         else
             category = "Artifact";
 
@@ -171,7 +178,6 @@ public class NbtEnchantManager implements EnchantManager {
         String livesDisplayed;
         if (lives < 0 || getMaxLives(itemStack) < 0)
             livesDisplayed = null;
-//            livesDisplayed = ChatColor.GRAY + "Lives: " + ChatColor.MAGIC + "?/?";
         else if (lives < 4)
             livesDisplayed = ChatColor.GRAY + "Lives: " + ChatColor.RED + lives + ChatColor.GRAY + "/" + getMaxLives(itemStack);
         else if (lives < 10)

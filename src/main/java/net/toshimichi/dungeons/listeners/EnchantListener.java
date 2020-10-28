@@ -6,6 +6,7 @@ import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
@@ -13,7 +14,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -47,19 +50,34 @@ public class EnchantListener implements Listener {
             DungeonsPlugin.getEnchantManager().disable(p);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent e) {
-        ItemStack[] inv = InventoryUtils.getPrimaryItemStacks(e.getEntity());
+        e.setKeepInventory(true);
+        e.getDrops().clear();
+        ArrayList<ItemStack> keepInv = new ArrayList<>();
+        PlayerInventory inventory = e.getEntity().getInventory();
+        ItemStack[] contents = InventoryUtils.getPrimaryItemStacks(e.getEntity());
         EnchantManager manager = DungeonsPlugin.getEnchantManager();
-        for (ItemStack itemStack : inv) {
-            int originalLives = manager.getLives(itemStack);
-            if (originalLives == -1) {
+
+        //reduce a life from mystics
+        for (ItemStack itemStack : contents) {
+            int lives = manager.getLives(itemStack);
+            if (lives == -1) {
                 continue;
-            } else if (originalLives == 1) {
-                e.getEntity().getInventory().removeItem(itemStack);
+            } else if (lives == 1) {
+                InventoryUtils.reduce(inventory, itemStack);
                 continue;
             }
-            manager.setLives(itemStack, originalLives - 1);
+            manager.setLives(itemStack, lives - 1);
+            keepInv.add(itemStack);
+        }
+
+        //drop items
+        for (ItemStack itemStack : inventory.getContents()) {
+            if (itemStack == null) continue;
+            if (keepInv.contains(itemStack)) continue;
+            if (!InventoryUtils.reduce(inventory, itemStack)) continue;
+            e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), itemStack);
         }
     }
 

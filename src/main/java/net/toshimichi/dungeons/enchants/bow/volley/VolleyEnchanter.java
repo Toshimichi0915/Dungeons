@@ -58,10 +58,8 @@ public class VolleyEnchanter extends Enchanter implements Listener {
 
             EntitySpawnEvent event = new EntitySpawnEvent(arrow);
             Bukkit.getPluginManager().callEvent(event);
-            if (event.isCancelled()) {
-                System.out.println("cancel!");
+            if (event.isCancelled())
                 arrow.remove();
-            }
 
             Vector v = arrow.getVelocity();
             v.setX(v.getX() + RandomUtils.nextFloat(0, 0.5F) - 0.1F);

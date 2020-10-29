@@ -47,6 +47,8 @@ public class MegaLongbowEnchanter extends Enchanter implements Listener {
         Vector vector = arrow.getVelocity().normalize();
         vector.setY(getPlayer().getEyeLocation().getDirection().getY());
         vector.normalize().multiply(3);
+        vector.setY(vector.getY() + getPlayer().getVelocity().getY());
+        System.out.println(getPlayer().getVelocity().getY());
         arrow.setVelocity(vector);
         arrow.setCritical(true);
 

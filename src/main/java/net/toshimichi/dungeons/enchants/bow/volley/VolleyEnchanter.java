@@ -45,7 +45,7 @@ public class VolleyEnchanter extends Enchanter implements Listener {
         Arrow projectile = (Arrow) e.getProjectile();
         projectile.remove();
 
-        double velocity = e.getProjectile().getVelocity().length();
+        double velocity = e.getProjectile().getVelocity().subtract(getPlayer().getVelocity()).length();
 
         getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_ARROW_SHOOT, 1F, 0.7F + (float) velocity / 6);
 
@@ -66,7 +66,6 @@ public class VolleyEnchanter extends Enchanter implements Listener {
             v.setY(v.getY() + RandomUtils.nextFloat(0, 0.2F) - 0.1F);
             v.setZ(v.getZ() + RandomUtils.nextFloat(0, 0.2F) - 0.1F);
             arrow.setVelocity(v);
-            v.normalize().multiply(velocity);
         }
     }
 }

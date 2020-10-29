@@ -62,7 +62,7 @@ public class VolleyEnchanter extends Enchanter implements Listener {
                 arrow.remove();
 
             Vector v = arrow.getVelocity();
-            v.setX(v.getX() + RandomUtils.nextFloat(0, 0.5F) - 0.1F);
+            v.setX(v.getX() + RandomUtils.nextFloat(0, 0.2F) - 0.1F);
             v.setY(v.getY() + RandomUtils.nextFloat(0, 0.2F) - 0.1F);
             v.setZ(v.getZ() + RandomUtils.nextFloat(0, 0.2F) - 0.1F);
             arrow.setVelocity(v);

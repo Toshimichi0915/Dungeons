@@ -3,10 +3,9 @@ package net.toshimichi.dungeons.enchants.bow.volley;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -44,6 +43,8 @@ public class VolleyEnchanter extends Enchanter implements Listener {
         if (!(e.getProjectile() instanceof Arrow)) return;
         Arrow projectile = (Arrow) e.getProjectile();
         projectile.remove();
+        if (getPlayer().getGameMode() != GameMode.CREATIVE)
+            InventoryUtils.reduce(getPlayer().getInventory(), new ItemStack(Material.ARROW, 1));
 
         double velocity = e.getProjectile().getVelocity().subtract(getPlayer().getVelocity()).length();
 

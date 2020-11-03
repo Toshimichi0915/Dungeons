@@ -27,7 +27,7 @@ public class GottaGoFast2 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 25;
+        return 100;
     }
 
     @Override

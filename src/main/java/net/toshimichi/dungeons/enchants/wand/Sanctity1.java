@@ -28,7 +28,7 @@ public class Sanctity1 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 30;
+        return 200;
     }
 
     @Override

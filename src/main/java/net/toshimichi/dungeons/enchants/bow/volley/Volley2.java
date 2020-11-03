@@ -28,7 +28,7 @@ public class Volley2 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 10;
+        return 120;
     }
 
     @Override

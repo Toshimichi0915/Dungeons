@@ -27,7 +27,7 @@ public class SpringInside1 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 15;
+        return 400;
     }
 
     @Override

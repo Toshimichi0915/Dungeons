@@ -28,7 +28,7 @@ public class MegaLongbow2 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 3;
+        return 80;
     }
 
     @Override

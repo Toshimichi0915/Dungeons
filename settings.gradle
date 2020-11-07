@@ -1,3 +1,3 @@
-include 'native:api', 'native:1.15.2'
+include 'native:api', 'native:1.15.2', 'native:1.16.4'
 rootProject.name = 'dungeons'
 

@@ -24,6 +24,7 @@ import net.toshimichi.dungeons.enchants.sword.Sharpness3;
 import net.toshimichi.dungeons.enchants.wand.Sanctity1;
 import net.toshimichi.dungeons.enchants.wand.Sanctity2;
 import net.toshimichi.dungeons.enchants.wand.Sanctity3;
+import net.toshimichi.dungeons.gui.GuiManager;
 import net.toshimichi.dungeons.lang.*;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
@@ -59,6 +60,7 @@ public class DungeonsPlugin extends JavaPlugin {
     private static Stash stash;
     private static IpStackApi ipStackApi;
     private static LocaleManager localeManager;
+    private static GuiManager guiManager;
     private static Set<Locale> locales;
     private static Locale defaultLocale;
     private File confFile;
@@ -86,6 +88,10 @@ public class DungeonsPlugin extends JavaPlugin {
 
     public static IpStackApi getIpStackApi() {
         return ipStackApi;
+    }
+
+    public static GuiManager getGuiHolder() {
+        return guiManager;
     }
 
     public static LocaleManager getLocaleManager() {
@@ -184,6 +190,8 @@ public class DungeonsPlugin extends JavaPlugin {
         economy = new SimpleEconomy(new File(getDataFolder(), "economy"));
         stash = new Stash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
+        guiManager = new GuiManager();
+
         locales = new HashSet<>();
 
         //Install lang files

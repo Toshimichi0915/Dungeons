@@ -4,5 +4,5 @@ import org.bukkit.entity.Player;
 
 @FunctionalInterface
 public interface GuiItemListener {
-    void onClick(Player player, GuiInfo gui, GuiItem item);
+    void onClick(Player player, Gui gui, GuiItem item);
 }

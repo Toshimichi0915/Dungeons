@@ -8,10 +8,10 @@ import java.util.HashMap;
 
 public class GuiManager {
 
-    private final HashMap<Player, GuiInfo> guis = new HashMap<>();
+    private final HashMap<Player, Gui> guis = new HashMap<>();
     private final HashMap<Player, Inventory> inventories = new HashMap<>();
 
-    public GuiInfo getGui(Player player) {
+    public Gui getGui(Player player) {
         return guis.get(player);
     }
 
@@ -19,16 +19,13 @@ public class GuiManager {
         return inventories.get(player);
     }
 
-    public void show(Player player, GuiInfo info) {
+    public void show(Player player, Gui info) {
         GuiItem[] items = info.getItems();
+        Inventory inv = Bukkit.createInventory(null, items.length, info.getTitle());
         guis.put(player, info);
-        Inventory known = inventories.get(player);
-        if (known == null || items.length != known.getSize()) {
-            known = Bukkit.createInventory(null, items.length, info.getTitle());
-            inventories.put(player, known);
-        }
+        inventories.put(player, inv);
         for (int i = 0; i < items.length; i++) {
-            known.setItem(i, items[i].getItemStack());
+            inv.setItem(i, items[i].getItemStack());
         }
     }
 

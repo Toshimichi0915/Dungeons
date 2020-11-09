@@ -1,7 +1,7 @@
 package net.toshimichi.dungeons.listeners;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
-import net.toshimichi.dungeons.gui.GuiInfo;
+import net.toshimichi.dungeons.gui.Gui;
 import net.toshimichi.dungeons.gui.GuiItem;
 import net.toshimichi.dungeons.gui.GuiItemListener;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class GuiListener implements Listener {
         Inventory opened = DungeonsPlugin.getGuiHolder().getInventory((Player) e.getWhoClicked());
         if (!opened.equals(e.getClickedInventory())) return;
         int slot = e.getSlot();
-        GuiInfo info = DungeonsPlugin.getGuiHolder().getGui((Player) e.getWhoClicked());
+        Gui info = DungeonsPlugin.getGuiHolder().getGui((Player) e.getWhoClicked());
         if (slot >= info.getItems().length) return;
         GuiItem item = info.getItems()[slot];
         if (item == null) return;

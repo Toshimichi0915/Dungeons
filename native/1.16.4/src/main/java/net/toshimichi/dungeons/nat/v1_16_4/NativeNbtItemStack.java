@@ -14,7 +14,7 @@ public class NativeNbtItemStack implements NbtItemStack {
 
     @Override
     public String getName() {
-        return itemStack.getName().getText();
+        return itemStack.getName().getString();
     }
 
     @Override

@@ -119,4 +119,12 @@ public interface EnchantManager {
      * @return 利用できる全てのエンチャント
      */
     Set<Enchant> getAllEnchants();
+
+    /**
+     * 指定されたIDとレベルを持ったエンチャントを返します.
+     * @param id ID
+     * @param level レベル
+     * @return エンチャント, 存在しない場合は {@code null}
+     */
+    Enchant getEnchant(int id, int level);
 }

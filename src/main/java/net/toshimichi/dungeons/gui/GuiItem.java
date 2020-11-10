@@ -2,20 +2,9 @@ package net.toshimichi.dungeons.gui;
 
 import org.bukkit.inventory.ItemStack;
 
-public class GuiItem {
-    private final ItemStack itemStack;
-    private final GuiItemListener listener;
+public interface GuiItem {
 
-    public GuiItem(ItemStack itemStack, GuiItemListener listener) {
-        this.itemStack = itemStack;
-        this.listener = listener;
-    }
+    ItemStack getItemStack();
 
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
-    public GuiItemListener getListener() {
-        return listener;
-    }
+    GuiItemListener getListener();
 }

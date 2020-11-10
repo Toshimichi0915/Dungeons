@@ -128,7 +128,7 @@ public class NbtEnchantManager implements EnchantManager {
                 color = ChatColor.GREEN;
             else if (tier == 2)
                 color = ChatColor.YELLOW;
-            else if(tier == 3)
+            else if (tier == 3)
                 color = ChatColor.RED;
             else
                 color = ChatColor.LIGHT_PURPLE;
@@ -302,6 +302,14 @@ public class NbtEnchantManager implements EnchantManager {
     @Override
     public Set<Enchant> getAllEnchants() {
         return new HashSet<>(enchants);
+    }
+
+    @Override
+    public Enchant getEnchant(int id, int level) {
+        return getAllEnchants().stream()
+                .filter(p -> p.getId() == id)
+                .filter(p -> p.getLevel() == level)
+                .findAny().orElse(null);
     }
 
 }

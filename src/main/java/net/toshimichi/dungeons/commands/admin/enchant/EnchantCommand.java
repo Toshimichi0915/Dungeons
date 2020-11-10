@@ -20,6 +20,7 @@ public class EnchantCommand extends BranchCommand {
         result.put("refresh", new RefreshCommand());
         result.put("lang", new LangCommand());
         result.put("all", new AllCommand());
+        result.put("well", new WellCommand());
         return result;
     }
 

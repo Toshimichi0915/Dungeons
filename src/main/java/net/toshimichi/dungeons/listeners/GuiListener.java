@@ -8,22 +8,30 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
 public class GuiListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClick(InventoryClickEvent e) {
         if (!(e.getWhoClicked() instanceof Player)) return;
-        Inventory opened = DungeonsPlugin.getGuiHolder().getInventory((Player) e.getWhoClicked());
+        Inventory opened = DungeonsPlugin.getGuiManager().getInventory((Player) e.getWhoClicked());
+        if (opened == null) return;
         if (!opened.equals(e.getClickedInventory())) return;
         int slot = e.getSlot();
-        Gui info = DungeonsPlugin.getGuiHolder().getGui((Player) e.getWhoClicked());
+        Gui info = DungeonsPlugin.getGuiManager().getGui((Player) e.getWhoClicked());
         if (slot >= info.getItems().length) return;
+        e.setCancelled(true);
         GuiItem item = info.getItems()[slot];
         if (item == null) return;
-        e.setCancelled(true);
         GuiItemListener listener = item.getListener();
-        if(listener != null)
+        if (listener != null)
             listener.onClick((Player) e.getWhoClicked(), info, item);
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onClose(InventoryCloseEvent e) {
+        if (!(e.getPlayer() instanceof Player)) return;
+        DungeonsPlugin.getGuiManager().close((Player) e.getPlayer());
     }
 }

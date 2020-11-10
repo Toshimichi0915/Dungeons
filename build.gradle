@@ -27,6 +27,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.8.0'
     implementation project(':native:api')
     runtime project(':native:1.15.2')
+    runtime project(":native:1.16.4")
     shadow "org.spigotmc:spigot-api:$spigot"
 }
 

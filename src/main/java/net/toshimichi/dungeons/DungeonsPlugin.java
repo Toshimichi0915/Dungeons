@@ -30,10 +30,7 @@ import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
 import net.toshimichi.dungeons.misc.*;
 import net.toshimichi.dungeons.nat.api.Installer;
-import net.toshimichi.dungeons.runnable.BossBarChatRunnable;
-import net.toshimichi.dungeons.runnable.EnchantRunnable;
-import net.toshimichi.dungeons.runnable.ManaBarRunnable;
-import net.toshimichi.dungeons.runnable.ManaRegenRunnable;
+import net.toshimichi.dungeons.runnable.*;
 import net.toshimichi.dungeons.utils.Lottery;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -90,7 +87,7 @@ public class DungeonsPlugin extends JavaPlugin {
         return ipStackApi;
     }
 
-    public static GuiManager getGuiHolder() {
+    public static GuiManager getGuiManager() {
         return guiManager;
     }
 
@@ -230,6 +227,7 @@ public class DungeonsPlugin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ManaListener(), this);
         Bukkit.getPluginManager().registerEvents(new LangListener(), this);
         Bukkit.getPluginManager().registerEvents(new BossBarChatListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
 
         Bukkit.getOnlinePlayers().forEach(enchantManager::refresh);
 
@@ -238,6 +236,7 @@ public class DungeonsPlugin extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, new ManaRegenRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, enchantManager::tick, 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new BossBarChatRunnable(), 1, 1);
+        Bukkit.getScheduler().runTaskTimer(this, new GuiRunnable(), 1, 1);
     }
 
     @Override

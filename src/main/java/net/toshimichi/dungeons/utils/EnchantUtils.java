@@ -55,6 +55,8 @@ public class EnchantUtils {
             return EnchantType.BOOTS;
         else if (itemStack.getType() == Material.SHIELD)
             return EnchantType.SHIELD;
+        else if(itemStack.getType() == Material.BOW)
+            return EnchantType.BOW;
 
         if (!itemStack.hasItemMeta()) return null;
         ItemMeta meta = itemStack.getItemMeta();
@@ -142,7 +144,7 @@ public class EnchantUtils {
                 AtomicReference<Enchant> ref = new AtomicReference<>();
                 do {
                     ref.set(lottery.draw());
-                } while (upgrade.stream().anyMatch(p -> ref.get().getId() == p.getId()));
+                } while (enchants.stream().anyMatch(p -> ref.get().getId() == p.getId()));
                 enchants.add(ref.get());
             }
             manager.setEnchants(itemStack, enchants.toArray(new Enchant[0]));

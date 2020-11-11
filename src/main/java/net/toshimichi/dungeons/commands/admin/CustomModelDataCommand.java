@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.commands.admin;
 
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,7 +13,7 @@ public class CustomModelDataCommand implements PlayerCommand {
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType() == Material.AIR)
-            throw new IllegalCommandUsageException("カスタムモデルデータの操作対象を手に持ってください");
+            throw new CommandException("カスタムモデルデータの操作対象を手に持ってください");
         int data;
         if (arguments.length() < 1) {
             data = item.getItemMeta() == null ? 0 : item.getItemMeta().getCustomModelData();

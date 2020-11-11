@@ -4,7 +4,7 @@ import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.lang.LocaleManager;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
@@ -20,13 +20,13 @@ public class LangCommand implements PlayerCommand {
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (itemStack.getType() == Material.AIR)
-            throw new IllegalCommandUsageException("言語を編集するアイテムを手に持ってください");
+            throw new CommandException("言語を編集するアイテムを手に持ってください");
 
         if (arguments.length() > 0) {
             String name = arguments.getString(0, "言語名");
             Locale locale = localeManager.getLocale(name);
             if (locale == null)
-                throw new IllegalCommandUsageException(name + "という英語名をもつ言語は存在しません");
+                throw new CommandException(name + "という英語名をもつ言語は存在しません");
             enchantManager.setLocale(itemStack, locale);
             return;
         }

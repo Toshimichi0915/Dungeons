@@ -3,7 +3,7 @@ package net.toshimichi.dungeons.commands.admin.stash;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.misc.Stash;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +28,7 @@ public class LoadCommand implements PlayerCommand {
             e.printStackTrace();
             //revert the inventory
             player.getInventory().setContents(oldContents);
-            throw new IllegalCommandUsageException("Stashを編集できませんでした");
+            throw new CommandException("Stashを編集できませんでした");
         }
     }
 

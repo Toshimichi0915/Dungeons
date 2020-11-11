@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.commands.admin.stash;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
 import org.bukkit.Material;
@@ -16,14 +16,14 @@ public class PutCommand implements PlayerCommand {
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (itemStack.getType() == Material.AIR)
-            throw new IllegalCommandUsageException("stashに入れるアイテムを手に持ってください");
+            throw new CommandException("stashに入れるアイテムを手に持ってください");
         Stash stash = DungeonsPlugin.getStash();
         try {
             stash.addItemStack(player.getUniqueId(), arguments.getString(0, "Stashの名前"), itemStack);
             player.getInventory().setItemInMainHand(null);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalCommandUsageException("Stashをロードできませんでした");
+            throw new CommandException("Stashをロードできませんでした");
         }
     }
 

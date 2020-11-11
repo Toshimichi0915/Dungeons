@@ -1,7 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.enchant;
 
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.utils.Nonce;
 import org.bukkit.Material;
@@ -13,7 +13,7 @@ public class NonceCommand implements PlayerCommand {
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(item.getType() == Material.AIR)
-            throw new IllegalCommandUsageException("固有番号を確認するアイテムを手に持ってください");
+            throw new CommandException("固有番号を確認するアイテムを手に持ってください");
         player.sendMessage("Nonce: " + Nonce.getNonce(item));
     }
 

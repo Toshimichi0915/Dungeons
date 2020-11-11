@@ -3,7 +3,7 @@ package net.toshimichi.dungeons.commands.admin.lang;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.SubCommand;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLanguage;
@@ -34,7 +34,7 @@ public class IpCommand implements SubCommand {
         if (arguments.length() > 0)
             target = arguments.getPlayer(0);
         if (target == null) {
-            throw new IllegalCommandUsageException(ChatColor.RED + "このコマンドはプレイヤーのみ使用できます");
+            throw new CommandException(ChatColor.RED + "このコマンドはプレイヤーのみ使用できます");
         }
         Player finalTarget = target;
         async(() -> {

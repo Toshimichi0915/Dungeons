@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.commands;
 
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +19,7 @@ public interface SubCommand extends CommandExecutor {
             args = " " + args;
         try {
             onCommand(commandSender, new Arguments(strings), command.getName() + args);
-        } catch (IllegalCommandUsageException e) {
+        } catch (CommandException e) {
             for (String message : e.getMessages()) {
                 commandSender.sendMessage(ChatColor.RED + message);
             }

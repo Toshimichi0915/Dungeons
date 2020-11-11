@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.commands;
 
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -14,7 +13,7 @@ public class Arguments {
 
     private void checkLength(int index, String what) {
         if (args.length <= index)
-            throw new IllegalCommandUsageException((index + 1) + "番目の引数に" + what + "が指定されていません");
+            throw new CommandException((index + 1) + "番目の引数に" + what + "が指定されていません");
     }
 
     public int length() {
@@ -29,7 +28,7 @@ public class Arguments {
         checkLength(index, what);
         Player player = Bukkit.getPlayerExact(args[index]);
         if (player == null)
-            throw new IllegalCommandUsageException(args[index] + "という名前のプレイヤーはオフラインです");
+            throw new CommandException(args[index] + "という名前のプレイヤーはオフラインです");
         return player;
     }
 
@@ -38,7 +37,7 @@ public class Arguments {
         try {
             return Byte.parseByte(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な数値(-128~127)ではありません");
+            throw new CommandException(args[index] + "は有効な数値(-128~127)ではありません");
         }
     }
 
@@ -47,7 +46,7 @@ public class Arguments {
         try {
             return Short.parseShort(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な数値(-32768~32767)ではありません");
+            throw new CommandException(args[index] + "は有効な数値(-32768~32767)ではありません");
         }
     }
 
@@ -56,7 +55,7 @@ public class Arguments {
         try {
             return Integer.parseInt(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な数値ではありません");
+            throw new CommandException(args[index] + "は有効な数値ではありません");
         }
     }
 
@@ -65,7 +64,7 @@ public class Arguments {
         try {
             return Long.parseLong(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な数値ではありません");
+            throw new CommandException(args[index] + "は有効な数値ではありません");
         }
     }
 
@@ -74,7 +73,7 @@ public class Arguments {
         try {
             return Float.parseFloat(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な小数ではありません");
+            throw new CommandException(args[index] + "は有効な小数ではありません");
         }
     }
 
@@ -83,7 +82,7 @@ public class Arguments {
         try {
             return Double.parseDouble(args[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandUsageException(args[index] + "は有効な小数ではありません");
+            throw new CommandException(args[index] + "は有効な小数ではありません");
         }
     }
 

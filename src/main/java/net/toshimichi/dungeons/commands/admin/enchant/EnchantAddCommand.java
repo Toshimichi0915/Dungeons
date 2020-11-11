@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.commands.admin.enchant;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantManager;
@@ -18,14 +18,14 @@ public class EnchantAddCommand implements PlayerCommand {
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType() == Material.AIR)
-            throw new IllegalCommandUsageException("エンチャントするアイテムを手に持ってください");
+            throw new CommandException("エンチャントするアイテムを手に持ってください");
         EnchantManager em = DungeonsPlugin.getEnchantManager();
         Set<Enchant> set = em.getEnchants(item);
         int id = arguments.getInt(0, "id");
         int level = arguments.getInt(1, "level");
         Optional<Enchant> opt = em.getAllEnchants().stream().filter(p -> p.getId() == id && p.getLevel() == level).findAny();
         if (!opt.isPresent())
-            throw new IllegalCommandUsageException("そのエンチャントは存在しません");
+            throw new CommandException("そのエンチャントは存在しません");
         set.add(opt.get());
         em.setEnchants(item, set.toArray(new Enchant[0]));
         em.setLocale(item, DungeonsPlugin.getLocaleManager().getLocale(player));

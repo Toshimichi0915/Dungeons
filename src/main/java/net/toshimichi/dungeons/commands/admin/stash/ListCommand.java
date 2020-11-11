@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.commands.admin.stash;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.exceptions.IllegalCommandUsageException;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.entity.Player;
 
@@ -17,7 +17,7 @@ public class ListCommand implements PlayerCommand {
             set = DungeonsPlugin.getStash().getStashes(player.getUniqueId());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalCommandUsageException("Stashをロードできませんでした");
+            throw new CommandException("Stashをロードできませんでした");
         }
         set.forEach(player::sendMessage);
     }

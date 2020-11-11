@@ -28,7 +28,6 @@ public class EnchantGui implements Gui, Listener {
     private int counter;
     private boolean updateGui;
     private EnchantState state;
-    private int requiredGold;
     private Player player;
     private Inventory inventory;
 
@@ -125,6 +124,7 @@ public class EnchantGui implements Gui, Listener {
                 ItemStack itemStack = getMysticWell(p);
                 if (itemStack == null) return;
                 if (state != EnchantState.AVAILABLE) return;
+                DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(itemStack));
                 EnchantUtils.enchant(itemStack);
                 updateGui = true;
             } catch (IOException e) {

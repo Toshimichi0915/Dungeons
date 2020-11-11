@@ -2,9 +2,7 @@ package net.toshimichi.dungeons.gui;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.misc.Stash;
-import net.toshimichi.dungeons.utils.EnchantUtils;
-import net.toshimichi.dungeons.utils.InventoryUtils;
-import net.toshimichi.dungeons.utils.LocaleBuilder;
+import net.toshimichi.dungeons.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,12 +13,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class EnchantGui implements Gui, Listener {
 
@@ -46,47 +41,16 @@ public class EnchantGui implements Gui, Listener {
             DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "mystic_well");
     }
 
-    private void updateEnchantState(Player player) {
-        ItemStack mysticWell;
-        try {
-            mysticWell = getMysticWell(player);
-        } catch (IOException e) {
-            e.printStackTrace();
-            state = EnchantState.ERROR;
-            return;
-        }
-        if (mysticWell == null) {
-            state = EnchantState.NOT_SET;
-            return;
-        }
-        int tier = DungeonsPlugin.getEnchantManager().getTier(mysticWell);
-        if (tier < 0) {
-            state = EnchantState.INVALID;
-            return;
-        } else if (tier == 3) {
-            state = EnchantState.MAXED_OUT;
-            return;
-        }
-        if (EnchantUtils.getCost(mysticWell) > DungeonsPlugin.getEconomy().getMoney(player.getUniqueId())) {
-            state = EnchantState.NO_GOLD;
-            return;
-        }
-
-        state = EnchantState.AVAILABLE;
-    }
-
-    private void setDisplayColor(ItemStack itemStack, ChatColor color) {
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(color + ChatColor.stripColor(meta.getDisplayName()));
-        List<String> lore = meta.getLore();
-        if (lore != null)
-            meta.setLore(lore.stream().map(m -> color + ChatColor.stripColor(m)).collect(Collectors.toList()));
-        itemStack.setItemMeta(meta);
+    private String getString(String key, Player player, ChatColor color) {
+        LocaleBuilder builder = new LocaleBuilder(key).player(player);
+        if (color != null)
+            builder.replace("{color}", color.toString());
+        return builder.build();
     }
 
     @Override
-    public String getTitle() {
-        return "Mystic Well";
+    public String getTitle(Player player) {
+        return getString("mysticwell.title", player, null);
     }
 
     @Override
@@ -94,10 +58,7 @@ public class EnchantGui implements Gui, Listener {
         GuiItem[] items = new GuiItem[45];
         for (int i : indexes) {
             ItemStack glass = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-            ItemMeta glassMeta = glass.getItemMeta();
-            String title = ChatColor.GRAY + new LocaleBuilder("mysticwell.click1").player(player).build();
-            glassMeta.setDisplayName(title);
-            glass.setItemMeta(glassMeta);
+            ItemStackUtils.setDisplay(glass, getString("mysticwell.not_set", player, ChatColor.GRAY));
             items[i] = new PlainGuiItem(glass, new NullListener());
         }
 
@@ -110,12 +71,10 @@ public class EnchantGui implements Gui, Listener {
                     updateGui = true;
                     return;
                 }
-                String message = new LocaleBuilder("mysticwell.inventory_full").player(p).build();
-                p.sendMessage(message);
+                p.sendMessage(getString("mysticwell.full", p, null));
             } catch (IOException e) {
                 e.printStackTrace();
-                String message = new LocaleBuilder("mysticwell.unknown").player(p).build();
-                p.sendMessage(message);
+                p.sendMessage(getString("mysticwell.unknown", p, null));
             }
         });
 
@@ -129,8 +88,7 @@ public class EnchantGui implements Gui, Listener {
                 updateGui = true;
             } catch (IOException e) {
                 e.printStackTrace();
-                String message = new LocaleBuilder("mysticwell.unknown").player(p).build();
-                p.sendMessage(message);
+                p.sendMessage(getString("mysticwell.unknown", p, null));
             }
         });
         return items;
@@ -154,42 +112,43 @@ public class EnchantGui implements Gui, Listener {
     public void next(Player player, Gui gui, Inventory inv) {
         counter++;
         if (updateGui) {
-            updateEnchantState(player);
+            state = EnchantState.getEnchantState(player);
             ItemStack itemStack;
             try {
                 itemStack = getMysticWell(player);
             } catch (IOException e) {
                 e.printStackTrace();
                 itemStack = new ItemStack(Material.BEDROCK);
-                ItemMeta meta = itemStack.getItemMeta();
-                String display = new LocaleBuilder("mysticwell.unknown").player(player).build();
-                meta.setDisplayName(display);
-                itemStack.setItemMeta(meta);
+                ItemStackUtils.setDisplay(itemStack, getString("mysticwell.unknown", player, null));
             }
             inv.setItem(20, itemStack);
 
             for (int index : indexes) {
                 ItemStack glass = inv.getItem(index);
-                ItemMeta glassMeta = glass.getItemMeta();
-                String title;
-                ArrayList<String> lore = new ArrayList<>();
-                if (state == EnchantState.NOT_SET) {
-                    title = ChatColor.GRAY + new LocaleBuilder("mysticwell.click1").player(player).build();
-                } else {
-                    title = ChatColor.GRAY + new LocaleBuilder("mysticwell.click2").player(player).build();
-                    lore.add(ChatColor.GRAY + new LocaleBuilder("mysticwell.getback").player(player).build());
-                }
-                glassMeta.setDisplayName(title);
-                glassMeta.setLore(lore);
-                glass.setItemMeta(glassMeta);
+                String display;
+                if (state == EnchantState.NOT_SET)
+                    display = getString("mysticwell.not_set", player, ChatColor.GRAY);
+                else
+                    display = getString("mysticwell.set", player, ChatColor.GRAY);
+                ItemStackUtils.setDisplay(glass, display);
                 inv.setItem(index, glass);
             }
 
-            ItemStack button;
-            if (state == EnchantState.AVAILABLE)
-                button = new ItemStack(Material.ENCHANTING_TABLE);
-            else
-                button = new ItemStack(Material.RED_CONCRETE);
+            ItemStack button = new ItemStack(state.getMaterial());
+            int cost = EnchantUtils.getCost(itemStack);
+            int money = DungeonsPlugin.getEconomy().getMoney(player.getUniqueId());
+            int tier = DungeonsPlugin.getEnchantManager().getTier(itemStack);
+            ChatColor chatColor;
+            if (tier == 0) chatColor = ChatColor.GREEN;
+            else if (tier == 1) chatColor = ChatColor.YELLOW;
+            else if (tier == 2) chatColor = ChatColor.RED;
+            else chatColor = ChatColor.LIGHT_PURPLE;
+            LocaleBuilder builder = new LocaleBuilder(state.getKey()).player(player)
+                    .replace("{cost}", Integer.toString(cost))
+                    .replace("{gold}", Integer.toString(cost - money));
+            if (tier >= 0)
+                builder.replace("{tier}", chatColor + RomanNumber.convert(tier + 1));
+            ItemStackUtils.setDisplay(button, builder.build());
             inv.setItem(25, button);
             updateGui = false;
         }
@@ -200,14 +159,17 @@ public class EnchantGui implements Gui, Listener {
         if (oldIndex < 0)
             oldIndex = indexes.length - 1;
 
-        setDisplayColor(inv.getItem(indexes[oldIndex]), ChatColor.GRAY);
-        inv.getItem(indexes[oldIndex]).setType(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack oldItem = inv.getItem(indexes[oldIndex]);
+        ItemStack item = inv.getItem(indexes[index]);
+        oldItem.setType(Material.GRAY_STAINED_GLASS_PANE);
         if (state != EnchantState.NOT_SET) {
-            setDisplayColor(inv.getItem(indexes[index]), ChatColor.RED);
-            inv.getItem(indexes[index]).setType(Material.RED_STAINED_GLASS_PANE);
+            ItemStackUtils.setDisplay(oldItem, getString("mysticwell.set", player, ChatColor.GRAY));
+            ItemStackUtils.setDisplay(item, getString("mysticwell.set", player, ChatColor.LIGHT_PURPLE));
+            item.setType(Material.RED_STAINED_GLASS_PANE);
         } else {
-            setDisplayColor(inv.getItem(indexes[index]), ChatColor.LIGHT_PURPLE);
-            inv.getItem(indexes[index]).setType(Material.PINK_STAINED_GLASS_PANE);
+            ItemStackUtils.setDisplay(oldItem, getString("mysticwell.not_set", player, ChatColor.GRAY));
+            ItemStackUtils.setDisplay(item, getString("mysticwell.not_set", player, ChatColor.RED));
+            item.setType(Material.PINK_STAINED_GLASS_PANE);
         }
 
     }
@@ -219,8 +181,7 @@ public class EnchantGui implements Gui, Listener {
         e.setCancelled(true);
         try {
             if (getMysticWell(player) != null) {
-                String message = new LocaleBuilder("mysticwell.already_set").player(player).build();
-                player.sendMessage(message);
+                player.sendMessage(getString("mysticwell.already_set", player, null));
                 return;
             }
             setMysticWell(player, e.getCurrentItem());
@@ -229,9 +190,5 @@ public class EnchantGui implements Gui, Listener {
             ex.printStackTrace();
         }
         InventoryUtils.reduce(player.getInventory(), e.getCurrentItem());
-    }
-
-    private enum EnchantState {
-        AVAILABLE, INVALID, ERROR, MAXED_OUT, NO_GOLD, NOT_SET
     }
 }

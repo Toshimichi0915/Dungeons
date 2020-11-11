@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 public interface Gui extends GuiAnimation{
 
-    String getTitle();
+    String getTitle(Player player);
 
     GuiItem[] getItems();
 

@@ -37,7 +37,7 @@ public class GuiManager {
      */
     public void show(Player player, Gui info) {
         GuiItem[] items = info.getItems();
-        Inventory inv = Bukkit.createInventory(null, items.length, info.getTitle());
+        Inventory inv = Bukkit.createInventory(null, items.length, info.getTitle(player));
         guis.put(player, info);
         inventories.put(player, inv);
         for (int i = 0; i < items.length; i++) {

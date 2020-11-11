@@ -57,7 +57,7 @@ public class Lottery<T> implements ConfigurationSerializable {
     }
 
     public static <R> Lottery<R> deserialize(Map<Integer, R> map) {
-        Lottery<R> lottery = new Lottery();
+        Lottery<R> lottery = new Lottery<>();
         map.forEach(lottery::add);
         return lottery;
     }

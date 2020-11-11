@@ -20,19 +20,22 @@ public class EnchantUtils {
 
     /**
      * エンチャントにかかる費用を返します.
+     *
      * @param itemStack エンチャントするアイテム
      * @return 費用
      */
     public static int getCost(ItemStack itemStack) {
         int tier = DungeonsPlugin.getEnchantManager().getTier(itemStack);
         if (tier < 0) return -1;
-        else if (tier == 1) return 2000;
-        else if (tier == 2) return 4000;
-        else return 8000;
+        else if (tier == 0) return 2000;
+        else if (tier == 1) return 4000;
+        else if (tier == 2) return 8000;
+        else return 16000;
     }
 
     /**
      * アイテムに付与できるエンチャントの種類を返します.
+     *
      * @param itemStack アイテム
      * @return 付与できるエンチャントの種類
      */
@@ -64,8 +67,9 @@ public class EnchantUtils {
 
     /**
      * アイテムが指定された {@link EnchantType} に含まれるか調べます.
+     *
      * @param itemStack 調べるアイテム
-     * @param type 許容される {@link EnchantType} の一覧
+     * @param type      許容される {@link EnchantType} の一覧
      * @return 含まれる場合は {@code true} そうでなければ {@code false}
      */
     public static boolean matchEnchantType(ItemStack itemStack, EnchantType[] type) {
@@ -75,6 +79,7 @@ public class EnchantUtils {
 
     /**
      * 指定されたアイテムをエンチャントします.
+     *
      * @param itemStack エンチャントするアイテム
      */
     public static void enchant(ItemStack itemStack) {

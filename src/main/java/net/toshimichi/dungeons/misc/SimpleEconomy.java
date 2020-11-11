@@ -66,7 +66,7 @@ public class SimpleEconomy implements Economy {
     public boolean withdraw(UUID uuid, int money) {
         int after = getMoney(uuid) - money;
         if (after < 0) return false;
-        setMoney(uuid, money);
+        setMoney(uuid, after);
         return true;
     }
 

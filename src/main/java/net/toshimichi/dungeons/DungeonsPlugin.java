@@ -9,6 +9,9 @@ import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast3;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard1;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard2;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard3;
+import net.toshimichi.dungeons.enchants.bow.fletching.Fletching1;
+import net.toshimichi.dungeons.enchants.bow.fletching.Fletching2;
+import net.toshimichi.dungeons.enchants.bow.fletching.Fletching3;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow1;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow2;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow3;
@@ -182,7 +185,9 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Wizard1(), new Wizard2(), new Wizard3(),
                 new MegaLongbow1(), new MegaLongbow2(), new MegaLongbow3(),
                 new SpringInside1(), new SpringInside2(), new SpringInside3(),
-                new Volley1(), new Volley2(), new Volley3());
+                new Volley1(), new Volley2(), new Volley3(),
+                new Fletching1(), new Fletching2(), new Fletching3());
+
         manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
         economy = new SimpleEconomy(new File(getDataFolder(), "economy"));
         stash = new Stash(new File(getDataFolder(), "stash"));

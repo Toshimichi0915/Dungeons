@@ -145,7 +145,8 @@ public class EnchantGui implements Gui, Listener {
             else chatColor = ChatColor.LIGHT_PURPLE;
             LocaleBuilder builder = new LocaleBuilder(state.getKey()).player(player)
                     .replace("{cost}", Integer.toString(cost))
-                    .replace("{gold}", Integer.toString(cost - money));
+                    .replace("{gold}", Integer.toString(cost - money))
+                    .replace("{color}", chatColor.toString());
             if (tier >= 0)
                 builder.replace("{tier}", chatColor + RomanNumber.convert(tier + 1));
             ItemStackUtils.setDisplay(button, builder.build());

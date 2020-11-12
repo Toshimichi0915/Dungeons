@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.listeners;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.toshimichi.dungeons.events.BetterDamageEvent;
+import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
@@ -19,7 +19,7 @@ public class HpBarListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
-        BetterDamageEvent e = new BetterDamageEvent(event);
+        PlayerDamageEvent e = new PlayerDamageEvent(event);
         if (!(e.getTrueDamager() instanceof Player)) return;
         if (!(e.getEntity() instanceof LivingEntity)) return;
         Player attacker = (Player) e.getTrueDamager();

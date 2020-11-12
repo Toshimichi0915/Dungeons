@@ -10,10 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 /**
  * {@link EntityDamageByEntityEvent} の拡張クラスです.
  */
-public class BetterDamageEvent implements Cancellable {
+public class PlayerDamageEvent implements Cancellable {
     private final EntityDamageByEntityEvent parent;
 
-    public BetterDamageEvent(EntityDamageByEntityEvent e) {
+    public PlayerDamageEvent(EntityDamageByEntityEvent e) {
         this.parent = e;
     }
 

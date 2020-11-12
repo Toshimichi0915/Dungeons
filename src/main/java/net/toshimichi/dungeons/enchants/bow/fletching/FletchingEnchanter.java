@@ -3,7 +3,7 @@ package net.toshimichi.dungeons.enchants.bow.fletching;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
-import net.toshimichi.dungeons.events.BetterDamageEvent;
+import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -36,7 +36,7 @@ public class FletchingEnchanter extends Enchanter implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e1) {
-        BetterDamageEvent e = new BetterDamageEvent(e1);
+        PlayerDamageEvent e = new PlayerDamageEvent(e1);
         if (!getPlayer().equals(e.getTrueDamager())) return;
         if (!(e.getDamager() instanceof Arrow)) return;
         double modifier;

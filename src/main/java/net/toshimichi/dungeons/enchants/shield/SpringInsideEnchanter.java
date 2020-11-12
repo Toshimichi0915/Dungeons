@@ -3,7 +3,7 @@ package net.toshimichi.dungeons.enchants.shield;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
-import net.toshimichi.dungeons.events.BetterDamageEvent;
+import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -40,7 +40,7 @@ public class SpringInsideEnchanter extends Enchanter implements Listener {
         if (!getPlayer().isBlocking()) return;
         if (e.getDamage() == 0 || e.getFinalDamage() != 0) return;
 
-        LivingEntity target = new BetterDamageEvent(e).getTrueDamager();
+        LivingEntity target = new PlayerDamageEvent(e).getTrueDamager();
         if (target == null) return;
         double modifier = 0.1 * getEnchant().getLevel();
         target.damage(e.getDamage() * modifier, getPlayer());

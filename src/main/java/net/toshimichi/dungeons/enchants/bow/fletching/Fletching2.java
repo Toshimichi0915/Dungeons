@@ -27,7 +27,7 @@ public class Fletching2 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 9000;
+        return 900;
     }
 
     @Override

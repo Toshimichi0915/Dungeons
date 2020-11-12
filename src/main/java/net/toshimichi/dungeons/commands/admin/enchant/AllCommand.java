@@ -48,9 +48,9 @@ public class AllCommand implements SubCommand {
         ArrayList<StringBuilder> builders = new ArrayList<>();
         for (int i = 0; i < enchants.size(); i++)
             builders.add(new StringBuilder());
-        add(enchants, builders, e -> "名前: " + ChatColor.BLUE + e.getName() + ChatColor.RESET);
-        add(enchants, builders, e -> " ID: " + e.getId());
-        add(enchants, builders, e -> " 出現比率: " + e.getRarity());
+        add(enchants, builders, e -> "(" + e.getId());
+        add(enchants, builders, e -> ", " + e.getRarity() + ")");
+        add(enchants, builders, e -> " " + ChatColor.BLUE + e.getName() + ChatColor.RESET);
 
         for (StringBuilder b : builders)
             sender.sendMessage(b.toString());

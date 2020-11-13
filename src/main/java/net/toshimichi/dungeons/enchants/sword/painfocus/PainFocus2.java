@@ -17,7 +17,7 @@ public class PainFocus2 implements Enchant {
 
     @Override
     public String getName() {
-        return "Pain Focus I";
+        return "Pain Focus II";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PainFocus2 implements Enchant {
 
     @Override
     public String getDescription(Locale locale) {
-        return new LocaleBuilder("enchant.painfocus.1").locale(locale).build();
+        return new LocaleBuilder("enchant.painfocus.2").locale(locale).build();
     }
 
     @Override

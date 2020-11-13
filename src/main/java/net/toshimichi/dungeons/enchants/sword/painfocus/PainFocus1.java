@@ -5,6 +5,7 @@ import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.Title;
 import net.toshimichi.dungeons.lang.Locale;
+import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,7 +32,7 @@ public class PainFocus1 implements Enchant {
 
     @Override
     public String getDescription(Locale locale) {
-        return null;
+        return new LocaleBuilder("enchant.painfocus.1").locale(locale).build();
     }
 
     @Override

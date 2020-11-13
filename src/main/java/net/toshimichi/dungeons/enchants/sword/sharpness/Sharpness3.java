@@ -1,6 +1,5 @@
-package net.toshimichi.dungeons.enchants.sword;
+package net.toshimichi.dungeons.enchants.sword.sharpness;
 
-import net.md_5.bungee.api.ChatColor;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;
@@ -10,7 +9,7 @@ import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Sharpness1 implements Enchant {
+public class Sharpness3 implements Enchant {
     @Override
     public int getId() {
         return 1;
@@ -18,23 +17,23 @@ public class Sharpness1 implements Enchant {
 
     @Override
     public String getName() {
-        return "Sharpness I";
+        return "Sharpness III";
     }
 
     @Override
     public int getLevel() {
-        return 1;
+        return 3;
     }
 
     @Override
     public int getRarity() {
-        return 1000;
+        return 500;
     }
 
     @Override
     public String getDescription(Locale locale) {
-//        return "ダメージが" + ChatColor.RED + "8%" + ChatColor.GRAY + "上昇";
-        return new LocaleBuilder("enchant.sharpness.1").locale(locale).build();
+//        return "ダメージが" + ChatColor.RED + "15%" + ChatColor.GRAY + "増加";
+        return new LocaleBuilder("enchant.sharpness.3").locale(locale).build();
     }
 
     @Override
@@ -51,5 +50,4 @@ public class Sharpness1 implements Enchant {
     public Enchanter getEnchanter(Player player, ItemStack itemStack) {
         return new SharpnessEnchanter(this, player, itemStack);
     }
-
 }

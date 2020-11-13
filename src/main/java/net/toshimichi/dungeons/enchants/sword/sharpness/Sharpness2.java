@@ -1,6 +1,5 @@
-package net.toshimichi.dungeons.enchants.sword;
+package net.toshimichi.dungeons.enchants.sword.sharpness;
 
-import net.md_5.bungee.api.ChatColor;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;

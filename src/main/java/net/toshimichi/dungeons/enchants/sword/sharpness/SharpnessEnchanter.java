@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.sword;
+package net.toshimichi.dungeons.enchants.sword.sharpness;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;

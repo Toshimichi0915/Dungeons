@@ -29,6 +29,10 @@ enchant.volley.3=矢を4本同時発射
 enchant.fletching.1=ダメージが&c 10% &7上昇
 enchant.fletching.2=ダメージが&c 15% &7上昇
 enchant.fletching.3=ダメージが&c 20% &7上昇
+enchant.painfocus.1=失った&c ❤ &7ごとにダメージが &e 2% &7上昇
+enchant.painfocus.2=失った&c ❤ &7ごとにダメージが &e 4% &7上昇
+enchant.painfocus.3=失った&c ❤ &7ごとにダメージが &e 7% &7上昇
+
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!
 mysticwell.set={color}錬金台にアイテムが入っています!\n{color}クリックしてアイテムを回収します

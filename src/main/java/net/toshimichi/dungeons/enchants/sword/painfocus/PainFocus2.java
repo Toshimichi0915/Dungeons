@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.enchants.sword.painfocus;
 
-import com.sun.org.apache.xpath.internal.axes.AxesWalker;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;

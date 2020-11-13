@@ -21,6 +21,9 @@ import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
 import net.toshimichi.dungeons.enchants.shield.SpringInside1;
 import net.toshimichi.dungeons.enchants.shield.SpringInside2;
 import net.toshimichi.dungeons.enchants.shield.SpringInside3;
+import net.toshimichi.dungeons.enchants.sword.painfocus.PainFocus1;
+import net.toshimichi.dungeons.enchants.sword.painfocus.PainFocus2;
+import net.toshimichi.dungeons.enchants.sword.painfocus.PainFocus3;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness1;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness2;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness3;
@@ -186,7 +189,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new MegaLongbow1(), new MegaLongbow2(), new MegaLongbow3(),
                 new SpringInside1(), new SpringInside2(), new SpringInside3(),
                 new Volley1(), new Volley2(), new Volley3(),
-                new Fletching1(), new Fletching2(), new Fletching3());
+                new Fletching1(), new Fletching2(), new Fletching3(),
+                new PainFocus1(), new PainFocus2(), new PainFocus3());
 
         manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
         economy = new SimpleEconomy(new File(getDataFolder(), "economy"));

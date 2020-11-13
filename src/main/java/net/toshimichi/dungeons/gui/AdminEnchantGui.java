@@ -111,6 +111,7 @@ public class AdminEnchantGui implements Gui, Listener {
             updateGui = true;
         });
         items[24] = new PlainGuiItem(new ItemStack(Material.GLOWSTONE_DUST), (p, g, i) -> {
+            if (getAdminWell(p) == null) return;
             List<Locale> locales = DungeonsPlugin.getLocales();
             Locale locale = locales.get((locales.indexOf(manager.getLocale(getAdminWell(p))) + 1) % locales.size());
             manager.setLocale(getAdminWell(p), locale);
@@ -167,7 +168,7 @@ public class AdminEnchantGui implements Gui, Listener {
 
         StringBuilder idBuilder = new StringBuilder("付与するエンチャントの種類を変更する\n");
         for (Enchant type : types) {
-            if(type.getId() == selectedEnchant.getId()) {
+            if (type.getId() == selectedEnchant.getId()) {
                 idBuilder.append(ChatColor.GREEN);
                 idBuilder.append(ChatColor.stripColor(type.getName()));
             } else {

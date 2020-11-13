@@ -135,6 +135,7 @@ public class NbtEnchantManager implements EnchantManager {
         }
 
         int lives = getLives(itemStack);
+        int maxLives = getMaxLives(itemStack);
         int token = getEnchants(itemStack).stream()
                 .map(Enchant::getLevel)
                 .reduce(Integer::sum).orElse(0);
@@ -150,7 +151,7 @@ public class NbtEnchantManager implements EnchantManager {
                 tierDisplayed = "Extraordinary " + tierDisplayed;
         } else if (token >= 8) {
             tierDisplayed = "Legendary " + tierDisplayed;
-        } else if (lives >= 100) {
+        } else if (maxLives >= 100) {
             tierDisplayed = "Durable " + tierDisplayed;
         }
 

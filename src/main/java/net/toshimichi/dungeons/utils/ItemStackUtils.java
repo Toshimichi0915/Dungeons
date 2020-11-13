@@ -16,11 +16,11 @@ public class ItemStackUtils {
             list.addAll(Arrays.asList(s.split("\n")));
         if (list.isEmpty()) return;
         ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) return;
+        if (meta == null) return;
         meta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', list.get(0)));
         List<String> lore = list.subList(1, list.size());
         lore = lore.stream()
-                .map(m -> ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', m))
+                .map(m -> ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', m))
                 .collect(Collectors.toList());
         meta.setLore(lore);
         itemStack.setItemMeta(meta);

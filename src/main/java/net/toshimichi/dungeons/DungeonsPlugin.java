@@ -50,7 +50,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DungeonsPlugin extends JavaPlugin {
@@ -64,7 +66,7 @@ public class DungeonsPlugin extends JavaPlugin {
     private static IpStackApi ipStackApi;
     private static LocaleManager localeManager;
     private static GuiManager guiManager;
-    private static Set<Locale> locales;
+    private static ArrayList<Locale> locales;
     private static Locale defaultLocale;
     private File confFile;
     private YamlConfiguration conf;
@@ -101,8 +103,8 @@ public class DungeonsPlugin extends JavaPlugin {
         return localeManager;
     }
 
-    public static Set<Locale> getLocales() {
-        return new HashSet<>(locales);
+    public static List<Locale> getLocales() {
+        return new ArrayList<>(locales);
     }
 
     public static Locale getDefaultLocale() {
@@ -198,7 +200,7 @@ public class DungeonsPlugin extends JavaPlugin {
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
         guiManager = new GuiManager();
 
-        locales = new HashSet<>();
+        locales = new ArrayList<>();
 
         //Install lang files
         Set<LocaleFactory> factories = new HashSet<>();

@@ -21,6 +21,7 @@ public class EnchantCommand extends BranchCommand {
         result.put("lang", new LangCommand());
         result.put("all", new AllCommand());
         result.put("well", new WellCommand());
+        result.put("gui", new GuiCommand());
         return result;
     }
 

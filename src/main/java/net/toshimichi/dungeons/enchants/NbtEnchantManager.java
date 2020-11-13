@@ -273,6 +273,7 @@ public class NbtEnchantManager implements EnchantManager {
 
     @Override
     public Locale getLocale(ItemStack itemStack) {
+        if (itemStack == null) return null;
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) return null;
         PersistentDataContainer container = meta.getPersistentDataContainer();

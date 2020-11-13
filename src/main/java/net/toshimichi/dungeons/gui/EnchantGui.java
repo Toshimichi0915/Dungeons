@@ -29,7 +29,7 @@ public class EnchantGui implements Gui, Listener {
     private ItemStack getMysticWell(Player player) throws IOException {
         Stash stash = DungeonsPlugin.getStash();
         List<ItemStack> well = stash.getItemStacks(player.getUniqueId(), "mystic_well");
-        if (well.size() < 1)
+        if (well.isEmpty())
             return null;
         return well.get(0);
     }

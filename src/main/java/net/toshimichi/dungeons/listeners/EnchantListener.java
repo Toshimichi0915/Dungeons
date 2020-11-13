@@ -52,6 +52,7 @@ public class EnchantListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent e) {
+        if (e.getKeepInventory()) return;
         e.setKeepInventory(true);
         e.getDrops().clear();
         ArrayList<ItemStack> keepInv = new ArrayList<>();

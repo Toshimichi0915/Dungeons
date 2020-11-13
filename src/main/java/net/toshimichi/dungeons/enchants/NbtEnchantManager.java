@@ -158,6 +158,8 @@ public class NbtEnchantManager implements EnchantManager {
         EnchantType type = EnchantType.getEnchantType(itemStack);
         if (type == EnchantType.SWORD)
             category = "Sword";
+        else if (type == EnchantType.AXE)
+            category = "Axe";
         else if (type == EnchantType.WAND)
             category = "Wand";
         else if (type == EnchantType.BOW)

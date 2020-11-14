@@ -39,7 +39,8 @@ public enum EnchantType {
             return EnchantType.SHIELD;
         else if (material == Material.BOW)
             return EnchantType.BOW;
-        else if (material == Material.STICK && meta != null && meta.getCustomModelData() > 1000)
+        else if (material == Material.STICK && meta != null && meta.hasCustomModelData() &&
+                meta.getCustomModelData() > 1000)
             return EnchantType.WAND;
         else
             return EnchantType.ARTIFACT;

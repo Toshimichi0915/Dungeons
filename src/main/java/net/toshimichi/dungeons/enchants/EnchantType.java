@@ -5,6 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum EnchantType {
     SWORD, AXE, BOW, WAND, HELMET, CHESTPLATE, LEGGINGS, BOOTS, SHIELD, ARTIFACT;
 
@@ -12,6 +15,13 @@ public enum EnchantType {
         return new EnchantType[]{HELMET, CHESTPLATE, LEGGINGS, BOOTS};
     }
 
+
+    /**
+     * アイテムに付与できるエンチャントの種類を返します.
+     *
+     * @param itemStack アイテム
+     * @return 付与できるエンチャントの種類
+     */
     public static EnchantType getEnchantType(ItemStack itemStack) {
         if (itemStack == null)
             return null;
@@ -44,5 +54,17 @@ public enum EnchantType {
             return EnchantType.WAND;
         else
             return EnchantType.ARTIFACT;
+    }
+
+    /**
+     * アイテムが指定された {@link EnchantType} に含まれるか調べます.
+     *
+     * @param itemStack 調べるアイテム
+     * @param type      許容される {@link EnchantType} の一覧
+     * @return 含まれる場合は {@code true} そうでなければ {@code false}
+     */
+    public static boolean matchEnchantType(ItemStack itemStack, EnchantType[] type) {
+        List<EnchantType> list = Arrays.asList(type);
+        return list.contains(getEnchantType(itemStack));
     }
 }

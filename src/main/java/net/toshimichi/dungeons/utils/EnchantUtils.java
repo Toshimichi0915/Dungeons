@@ -34,52 +34,6 @@ public class EnchantUtils {
     }
 
     /**
-     * アイテムに付与できるエンチャントの種類を返します.
-     *
-     * @param itemStack アイテム
-     * @return 付与できるエンチャントの種類
-     */
-    public static EnchantType getEnchantType(ItemStack itemStack) {
-        if (itemStack == null) return null;
-        else if (MaterialUtils.isSword(itemStack.getType()))
-            return EnchantType.SWORD;
-        else if (MaterialUtils.isAxe(itemStack.getType()))
-            return EnchantType.AXE;
-        else if (MaterialUtils.isHelmet(itemStack.getType()))
-            return EnchantType.HELMET;
-        else if (MaterialUtils.isChestplate(itemStack.getType()))
-            return EnchantType.CHESTPLATE;
-        else if (MaterialUtils.isLeggings(itemStack.getType()))
-            return EnchantType.LEGGINGS;
-        else if (MaterialUtils.isBoots(itemStack.getType()))
-            return EnchantType.BOOTS;
-        else if (itemStack.getType() == Material.SHIELD)
-            return EnchantType.SHIELD;
-        else if(itemStack.getType() == Material.BOW)
-            return EnchantType.BOW;
-
-        if (!itemStack.hasItemMeta()) return null;
-        ItemMeta meta = itemStack.getItemMeta();
-        if (!meta.hasCustomModelData()) return null;
-        int data = meta.getCustomModelData();
-        if (itemStack.getType() == Material.STICK && data >= 1000 && data <= 2000)
-            return EnchantType.WAND;
-        return null;
-    }
-
-    /**
-     * アイテムが指定された {@link EnchantType} に含まれるか調べます.
-     *
-     * @param itemStack 調べるアイテム
-     * @param type      許容される {@link EnchantType} の一覧
-     * @return 含まれる場合は {@code true} そうでなければ {@code false}
-     */
-    public static boolean matchEnchantType(ItemStack itemStack, EnchantType[] type) {
-        List<EnchantType> list = Arrays.asList(type);
-        return list.contains(getEnchantType(itemStack));
-    }
-
-    /**
      * 指定されたアイテムをエンチャントします.
      *
      * @param itemStack エンチャントするアイテム
@@ -91,7 +45,7 @@ public class EnchantUtils {
         if (tier == 0) {
             manager.getAllEnchants().stream()
                     .filter(p -> p.getTitle() == Title.COMMON)
-                    .filter(p -> matchEnchantType(itemStack, p.getEnchantType()))
+                    .filter(p -> EnchantType.matchEnchantType(itemStack, p.getEnchantType()))
                     .filter(p -> p.getLevel() < 3)
                     .forEach(a -> lottery.add(a.getRarity(), a));
             if (RandomUtils.nextInt() % 4 != 0) {
@@ -110,7 +64,7 @@ public class EnchantUtils {
             manager.setLives(itemStack, lives);
         } else {
             for (Enchant e : manager.getAllEnchants()) {
-                if (!matchEnchantType(itemStack, e.getEnchantType())) continue;
+                if (!EnchantType.matchEnchantType(itemStack, e.getEnchantType())) continue;
                 if (tier >= 2) {
                     lottery.add(e.getRarity(), e);
                 } else {

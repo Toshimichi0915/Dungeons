@@ -8,13 +8,44 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * エンチャントを付与できるアイテムの種類を表します.
+ */
 public enum EnchantType {
-    SWORD, AXE, BOW, WAND, HELMET, CHESTPLATE, LEGGINGS, BOOTS, SHIELD, ARTIFACT;
+    SWORD("Sword"),
+    AXE("Axe"),
+    BOW("Bow"),
+    WAND("Wand"),
+    HELMET("Helmet"),
+    CHESTPLATE("Chestplate"),
+    LEGGINGS("Leggings"),
+    BOOTS("Boots"),
+    SHIELD("Shield"),
+    ARTIFACT("Artifact");
 
+    private final String prefix;
+
+    EnchantType(String prefix) {
+        this.prefix = prefix;
+    }
+
+    /**
+     * 表示名を返します.
+     *
+     * @return 表示名
+     */
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * 防具の一覧を返します.
+     *
+     * @return 防具の一覧
+     */
     public static EnchantType[] getArmor() {
         return new EnchantType[]{HELMET, CHESTPLATE, LEGGINGS, BOOTS};
     }
-
 
     /**
      * アイテムに付与できるエンチャントの種類を返します.

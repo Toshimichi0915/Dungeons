@@ -155,31 +155,9 @@ public class NbtEnchantManager implements EnchantManager {
             tierDisplayed = "Durable " + tierDisplayed;
         }
 
-        String category;
-        EnchantType type = EnchantType.getEnchantType(itemStack);
-        if (type == EnchantType.SWORD)
-            category = "Sword";
-        else if (type == EnchantType.AXE)
-            category = "Axe";
-        else if (type == EnchantType.WAND)
-            category = "Wand";
-        else if (type == EnchantType.BOW)
-            category = "Bow";
-        else if (type == EnchantType.SHIELD)
-            category = "Shield";
-        else if (type == EnchantType.HELMET)
-            category = "Helmet";
-        else if (type == EnchantType.CHESTPLATE)
-            category = "Chestplate";
-        else if (type == EnchantType.LEGGINGS)
-            category = "Leggings";
-        else if (type == EnchantType.BOOTS)
-            category = "Boots";
-        else
-            category = "Artifact";
+        String category = EnchantType.getEnchantType(itemStack).getPrefix();
 
         ArrayList<String> lore = new ArrayList<>();
-
         String livesDisplayed;
         if (lives < 0 || getMaxLives(itemStack) < 0)
             livesDisplayed = null;

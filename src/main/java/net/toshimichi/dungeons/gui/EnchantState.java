@@ -10,12 +10,37 @@ import org.bukkit.inventory.ItemStack;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Mystic Wellの状態を表します.
+ */
 public enum EnchantState {
+    /**
+     * エンチャント可能であることを表します.
+     */
     AVAILABLE(Material.ENCHANTING_TABLE, "mysticwell.button.available"),
+    /**
+     * エンチャント不可能なアイテムがセットされていることを表します.
+     */
     INVALID(Material.RED_CONCRETE, "mysticwell.button.invalid"),
+
+    /**
+     * すでに最大までエンチャントされていることを表します.
+     */
     MAXED_OUT(Material.RED_CONCRETE, "mysticwell.button.maxed_out"),
+
+    /**
+     * エンチャントするのに所持金が足りないことを表します.
+     */
     NO_GOLD(Material.RED_CONCRETE, "mysticwell.button.no_gold"),
+
+    /**
+     * Mystic Wellにアイテムがセットされていないことを表します.
+     */
     NOT_SET(Material.RED_CONCRETE, "mysticwell.button.not_set"),
+
+    /**
+     * エラーによりアイテムがエンチャントできないことを表します.
+     */
     ERROR(Material.BEDROCK, "mysticwell.button.unknown");
 
     private final Material material;
@@ -26,14 +51,32 @@ public enum EnchantState {
         this.key = key;
     }
 
+    /**
+     * エンチャント用のボタンに表示される {@link Material} を返します.
+     *
+     * @return エンチャント用のボタンに表示される {@link Material}
+     */
     public Material getMaterial() {
         return material;
     }
 
+    /**
+     * langファイルのキーを返します.
+     *
+     * @return langファイルのキー
+     */
     public String getKey() {
         return key;
     }
 
+    /**
+     * 現在のMystic Wellの状態を返します.
+     * またMystic Wellのアイテムは {@link net.toshimichi.dungeons.misc.Stash} の
+     * {@code mystic_well} にセットされているアイテムが使用されます.
+     *
+     * @param player プレイヤー
+     * @return 現在のMystic Wellの状態
+     */
     public static EnchantState getEnchantState(Player player) {
         List<ItemStack> mysticWell;
         try {

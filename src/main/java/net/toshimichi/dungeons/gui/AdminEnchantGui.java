@@ -24,6 +24,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * エンチャントの管理GUIです.
+ */
 public class AdminEnchantGui implements Gui, Listener {
 
     private Player player;

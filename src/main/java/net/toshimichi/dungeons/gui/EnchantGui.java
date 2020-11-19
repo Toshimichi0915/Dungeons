@@ -17,6 +17,9 @@ import org.bukkit.inventory.ItemStack;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Mystic WellのGUIです.
+ */
 public class EnchantGui implements Gui, Listener {
 
     private static final int[] indexes = {10, 11, 12, 21, 30, 29, 28, 19};

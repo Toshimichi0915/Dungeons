@@ -14,10 +14,10 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        url = 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
     maven {
-        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
     }
 }
 
@@ -25,10 +25,11 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.11'
     implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'commons-io:commons-io:2.8.0'
+    shadow "org.spigotmc:spigot-api:$spigot"
+
     implementation project(':native:api')
     runtime project(':native:1.15.2')
-    runtime project(":native:1.16.4")
-    shadow "org.spigotmc:spigot-api:$spigot"
+    runtime project(':native:1.16.4')
 }
 
 processResources {
@@ -53,7 +54,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven {
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
         maven {
             url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'

@@ -15,6 +15,7 @@ public class EnchantRunnable implements Runnable {
 
     @Override
     public void run() {
+        DungeonsPlugin.getEnchantManager().tick();
         for (Player player : Bukkit.getOnlinePlayers()) {
             ItemStack[] inv = InventoryUtils.getPrimaryItemStacks(player);
             ItemStack[] old = itemMap.get(player);

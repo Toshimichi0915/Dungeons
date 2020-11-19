@@ -245,7 +245,6 @@ public class DungeonsPlugin extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, new ManaBarRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new EnchantRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new ManaRegenRunnable(), 1, 1);
-        Bukkit.getScheduler().runTaskTimer(this, enchantManager::tick, 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new BossBarChatRunnable(), 1, 1);
         Bukkit.getScheduler().runTaskTimer(this, new GuiRunnable(), 1, 1);
     }

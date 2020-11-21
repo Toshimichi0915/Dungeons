@@ -13,7 +13,7 @@ public class ItemStackUtils {
     public static void setDisplay(ItemStack itemStack, String... display) {
         ArrayList<String> list = new ArrayList<>();
         for (String s : display)
-            list.addAll(Arrays.asList(s.split("\n")));
+            list.addAll(Arrays.asList(s.split("[\\r\\n]+")));
         if (list.isEmpty()) return;
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) return;

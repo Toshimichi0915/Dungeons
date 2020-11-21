@@ -11,7 +11,7 @@ public interface Music {
      * @param pos 音楽の再生位置(tick単位)
      * @return 再生する {@link MusicSound} の一覧, もしくは {@code null}
      */
-    MusicSound[] getMusicSound(int pos);
+    MusicSound[] getMusicSounds(int pos);
 
     /**
      * 音楽の長さを返します.

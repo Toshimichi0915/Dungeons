@@ -1,8 +1,8 @@
 package net.toshimichi.dungeons.music;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class PersonalMusicPlayer implements MusicPlayer {
@@ -33,13 +33,19 @@ public class PersonalMusicPlayer implements MusicPlayer {
     @Override
     public void resume() {
         if (task != null) return;
-        task = Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
-            if (pos >= music.getLength()) return;
-            for (MusicSound sound : music.getMusicSounds(pos)) {
-                player.playSound(player.getLocation(), sound.getType(), sound.getPitch(), sound.getVolume());
+        task = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (pos >= music.getLength()) {
+                    cancel();
+                    return;
+                }
+                for (MusicSound sound : music.getMusicSounds(pos)) {
+                    player.playSound(player.getLocation(), sound.getType(), sound.getPitch(), sound.getVolume());
+                }
+                pos++;
             }
-            pos++;
-        }, 1, 1);
+        }.runTaskTimer(DungeonsPlugin.getPlugin(), 1, 1);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class ResourceMusic implements Music {
         String text = IOUtils.toString(getClass().getResourceAsStream(resourceName), StandardCharsets.UTF_8);
         int length = 0;
         for (String line : text.split("[\\r\\n]+")) {
-            String[] split = line.split("\\s+");
+            String[] split = line.split("[\\s\\t,]+");
             try {
                 int pos = Integer.parseInt(split[0]);
                 float pitch = Float.parseFloat(split[1]);

@@ -2,13 +2,17 @@ package net.toshimichi.dungeons.listeners;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.EnchantManager;
+import net.toshimichi.dungeons.gui.EnchantGui;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -87,5 +91,15 @@ public class EnchantListener implements Listener {
         if (!Arrays.asList(InventoryUtils.getPrimaryItemStacks(e.getPlayer())).contains(e.getItem())) return;
         if (DungeonsPlugin.getEnchantManager().getEnchants(e.getItem()).size() == 0) return;
         e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onInventoryOpen(InventoryOpenEvent e) {
+        if (e.getInventory().getType() != InventoryType.ENCHANTING) return;
+        if (!(e.getPlayer() instanceof Player)) return;
+        Player p = (Player) e.getPlayer();
+        e.setCancelled(true);
+        DungeonsPlugin.getGuiManager().show(p, new EnchantGui());
+        p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
     }
 }

@@ -6,6 +6,7 @@ import net.toshimichi.dungeons.music.MusicPlayer;
 import net.toshimichi.dungeons.music.PersonalMusicPlayer;
 import net.toshimichi.dungeons.music.ResourceMusic;
 import net.toshimichi.dungeons.utils.*;
+import org.apache.commons.lang3.RandomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,6 +27,7 @@ import java.util.List;
  */
 public class EnchantGui implements Gui, Listener {
 
+    private static final Material[] dyes;
     private static final int[] indexes = {10, 11, 12, 21, 30, 29, 28, 19};
     private static ResourceMusic music;
     private int counter;
@@ -40,6 +43,8 @@ public class EnchantGui implements Gui, Listener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        dyes = Arrays.stream(Material.values()).filter(p -> p.name().endsWith("DYE")).toArray(Material[]::new);
     }
 
     private ItemStack getMysticWell(Player player) throws IOException {
@@ -124,7 +129,7 @@ public class EnchantGui implements Gui, Listener {
     @Override
     public void onClose() {
         HandlerList.unregisterAll(this);
-        if(musicPlayer != null)
+        if (musicPlayer != null)
             musicPlayer.stop();
     }
 
@@ -172,6 +177,18 @@ public class EnchantGui implements Gui, Listener {
             ItemStackUtils.setDisplay(button, builder.build());
             inv.setItem(25, button);
             updateGui = false;
+        }
+
+        if (musicPlayer != null) {
+            if (musicPlayer.isPlaying()) {
+                Material randomDye = dyes[RandomUtils.nextInt(0, dyes.length)];
+                ItemStack dyeItem = new ItemStack(randomDye);
+                ItemStackUtils.setDisplay(dyeItem, getString("mysticwell.enchanting", player, null));
+                inv.setItem(20, dyeItem);
+            } else {
+                updateGui = true;
+                musicPlayer = null;
+            }
         }
 
         if (counter % 10 != 0) return;

@@ -39,6 +39,7 @@ mysticwell.set={color}錬金台にアイテムが入っています!\n{color}ク
 mysticwell.already_set=&c錬金台にすでにアイテムが嵌っています!
 mysticwell.full=&cインベントリに空きがありません!
 mysticwell.unknown=&c不明なエラーが発生しました!
+mysticwell.enchanting=エンチャント中!
 mysticwell.button.available=&dMystic Well\n&7階位:{color} Tier {tier}\n&7コスト:&6 {cost}g\n\n&eクリックでエンチャントを行います!
 mysticwell.button.maxed_out=&cMystic Well\n&7これ以上エンチャントできません
 mysticwell.button.no_gold=&cMystic Well\n&7所持金が&6 {gold}g &7足りません

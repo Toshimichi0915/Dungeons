@@ -2,6 +2,9 @@ package net.toshimichi.dungeons.gui;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.misc.Stash;
+import net.toshimichi.dungeons.music.MusicPlayer;
+import net.toshimichi.dungeons.music.PersonalMusicPlayer;
+import net.toshimichi.dungeons.music.ResourceMusic;
 import net.toshimichi.dungeons.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,11 +26,21 @@ import java.util.List;
 public class EnchantGui implements Gui, Listener {
 
     private static final int[] indexes = {10, 11, 12, 21, 30, 29, 28, 19};
+    private static ResourceMusic music;
     private int counter;
     private boolean updateGui;
     private EnchantState state;
     private Player player;
     private Inventory inventory;
+    private MusicPlayer musicPlayer;
+
+    static {
+        try {
+            music = new ResourceMusic("music/enchant_normal.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private ItemStack getMysticWell(Player player) throws IOException {
         Stash stash = DungeonsPlugin.getStash();
@@ -88,6 +101,8 @@ public class EnchantGui implements Gui, Listener {
                 if (state != EnchantState.AVAILABLE) return;
                 DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(itemStack));
                 EnchantUtils.enchant(itemStack);
+                musicPlayer = new PersonalMusicPlayer(music, p);
+                musicPlayer.start();
                 updateGui = true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -109,6 +124,8 @@ public class EnchantGui implements Gui, Listener {
     @Override
     public void onClose() {
         HandlerList.unregisterAll(this);
+        if(musicPlayer != null)
+            musicPlayer.stop();
     }
 
     @Override

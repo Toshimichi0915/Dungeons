@@ -55,6 +55,11 @@ public class PersonalMusicPlayer implements MusicPlayer {
     }
 
     @Override
+    public boolean isPlaying() {
+        return task != null && !task.isCancelled();
+    }
+
+    @Override
     public int getPos() {
         return pos;
     }

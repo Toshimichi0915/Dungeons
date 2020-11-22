@@ -26,7 +26,15 @@ public interface MusicPlayer {
     void stop();
 
     /**
+     * 音楽が再生中かそうでないかを調べます.
+     *
+     * @return 再生中の場合は {@code true} そうでなければ {@code false}
+     */
+    boolean isPlaying();
+
+    /**
      * 現在の音楽の再生位置を返します.
+     *
      * @return 現在の音楽の再生位置
      */
     int getPos();

@@ -53,4 +53,14 @@ public class PersonalMusicPlayer implements MusicPlayer {
         pause();
         pos = 0;
     }
+
+    @Override
+    public int getPos() {
+        return pos;
+    }
+
+    @Override
+    public Music getMusic() {
+        return music;
+    }
 }

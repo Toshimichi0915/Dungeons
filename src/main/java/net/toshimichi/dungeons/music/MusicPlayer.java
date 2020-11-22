@@ -24,4 +24,16 @@ public interface MusicPlayer {
      * 音楽の再生を停止し, 音楽の再生位置を最初に戻します.
      */
     void stop();
+
+    /**
+     * 現在の音楽の再生位置を返します.
+     * @return 現在の音楽の再生位置
+     */
+    int getPos();
+
+    /**
+     * 再生されている音楽を返します.
+     * @return 再生されている音楽
+     */
+    Music getMusic();
 }

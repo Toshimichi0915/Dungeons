@@ -76,10 +76,20 @@ abstract public class Enchanter {
     }
 
     /**
-     * エンチャントの有効、無効を調べます.
+     * エンチャントの有効、無効を返します.
+     *
      * @return エンチャントが有効な場合は {@code true} そうでない場合は {@code false}
      */
     public boolean isEnabled() {
         return enabled;
+    }
+
+    /**
+     * エンチャントを有効化できるかを返します.
+     *
+     * @return 有効化できる場合は {@code true} そうでなければ {@code false}
+     */
+    boolean isAvailable() {
+        return true;
     }
 }

@@ -56,6 +56,7 @@ public class NbtEnchantManager implements EnchantManager {
                 .stream()
                 .map(a -> a.getEnchanter(player, itemStack))
                 .filter(Objects::nonNull)
+                .filter(Enchanter::isAvailable)
                 .forEach(a -> {
                     a.enable();
                     addEnchanter(player, a);

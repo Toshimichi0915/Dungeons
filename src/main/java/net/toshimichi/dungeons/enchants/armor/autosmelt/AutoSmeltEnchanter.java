@@ -53,6 +53,6 @@ public class AutoSmeltEnchanter extends Enchanter implements Listener {
 
     @Override
     public boolean isAvailable() {
-        return getPlayer().getInventory().getItem(EquipmentSlot.HEAD).equals(getItemStack());
+        return getItemStack().equals(getPlayer().getInventory().getItem(EquipmentSlot.HEAD));
     }
 }

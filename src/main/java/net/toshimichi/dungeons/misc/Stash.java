@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.misc;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -11,6 +10,7 @@ import java.util.*;
 
 /**
  * アイテムの格納目的で作られたクラスです.
+ * このインターフェースのメソッドはスレッドセーフであることが保証されます.
  */
 public class Stash {
 
@@ -27,11 +27,11 @@ public class Stash {
         this.baseDir = baseDir;
     }
 
-    private File getFile(UUID uuid) {
+    private synchronized File getFile(UUID uuid) {
         return new File(baseDir, uuid.toString() + ".yaml");
     }
 
-    private YamlConfiguration getYaml(UUID uuid) throws IOException {
+    private synchronized YamlConfiguration getYaml(UUID uuid) throws IOException {
         YamlConfiguration result = cache.get(uuid);
         if (result != null) return result;
         result = new YamlConfiguration();
@@ -55,7 +55,7 @@ public class Stash {
      * @param uuid プレイヤーの {@link UUID}
      * @throws IOException セーブできなかった場合
      */
-    public void save(UUID uuid) throws IOException {
+    public synchronized void save(UUID uuid) throws IOException {
         YamlConfiguration conf = cache.get(uuid);
         if (conf == null) return;
         conf.save(getFile(uuid));
@@ -66,7 +66,7 @@ public class Stash {
      *
      * @throws IOException セーブできなかった場合
      */
-    public void saveAll() throws IOException {
+    public synchronized void saveAll() throws IOException {
         for (Map.Entry<UUID, YamlConfiguration> entry : cache.entrySet()) {
             entry.getValue().save(getFile(entry.getKey()));
         }
@@ -74,11 +74,12 @@ public class Stash {
 
     /**
      * 利用できるStashを返します.
+     *
      * @param uuid プレイヤーの {@link UUID}
      * @return 利用できるStashの一覧
      * @throws IOException ロードできなかった場合
      */
-    public Set<String> getStashes(UUID uuid) throws IOException{
+    public synchronized Set<String> getStashes(UUID uuid) throws IOException {
         return getYaml(uuid).getKeys(false);
     }
 
@@ -90,7 +91,7 @@ public class Stash {
      * @param itemStacks Stashの中身
      * @throws IOException ロードできなかった場合
      */
-    public void setItemStacks(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
+    public synchronized void setItemStacks(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
         conf.set(space, Arrays.asList(itemStacks));
     }
@@ -103,7 +104,7 @@ public class Stash {
      * @return アイテム一覧
      * @throws IOException ロードできなかった場合
      */
-    public List<ItemStack> getItemStacks(UUID uuid, String space) throws IOException {
+    public synchronized List<ItemStack> getItemStacks(UUID uuid, String space) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
         List<?> list = conf.getList(space, new ArrayList<>());
         ArrayList<ItemStack> itemStacks = new ArrayList<>();
@@ -121,7 +122,7 @@ public class Stash {
      * @param space Stashの名前
      * @return アイテム一覧
      */
-    public List<ItemStack> getItemStacksSilently(UUID uuid, String space) {
+    public synchronized List<ItemStack> getItemStacksSilently(UUID uuid, String space) {
         try {
             return getItemStacks(uuid, space);
         } catch (IOException e) {
@@ -138,7 +139,7 @@ public class Stash {
      * @param itemStacks 追加するアイテム
      * @throws IOException ロードできなかった場合
      */
-    public void addItemStack(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
+    public synchronized void addItemStack(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
         List<ItemStack> list = getItemStacks(uuid, space);
         list.addAll(Arrays.asList(itemStacks));
         getYaml(uuid).set(space, list);
@@ -153,7 +154,7 @@ public class Stash {
      * @param itemStacks 削除するアイテム
      * @throws IOException ロードできなかった場合
      */
-    public void removeItemStack(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
+    public synchronized void removeItemStack(UUID uuid, String space, ItemStack... itemStacks) throws IOException {
         List<ItemStack> list = getItemStacks(uuid, space);
         for (ItemStack itemStack : itemStacks) {
             int remaining = itemStack.getAmount();
@@ -181,7 +182,7 @@ public class Stash {
      * @param space Stashの名前
      * @throws IOException ロードできなかった場合
      */
-    public void clearStash(UUID uuid, String space) throws IOException {
+    public synchronized void clearStash(UUID uuid, String space) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
         conf.set(space, null);
     }

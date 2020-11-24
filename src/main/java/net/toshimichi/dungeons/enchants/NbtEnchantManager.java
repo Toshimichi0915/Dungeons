@@ -65,7 +65,6 @@ public class NbtEnchantManager implements EnchantManager {
 
     @Override
     public void refresh(Player player) {
-        PlayerInventory inv = player.getInventory();
         ItemStack[] checkList = InventoryUtils.getPrimaryItemStacks(player);
         Set<ItemStack> removed = new HashSet<>();
         getEnchanters(player).stream()

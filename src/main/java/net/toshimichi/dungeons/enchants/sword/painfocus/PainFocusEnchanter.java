@@ -48,4 +48,9 @@ public class PainFocusEnchanter extends Enchanter implements Listener {
         double modifier = 1 + pain * coefficient;
         e.setDamage(e.getDamage() * modifier);
     }
+
+    @Override
+    public boolean isAvailable() {
+        return getPlayer().getInventory().getItemInMainHand().equals(getItemStack());
+    }
 }

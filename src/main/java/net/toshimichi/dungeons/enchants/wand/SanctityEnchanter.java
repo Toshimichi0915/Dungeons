@@ -40,12 +40,10 @@ public class SanctityEnchanter extends Enchanter implements Listener {
     }
 
     private boolean tryUse() {
-        ItemStack item = getPlayer().getInventory().getItemInMainHand();
-        if (!item.equals(getItemStack())) return false;
         int level = getEnchant().getLevel();
-        if (SilentCooldown.getCooldown(item, "enchant.sanctity.cooldown") > 1) return false;
+        if (SilentCooldown.getCooldown(getItemStack(), "enchant.sanctity.cooldown") > 1) return false;
         if (!DungeonsPlugin.getManaManager().consumeMana(getPlayer(), 20 * level)) return false;
-        SilentCooldown.setCooldown(item, "enchant.sanctity.cooldown", 10);
+        SilentCooldown.setCooldown(getItemStack(), "enchant.sanctity.cooldown", 10);
         double healAmount;
         if (level == 1)
             healAmount = 2;
@@ -75,4 +73,10 @@ public class SanctityEnchanter extends Enchanter implements Listener {
             e.setCancelled(true);
     }
 
+    @Override
+    public boolean isAvailable() {
+        ItemStack mainHand = getPlayer().getInventory().getItemInMainHand();
+        ItemStack offHand = getPlayer().getInventory().getItemInOffHand();
+        return mainHand.equals(getItemStack()) || offHand.equals(getItemStack());
+    }
 }

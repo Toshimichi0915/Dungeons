@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class GottaGoFastEnchanter extends Enchanter {
@@ -45,5 +46,10 @@ public class GottaGoFastEnchanter extends Enchanter {
     @Override
     protected void onDisabled() {
         getPlayer().setWalkSpeed(getPlayer().getWalkSpeed() - changed);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return getPlayer().getInventory().getItem(EquipmentSlot.FEET).equals(getItemStack());
     }
 }

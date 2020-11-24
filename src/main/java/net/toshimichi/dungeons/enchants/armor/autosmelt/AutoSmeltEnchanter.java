@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class AutoSmeltEnchanter extends Enchanter implements Listener {
@@ -48,5 +49,10 @@ public class AutoSmeltEnchanter extends Enchanter implements Listener {
             e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), drop);
         }
         e.getBlock().setType(Material.AIR);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return getPlayer().getInventory().getItem(EquipmentSlot.HEAD).equals(getItemStack());
     }
 }

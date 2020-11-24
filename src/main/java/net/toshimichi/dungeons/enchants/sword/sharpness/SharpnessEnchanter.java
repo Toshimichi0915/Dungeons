@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.sword.sharpness;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import net.toshimichi.dungeons.utils.Nonce;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -35,11 +36,9 @@ public class SharpnessEnchanter extends Enchanter implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onDamage(EntityDamageByEntityEvent e) {
-        if (!e.getDamager().equals(getPlayer())) return;
-        if(!(e.getEntity() instanceof LivingEntity)) return;
-        if(!((Player)e.getDamager()).getInventory().getItemInMainHand().equals(getItemStack()))
-            return;
+    public void onDamage(EntityDamageByEntityEvent e1) {
+        PlayerDamageEvent e = new PlayerDamageEvent(e1);
+        if(!getPlayer().equals(e.getTrueDamager())) return;
         double modifier;
         if (getEnchant().getLevel() == 1) {
             modifier = 0.08;
@@ -50,5 +49,10 @@ public class SharpnessEnchanter extends Enchanter implements Listener {
         }
 
         e.setDamage(e.getDamage() * (1 + modifier));
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return getPlayer().getInventory().getItemInMainHand().equals(getItemStack());
     }
 }

@@ -49,4 +49,9 @@ public class LifestealEnchanter extends Enchanter implements Listener {
         after = Math.min(after, getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         getPlayer().setHealth(after);
     }
+
+    @Override
+    public boolean isAvailable() {
+        return getPlayer().getInventory().getItemInMainHand().equals(getItemStack());
+    }
 }

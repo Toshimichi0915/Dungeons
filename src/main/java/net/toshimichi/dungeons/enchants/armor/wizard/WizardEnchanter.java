@@ -6,6 +6,8 @@ import net.toshimichi.dungeons.enchants.Enchanter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
+
 public class WizardEnchanter extends Enchanter {
 
     private int delta;
@@ -34,5 +36,10 @@ public class WizardEnchanter extends Enchanter {
     protected void onDisabled() {
         int maxMana = DungeonsPlugin.getManaManager().getMaxMana(getPlayer());
         DungeonsPlugin.getManaManager().setMaxMana(getPlayer(), maxMana - delta);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return Arrays.asList(getPlayer().getInventory().getArmorContents()).contains(getItemStack());
     }
 }

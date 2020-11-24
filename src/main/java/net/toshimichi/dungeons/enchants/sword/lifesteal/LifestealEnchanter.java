@@ -1,0 +1,50 @@
+package net.toshimichi.dungeons.enchants.sword.lifesteal;
+
+import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.enchants.Enchant;
+import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.events.PlayerDamageEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
+
+public class LifestealEnchanter extends Enchanter implements Listener {
+
+    public LifestealEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
+        super(enchant, player, itemStack);
+    }
+
+    @Override
+    protected void onEnabled() {
+        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    protected void onDisabled() {
+        HandlerList.unregisterAll(this);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onAttack(EntityDamageByEntityEvent e1) {
+        PlayerDamageEvent e = new PlayerDamageEvent(e1);
+        if (!e.getTrueDamager().equals(getPlayer())) return;
+        double after = getPlayer().getHealth();
+        if (getEnchant().getLevel() == 1)
+            after += e.getFinalDamage() * 0.05;
+        else if (getEnchant().getLevel() == 2)
+            after += e.getFinalDamage() * 0.1;
+        else if (getEnchant().getLevel() >= 3)
+            after += e.getFinalDamage() * 0.17;
+        getPlayer().setHealth(after);
+    }
+}

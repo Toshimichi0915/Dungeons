@@ -2,6 +2,7 @@ package net.toshimichi.dungeons.gui;
 
 
 import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.misc.YamlStash;
 import net.toshimichi.dungeons.utils.EnchantUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -71,7 +72,7 @@ public enum EnchantState {
 
     /**
      * 現在のMystic Wellの状態を返します.
-     * またMystic Wellのアイテムは {@link net.toshimichi.dungeons.misc.Stash} の
+     * またMystic Wellのアイテムは {@link YamlStash} の
      * {@code mystic_well} にセットされているアイテムが使用されます.
      *
      * @param player プレイヤー

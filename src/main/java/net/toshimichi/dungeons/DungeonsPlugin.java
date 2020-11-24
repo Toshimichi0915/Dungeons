@@ -202,7 +202,7 @@ public class DungeonsPlugin extends JavaPlugin {
                 new AutoSmelt1());
 
         manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
-        stash = new Stash(new File(getDataFolder(), "stash"));
+        stash = new YamlStash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
         guiManager = new SimpleGuiManager();
 

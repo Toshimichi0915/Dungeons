@@ -210,7 +210,7 @@ public class DungeonsPlugin extends JavaPlugin {
                 Bukkit.getServicesManager().load(net.milkbowl.vault.economy.Economy.class) != null) {
             economy = new VaultEconomy(Bukkit.getServicesManager().load(net.milkbowl.vault.economy.Economy.class));
         }
-        economy = new SimpleEconomy(new File(getDataFolder(), "economy"));
+        economy = new YamlEconomy(new File(getDataFolder(), "economy"));
 
         locales = new ArrayList<>();
 

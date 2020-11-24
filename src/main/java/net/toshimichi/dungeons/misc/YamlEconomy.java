@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
-public class SimpleEconomy implements Economy {
+public class YamlEconomy implements Economy {
 
     private final Map<UUID, Integer> cache = new WeakHashMap<>();
     private final File baseDir;
 
-    public SimpleEconomy(File baseDir) {
+    public YamlEconomy(File baseDir) {
         this.baseDir = baseDir;
     }
 

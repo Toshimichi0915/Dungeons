@@ -89,7 +89,7 @@ abstract public class Enchanter {
      *
      * @return 有効化できる場合は {@code true} そうでなければ {@code false}
      */
-    boolean isAvailable() {
+    public boolean isAvailable() {
         return true;
     }
 }

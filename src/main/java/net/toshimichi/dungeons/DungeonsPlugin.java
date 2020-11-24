@@ -41,7 +41,7 @@ import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
 import net.toshimichi.dungeons.misc.*;
 import net.toshimichi.dungeons.nat.api.Installer;
-import net.toshimichi.dungeons.runnable.*;
+import net.toshimichi.dungeons.services.*;
 import net.toshimichi.dungeons.utils.Lottery;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -73,6 +73,8 @@ public class DungeonsPlugin extends JavaPlugin {
     private static GuiManager guiManager;
     private static ArrayList<Locale> locales;
     private static Locale defaultLocale;
+
+    private final ArrayList<Service> services = new ArrayList<>();
     private File confFile;
     private YamlConfiguration conf;
 
@@ -131,6 +133,11 @@ public class DungeonsPlugin extends JavaPlugin {
     private Locale getLocale(String name) throws IOException {
         File f = new File(getDataFolder(), "lang/" + name + ".lang");
         return new PropertiesLocale(f);
+    }
+
+    private void registerService(Service service) {
+        service.start();
+        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), service, 1, 1);
     }
 
     @Override
@@ -254,15 +261,16 @@ public class DungeonsPlugin extends JavaPlugin {
 
         Bukkit.getOnlinePlayers().forEach(enchantManager::refresh);
 
-        Bukkit.getScheduler().runTaskTimer(this, new ManaBarRunnable(), 1, 1);
-        Bukkit.getScheduler().runTaskTimer(this, new EnchantRunnable(), 1, 1);
-        Bukkit.getScheduler().runTaskTimer(this, new ManaRegenRunnable(), 1, 1);
-        Bukkit.getScheduler().runTaskTimer(this, new BossBarChatRunnable(), 1, 1);
-        Bukkit.getScheduler().runTaskTimer(this, new GuiRunnable(), 1, 1);
+        registerService(new ManaBarService());
+        registerService(new EnchantService());
+        registerService(new ManaRegenService());
+        registerService(new BossBarChatService());
+        registerService(new GuiService());
     }
 
     @Override
     public void onDisable() {
         Bukkit.getOnlinePlayers().forEach(enchantManager::disable);
+        services.forEach(Service::stop);
     }
 }

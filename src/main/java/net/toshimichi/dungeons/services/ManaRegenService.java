@@ -1,10 +1,10 @@
-package net.toshimichi.dungeons.runnable;
+package net.toshimichi.dungeons.services;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class ManaRegenRunnable implements Runnable {
+public class ManaRegenService implements Service{
 
     private int counter;
 

@@ -18,14 +18,14 @@ public class VaultEconomy implements Economy {
     }
 
     @Override
-    public void setMoney(UUID uuid, int money) {
+    public boolean setMoney(UUID uuid, int money) {
         int current = getMoney(uuid);
         int delta = money - current;
-        if (delta == 0) return;
+        if (delta == 0) return true;
         if (delta > 0)
-            deposit(uuid, delta);
+            return deposit(uuid, delta);
         else
-            withdraw(uuid, -delta);
+            return withdraw(uuid, -delta);
     }
 
     @Override
@@ -34,8 +34,8 @@ public class VaultEconomy implements Economy {
     }
 
     @Override
-    public void deposit(UUID uuid, int money) {
-        vault.depositPlayer(getOfflinePlayer(uuid), money);
+    public boolean deposit(UUID uuid, int money) {
+        return vault.depositPlayer(getOfflinePlayer(uuid), money).transactionSuccess();
     }
 
     @Override

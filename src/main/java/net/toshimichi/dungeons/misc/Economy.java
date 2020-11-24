@@ -1,9 +1,11 @@
 package net.toshimichi.dungeons.misc;
 
+import java.io.IOException;
 import java.util.UUID;
 
 /**
  * プレイヤーの所持金を管理します.
+ * このインターフェースのメソッドは全て非同期で呼ばれなければなりません.
  */
 public interface Economy {
 
@@ -18,14 +20,15 @@ public interface Economy {
      * プレイヤーの所持金を設定します.
      * @param uuid プレイヤーの {@link UUID}
      * @param money 新しい所持金
+     * @return 設定できた場合は {@code true} そうでなければ {@code false}
      */
-    void setMoney(UUID uuid, int money);
+    boolean setMoney(UUID uuid, int money);
 
     /**
      * プレイヤーの所持金から指定された額を引き出します.
      * @param uuid プレイヤーの {@link UUID}
      * @param money 所持金
-     * @return 引き出せた場合は {@code true} そうでない場合は {@code false}
+     * @return 引き出せた場合は {@code true} そうでなけれは {@code false}
      */
     boolean withdraw(UUID uuid, int money);
 
@@ -33,17 +36,20 @@ public interface Economy {
      * プレイヤーの所持金を増やします.
      * @param uuid プレイヤーの {@link UUID}
      * @param money 増やすお金
+     * @return 増やせた場合は {@code true} そうでなければ {@code false}
      */
-    void deposit(UUID uuid, int money);
+    boolean deposit(UUID uuid, int money);
 
     /**
-     * プレイヤーのデータをセーブします.
+     * プレイヤーのデータが確実にセーブされていることを確実にします.
      * @param uuid プレイヤーの {@link UUID}
+     * @throws IOException セーブに失敗した場合
      */
-    void save(UUID uuid);
+    void save(UUID uuid) throws IOException;
 
     /**
-     * ロードされている全てのプレイヤーのデータをセーブします.
+     * ロードされている全てのプレイヤーのデータがセーブされていることを確実にします.
+     * @throws IOException セーブに失敗した場合
      */
-    void saveAll();
+    void saveAll() throws IOException;
 }

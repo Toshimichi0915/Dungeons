@@ -58,8 +58,9 @@ public class SimpleEconomy implements Economy {
     }
 
     @Override
-    public void setMoney(UUID uuid, int money) {
+    public boolean setMoney(UUID uuid, int money) {
         cache.put(uuid, money);
+        return true;
     }
 
     @Override
@@ -71,23 +72,21 @@ public class SimpleEconomy implements Economy {
     }
 
     @Override
-    public void deposit(UUID uuid, int money) {
-        setMoney(uuid, getMoney(uuid) + money);
+    public boolean deposit(UUID uuid, int money) {
+        return setMoney(uuid, getMoney(uuid) + money);
     }
 
     @Override
-    public void save(UUID uuid) {
+    public void save(UUID uuid) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
         conf.set("money", getMoney(uuid));
-        try {
-            conf.save(getFile(uuid));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        conf.save(getFile(uuid));
     }
 
     @Override
-    public void saveAll() {
-        cache.keySet().forEach(this::save);
+    public void saveAll() throws IOException {
+        for (UUID key : cache.keySet()) {
+            save(key);
+        }
     }
 }

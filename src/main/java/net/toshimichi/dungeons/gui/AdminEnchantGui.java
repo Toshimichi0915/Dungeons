@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,56 +38,59 @@ public class AdminEnchantGui implements Gui, Listener {
     private int level = 1;
     private boolean updateGui;
 
+    private BukkitTask updater;
+    private int counter;
+    private boolean forceUpdate;
+    private ItemStack adminWell;
+
     @Override
     public String getTitle(Player player) {
         return "Enchant Manager";
     }
 
-    private ItemStack getAdminWell(Player player) {
-        try {
-            Stash stash = DungeonsPlugin.getStash();
-            List<ItemStack> well = stash.getItemStacks(player.getUniqueId(), "admin_well");
-            if (well.isEmpty())
-                return null;
-            return well.get(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private void setAdminWell(Player player, ItemStack itemStack) {
-        try {
-            if (itemStack != null)
-                DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "admin_well", itemStack);
-            else
-                DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "admin_well");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void setAdminWell(ItemStack itemStack) {
+        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            try {
+                if (itemStack != null)
+                    DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "admin_well", itemStack);
+                else
+                    DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "admin_well");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> forceUpdate = true);
+        });
     }
 
     @Override
     public GuiItem[] getItems() {
         GuiItem[] items = new GuiItem[36];
         items[10] = new PlainGuiItem(new ItemStack(Material.AIR), (p, g, i) -> {
-            ItemStack itemStack = getAdminWell(p);
+            ItemStack itemStack = adminWell;
             if (itemStack == null) return;
             if (p.getInventory().addItem(itemStack).size() != 0) return;
-            setAdminWell(p, null);
-            updateGui = true;
+            setAdminWell(null);
         });
         items[12] = new PlainGuiItem(new ItemStack(Material.ENDER_EYE), (p, g, i) -> {
-            manager.setLives(getAdminWell(p), manager.getLives(getAdminWell(p)) + 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setLives(itemStack, manager.getLives(itemStack) + 1);
+            setAdminWell(itemStack);
         });
         items[13] = new PlainGuiItem(new ItemStack(Material.PINK_DYE), (p, g, i) -> {
-            manager.setMaxLives(getAdminWell(p), manager.getMaxLives(getAdminWell(p)) + 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setMaxLives(itemStack, manager.getMaxLives(itemStack) + 1);
+            setAdminWell(itemStack);
         });
         items[14] = new PlainGuiItem(new ItemStack(Material.LAVA_BUCKET), (p, g, i) -> {
-            manager.setTier(getAdminWell(p), manager.getTier(getAdminWell(p)) + 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setTier(itemStack, manager.getTier(itemStack) + 1);
+            setAdminWell(itemStack);
         });
         items[15] = new PlainGuiItem(new ItemStack(Material.BLAZE_ROD), (p, g, i) -> {
             if (manager.getEnchant(++id, 1) == null)
@@ -104,23 +108,34 @@ public class AdminEnchantGui implements Gui, Listener {
         ItemStackUtils.setDisplay(book, ChatColor.GRAY + "錬金台のアイテムを編集できます");
         items[19] = new PlainGuiItem(book, new NullListener());
         items[21] = new PlainGuiItem(new ItemStack(Material.ENDER_PEARL), (p, g, i) -> {
-            manager.setLives(getAdminWell(p), manager.getLives(getAdminWell(p)) - 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setLives(itemStack, manager.getLives(itemStack) - 1);
+            setAdminWell(itemStack);
         });
         items[22] = new PlainGuiItem(new ItemStack(Material.CYAN_DYE), (p, g, i) -> {
-            manager.setMaxLives(getAdminWell(p), manager.getMaxLives(getAdminWell(p)) - 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setMaxLives(itemStack, manager.getMaxLives(itemStack) - 1);
+            setAdminWell(itemStack);
         });
         items[23] = new PlainGuiItem(new ItemStack(Material.WATER_BUCKET), (p, g, i) -> {
-            manager.setTier(getAdminWell(p), manager.getTier(getAdminWell(p)) - 1);
-            updateGui = true;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
+            manager.setTier(itemStack, manager.getTier(itemStack) - 1);
+            setAdminWell(itemStack);
         });
         items[24] = new PlainGuiItem(new ItemStack(Material.GLOWSTONE_DUST), (p, g, i) -> {
-            if (getAdminWell(p) == null) return;
+            ItemStack itemStack = adminWell;
+            if (itemStack == null) return;
+            itemStack = itemStack.clone();
             List<Locale> locales = DungeonsPlugin.getLocales();
-            Locale locale = locales.get((locales.indexOf(manager.getLocale(getAdminWell(p))) + 1) % locales.size());
-            manager.setLocale(getAdminWell(p), locale);
-            updateGui = true;
+            Locale locale = locales.get((locales.indexOf(manager.getLocale(itemStack)) + 1) % locales.size());
+            manager.setLocale(itemStack, locale);
+            setAdminWell(itemStack);
         });
         items[25] = new PlainGuiItem(new ItemStack(Material.ENCHANTING_TABLE), (p, g, i) -> {
             Set<Enchant> enchants = DungeonsPlugin.getEnchantManager().getAllEnchants();
@@ -128,13 +143,14 @@ public class AdminEnchantGui implements Gui, Listener {
                     .filter(p1 -> p1.getId() == id && p1.getLevel() == level)
                     .findAny().orElse(null);
             if (e == null) return;
-            ItemStack itemStack = getAdminWell(p);
+            ItemStack itemStack = adminWell;
             if (itemStack == null) return;
+            itemStack = itemStack.clone();
             Set<Enchant> applied = DungeonsPlugin.getEnchantManager().getEnchants(itemStack);
             applied.removeIf(f -> f.getId() == e.getId());
             applied.add(e);
             DungeonsPlugin.getEnchantManager().setEnchants(itemStack, applied.toArray(new Enchant[0]));
-            updateGui = true;
+            setAdminWell(itemStack);
         });
         return items;
     }
@@ -145,18 +161,40 @@ public class AdminEnchantGui implements Gui, Listener {
         this.inventory = inventory;
         manager = DungeonsPlugin.getEnchantManager();
         Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
-        updateGui = true;
+        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            if (counter != 200 && !forceUpdate) return;
+            forceUpdate = false;
+            Stash stash = DungeonsPlugin.getStash();
+            List<ItemStack> well;
+            try {
+                well = stash.getItemStacks(player.getUniqueId(), "admin_well");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                if (well.isEmpty())
+                    adminWell = null;
+                else
+                    adminWell = well.get(0);
+                updateGui = true;
+            });
+        }, 1, 1);
     }
 
     @Override
     public void onClose() {
         HandlerList.unregisterAll(this);
+        if (updater != null)
+            updater.cancel();
     }
 
     @Override
     public void next(Player player, Gui gui, Inventory inv) {
+        counter++;
         if (!updateGui) return;
-        ItemStack item = getAdminWell(player);
+        updateGui = false;
+        ItemStack item = adminWell;
         inv.setItem(10, item);
 
         ItemStackUtils.setDisplay(inv.getItem(12), "残機を増加させる\n現在: " + manager.getLives(item));
@@ -196,7 +234,6 @@ public class AdminEnchantGui implements Gui, Listener {
         ItemStackUtils.setDisplay(inv.getItem(24), localeBuilder.toString());
         ItemStackUtils.setDisplay(inv.getItem(25), "エンチャントを付与する\n" +
                 "選択されたエンチャント: " + ChatColor.BLUE + selectedEnchant.getName());
-        updateGui = false;
     }
 
     @EventHandler
@@ -204,10 +241,9 @@ public class AdminEnchantGui implements Gui, Listener {
         if (!player.getInventory().equals(e.getClickedInventory())) return;
         if (e.getCurrentItem() == null) return;
         e.setCancelled(true);
-        if (getAdminWell(player) != null)
+        if (adminWell != null)
             return;
-        setAdminWell(player, e.getCurrentItem());
-        updateGui = true;
+        setAdminWell(e.getCurrentItem());
         InventoryUtils.reduce(player.getInventory(), e.getCurrentItem());
     }
 }

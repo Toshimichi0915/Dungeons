@@ -5,6 +5,8 @@ import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,13 +20,16 @@ public class PutCommand implements PlayerCommand {
         if (itemStack.getType() == Material.AIR)
             throw new CommandException("stashに入れるアイテムを手に持ってください");
         Stash stash = DungeonsPlugin.getStash();
-        try {
-            stash.addItemStack(player.getUniqueId(), arguments.getString(0, "Stashの名前"), itemStack);
-            player.getInventory().setItemInMainHand(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new CommandException("Stashをロードできませんでした");
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            try {
+                stash.addItemStack(player.getUniqueId(), arguments.getString(0, "Stashの名前"), itemStack);
+                player.getInventory().setItemInMainHand(null);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                        player.sendMessage(ChatColor.RED + "Stashをロードできませんでした"));
+            }
+        });
     }
 
     @Override

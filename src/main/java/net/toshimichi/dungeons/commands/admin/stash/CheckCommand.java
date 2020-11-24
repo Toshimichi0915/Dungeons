@@ -55,14 +55,18 @@ public class CheckCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         Stash stash = DungeonsPlugin.getStash();
-        List<ItemStack> list = stash.getItemStacksSilently(player.getUniqueId(), arguments.getString(0, "Stashの名前"));
-        if (list.isEmpty()) {
-            player.sendMessage("Stashには何も入っていません");
-            return;
-        }
-        for (ItemStack itemStack : list) {
-            player.spigot().sendMessage(getTextComponent(itemStack));
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            List<ItemStack> list = stash.getItemStacksSilently(player.getUniqueId(), arguments.getString(0, "Stashの名前"));
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                if (list.isEmpty()) {
+                    player.sendMessage("Stashには何も入っていません");
+                    return;
+                }
+                for (ItemStack itemStack : list) {
+                    player.spigot().sendMessage(getTextComponent(itemStack));
+                }
+            });
+        });
     }
 
     @Override

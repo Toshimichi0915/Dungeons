@@ -91,6 +91,8 @@ public class AdminEnchantGui implements Gui, Listener {
         items[15] = new PlainGuiItem(new ItemStack(Material.BLAZE_ROD), (p, g, i) -> {
             if (manager.getEnchant(++id, 1) == null)
                 id = 1;
+            if (manager.getEnchant(id, level) == null)
+                level = 1;
             updateGui = true;
         });
         items[16] = new PlainGuiItem(new ItemStack(Material.STICK), (p, g, i) -> {

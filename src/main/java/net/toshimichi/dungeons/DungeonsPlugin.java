@@ -3,6 +3,7 @@ package net.toshimichi.dungeons;
 import net.toshimichi.dungeons.commands.DungeonsCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.NbtEnchantManager;
+import net.toshimichi.dungeons.enchants.armor.autosmelt.AutoSmelt1;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast1;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast2;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast3;
@@ -197,7 +198,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Volley1(), new Volley2(), new Volley3(),
                 new Fletching1(), new Fletching2(), new Fletching3(),
                 new PainFocus1(), new PainFocus2(), new PainFocus3(),
-                new Lifesteal1(), new Lifesteal2(), new Lifesteal3());
+                new Lifesteal1(), new Lifesteal2(), new Lifesteal3(),
+                new AutoSmelt1());
 
         manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
         economy = new SimpleEconomy(new File(getDataFolder(), "economy"));

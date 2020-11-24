@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 public class ResourceMusic implements Music {
 
     private final int length;
-    private final Multimap<Integer, SimpleMusicSound> sounds = ArrayListMultimap.create();
+    private final Multimap<Integer, PlainMusicSound> sounds = ArrayListMultimap.create();
 
     public ResourceMusic(String resourceName) throws IOException {
         String text = IOUtils.toString(DungeonsPlugin.getPlugin().getResource(resourceName), StandardCharsets.UTF_8);
@@ -29,7 +29,7 @@ public class ResourceMusic implements Music {
                 Sound type = Sound.valueOf(split[3]);
                 if (pos > length)
                     length = pos;
-                sounds.put(pos, new SimpleMusicSound(type, pitch, volume));
+                sounds.put(pos, new PlainMusicSound(type, pitch, volume));
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 //skip

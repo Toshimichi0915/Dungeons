@@ -201,7 +201,7 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Lifesteal1(), new Lifesteal2(), new Lifesteal3(),
                 new AutoSmelt1());
 
-        manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
+        manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
         guiManager = new SimpleGuiManager();

@@ -9,13 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.WeakHashMap;
 
-public class SimpleManaManager implements ManaManager {
+public class LocalManaManager implements ManaManager {
 
     private final WeakHashMap<Player, Integer> manaMap = new WeakHashMap<>();
     private final WeakHashMap<Player, Integer> maxManaMap = new WeakHashMap<>();
     private final File baseDir;
 
-    public SimpleManaManager(File baseDir) {
+    public LocalManaManager(File baseDir) {
         this.baseDir = baseDir;
     }
 

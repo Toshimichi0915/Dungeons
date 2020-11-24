@@ -10,7 +10,7 @@ import java.util.*;
 
 public class YamlStash implements Stash {
 
-    private static Map<UUID, YamlConfiguration> cache = new WeakHashMap<>();
+    private static final Map<UUID, YamlConfiguration> cache = new WeakHashMap<>();
 
     private final File baseDir;
 

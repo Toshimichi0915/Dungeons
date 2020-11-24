@@ -7,9 +7,10 @@ import net.toshimichi.dungeons.utils.InventoryUtils;
 import net.toshimichi.dungeons.utils.Nonce;
 import net.toshimichi.dungeons.utils.RomanNumber;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -178,6 +179,8 @@ public class NbtEnchantManager implements EnchantManager {
 
         meta.setDisplayName(color + tierDisplayed + " " + category);
         meta.setLore(lore);
+        meta.addEnchant(Enchantment.MENDING, 0, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(meta);
     }
 

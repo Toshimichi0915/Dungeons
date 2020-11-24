@@ -64,9 +64,9 @@ public class DungeonsPlugin extends JavaPlugin {
 
     private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;
-    private static NbtEnchantManager enchantManager;
-    private static SimpleManaManager manaManager;
-    private static SimpleEconomy economy;
+    private static EnchantManager enchantManager;
+    private static ManaManager manaManager;
+    private static Economy economy;
     private static Stash stash;
     private static IpStackApi ipStackApi;
     private static LocaleManager localeManager;
@@ -202,10 +202,15 @@ public class DungeonsPlugin extends JavaPlugin {
                 new AutoSmelt1());
 
         manaManager = new SimpleManaManager(new File(getDataFolder(), "mana"));
-        economy = new SimpleEconomy(new File(getDataFolder(), "economy"));
         stash = new Stash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
         guiManager = new SimpleGuiManager();
+
+        if (Bukkit.getPluginManager().getPlugin("Vault") != null &&
+                Bukkit.getServicesManager().load(net.milkbowl.vault.economy.Economy.class) != null) {
+            economy = new VaultEconomy(Bukkit.getServicesManager().load(net.milkbowl.vault.economy.Economy.class));
+        }
+        economy = new SimpleEconomy(new File(getDataFolder(), "economy"));
 
         locales = new ArrayList<>();
 

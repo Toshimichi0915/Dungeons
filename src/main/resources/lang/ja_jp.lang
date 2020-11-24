@@ -35,6 +35,7 @@ enchant.painfocus.3=失った&c❤&7ごとにダメージが&e 7% &7上昇
 enchant.lifesteal.1=与えたダメージのうち&c 5% &7を回復
 enchant.lifesteal.2=与えたダメージのうち&c 10% &7を回復
 enchant.lifesteal.3=与えたダメージのうち&c 17% &7を回復
+enchant.autosmelt.1=鉄鉱石と金鉱石を採掘時に精錬
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

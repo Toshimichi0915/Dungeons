@@ -2,8 +2,8 @@ package net.toshimichi.dungeons.commands.admin.lang;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.commands.SubCommand;
 import net.toshimichi.dungeons.commands.CommandException;
+import net.toshimichi.dungeons.commands.SubCommand;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLanguage;
@@ -17,14 +17,6 @@ import java.io.IOException;
 
 public class IpCommand implements SubCommand {
 
-    private void async(Runnable r) {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), r);
-    }
-
-    private void sync(Runnable r) {
-        Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), r);
-    }
-
     @Override
     public void onCommand(CommandSender sender, Arguments arguments, String cmd) {
         IpStackApi api = DungeonsPlugin.getIpStackApi();
@@ -37,7 +29,7 @@ public class IpCommand implements SubCommand {
             throw new CommandException(ChatColor.RED + "このコマンドはプレイヤーのみ使用できます");
         }
         Player finalTarget = target;
-        async(() -> {
+        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
             String ip = finalTarget.getAddress().getHostString();
             boolean available = api.isAvailable();
             IpStackInfo info = null;
@@ -50,7 +42,8 @@ public class IpCommand implements SubCommand {
                 }
             }
             if (!available) {
-                sync(() -> sender.sendMessage("IPに関する情報は現在使用不可能です"));
+                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                        sender.sendMessage("IPに関する情報は現在使用不可能です"));
                 return;
             }
             if (info.getIp() == null)

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -60,6 +61,7 @@ public class EnchantGui implements Gui, Listener {
             DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", itemStack);
         else
             DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "mystic_well");
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
     }
 
     private String getString(String key, Player player, ChatColor color) {

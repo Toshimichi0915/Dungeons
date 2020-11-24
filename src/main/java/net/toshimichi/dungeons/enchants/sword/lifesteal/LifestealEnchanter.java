@@ -5,6 +5,7 @@ import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -45,6 +46,7 @@ public class LifestealEnchanter extends Enchanter implements Listener {
             after += e.getFinalDamage() * 0.1;
         else if (getEnchant().getLevel() >= 3)
             after += e.getFinalDamage() * 0.17;
+        after = Math.min(after, getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         getPlayer().setHealth(after);
     }
 }

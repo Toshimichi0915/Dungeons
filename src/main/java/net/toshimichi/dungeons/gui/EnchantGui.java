@@ -18,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,11 +33,17 @@ public class EnchantGui implements Gui, Listener {
     private static final int[] indexes = {10, 11, 12, 21, 30, 29, 28, 19};
     private static ResourceMusic music;
     private int counter;
-    private boolean updateGui;
-    private EnchantState state;
     private Player player;
     private Inventory inventory;
     private MusicPlayer musicPlayer;
+    private BukkitTask updater;
+
+    //update
+    private boolean forceUpdate;
+    private boolean updateGui;
+    private EnchantState state;
+    private ItemStack mysticWell;
+    private int money;
 
     static {
         try {
@@ -46,22 +53,6 @@ public class EnchantGui implements Gui, Listener {
         }
 
         dyes = Arrays.stream(Material.values()).filter(p -> p.name().endsWith("DYE")).toArray(Material[]::new);
-    }
-
-    private ItemStack getMysticWell(Player player) throws IOException {
-        Stash stash = DungeonsPlugin.getStash();
-        List<ItemStack> well = stash.getItemStacks(player.getUniqueId(), "mystic_well");
-        if (well.isEmpty())
-            return null;
-        return well.get(0);
-    }
-
-    private void setMysticWell(Player player, ItemStack itemStack) throws IOException {
-        if (itemStack != null)
-            DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", itemStack);
-        else
-            DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "mystic_well");
-        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
     }
 
     private String getString(String key, Player player, ChatColor color) {
@@ -86,35 +77,46 @@ public class EnchantGui implements Gui, Listener {
         }
 
         items[20] = new PlainGuiItem(new ItemStack(Material.AIR), (p, g, i) -> {
-            try {
-                ItemStack itemStack = getMysticWell(p);
-                if (itemStack == null) return;
-                if (p.getInventory().addItem(itemStack).size() == 0) {
-                    setMysticWell(p, null);
-                    updateGui = true;
-                    return;
-                }
+            if (mysticWell == null) return;
+            if (p.getInventory().addItem(mysticWell).size() != 0) {
                 p.sendMessage(getString("mysticwell.full", p, null));
-            } catch (IOException e) {
-                e.printStackTrace();
-                p.sendMessage(getString("mysticwell.unknown", p, null));
+                return;
             }
+            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+                try {
+                    DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "mystic_well");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                        InventoryUtils.reduce(p.getInventory(), mysticWell);
+                        p.sendMessage(getString("mysticwell.unknown", p, null));
+                    });
+                }
+                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
+                    forceUpdate = true;
+                });
+            });
         });
 
         items[25] = new PlainGuiItem(new ItemStack(Material.AIR), (p, g, i) -> {
-            try {
-                ItemStack itemStack = getMysticWell(p);
-                if (itemStack == null) return;
-                if (state != EnchantState.AVAILABLE) return;
-                DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(itemStack));
-                EnchantUtils.enchant(itemStack);
-                musicPlayer = new PersonalMusicPlayer(music, p);
-                musicPlayer.start();
-                updateGui = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                p.sendMessage(getString("mysticwell.unknown", p, null));
-            }
+            if (mysticWell == null) return;
+            if (state != EnchantState.AVAILABLE) return;
+            ItemStack enchanted = mysticWell.clone();
+            EnchantUtils.enchant(enchanted);
+            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+                DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(mysticWell));
+                try {
+                    DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", enchanted);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                            p.sendMessage(getString("mysticwell.unknown", p, null)));
+                }
+                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> forceUpdate = true);
+            });
+            musicPlayer = new PersonalMusicPlayer(music, p);
+            musicPlayer.start();
         });
         return items;
 
@@ -125,7 +127,32 @@ public class EnchantGui implements Gui, Listener {
         this.player = player;
         this.inventory = inventory;
         Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
-        updateGui = true;
+
+        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            if (counter % 200 != 0 && !forceUpdate) return;
+            forceUpdate = false;
+            EnchantState state = EnchantState.getEnchantState(player);
+            ItemStack mysticWell;
+            Stash stash = DungeonsPlugin.getStash();
+            List<ItemStack> well = null;
+            try {
+                well = stash.getItemStacks(player.getUniqueId(), "mystic_well");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (well == null || well.isEmpty())
+                mysticWell = null;
+            else
+                mysticWell = well.get(0);
+            int money = DungeonsPlugin.getEconomy().getMoney(player.getUniqueId());
+
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                this.state = state;
+                this.mysticWell = mysticWell;
+                this.money = money;
+                updateGui = true;
+            });
+        }, 1, 1);
     }
 
     @Override
@@ -133,22 +160,17 @@ public class EnchantGui implements Gui, Listener {
         HandlerList.unregisterAll(this);
         if (musicPlayer != null)
             musicPlayer.stop();
+        if (updater != null)
+            updater.cancel();
     }
 
     @Override
     public void next(Player player, Gui gui, Inventory inv) {
         counter++;
         if (updateGui) {
+            updateGui = false;
             state = EnchantState.getEnchantState(player);
-            ItemStack itemStack;
-            try {
-                itemStack = getMysticWell(player);
-            } catch (IOException e) {
-                e.printStackTrace();
-                itemStack = new ItemStack(Material.BEDROCK);
-                ItemStackUtils.setDisplay(itemStack, getString("mysticwell.unknown", player, null));
-            }
-            inv.setItem(20, itemStack);
+            inv.setItem(20, mysticWell);
 
             for (int index : indexes) {
                 ItemStack glass = inv.getItem(index);
@@ -162,9 +184,8 @@ public class EnchantGui implements Gui, Listener {
             }
 
             ItemStack button = new ItemStack(state.getMaterial());
-            int cost = EnchantUtils.getCost(itemStack);
-            int money = DungeonsPlugin.getEconomy().getMoney(player.getUniqueId());
-            int tier = DungeonsPlugin.getEnchantManager().getTier(itemStack);
+            int cost = EnchantUtils.getCost(mysticWell);
+            int tier = DungeonsPlugin.getEnchantManager().getTier(mysticWell);
             ChatColor chatColor;
             if (tier == 0) chatColor = ChatColor.GREEN;
             else if (tier == 1) chatColor = ChatColor.YELLOW;
@@ -178,7 +199,6 @@ public class EnchantGui implements Gui, Listener {
                 builder.replace("{tier}", chatColor + RomanNumber.convert(tier + 1));
             ItemStackUtils.setDisplay(button, builder.build());
             inv.setItem(25, button);
-            updateGui = false;
         }
 
         if (musicPlayer != null) {
@@ -219,16 +239,22 @@ public class EnchantGui implements Gui, Listener {
         if (!player.getInventory().equals(e.getClickedInventory())) return;
         if (e.getCurrentItem() == null) return;
         e.setCancelled(true);
-        try {
-            if (getMysticWell(player) != null) {
-                player.sendMessage(getString("mysticwell.already_set", player, null));
+        if (mysticWell != null) {
+            player.sendMessage(getString("mysticwell.already_set", player, null));
+            return;
+        }
+        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            try {
+                DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", e.getCurrentItem());
+            } catch (IOException ex) {
+                ex.printStackTrace();
                 return;
             }
-            setMysticWell(player, e.getCurrentItem());
-            updateGui = true;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        InventoryUtils.reduce(player.getInventory(), e.getCurrentItem());
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
+                InventoryUtils.reduce(player.getInventory(), e.getCurrentItem());
+                forceUpdate = true;
+            });
+        });
     }
 }

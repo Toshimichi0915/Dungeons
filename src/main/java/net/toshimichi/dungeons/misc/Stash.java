@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * アイテムの格納を管理します.
+ * このインターフェースのメソッドはスレッドセーフであることが保証されます.
+ */
 public interface Stash {
     /**
      * Stashをセーブします.

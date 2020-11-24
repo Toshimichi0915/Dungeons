@@ -8,10 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * アイテムの格納目的で作られたクラスです.
- * このインターフェースのメソッドはスレッドセーフであることが保証されます.
- */
 public class YamlStash implements Stash {
 
     private static Map<UUID, YamlConfiguration> cache = new WeakHashMap<>();

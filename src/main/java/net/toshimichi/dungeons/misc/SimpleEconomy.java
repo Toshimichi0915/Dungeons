@@ -18,7 +18,7 @@ public class SimpleEconomy implements Economy {
         this.baseDir = baseDir;
     }
 
-    private File getFile(UUID uuid) {
+    private synchronized File getFile(UUID uuid) {
         File f = new File(baseDir, uuid + ".yaml");
         if (!f.exists()) {
             f.getParentFile().mkdirs();
@@ -31,7 +31,7 @@ public class SimpleEconomy implements Economy {
         return f;
     }
 
-    private YamlConfiguration getYaml(UUID uuid) {
+    private synchronized YamlConfiguration getYaml(UUID uuid) {
         File f = getFile(uuid);
         YamlConfiguration conf = new YamlConfiguration();
         try {
@@ -43,7 +43,7 @@ public class SimpleEconomy implements Economy {
     }
 
     @Override
-    public int getMoney(UUID uuid) {
+    public synchronized int getMoney(UUID uuid) {
         Integer money = cache.get(uuid);
         if (money == null) {
             YamlConfiguration conf = getYaml(uuid);
@@ -58,13 +58,13 @@ public class SimpleEconomy implements Economy {
     }
 
     @Override
-    public boolean setMoney(UUID uuid, int money) {
+    public synchronized boolean setMoney(UUID uuid, int money) {
         cache.put(uuid, money);
         return true;
     }
 
     @Override
-    public boolean withdraw(UUID uuid, int money) {
+    public synchronized boolean withdraw(UUID uuid, int money) {
         int after = getMoney(uuid) - money;
         if (after < 0) return false;
         setMoney(uuid, after);
@@ -72,19 +72,19 @@ public class SimpleEconomy implements Economy {
     }
 
     @Override
-    public boolean deposit(UUID uuid, int money) {
+    public synchronized boolean deposit(UUID uuid, int money) {
         return setMoney(uuid, getMoney(uuid) + money);
     }
 
     @Override
-    public void save(UUID uuid) throws IOException {
+    public synchronized void save(UUID uuid) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
         conf.set("money", getMoney(uuid));
         conf.save(getFile(uuid));
     }
 
     @Override
-    public void saveAll() throws IOException {
+    public synchronized void saveAll() throws IOException {
         for (UUID key : cache.keySet()) {
             save(key);
         }

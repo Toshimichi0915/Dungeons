@@ -43,7 +43,7 @@ public class YamlEconomy implements Economy {
     }
 
     @Override
-    public synchronized int getMoney(UUID uuid) {
+    public synchronized int getBalance(UUID uuid) {
         Integer money = cache.get(uuid);
         if (money == null) {
             YamlConfiguration conf = getYaml(uuid);
@@ -58,28 +58,28 @@ public class YamlEconomy implements Economy {
     }
 
     @Override
-    public synchronized boolean setMoney(UUID uuid, int money) {
-        cache.put(uuid, money);
+    public synchronized boolean setBalance(UUID uuid, int balance) {
+        cache.put(uuid, balance);
         return true;
     }
 
     @Override
-    public synchronized boolean withdraw(UUID uuid, int money) {
-        int after = getMoney(uuid) - money;
+    public synchronized boolean withdraw(UUID uuid, int balance) {
+        int after = getBalance(uuid) - balance;
         if (after < 0) return false;
-        setMoney(uuid, after);
+        setBalance(uuid, after);
         return true;
     }
 
     @Override
     public synchronized boolean deposit(UUID uuid, int money) {
-        return setMoney(uuid, getMoney(uuid) + money);
+        return setBalance(uuid, getBalance(uuid) + money);
     }
 
     @Override
     public synchronized void save(UUID uuid) throws IOException {
         YamlConfiguration conf = getYaml(uuid);
-        conf.set("money", getMoney(uuid));
+        conf.set("money", getBalance(uuid));
         conf.save(getFile(uuid));
     }
 

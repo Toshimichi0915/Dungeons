@@ -15,25 +15,25 @@ public interface Economy {
      * @param uuid プレイヤーの {@link UUID}
      * @return 所持金
      */
-    int getMoney(UUID uuid);
+    int getBalance(UUID uuid);
 
     /**
      * プレイヤーの所持金を設定します.
      *
-     * @param uuid  プレイヤーの {@link UUID}
-     * @param money 新しい所持金
+     * @param uuid    プレイヤーの {@link UUID}
+     * @param balance 新しい所持金
      * @return 設定できた場合は {@code true} そうでなければ {@code false}
      */
-    boolean setMoney(UUID uuid, int money);
+    boolean setBalance(UUID uuid, int balance);
 
     /**
      * プレイヤーの所持金から指定された額を引き出します.
      *
-     * @param uuid  プレイヤーの {@link UUID}
-     * @param money 所持金
+     * @param uuid    プレイヤーの {@link UUID}
+     * @param balance 所持金
      * @return 引き出せた場合は {@code true} そうでなけれは {@code false}
      */
-    boolean withdraw(UUID uuid, int money);
+    boolean withdraw(UUID uuid, int balance);
 
     /**
      * プレイヤーの所持金を増やします.

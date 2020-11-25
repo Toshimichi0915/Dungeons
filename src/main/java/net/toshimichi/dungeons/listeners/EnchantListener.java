@@ -89,7 +89,7 @@ public class EnchantListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onUse(PlayerItemDamageEvent e) {
         if (!Arrays.asList(InventoryUtils.getPrimaryItemStacks(e.getPlayer())).contains(e.getItem())) return;
-        if (DungeonsPlugin.getEnchantManager().getEnchants(e.getItem()).size() == 0) return;
+        if (DungeonsPlugin.getEnchantManager().getTier(e.getItem()) < 0) return;
         e.setCancelled(true);
     }
 

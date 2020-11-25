@@ -179,7 +179,7 @@ public class NbtEnchantManager implements EnchantManager {
 
         meta.setDisplayName(color + tierDisplayed + " " + category);
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.MENDING, 0, true);
+        meta.addEnchant(Enchantment.MENDING, 1, true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(meta);
     }

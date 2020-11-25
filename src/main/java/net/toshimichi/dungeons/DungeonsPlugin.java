@@ -7,6 +7,9 @@ import net.toshimichi.dungeons.enchants.armor.autosmelt.AutoSmelt1;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast1;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast2;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast3;
+import net.toshimichi.dungeons.enchants.armor.protection.Protection1;
+import net.toshimichi.dungeons.enchants.armor.protection.Protection2;
+import net.toshimichi.dungeons.enchants.armor.protection.Protection3;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard1;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard2;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard3;
@@ -206,7 +209,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Fletching1(), new Fletching2(), new Fletching3(),
                 new PainFocus1(), new PainFocus2(), new PainFocus3(),
                 new Lifesteal1(), new Lifesteal2(), new Lifesteal3(),
-                new AutoSmelt1());
+                new AutoSmelt1(),
+                new Protection1(), new Protection2(), new Protection3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

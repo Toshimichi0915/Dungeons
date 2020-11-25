@@ -36,6 +36,9 @@ enchant.lifesteal.1=与えたダメージのうち&c 5% &7を回復
 enchant.lifesteal.2=与えたダメージのうち&c 10% &7を回復
 enchant.lifesteal.3=与えたダメージのうち&c 17% &7を回復
 enchant.autosmelt.1=鉄鉱石と金鉱石を採掘時に精錬
+enchant.protection.1=ダメージを&c 4% &7軽減
+enchant.protection.2=ダメージを&c 8% &7軽減
+enchant.protection.3=ダメージを&c 13% &7軽減
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

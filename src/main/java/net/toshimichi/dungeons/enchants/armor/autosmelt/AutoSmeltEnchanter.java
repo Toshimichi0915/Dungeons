@@ -4,6 +4,7 @@ import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,6 +39,7 @@ public class AutoSmeltEnchanter extends Enchanter implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onMine(BlockBreakEvent e) {
         if (!getPlayer().equals(e.getPlayer())) return;
+        if (getPlayer().getGameMode() == GameMode.CREATIVE) return;
         e.setCancelled(true);
         e.setDropItems(true);
 

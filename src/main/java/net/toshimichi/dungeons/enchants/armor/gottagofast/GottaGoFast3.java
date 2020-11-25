@@ -38,7 +38,7 @@ public class GottaGoFast3 implements Enchant {
 
     @Override
     public EnchantType[] getEnchantType() {
-        return EnchantType.getArmor();
+        return new EnchantType[]{EnchantType.BOOTS};
     }
 
     @Override

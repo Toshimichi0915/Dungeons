@@ -50,6 +50,6 @@ public class GottaGoFastEnchanter extends Enchanter {
 
     @Override
     public boolean isAvailable() {
-        return getItemStack().equals(getPlayer().getInventory().getItem(EquipmentSlot.LEGS));
+        return getItemStack().equals(getPlayer().getInventory().getItem(EquipmentSlot.FEET));
     }
 }

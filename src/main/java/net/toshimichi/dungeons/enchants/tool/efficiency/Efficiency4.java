@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.tool;
+package net.toshimichi.dungeons.enchants.tool.efficiency;
 
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;
@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Efficiency5 extends Efficiency {
+public class Efficiency4 extends Efficiency {
     @Override
     public int getId() {
         return 15;
@@ -19,17 +19,17 @@ public class Efficiency5 extends Efficiency {
 
     @Override
     public String getName() {
-        return "Efficiency V";
+        return "Efficiency IV";
     }
 
     @Override
     public int getLevel() {
-        return 5;
+        return 4;
     }
 
     @Override
     public int getRarity() {
-        return 400;
+        return 600;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Efficiency5 extends Efficiency {
     @Override
     public Map<Enchantment, Integer> getEnchantments() {
         HashMap<Enchantment, Integer> map = new HashMap<>();
-        map.put(Enchantment.DIG_SPEED, 5);
+        map.put(Enchantment.DIG_SPEED, 4);
         return map;
     }
 }

@@ -1,4 +1,4 @@
-version=4
+version=5
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -52,6 +52,7 @@ enchant.efficiency.2=Increases block breaking speed by&e {modifier}%
 enchant.efficiency.3=Increases block breaking speed by&e {modifier}%
 enchant.efficiency.4=Increases block breaking speed by&e {modifier}%
 enchant.efficiency.5=Increases block breaking speed by&e {modifier}%
+enchant.silktouch.1=Allows blocks to drop themselves in their original forms
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

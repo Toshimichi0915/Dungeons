@@ -1,4 +1,4 @@
-version=4
+version=5
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -52,6 +52,7 @@ enchant.efficiency.2=ブロック破壊速度を&e {modifier}% &7上昇
 enchant.efficiency.3=ブロック破壊速度を&e {modifier}% &7上昇
 enchant.efficiency.4=ブロック破壊速度を&e {modifier}% &7上昇
 enchant.efficiency.5=ブロック破壊速度を&e {modifier}% &7上昇
+enchant.silktouch.1=ブロック破壊時にそのままの形でドロップ
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

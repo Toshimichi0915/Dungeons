@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.tool;
+package net.toshimichi.dungeons.enchants.tool.efficiency;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.lang.Locale;

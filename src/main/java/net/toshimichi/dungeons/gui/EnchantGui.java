@@ -84,7 +84,7 @@ public class EnchantGui implements Gui, Listener {
             }
             Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
                 try {
-                    DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "mystic_well");
+                    DungeonsPlugin.getStash().clearStash(p.getUniqueId(), "mystic_well");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
@@ -93,7 +93,7 @@ public class EnchantGui implements Gui, Listener {
                     });
                 }
                 Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
-                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
+                    p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
                     forceUpdate = true;
                 });
             });
@@ -104,10 +104,11 @@ public class EnchantGui implements Gui, Listener {
             if (state != EnchantState.AVAILABLE) return;
             ItemStack enchanted = mysticWell.clone();
             EnchantUtils.enchant(enchanted);
+            DungeonsPlugin.getEnchantManager().setLocale(enchanted, DungeonsPlugin.getLocaleManager().getLocale(p));
             Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
                 DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(mysticWell));
                 try {
-                    DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", enchanted);
+                    DungeonsPlugin.getStash().setItemStacks(p.getUniqueId(), "mystic_well", enchanted);
                 } catch (IOException e) {
                     e.printStackTrace();
                     Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->

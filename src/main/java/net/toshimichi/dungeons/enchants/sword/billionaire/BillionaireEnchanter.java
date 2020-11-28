@@ -69,7 +69,7 @@ public class BillionaireEnchanter extends Enchanter implements Listener {
         e.setDamage(e.getDamage() * modifier);
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () ->
                 DungeonsPlugin.getEconomy().withdraw(getPlayer().getUniqueId(), cost));
-        getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
+        getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.7F);
     }
 
     @Override

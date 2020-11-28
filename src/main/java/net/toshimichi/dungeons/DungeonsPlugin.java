@@ -142,6 +142,7 @@ public class DungeonsPlugin extends JavaPlugin {
     }
 
     private void registerService(Service service) {
+        services.add(service);
         service.start();
         Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), service, 1, 1);
     }

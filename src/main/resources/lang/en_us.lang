@@ -1,4 +1,4 @@
-version=3
+version=4
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -47,6 +47,11 @@ enchant.telebow.cooldown=&eIn cooldown! Remaining&c {seconds} &eseconds
 enchant.telebow.1=Sneak to shoot a teleportation arrow (300s cooldown)
 enchant.telebow.2=Sneak to shoot a teleportation arrow (180s cooldown)
 enchant.telebow.3=Sneak to shoot a teleportation arrow (120s cooldown)
+enchant.efficiency.1=Increases block breaking speed by &e{modifier}%
+enchant.efficiency.2=Increases block breaking speed by &e{modifier}%
+enchant.efficiency.3=Increases block breaking speed by &e{modifier}%
+enchant.efficiency.4=Increases block breaking speed by &e{modifier}%
+enchant.efficiency.5=Increases block breaking speed by &e{modifier}%
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

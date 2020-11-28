@@ -40,6 +40,7 @@ import net.toshimichi.dungeons.enchants.sword.painfocus.PainFocus3;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness1;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness2;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness3;
+import net.toshimichi.dungeons.enchants.tool.*;
 import net.toshimichi.dungeons.enchants.wand.Sanctity1;
 import net.toshimichi.dungeons.enchants.wand.Sanctity2;
 import net.toshimichi.dungeons.enchants.wand.Sanctity3;
@@ -226,7 +227,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new AutoSmelt1(),
                 new Protection1(), new Protection2(), new Protection3(),
                 new Billionaire1(), new Billionaire2(), new Billionaire3(),
-                new Telebow1(), new Telebow2(), new Telebow3());
+                new Telebow1(), new Telebow2(), new Telebow3(),
+                new Efficiency1(), new Efficiency2(), new Efficiency3(), new Efficiency4(), new Efficiency5());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

@@ -73,7 +73,7 @@ public class MobUtils {
             case WITCH:
             case VINDICATOR:
             case ILLUSIONER:
-            case PIG_ZOMBIE:
+            case ZOMBIFIED_PIGLIN:
             case PILLAGER:
             case SKELETON:
             case STRAY:

@@ -162,7 +162,7 @@ public class AdminEnchantGui implements Gui, Listener {
         manager = DungeonsPlugin.getEnchantManager();
         Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
         updater = Bukkit.getScheduler().runTaskTimerAsynchronously(DungeonsPlugin.getPlugin(), () -> {
-            if (counter != 200 && !forceUpdate) return;
+            if (counter % 200 != 0 && !forceUpdate) return;
             forceUpdate = false;
             Stash stash = DungeonsPlugin.getStash();
             List<ItemStack> well;

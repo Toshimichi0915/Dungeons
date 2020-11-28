@@ -120,7 +120,6 @@ public class EnchantGui implements Gui, Listener {
             musicPlayer.start();
         });
         return items;
-
     }
 
     @Override

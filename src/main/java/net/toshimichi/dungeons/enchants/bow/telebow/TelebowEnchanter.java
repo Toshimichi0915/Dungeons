@@ -26,6 +26,21 @@ public class TelebowEnchanter extends Enchanter implements Listener {
     private static final WeakHashMap<Player, Integer> cooldown = new WeakHashMap<>();
     private static final WeakHashMap<Player, Arrow> arrows = new WeakHashMap<>();
 
+    static {
+        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
+            for (Map.Entry<Player, Integer> entry : cooldown.entrySet()) {
+                int next = entry.getValue() - 1;
+                if (next == 0)
+                    cooldown.remove(entry.getKey());
+                else
+                    cooldown.put(entry.getKey(), next);
+            }
+            for (Arrow arrow : arrows.values()) {
+                arrow.getWorld().spawnParticle(Particle.SPELL_MOB, arrow.getLocation(), 1);
+            }
+        }, 1, 1);
+    }
+
     public TelebowEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);
     }
@@ -37,16 +52,6 @@ public class TelebowEnchanter extends Enchanter implements Listener {
 
     @Override
     public void tick() {
-        for (Map.Entry<Player, Integer> entry : cooldown.entrySet()) {
-            int next = entry.getValue() - 1;
-            if (next == 0)
-                cooldown.remove(entry.getKey());
-            else
-                cooldown.put(entry.getKey(), next);
-        }
-        for (Arrow arrow : arrows.values()) {
-            arrow.getWorld().spawnParticle(Particle.SPELL_MOB, arrow.getLocation(), 1);
-        }
     }
 
     @Override

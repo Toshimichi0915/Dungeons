@@ -37,7 +37,7 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
                     cooldown.put(entry.getKey(), next);
             }
             for (Arrow arrow : arrows.values()) {
-                arrow.getWorld().spawnParticle(Particle.SPELL_MOB, arrow.getLocation(), 1);
+                arrow.getWorld().spawnParticle(Particle.SPELL_MOB, arrow.getLocation(), 3);
             }
         }, 1, 1);
     }

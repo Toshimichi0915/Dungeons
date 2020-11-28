@@ -39,6 +39,9 @@ enchant.autosmelt.1=鉄鉱石と金鉱石を採掘時に精錬
 enchant.protection.1=ダメージを&c 4% &7軽減
 enchant.protection.2=ダメージを&c 8% &7軽減
 enchant.protection.3=ダメージを&c 13% &7軽減
+enchant.billionaire.1=ダメージが&c 50% &7上昇するが&6 100g &7消費
+enchant.billionaire.2=ダメージが&c 80% &7上昇するが&6 150g &7消費
+enchant.billionaire.3=ダメージが&c 120% &7上昇するが&6 200g &7消費
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

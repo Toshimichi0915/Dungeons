@@ -23,7 +23,7 @@ public class BossBarChatService implements Service {
             ArrayList<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
             Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
                 for (Player p : players) {
-                    int money = DungeonsPlugin.getEconomy().getMoney(p.getUniqueId());
+                    int money = DungeonsPlugin.getEconomy().getBalance(p.getUniqueId());
                     Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
                             moneyMap.put(p, money));
                 }

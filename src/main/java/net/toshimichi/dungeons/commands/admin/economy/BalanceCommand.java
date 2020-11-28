@@ -10,7 +10,7 @@ public class BalanceCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
-            int money = DungeonsPlugin.getEconomy().getMoney(player.getUniqueId());
+            int money = DungeonsPlugin.getEconomy().getBalance(player.getUniqueId());
             Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
                 player.sendMessage("所持金: " + money);
             });

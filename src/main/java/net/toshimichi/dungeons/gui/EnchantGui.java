@@ -144,7 +144,7 @@ public class EnchantGui implements Gui, Listener {
                 mysticWell = null;
             else
                 mysticWell = well.get(0);
-            int money = DungeonsPlugin.getEconomy().getMoney(player.getUniqueId());
+            int money = DungeonsPlugin.getEconomy().getBalance(player.getUniqueId());
 
             Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
                 this.state = state;

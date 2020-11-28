@@ -39,6 +39,9 @@ enchant.autosmelt.1=Automatically smelts iron ore and gold ore
 enchant.protection.1=Reduces damage by&c 4%
 enchant.protection.2=Reduces damage by&c 8%
 enchant.protection.3=Reduces damage by&c 13%
+enchant.billionaire.1=Increases damage by &c 50% &7 but costs &6 100g
+enchant.billionaire.2=Increases damage by &c 80% &7 but costs &6 150g
+enchant.billionaire.3=Increases damage by &c 120% &7 but costs &6 200g
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

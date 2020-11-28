@@ -10,7 +10,7 @@ public class SetCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
-            DungeonsPlugin.getEconomy().setMoney(player.getUniqueId(), arguments.getInt(0, "所持金"));
+            DungeonsPlugin.getEconomy().setBalance(player.getUniqueId(), arguments.getInt(0, "所持金"));
         });
     }
 

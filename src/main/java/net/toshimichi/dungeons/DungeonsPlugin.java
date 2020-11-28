@@ -25,6 +25,9 @@ import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
 import net.toshimichi.dungeons.enchants.shield.SpringInside1;
 import net.toshimichi.dungeons.enchants.shield.SpringInside2;
 import net.toshimichi.dungeons.enchants.shield.SpringInside3;
+import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire1;
+import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire2;
+import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire3;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal1;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal2;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal3;
@@ -210,7 +213,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new PainFocus1(), new PainFocus2(), new PainFocus3(),
                 new Lifesteal1(), new Lifesteal2(), new Lifesteal3(),
                 new AutoSmelt1(),
-                new Protection1(), new Protection2(), new Protection3());
+                new Protection1(), new Protection2(), new Protection3(),
+                new Billionaire1(), new Billionaire2(), new Billionaire3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

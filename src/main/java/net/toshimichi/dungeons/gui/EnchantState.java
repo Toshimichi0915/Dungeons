@@ -94,7 +94,7 @@ public enum EnchantState {
         else if (tier == 3)
             return EnchantState.MAXED_OUT;
 
-        if (EnchantUtils.getCost(mysticWell.get(0)) > DungeonsPlugin.getEconomy().getMoney(player.getUniqueId()))
+        if (EnchantUtils.getCost(mysticWell.get(0)) > DungeonsPlugin.getEconomy().getBalance(player.getUniqueId()))
             return EnchantState.NO_GOLD;
 
         return EnchantState.AVAILABLE;

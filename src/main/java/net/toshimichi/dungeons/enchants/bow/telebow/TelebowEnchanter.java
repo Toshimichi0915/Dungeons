@@ -7,6 +7,7 @@ import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -90,7 +91,9 @@ public class TelebowEnchanter extends Enchanter implements Listener {
         Arrow arrow = (Arrow) e.getEntity();
         arrows.remove(getPlayer());
         if (!getPlayer().equals(arrow.getShooter())) return;
-        getPlayer().teleport(arrow.getLocation());
+        Location loc = arrow.getLocation();
+        loc.setDirection(getPlayer().getLocation().getDirection());
+        getPlayer().teleport(loc);
         getPlayer().getWorld().playSound(getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.7F, 2);
     }
 }

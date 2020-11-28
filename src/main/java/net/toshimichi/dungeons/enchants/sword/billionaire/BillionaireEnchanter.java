@@ -65,6 +65,7 @@ public class BillionaireEnchanter extends Enchanter implements Listener {
         }
         if (estimatedMoney < cost)
             return;
+        estimatedMoney -= cost;
         e.setDamage(e.getDamage() * modifier);
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () ->
                 DungeonsPlugin.getEconomy().withdraw(getPlayer().getUniqueId(), cost));

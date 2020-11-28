@@ -27,7 +27,7 @@ public class Wizard1 implements Enchant {
 
     @Override
     public int getRarity() {
-        return 30;
+        return 300;
     }
 
     @Override

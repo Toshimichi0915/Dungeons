@@ -61,7 +61,7 @@ public class EnchantListener implements Listener {
         e.getDrops().clear();
         ArrayList<ItemStack> keepInv = new ArrayList<>();
         PlayerInventory inventory = e.getEntity().getInventory();
-        ItemStack[] contents = InventoryUtils.getPrimaryItemStacks(e.getEntity());
+        ItemStack[] contents = e.getEntity().getInventory().getContents();
         EnchantManager manager = DungeonsPlugin.getEnchantManager();
 
         //reduce a life from mystics

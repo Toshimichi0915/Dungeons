@@ -1,4 +1,4 @@
-version=5
+version=6
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -53,6 +53,9 @@ enchant.efficiency.3=Increases block breaking speed by&e {modifier}%
 enchant.efficiency.4=Increases block breaking speed by&e {modifier}%
 enchant.efficiency.5=Increases block breaking speed by&e {modifier}%
 enchant.silktouch.1=Allows blocks to drop themselves in their original forms
+enchant.katana.1=Reduces enemy's knockback by&e 10%
+enchant.katana.2=Reduces enemy's knockback by&e 20%
+enchant.katana.3=Reduces enemy's knockback by&e 40%
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

@@ -31,6 +31,9 @@ import net.toshimichi.dungeons.enchants.shield.SpringInside3;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire1;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire2;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire3;
+import net.toshimichi.dungeons.enchants.sword.katana.Katana1;
+import net.toshimichi.dungeons.enchants.sword.katana.Katana2;
+import net.toshimichi.dungeons.enchants.sword.katana.Katana3;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal1;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal2;
 import net.toshimichi.dungeons.enchants.sword.lifesteal.Lifesteal3;
@@ -230,7 +233,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Billionaire1(), new Billionaire2(), new Billionaire3(),
                 new Telebow1(), new Telebow2(), new Telebow3(),
                 new Efficiency1(), new Efficiency2(), new Efficiency3(), new Efficiency4(), new Efficiency5(),
-                new SilkTouch1());
+                new SilkTouch1(),
+                new Katana1(), new Katana2(), new Katana3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

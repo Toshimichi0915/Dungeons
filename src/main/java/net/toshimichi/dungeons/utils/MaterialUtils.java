@@ -1,16 +1,11 @@
 package net.toshimichi.dungeons.utils;
 
-import net.toshimichi.dungeons.enchants.EnchantType;
 import org.bukkit.Material;
 
 public class MaterialUtils {
 
     public static boolean isSword(Material material) {
         return material.name().endsWith("SWORD");
-    }
-
-    public static boolean isAxe(Material material) {
-        return material.name().endsWith("AXE");
     }
 
     public static boolean isHelmet(Material material) {
@@ -27,6 +22,22 @@ public class MaterialUtils {
 
     public static boolean isBoots(Material material) {
         return material.name().endsWith("BOOTS");
+    }
+
+    public static boolean isPickaxe(Material material) {
+        return material.name().endsWith("PICKAXE");
+    }
+
+    public static boolean isAxe(Material material) {
+        return material.name().endsWith("AXE");
+    }
+
+    public static boolean isShovel(Material material) {
+        return material.name().endsWith("SHOVEL");
+    }
+
+    public static boolean isHoe(Material material) {
+        return material.name().endsWith("HOE");
     }
 
     public static boolean isArmor(Material material) {

@@ -13,7 +13,6 @@ import java.util.List;
  */
 public enum EnchantType {
     SWORD("Sword"),
-    AXE("Axe"),
     BOW("Bow"),
     WAND("Wand"),
     HELMET("Helmet"),
@@ -21,6 +20,10 @@ public enum EnchantType {
     LEGGINGS("Leggings"),
     BOOTS("Boots"),
     SHIELD("Shield"),
+    PICKAXE("Pickaxe"),
+    AXE("Axe"),
+    SHOVEL("Shovel"),
+    HOE("Hoe"),
     ARTIFACT("Artifact");
 
     private final String prefix;
@@ -36,6 +39,10 @@ public enum EnchantType {
      */
     public String getPrefix() {
         return prefix;
+    }
+
+    public static EnchantType[] getTools() {
+        return new EnchantType[]{PICKAXE, AXE, SHOVEL, HOE};
     }
 
     /**
@@ -65,24 +72,30 @@ public enum EnchantType {
         if (material.isAir() || material.isBlock())
             return null;
         else if (MaterialUtils.isSword(material))
-            return EnchantType.SWORD;
-        else if (MaterialUtils.isAxe(material))
-            return EnchantType.AXE;
+            return SWORD;
         else if (MaterialUtils.isHelmet(material))
-            return EnchantType.HELMET;
+            return HELMET;
         else if (MaterialUtils.isChestplate(material))
-            return EnchantType.CHESTPLATE;
+            return CHESTPLATE;
         else if (MaterialUtils.isLeggings(material))
-            return EnchantType.LEGGINGS;
+            return LEGGINGS;
         else if (MaterialUtils.isBoots(material))
-            return EnchantType.BOOTS;
+            return BOOTS;
         else if (material == Material.SHIELD)
-            return EnchantType.SHIELD;
+            return SHIELD;
         else if (material == Material.BOW)
-            return EnchantType.BOW;
+            return BOW;
+        else if (MaterialUtils.isPickaxe(material))
+            return PICKAXE;
+        else if (MaterialUtils.isAxe(material))
+            return AXE;
+        else if (MaterialUtils.isShovel(material))
+            return SHOVEL;
+        else if (MaterialUtils.isHoe(material))
+            return HOE;
         else if (material == Material.STICK && meta != null && meta.hasCustomModelData() &&
                 meta.getCustomModelData() > 1000)
-            return EnchantType.WAND;
+            return WAND;
         else
             return EnchantType.ARTIFACT;
     }

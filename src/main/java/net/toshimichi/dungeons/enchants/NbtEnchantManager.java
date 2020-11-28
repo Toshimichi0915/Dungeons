@@ -179,8 +179,14 @@ public class NbtEnchantManager implements EnchantManager {
 
         meta.setDisplayName(color + tierDisplayed + " " + category);
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.MENDING, 1, true);
+        Arrays.stream(Enchantment.values()).forEach(meta::removeEnchant);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addEnchant(Enchantment.MENDING, 1, true);
+        for (Enchant e : getEnchants(itemStack)) {
+            e.getEnchantments().entrySet().stream()
+                    .filter(entry -> entry.getValue() > meta.getEnchantLevel(entry.getKey()))
+                    .forEach(entry -> meta.addEnchant(entry.getKey(), entry.getValue(), true));
+        }
         itemStack.setItemMeta(meta);
     }
 

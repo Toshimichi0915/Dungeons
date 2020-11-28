@@ -1,8 +1,13 @@
 package net.toshimichi.dungeons.enchants;
 
 import net.toshimichi.dungeons.lang.Locale;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 単一のエンチャントを表します.
@@ -69,5 +74,14 @@ public interface Enchant {
      * @return エンチャントの実行クラス
      */
     Enchanter getEnchanter(Player player, ItemStack itemStack);
+
+    /**
+     * このエンチャントの条件となる, マインクラフトのエンチャントを返します.
+     *
+     * @return このエンチャントを付与する際に必要となるマインクラフトのエンチャント
+     */
+    default Map<Enchantment, Integer> getEnchantments() {
+        return Collections.emptyMap();
+    }
 
 }

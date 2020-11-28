@@ -37,7 +37,7 @@ public class PainFocus2 implements Enchant {
 
     @Override
     public EnchantType[] getEnchantType() {
-        return new EnchantType[]{EnchantType.SWORD};
+        return new EnchantType[]{EnchantType.SWORD, EnchantType.AXE};
     }
 
     @Override

@@ -21,7 +21,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -52,9 +55,10 @@ public class AdminEnchantGui implements Gui, Listener {
     private Enchant getEnchant(ItemStack itemStack, int id, int level) {
         ArrayList<Enchant> enchants = getEnchants(itemStack);
         if (enchants.isEmpty()) return null;
-        LinkedHashSet<Integer> set = new LinkedHashSet<>();
-        enchants.forEach(a -> set.add(a.getId()));
-        ArrayList<Integer> idList = new ArrayList<>(set);
+        List<Integer> idList = enchants.stream()
+                .map(Enchant::getId)
+                .distinct()
+                .collect(Collectors.toList());
         List<Enchant> sameIds = enchants.stream()
                 .filter(p -> p.getId() == idList.get(id % idList.size()))
                 .sorted(Comparator.comparingInt(Enchant::getLevel))

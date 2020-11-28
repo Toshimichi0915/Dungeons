@@ -47,10 +47,11 @@ public interface Enchant {
     /**
      * エンチャントの表示上の説明を返します.
      *
+     * @param itemStack エンチャントされているアイテム
      * @param locale 使用する言語
      * @return エンチャントの表示上の説明
      */
-    String getDescription(Locale locale);
+    String getDescription(ItemStack itemStack, Locale locale);
 
     /**
      * エンチャントがつけられる部位を返します.

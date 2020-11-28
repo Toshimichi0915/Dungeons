@@ -32,7 +32,7 @@ public class MegaLongbow1 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.megalongbow.1").locale(locale).build();
     }
 

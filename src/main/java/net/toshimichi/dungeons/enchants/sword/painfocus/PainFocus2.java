@@ -31,7 +31,7 @@ public class PainFocus2 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.painfocus.2").locale(locale).build();
     }
 

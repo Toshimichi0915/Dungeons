@@ -31,7 +31,7 @@ public class GottaGoFast2 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
 //        return "移動速度が" + ChatColor.YELLOW + "10%" + ChatColor.GRAY + "増加";
         return new LocaleBuilder("enchant.gottagofast.2").locale(locale).build();
     }

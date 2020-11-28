@@ -31,7 +31,7 @@ public class SpringInside1 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.springinside.1").locale(locale).build();
     }
 

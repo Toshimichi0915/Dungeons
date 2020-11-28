@@ -32,7 +32,7 @@ public class Billionaire2 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.billionaire.2").locale(locale).build();
     }
 

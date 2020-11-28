@@ -31,7 +31,7 @@ public class Fletching3 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.fletching.3").locale(locale).build();
     }
 

@@ -33,7 +33,7 @@ public class Telebow1 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.telebow.1").locale(locale).build();
     }
 

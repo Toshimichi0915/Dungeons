@@ -32,7 +32,7 @@ public class Sanctity2 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
 //        return  "体力を" + ChatColor.RED + "1.5❤" + ChatColor.GRAY + "回復";
         return new LocaleBuilder("enchant.sanctity.2").locale(locale).build();
     }

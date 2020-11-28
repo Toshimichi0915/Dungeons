@@ -174,7 +174,7 @@ public class NbtEnchantManager implements EnchantManager {
         for (Enchant e : getEnchants(itemStack)) {
             lore.add("");
             lore.add("" + ChatColor.BLUE + e.getName());
-            lore.add(ChatColor.GRAY + e.getDescription(getLocale(itemStack)));
+            lore.add(ChatColor.GRAY + e.getDescription(itemStack, getLocale(itemStack)));
         }
 
         meta.setDisplayName(color + tierDisplayed + " " + category);

@@ -31,7 +31,7 @@ public class Lifesteal3 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.lifesteal.3").locale(locale).build();
     }
 

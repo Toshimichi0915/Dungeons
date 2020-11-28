@@ -31,7 +31,7 @@ public class Sharpness1 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
 //        return "ダメージが" + ChatColor.RED + "8%" + ChatColor.GRAY + "上昇";
         return new LocaleBuilder("enchant.sharpness.1").locale(locale).build();
     }

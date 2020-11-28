@@ -32,7 +32,7 @@ public class Volley3 implements Enchant {
     }
 
     @Override
-    public String getDescription(Locale locale) {
+    public String getDescription(ItemStack itemStack, Locale locale) {
         return new LocaleBuilder("enchant.volley.3").locale(locale).build();
     }
 

@@ -19,6 +19,9 @@ import net.toshimichi.dungeons.enchants.bow.fletching.Fletching3;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow1;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow2;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow3;
+import net.toshimichi.dungeons.enchants.bow.telebow.Telebow1;
+import net.toshimichi.dungeons.enchants.bow.telebow.Telebow2;
+import net.toshimichi.dungeons.enchants.bow.telebow.Telebow3;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley1;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley2;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
@@ -59,7 +62,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -220,7 +225,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Lifesteal1(), new Lifesteal2(), new Lifesteal3(),
                 new AutoSmelt1(),
                 new Protection1(), new Protection2(), new Protection3(),
-                new Billionaire1(), new Billionaire2(), new Billionaire3());
+                new Billionaire1(), new Billionaire2(), new Billionaire3(),
+                new Telebow1(), new Telebow2(), new Telebow3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

@@ -69,7 +69,7 @@ public enum EnchantType {
         if (itemStack.hasItemMeta())
             meta = itemStack.getItemMeta();
 
-        if (material.isAir() || material.isBlock())
+        if (material.isAir())
             return null;
         else if (MaterialUtils.isSword(material))
             return SWORD;

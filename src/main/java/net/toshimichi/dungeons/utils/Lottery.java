@@ -3,10 +3,14 @@ package net.toshimichi.dungeons.utils;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * 出現比を用いた抽選を行います.
+ *
  * @param <T> 抽選の対象
  */
 public class Lottery<T> implements ConfigurationSerializable {
@@ -16,8 +20,9 @@ public class Lottery<T> implements ConfigurationSerializable {
 
     /**
      * 抽選の対象を追加します.
+     *
      * @param ratio 出現比
-     * @param t 対象
+     * @param t     対象
      */
     public void add(int ratio, T t) {
         size += ratio;
@@ -26,6 +31,7 @@ public class Lottery<T> implements ConfigurationSerializable {
 
     /**
      * 抽選を行います.
+     *
      * @return 抽選結果
      */
     public T draw() {
@@ -34,6 +40,7 @@ public class Lottery<T> implements ConfigurationSerializable {
 
     /**
      * 乱数のアルゴリズムを指定して抽選を行います.
+     *
      * @param random 乱数のアルゴリズム
      * @return 抽選結果
      */
@@ -49,7 +56,7 @@ public class Lottery<T> implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         HashMap<String, Object> result = new HashMap<>();
         int sum = 0;
-        for(Map.Entry<Integer, T> entry : map.entrySet()) {
+        for (Map.Entry<Integer, T> entry : map.entrySet()) {
             result.put(Integer.toString(entry.getKey() - sum), entry.getValue());
             sum += entry.getKey();
         }

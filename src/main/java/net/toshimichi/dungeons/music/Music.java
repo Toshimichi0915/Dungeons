@@ -8,6 +8,7 @@ public interface Music {
 
     /**
      * ある位置において再生される {@link MusicSound} を返します.
+     *
      * @param pos 音楽の再生位置(tick単位)
      * @return 再生する {@link MusicSound} の一覧, もしくは {@code null}
      */

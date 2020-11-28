@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class WalkSpeedCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        if(arguments.length() == 0) {
+        if (arguments.length() == 0) {
             player.sendMessage("歩く速度: " + player.getWalkSpeed());
             return;
         }

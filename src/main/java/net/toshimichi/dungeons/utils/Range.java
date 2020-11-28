@@ -16,6 +16,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 1つの {@link Pos} によって範囲を指定しインスタンスを作成します.
+     *
      * @param pos1 1つ目の空間座標を持つインスタンス
      * @param pos2 2つめの空間座標を持つインスタンス
      */
@@ -26,6 +27,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 1つ目の空間座標を持つインスタンスを返します.
+     *
      * @return 1つ目の空間座標を持つインスタンス
      */
     public Pos getPos1() {
@@ -34,6 +36,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 2つ目の空間座標を持つインスタンスを返します.
+     *
      * @return 2つ目の空間座標を持つインスタンス
      */
     public Pos getPos2() {
@@ -42,6 +45,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 範囲によって示される、x y z座標が共に最も小さい地点を返します.
+     *
      * @return x y z座標が共に最も小さい地点
      */
     public Pos getMinPoint() {
@@ -53,6 +57,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 範囲によって示される、x y z座標が共に最も大さい地点を返します.
+     *
      * @return x y z座標が共に最も大さい地点
      */
     public Pos getMaxPoint() {
@@ -64,6 +69,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 範囲のx座標に関する長さを求めます.
+     *
      * @return x座標に関する長さ
      */
     public int getXLength() {
@@ -72,6 +78,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 範囲のy座標に関する長さを求めます.
+     *
      * @return y座標に関する長さ
      */
     public int getYLength() {
@@ -80,6 +87,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
 
     /**
      * 範囲のz座標に関する長さを求めます.
+     *
      * @return z座標に関する長さ
      */
     public int getZLength() {
@@ -89,6 +97,7 @@ public class Range implements Cloneable, Serializable, ConfigurationSerializable
     /**
      * 範囲内に存在する整数値を持つ空間座標全てに対して指定された処理を実行します.
      * 複数回このメソッドを実行したとき、全ての場合において同じ順番で実行されることが保証されます.
+     *
      * @param consumer 空間座標に対して行う処理
      */
     public void forEach(Consumer<Pos> consumer) {

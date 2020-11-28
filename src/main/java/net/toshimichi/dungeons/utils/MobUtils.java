@@ -28,8 +28,9 @@ public class MobUtils {
 
     /**
      * モブがスポーンできるかどうか調べます.
+     *
      * @param type スポーンさせたいモブの種類
-     * @param loc スポーンさせる中央となる場所
+     * @param loc  スポーンさせる中央となる場所
      * @return スポーンできる場合は {@code true} そうでない場合は {@code false}
      */
     public static boolean canSpawn(EntityType type, Location loc) {
@@ -103,7 +104,8 @@ public class MobUtils {
 
     /**
      * モブのスポーンを試行します.
-     * @param type スポーンさせるモブの種類
+     *
+     * @param type  スポーンさせるモブの種類
      * @param range スポーンさせるモブの中心が取りうる範囲
      * @param world スポーンさせるワールド
      * @return スポーンできた場合はその {@link Entity} そうでない場合は {@code null}

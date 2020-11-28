@@ -88,7 +88,7 @@ public class BossBarChat {
     private static BossBar getPrimaryBossBar(Player player) {
         HashMap<Integer, BossBar> bars = map.getOrDefault(player, new HashMap<>());
         BossBar result = bars.get(0);
-        if(result == null) {
+        if (result == null) {
             result = Bukkit.createBossBar("", BarColor.WHITE, BarStyle.SOLID);
             result.addPlayer(player);
             bars.put(0, result);
@@ -99,7 +99,8 @@ public class BossBarChat {
 
     /**
      * 常に表示されるメッセージを設定します.
-     * @param player プレイヤー
+     *
+     * @param player  プレイヤー
      * @param message メッセージ
      */
     public static void setPrimaryMessage(Player player, String message) {
@@ -108,6 +109,7 @@ public class BossBarChat {
 
     /**
      * 常に表示されるメッセージを返します.
+     *
      * @param player プレイヤー
      * @return メッセージ
      */

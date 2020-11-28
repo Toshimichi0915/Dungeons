@@ -1,7 +1,6 @@
 package net.toshimichi.dungeons.utils;
 
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 import java.util.WeakHashMap;

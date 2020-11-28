@@ -7,7 +7,7 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.Set;
 
-public class GuiService implements Service{
+public class GuiService implements Service {
     @Override
     public void run() {
         Set<Player> players = DungeonsPlugin.getGuiManager().getPlayers();

@@ -23,7 +23,7 @@ public class Nonce {
      */
     public static void setNonce(ItemStack itemStack, long nonce) {
         ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) return;
+        if (meta == null) return;
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(key, PersistentDataType.LONG, nonce);
         itemStack.setItemMeta(meta);
@@ -37,10 +37,10 @@ public class Nonce {
      * @param itemStack アイテム
      */
     public static void newNonce(ItemStack itemStack) {
-        if(hasNonce(itemStack)) return;
-        while(true) {
+        if (hasNonce(itemStack)) return;
+        while (true) {
             long nonce = RandomUtils.nextLong();
-            if(nonce == 0) continue;
+            if (nonce == 0) continue;
             setNonce(itemStack, nonce);
             break;
         }
@@ -56,14 +56,14 @@ public class Nonce {
     public static long getNonce(ItemStack itemStack) {
         if (!hasNonce(itemStack)) return 0;
         ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) throw new IllegalArgumentException("Item cannot have nonce");
+        if (meta == null) throw new IllegalArgumentException("Item cannot have nonce");
         PersistentDataContainer container = meta.getPersistentDataContainer();
         return container.get(key, PersistentDataType.LONG);
     }
 
     public static boolean hasNonce(ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null)return false;
+        if (meta == null) return false;
         PersistentDataContainer container = meta.getPersistentDataContainer();
         return container.has(key, PersistentDataType.LONG);
     }

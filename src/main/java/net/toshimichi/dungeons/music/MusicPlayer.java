@@ -41,6 +41,7 @@ public interface MusicPlayer {
 
     /**
      * 再生されている音楽を返します.
+     *
      * @return 再生されている音楽
      */
     Music getMusic();

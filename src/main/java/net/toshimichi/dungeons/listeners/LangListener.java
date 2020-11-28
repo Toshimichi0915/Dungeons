@@ -16,7 +16,7 @@ public class LangListener implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
             DungeonsPlugin.getLocaleManager().getLocale(e.getPlayer());
             DungeonsPlugin.getLocaleManager().getSuggestedLocale(e.getPlayer());
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), ()->{
+            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
                 LocaleLoadEvent event = new LocaleLoadEvent(e.getPlayer(), DungeonsPlugin.getLocaleManager(), DungeonsPlugin.getLocaleManager().getLocale(e.getPlayer()));
                 Bukkit.getPluginManager().callEvent(event);
             });

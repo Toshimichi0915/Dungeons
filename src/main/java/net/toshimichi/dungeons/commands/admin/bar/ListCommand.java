@@ -17,7 +17,7 @@ public class ListCommand implements SubCommand {
             KeyedBossBar bar = iterator.next();
             String names = bar.getPlayers().stream()
                     .map(HumanEntity::getName)
-                    .reduce((a,b) -> a + " " + b).orElse("なし");
+                    .reduce((a, b) -> a + " " + b).orElse("なし");
             sender.sendMessage("タイトル: " + bar.getTitle() + " 表示プレイヤー: " + names);
         }
     }

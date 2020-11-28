@@ -25,6 +25,7 @@ public class LocaleLoadEvent extends Event {
 
     /**
      * ロードされたプレイヤーを返します.
+     *
      * @return ロードされたプレイヤー
      */
     public Player getPlayer() {
@@ -33,6 +34,7 @@ public class LocaleLoadEvent extends Event {
 
     /**
      * 使用された {@link LocaleManager} を返します.
+     *
      * @return 使用された {@link LocaleManager}
      */
     public LocaleManager getLocaleManager() {
@@ -41,6 +43,7 @@ public class LocaleLoadEvent extends Event {
 
     /**
      * プレイヤーが使用する {@link Locale} を返します.
+     *
      * @return 使用する {@link Locale}
      */
     public Locale getLocale() {

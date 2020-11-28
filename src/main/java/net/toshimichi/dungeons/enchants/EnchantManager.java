@@ -13,12 +13,14 @@ public interface EnchantManager {
 
     /**
      * プレイヤーのエンチャントを更新します.
+     *
      * @param player 更新するプレイヤー
      */
     void refresh(Player player);
 
     /**
      * プレイヤーの全エンチャントを無効にします.
+     *
      * @param player 無効にするプレイヤー
      */
     void disable(Player player);
@@ -30,6 +32,7 @@ public interface EnchantManager {
 
     /**
      * アイテムに適用されているエンチャントを返します.
+     *
      * @param itemStack 適用されているエンチャント
      * @return 適用されているエンチャント
      */
@@ -37,6 +40,7 @@ public interface EnchantManager {
 
     /**
      * アイテムの名前や説明などを更新します.
+     *
      * @param itemStack 更新するアイテム
      */
     void refresh(ItemStack itemStack);
@@ -44,13 +48,15 @@ public interface EnchantManager {
     /**
      * アイテムにエンチャントを適用します.
      * エンチャント適用時にアイテムの名前や説明なども合わせて変更されます.
+     *
      * @param itemStack 適用するアイテム
-     * @param enchants 適用するエンチャント
+     * @param enchants  適用するエンチャント
      */
     void setEnchants(ItemStack itemStack, Enchant... enchants);
 
     /**
      * アイテムの階位を返します
+     *
      * @param itemStack アイテム
      * @return アイテムの階位 設定されていない場合は {@code -1}
      */
@@ -59,13 +65,15 @@ public interface EnchantManager {
     /**
      * アイテムの階位を設定します.
      * アイテムの名前や説明なども自動で変更されます.
+     *
      * @param itemStack アイテム
-     * @param tier アイテムの階位
+     * @param tier      アイテムの階位
      */
     void setTier(ItemStack itemStack, int tier);
 
     /**
      * アイテムの残り残機を返します.
+     *
      * @param itemStack アイテム
      * @return 残り残機. 設定されていない場合は {@code -1}
      */
@@ -74,12 +82,15 @@ public interface EnchantManager {
     /**
      * アイテムの残り残機を設定します.
      * アイテムの名前や説明なども自動で変更されます.
+     *
      * @param itemStack アイテム
-     * @param lives 残り残機
+     * @param lives     残り残機
      */
     void setLives(ItemStack itemStack, int lives);
+
     /**
      * アイテムの最大残り残機を返します.
+     *
      * @param itemStack アイテム
      * @return 最大残り残機. 設定されていない場合は {@code -1}
      */
@@ -88,13 +99,15 @@ public interface EnchantManager {
     /**
      * アイテムの最大残り残機を設定します.
      * アイテムの名前や説明なども自動で変更されます.
+     *
      * @param itemStack アイテム
-     * @param lives 最大残り残機
+     * @param lives     最大残り残機
      */
     void setMaxLives(ItemStack itemStack, int lives);
 
     /**
      * アイテムに設定された言語情報を返します.
+     *
      * @param itemStack アイテム
      * @return 言語情報. 存在しない場合は {@code null}
      */
@@ -102,13 +115,15 @@ public interface EnchantManager {
 
     /**
      * アイテムの言語情報を設定します.
+     *
      * @param itemStack アイテム
-     * @param locale 言語情報. 設定を消去する場合は {@code null}
+     * @param locale    言語情報. 設定を消去する場合は {@code null}
      */
     void setLocale(ItemStack itemStack, Locale locale);
 
     /**
      * プレイヤーに適用されているエンチャントを返します.
+     *
      * @param player 適用されているプレイヤー
      * @return 適用されている {@link Enchanter} 一覧
      */
@@ -116,13 +131,15 @@ public interface EnchantManager {
 
     /**
      * 利用できる全てのエンチャントを返します.
+     *
      * @return 利用できる全てのエンチャント
      */
     Set<Enchant> getAllEnchants();
 
     /**
      * 指定されたIDとレベルを持ったエンチャントを返します.
-     * @param id ID
+     *
+     * @param id    ID
      * @param level レベル
      * @return エンチャント, 存在しない場合は {@code null}
      */

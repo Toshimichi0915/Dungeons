@@ -9,7 +9,7 @@ import java.util.Map;
 abstract public class BranchCommand implements SubCommand {
 
     private void showHelp(CommandSender sender, String cmd) {
-        if(!sender.hasPermission(getPermission())) {
+        if (!sender.hasPermission(getPermission())) {
             sender.sendMessage(ChatColor.RED + "ヘルプを表示する権限がありません");
             return;
         }
@@ -32,7 +32,7 @@ abstract public class BranchCommand implements SubCommand {
         if (subCommand == null) {
             showHelp(sender, cmd.substring(0, cmd.length() - String.join(" ", args.getRaw()).length() - 1));
         } else {
-            if(!sender.hasPermission(subCommand.getPermission())) {
+            if (!sender.hasPermission(subCommand.getPermission())) {
                 sender.sendMessage(ChatColor.RED + "権限がありません");
                 return;
             }

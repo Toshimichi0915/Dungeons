@@ -2,8 +2,8 @@ package net.toshimichi.dungeons.commands.admin.lang;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.commands.CommandException;
+import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.lang.LocaleManager;
 import org.bukkit.entity.Player;

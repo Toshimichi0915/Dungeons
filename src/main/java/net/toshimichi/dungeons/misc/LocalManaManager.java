@@ -77,13 +77,13 @@ public class LocalManaManager implements ManaManager {
     @Override
     public void setMaxMana(Player player, int mana) {
         maxManaMap.put(player, mana);
-        if(getMana(player) > mana)
+        if (getMana(player) > mana)
             setMana(player, mana);
     }
 
     @Override
     public boolean consumeMana(Player player, int mana) {
-        if(player.getGameMode() == GameMode.CREATIVE) return true;
+        if (player.getGameMode() == GameMode.CREATIVE) return true;
         int current = getMana(player);
         if (current < mana) return false;
         setMana(player, current - mana);

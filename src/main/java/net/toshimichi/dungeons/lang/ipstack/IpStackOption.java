@@ -9,7 +9,8 @@ public class IpStackOption {
 
     /**
      * キーと値を指定して初期化します.
-     * @param key キー
+     *
+     * @param key   キー
      * @param value 値
      */
     public IpStackOption(String key, String value) {
@@ -19,6 +20,7 @@ public class IpStackOption {
 
     /**
      * キーを返します.
+     *
      * @return オプションのキー
      */
     public String getKey() {
@@ -27,6 +29,7 @@ public class IpStackOption {
 
     /**
      * 値を返します.
+     *
      * @return オプションの値
      */
     public String getValue() {

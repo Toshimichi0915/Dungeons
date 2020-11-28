@@ -20,9 +20,9 @@ public class GottaGoFastEnchanter extends Enchanter {
     }
 
     private float getModifier() {
-        if(getEnchant().getLevel() == 1)
+        if (getEnchant().getLevel() == 1)
             return 1.05F;
-        else if(getEnchant().getLevel() == 2)
+        else if (getEnchant().getLevel() == 2)
             return 1.10F;
         else
             return 1.2F;
@@ -36,7 +36,7 @@ public class GottaGoFastEnchanter extends Enchanter {
 
     @Override
     public void tick() {
-        if(count++ % 3 != 0) return;
+        if (count++ % 3 != 0) return;
         Location loc = getPlayer().getLocation();
         loc.add(RandomUtils.nextDouble() % 0.4 - 0.2, RandomUtils.nextDouble() % 0.2, RandomUtils.nextDouble() % 0.4 - 0.2);
         World world = loc.getWorld();

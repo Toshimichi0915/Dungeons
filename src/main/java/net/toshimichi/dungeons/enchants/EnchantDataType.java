@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 public class EnchantDataType implements PersistentDataType<byte[], Enchant[]> {
 
@@ -42,11 +41,11 @@ public class EnchantDataType implements PersistentDataType<byte[], Enchant[]> {
         Enchant[] result = new Enchant[bytes.length / 8];
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         int i = 0;
-        while(i < result.length) {
+        while (i < result.length) {
             int id = buffer.getInt();
             int level = buffer.getInt();
             result[i++] = Arrays.stream(enchants)
-                    .filter(p->p.getId() == id && p.getLevel() == level)
+                    .filter(p -> p.getId() == id && p.getLevel() == level)
                     .findAny()
                     .orElse(null);
         }

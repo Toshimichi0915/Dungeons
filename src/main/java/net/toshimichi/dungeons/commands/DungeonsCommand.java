@@ -12,7 +12,7 @@ import net.toshimichi.dungeons.commands.admin.stash.StashCommand;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DungeonsCommand extends BranchCommand{
+public class DungeonsCommand extends BranchCommand {
     @Override
     protected Map<String, SubCommand> getSubCommands() {
         HashMap<String, SubCommand> result = new HashMap<>();

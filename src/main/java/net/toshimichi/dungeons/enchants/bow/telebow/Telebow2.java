@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Telebow2 implements Enchant{
+public class Telebow2 implements Enchant {
 
     @Override
     public int getId() {

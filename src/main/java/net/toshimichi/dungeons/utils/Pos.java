@@ -98,6 +98,7 @@ public class Pos implements Cloneable, Serializable, ConfigurationSerializable {
 
     /**
      * このインスタンスを {@link Location} に変換します.
+     *
      * @param world {@link Location#getWorld()}
      * @return 変換された {@link Location}
      */

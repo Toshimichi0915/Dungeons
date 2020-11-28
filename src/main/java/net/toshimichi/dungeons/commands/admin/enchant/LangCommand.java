@@ -2,9 +2,9 @@ package net.toshimichi.dungeons.commands.admin.enchant;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
-import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.lang.LocaleManager;
 import net.toshimichi.dungeons.utils.LocaleBuilder;

@@ -9,18 +9,21 @@ public interface MusicSound {
 
     /**
      * 音の種類を返します.
+     *
      * @return 音の種類
      */
     Sound getType();
 
     /**
      * 音のピッチを返します.
+     *
      * @return 音のピッチ
      */
     float getPitch();
 
     /**
      * 音の大きさを返します.
+     *
      * @return 音の大きさ
      */
     float getVolume();

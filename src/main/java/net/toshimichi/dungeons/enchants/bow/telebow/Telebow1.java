@@ -1,30 +1,16 @@
 package net.toshimichi.dungeons.enchants.bow.telebow;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.Title;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Particle;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Map;
-import java.util.WeakHashMap;
-
-public class Telebow1 implements Enchant{
+public class Telebow1 implements Enchant {
 
     @Override
     public int getId() {

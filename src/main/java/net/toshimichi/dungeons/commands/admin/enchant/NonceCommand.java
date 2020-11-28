@@ -12,7 +12,7 @@ public class NonceCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(item.getType() == Material.AIR)
+        if (item.getType() == Material.AIR)
             throw new CommandException("固有番号を確認するアイテムを手に持ってください");
         player.sendMessage("Nonce: " + Nonce.getNonce(item));
     }

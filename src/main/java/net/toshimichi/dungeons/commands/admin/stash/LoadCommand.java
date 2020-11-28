@@ -2,7 +2,6 @@ package net.toshimichi.dungeons.commands.admin.stash;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
-import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
 import org.bukkit.Bukkit;
@@ -34,7 +33,7 @@ public class LoadCommand implements PlayerCommand {
                     } catch (IOException e) {
                         e.printStackTrace();
                         //revert the inventory
-                        Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), ()->{
+                        Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
                             player.getInventory().setContents(oldContents);
                             player.sendMessage(ChatColor.RED + "Stashを編集できませんでした");
                         });

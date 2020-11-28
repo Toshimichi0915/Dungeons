@@ -12,7 +12,7 @@ public class RefreshCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(item.getType() == Material.AIR)
+        if (item.getType() == Material.AIR)
             throw new CommandException("更新するアイテムを手に持ってください");
         DungeonsPlugin.getEnchantManager().setLocale(item, DungeonsPlugin.getLocaleManager().getLocale(player));
         DungeonsPlugin.getEnchantManager().refresh(item);

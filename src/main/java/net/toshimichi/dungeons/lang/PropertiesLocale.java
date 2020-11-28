@@ -11,14 +11,14 @@ public class PropertiesLocale implements Locale {
 
     private final Properties properties = new Properties();
 
-    public PropertiesLocale(String contents) throws IOException{
+    public PropertiesLocale(String contents) throws IOException {
         try (StringReader reader = new StringReader(contents)) {
             properties.load(reader);
         }
     }
 
     public PropertiesLocale(InputStream in) throws IOException {
-        try(InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+        try (InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
             properties.load(reader);
         }
     }

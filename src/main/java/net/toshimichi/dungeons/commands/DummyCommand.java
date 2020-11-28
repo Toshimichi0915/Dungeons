@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class DummyCommand implements PlayerCommand{
+public class DummyCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         World world = player.getWorld();
-        Pig pig = (Pig)world.spawnEntity(player.getLocation(), EntityType.PIG);
+        Pig pig = (Pig) world.spawnEntity(player.getLocation(), EntityType.PIG);
         pig.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(150);
         pig.setHealth(150);
         pig.setAI(false);

@@ -3,8 +3,6 @@ package net.toshimichi.dungeons.commands.admin.lang;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
-import net.toshimichi.dungeons.lang.IpStackLocaleFactory;
-import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLanguage;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLocation;
@@ -22,7 +20,7 @@ public class CheckCommand implements PlayerCommand {
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
             String ip = player.getAddress().getHostName();
             boolean available = DungeonsPlugin.getIpStackApi().isAvailable();
-            if(!available) return;
+            if (!available) return;
             IpStackInfo info;
             try {
                 info = DungeonsPlugin.getIpStackApi().getInfo(ip);
@@ -31,14 +29,14 @@ public class CheckCommand implements PlayerCommand {
                 return;
             }
 
-            if(info == null) return;
+            if (info == null) return;
             IpStackLocation loc = info.getLocation();
-            if(loc == null || loc.getLanguages() == null) return;
+            if (loc == null || loc.getLanguages() == null) return;
             int count = 0;
-            for(IpStackLanguage lang : loc.getLanguages()) {
-                if(lang == null) continue;
+            for (IpStackLanguage lang : loc.getLanguages()) {
+                if (lang == null) continue;
                 int finalCount = count;
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), ()->{
+                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
                     player.sendMessage("プレイヤーの国の言語(" + finalCount + "): " + lang.getName());
                 });
                 count++;

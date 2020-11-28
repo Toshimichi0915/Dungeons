@@ -53,6 +53,7 @@ abstract public class Enchanter {
 
     /**
      * エンチャントを返します.
+     *
      * @return エンチャント
      */
     public Enchant getEnchant() {
@@ -61,6 +62,7 @@ abstract public class Enchanter {
 
     /**
      * エンチャントを利用しているプレイヤーを返します.
+     *
      * @return エンチャントを利用しているプレイヤー
      */
     public Player getPlayer() {
@@ -69,6 +71,7 @@ abstract public class Enchanter {
 
     /**
      * エンチャントが適用されているアイテムを返します.
+     *
      * @return エンチャントが適用されているアイテム
      */
     public ItemStack getItemStack() {

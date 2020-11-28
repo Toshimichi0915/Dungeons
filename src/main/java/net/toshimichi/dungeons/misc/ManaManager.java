@@ -9,6 +9,7 @@ public interface ManaManager {
 
     /**
      * プレイヤーの魔力を返します.
+     *
      * @param player プレイヤー
      * @return 魔力
      */
@@ -16,6 +17,7 @@ public interface ManaManager {
 
     /**
      * プレイヤーの最大魔力を返します.
+     *
      * @param player プレイヤー
      * @return 最大魔力
      */
@@ -23,28 +25,32 @@ public interface ManaManager {
 
     /**
      * プレイヤーの魔力を設定します.
+     *
      * @param player プレイヤー
-     * @param mana 魔力
+     * @param mana   魔力
      */
     void setMana(Player player, int mana);
 
     /**
      * プレイヤーの最大魔力を設定します.
+     *
      * @param player プレイヤー
-     * @param mana 最大魔力
+     * @param mana   最大魔力
      */
     void setMaxMana(Player player, int mana);
 
     /**
      * プレイヤーの魔力を消費します.
+     *
      * @param player プレイヤー
-     * @param mana 消費する魔力
+     * @param mana   消費する魔力
      * @return 消費できた場合は {@code true} そうでない場合は
      */
     boolean consumeMana(Player player, int mana);
 
     /**
      * プレイヤーのデータを保存します.
+     *
      * @param player プレイヤー
      */
     void save(Player player);

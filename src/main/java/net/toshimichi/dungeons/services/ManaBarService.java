@@ -4,7 +4,7 @@ import net.toshimichi.dungeons.DungeonsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class ManaBarService implements Service{
+public class ManaBarService implements Service {
 
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {

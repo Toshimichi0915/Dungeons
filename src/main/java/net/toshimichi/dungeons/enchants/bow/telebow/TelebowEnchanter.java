@@ -88,6 +88,7 @@ public class TelebowEnchanter extends Enchanter implements Listener {
     public void onHit(ProjectileHitEvent e) {
         if (!arrows.containsValue(e.getEntity())) return;
         Arrow arrow = (Arrow) e.getEntity();
+        arrows.remove(getPlayer());
         if (!getPlayer().equals(arrow.getShooter())) return;
         getPlayer().teleport(arrow.getLocation());
         getPlayer().getWorld().playSound(getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.7F, 2);

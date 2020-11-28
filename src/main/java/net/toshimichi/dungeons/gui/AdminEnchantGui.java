@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.gui;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantManager;
+import net.toshimichi.dungeons.enchants.EnchantType;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.misc.Stash;
 import net.toshimichi.dungeons.utils.InventoryUtils;
@@ -20,10 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * エンチャントの管理GUIです.
@@ -34,14 +33,34 @@ public class AdminEnchantGui implements Gui, Listener {
     private Inventory inventory;
 
     private EnchantManager manager;
-    private int id = 1;
-    private int level = 1;
+    private int id = 0;
+    private int level = 0;
     private boolean updateGui;
 
     private BukkitTask updater;
     private int counter;
     private boolean forceUpdate;
     private ItemStack adminWell;
+
+    private ArrayList<Enchant> getEnchants(ItemStack itemStack) {
+        ArrayList<Enchant> types = new ArrayList<>(manager.getAllEnchants());
+        types.removeIf(p -> !EnchantType.matchEnchantType(itemStack, p.getEnchantType()));
+        types.sort(Comparator.comparingInt(Enchant::getId));
+        return types;
+    }
+
+    private Enchant getEnchant(ItemStack itemStack, int id, int level) {
+        ArrayList<Enchant> enchants = getEnchants(itemStack);
+        if (enchants.isEmpty()) return null;
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
+        enchants.forEach(a -> set.add(a.getId()));
+        ArrayList<Integer> idList = new ArrayList<>(set);
+        List<Enchant> sameIds = enchants.stream()
+                .filter(p -> p.getId() == idList.get(id % idList.size()))
+                .sorted(Comparator.comparingInt(Enchant::getLevel))
+                .collect(Collectors.toList());
+        return sameIds.get(level % sameIds.size());
+    }
 
     @Override
     public String getTitle(Player player) {
@@ -93,15 +112,11 @@ public class AdminEnchantGui implements Gui, Listener {
             setAdminWell(itemStack);
         });
         items[15] = new PlainGuiItem(new ItemStack(Material.BLAZE_ROD), (p, g, i) -> {
-            if (manager.getEnchant(++id, 1) == null)
-                id = 1;
-            if (manager.getEnchant(id, level) == null)
-                level = 1;
+            id++;
             updateGui = true;
         });
         items[16] = new PlainGuiItem(new ItemStack(Material.STICK), (p, g, i) -> {
-            if (manager.getEnchant(id, ++level) == null)
-                level = 1;
+            level++;
             updateGui = true;
         });
         ItemStack book = new ItemStack(Material.BOOK);
@@ -138,10 +153,7 @@ public class AdminEnchantGui implements Gui, Listener {
             setAdminWell(itemStack);
         });
         items[25] = new PlainGuiItem(new ItemStack(Material.ENCHANTING_TABLE), (p, g, i) -> {
-            Set<Enchant> enchants = DungeonsPlugin.getEnchantManager().getAllEnchants();
-            Enchant e = enchants.stream()
-                    .filter(p1 -> p1.getId() == id && p1.getLevel() == level)
-                    .findAny().orElse(null);
+            Enchant e = getEnchant(adminWell, id, level);
             if (e == null) return;
             ItemStack itemStack = adminWell;
             if (itemStack == null) return;
@@ -194,24 +206,22 @@ public class AdminEnchantGui implements Gui, Listener {
         counter++;
         if (!updateGui) return;
         updateGui = false;
-        ItemStack item = adminWell;
-        inv.setItem(10, item);
+        inv.setItem(10, adminWell);
 
-        ItemStackUtils.setDisplay(inv.getItem(12), "残機を増加させる\n現在: " + manager.getLives(item));
-        ItemStackUtils.setDisplay(inv.getItem(13), "最大残機を増加させる\n現在: " + manager.getMaxLives(item));
-        ItemStackUtils.setDisplay(inv.getItem(14), "階位を増加させる\n現在: " + manager.getTier(item));
-        ItemStackUtils.setDisplay(inv.getItem(21), "残機を減少させる\n現在: " + manager.getLives(item));
-        ItemStackUtils.setDisplay(inv.getItem(22), "最大残機を減少させる\n現在: " + manager.getMaxLives(item));
-        ItemStackUtils.setDisplay(inv.getItem(23), "階位を減少させる\n現在: " + manager.getTier(item));
+        ItemStackUtils.setDisplay(inv.getItem(12), "残機を増加させる\n現在: " + manager.getLives(adminWell));
+        ItemStackUtils.setDisplay(inv.getItem(13), "最大残機を増加させる\n現在: " + manager.getMaxLives(adminWell));
+        ItemStackUtils.setDisplay(inv.getItem(14), "階位を増加させる\n現在: " + manager.getTier(adminWell));
+        ItemStackUtils.setDisplay(inv.getItem(21), "残機を減少させる\n現在: " + manager.getLives(adminWell));
+        ItemStackUtils.setDisplay(inv.getItem(22), "最大残機を減少させる\n現在: " + manager.getMaxLives(adminWell));
+        ItemStackUtils.setDisplay(inv.getItem(23), "階位を減少させる\n現在: " + manager.getTier(adminWell));
 
-        Enchant selectedEnchant = manager.getEnchant(id, level);
-        ArrayList<Enchant> types = new ArrayList<>(manager.getAllEnchants());
-        types.removeIf(p -> p.getLevel() != 1);
-        types.sort(Comparator.comparingInt(Enchant::getId));
+        Enchant selectedEnchant = getEnchant(adminWell, id, level);
 
         StringBuilder idBuilder = new StringBuilder("付与するエンチャントの種類を変更する\n");
+        ArrayList<Enchant> types = getEnchants(adminWell);
+        types.removeIf(p -> p.getLevel() != 1);
         for (Enchant type : types) {
-            if (type.getId() == selectedEnchant.getId()) {
+            if (selectedEnchant != null && type.getId() == selectedEnchant.getId()) {
                 idBuilder.append(ChatColor.GREEN);
                 idBuilder.append(ChatColor.stripColor(type.getName()));
             } else {
@@ -222,18 +232,24 @@ public class AdminEnchantGui implements Gui, Listener {
         }
         ItemStackUtils.setDisplay(inv.getItem(15), idBuilder.toString());
 
-        ItemStackUtils.setDisplay(inv.getItem(16), "付与するエンチャントのレベルを変更する\n選択されたレベル: " + level);
+        if (selectedEnchant == null)
+            ItemStackUtils.setDisplay(inv.getItem(16), "付与するエンチャントのレベルを変更する");
+        else
+            ItemStackUtils.setDisplay(inv.getItem(16), "付与するエンチャントのレベルを変更する\n選択されたレベル: " + selectedEnchant.getLevel());
 
         StringBuilder localeBuilder = new StringBuilder("アイテムの言語を変更する\n");
         for (Locale locale : DungeonsPlugin.getLocales()) {
-            if (locale.equals(manager.getLocale(item)))
+            if (locale.equals(manager.getLocale(adminWell)))
                 localeBuilder.append(ChatColor.GREEN);
             localeBuilder.append(locale.get("general.lang.name"));
             localeBuilder.append('\n');
         }
         ItemStackUtils.setDisplay(inv.getItem(24), localeBuilder.toString());
-        ItemStackUtils.setDisplay(inv.getItem(25), "エンチャントを付与する\n" +
-                "選択されたエンチャント: " + ChatColor.BLUE + selectedEnchant.getName());
+        if (selectedEnchant == null)
+            ItemStackUtils.setDisplay(inv.getItem(25), "エンチャントを付与する");
+        else
+            ItemStackUtils.setDisplay(inv.getItem(25), "エンチャントを付与する\n" +
+                    "選択されたエンチャント: " + ChatColor.BLUE + selectedEnchant.getName());
     }
 
     @EventHandler

@@ -51,6 +51,7 @@ import net.toshimichi.dungeons.services.*;
 import net.toshimichi.dungeons.utils.Lottery;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -127,13 +128,17 @@ public class DungeonsPlugin extends JavaPlugin {
 
     private void copyLang(String locale) throws IOException {
         File f = new File(getDataFolder(), "lang/" + locale + ".lang");
-        if (f.exists()) return;
+        String contents = IOUtils.toString(getResource("lang/" + locale + ".lang"), StandardCharsets.UTF_8);
+        PropertiesLocale newLocale = new PropertiesLocale(contents);
+        if (f.exists()) {
+            String version = new PropertiesLocale(f).get("version");
+            if ("-1".equals(version) || NumberUtils.toInt(version) >= NumberUtils.toInt(newLocale.get("version")))
+                return;
+            FileUtils.writeStringToFile(f, contents, StandardCharsets.UTF_8);
+        }
         f.getParentFile().mkdirs();
         f.createNewFile();
-        try (InputStream in = getResource("lang/" + locale + ".lang");
-             FileOutputStream out = new FileOutputStream(f)) {
-            IOUtils.copy(in, out);
-        }
+        FileUtils.writeStringToFile(f, contents, StandardCharsets.UTF_8);
     }
 
     private Locale getLocale(String name) throws IOException {

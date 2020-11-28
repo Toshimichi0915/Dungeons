@@ -9,7 +9,13 @@ import java.util.Properties;
  */
 public class PropertiesLocale implements Locale {
 
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
+
+    public PropertiesLocale(String contents) throws IOException{
+        try (StringReader reader = new StringReader(contents)) {
+            properties.load(reader);
+        }
+    }
 
     public PropertiesLocale(InputStream in) throws IOException {
         try(InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {

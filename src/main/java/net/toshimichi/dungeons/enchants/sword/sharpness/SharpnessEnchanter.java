@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.sword.sharpness;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SharpnessEnchanter extends Enchanter implements Listener {
+public class SharpnessEnchanter extends SwordEnchanter implements Listener {
 
     public SharpnessEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);

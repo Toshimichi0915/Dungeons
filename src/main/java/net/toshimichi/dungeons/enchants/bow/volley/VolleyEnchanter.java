@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.bow.volley;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.bukkit.*;
@@ -17,7 +18,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class VolleyEnchanter extends Enchanter implements Listener {
+public class VolleyEnchanter extends BowEnchanter implements Listener {
 
     public VolleyEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);

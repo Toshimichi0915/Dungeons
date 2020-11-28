@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class TelebowEnchanter extends Enchanter implements Listener {
+public class TelebowEnchanter extends BowEnchanter implements Listener {
 
     private static final WeakHashMap<Player, Integer> cooldown = new WeakHashMap<>();
     private static final WeakHashMap<Player, Arrow> arrows = new WeakHashMap<>();

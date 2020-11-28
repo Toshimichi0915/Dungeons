@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.sword.billionaire;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -13,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BillionaireEnchanter extends Enchanter implements Listener {
+public class BillionaireEnchanter extends SwordEnchanter implements Listener {
 
     private int estimatedMoney;
     private boolean updated;
@@ -70,10 +71,5 @@ public class BillionaireEnchanter extends Enchanter implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () ->
                 DungeonsPlugin.getEconomy().withdraw(getPlayer().getUniqueId(), cost));
         getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.7F);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return getItemStack().equals(getPlayer().getInventory().getItemInMainHand());
     }
 }

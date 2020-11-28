@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.sword.lifesteal;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -14,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class LifestealEnchanter extends Enchanter implements Listener {
+public class LifestealEnchanter extends SwordEnchanter implements Listener {
 
     public LifestealEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);

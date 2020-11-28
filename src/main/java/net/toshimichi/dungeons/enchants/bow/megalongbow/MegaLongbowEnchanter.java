@@ -3,7 +3,9 @@ package net.toshimichi.dungeons.enchants.bow.megalongbow;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
-public class MegaLongbowEnchanter extends Enchanter implements Listener {
+public class MegaLongbowEnchanter extends BowEnchanter implements Listener {
 
     public MegaLongbowEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);

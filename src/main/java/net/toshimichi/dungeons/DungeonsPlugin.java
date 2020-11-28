@@ -19,6 +19,7 @@ import net.toshimichi.dungeons.enchants.bow.fletching.Fletching3;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow1;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow2;
 import net.toshimichi.dungeons.enchants.bow.megalongbow.MegaLongbow3;
+import net.toshimichi.dungeons.enchants.bow.telebow.Bugbow;
 import net.toshimichi.dungeons.enchants.bow.telebow.Telebow1;
 import net.toshimichi.dungeons.enchants.bow.telebow.Telebow2;
 import net.toshimichi.dungeons.enchants.bow.telebow.Telebow3;
@@ -231,7 +232,7 @@ public class DungeonsPlugin extends JavaPlugin {
                 new AutoSmelt1(),
                 new Protection1(), new Protection2(), new Protection3(),
                 new Billionaire1(), new Billionaire2(), new Billionaire3(),
-                new Telebow1(), new Telebow2(), new Telebow3(),
+                new Telebow1(), new Telebow2(), new Telebow3(), new Bugbow(),
                 new Efficiency1(), new Efficiency2(), new Efficiency3(), new Efficiency4(), new Efficiency5(),
                 new SilkTouch1(),
                 new Katana1(), new Katana2(), new Katana3());

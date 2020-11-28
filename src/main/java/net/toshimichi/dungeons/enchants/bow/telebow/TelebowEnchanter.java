@@ -4,7 +4,6 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
 import org.bukkit.Bukkit;
@@ -32,7 +31,7 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
         Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
             for (Map.Entry<Player, Integer> entry : cooldown.entrySet()) {
                 int next = entry.getValue() - 1;
-                if (next == 0)
+                if (next <= 0)
                     cooldown.remove(entry.getKey());
                 else
                     cooldown.put(entry.getKey(), next);
@@ -80,6 +79,8 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
             timer = 300;
         else if (getEnchant().getLevel() == 2)
             timer = 180;
+        else if (getEnchant().getLevel() == 10)
+            timer = 0;
         else
             timer = 120;
         cooldown.put(getPlayer(), timer * 20);

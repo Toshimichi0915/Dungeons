@@ -73,6 +73,8 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
         if (e.getCause() != EntityDamageEvent.DamageCause.FIRE_TICK) return;
         e.setCancelled(true);
         LivingEntity entity = (LivingEntity) e.getEntity();
+        int noDamageTicks = entity.getNoDamageTicks();
         entity.damage(1);
+        entity.setNoDamageTicks(noDamageTicks);
     }
 }

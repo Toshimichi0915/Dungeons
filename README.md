@@ -58,3 +58,6 @@
 | 19 | Flame | 1 | 400 | Sets an enemy on flame for 3s |
 | 19 | Flame | 2 | 300 | Sets an enemy on flame for 4s |
 | 19 | Flame | 3 | 300 | Sets an enemy on flame for 5s |
+| 20 | Parry | 1 | 700 | 2% chance to disable enemy's charge for 2s |
+| 20 | Parry | 2 | 650 | 4% chance to disable enemy's charge for 2s |
+| 20 | Parry | 3 | 600 | 6% chance to disable enemy's charge for 2s |

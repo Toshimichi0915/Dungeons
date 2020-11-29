@@ -1,4 +1,4 @@
-version=7
+version=8
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -59,6 +59,9 @@ enchant.katana.3=Reduces enemy's knockback by&e 40%
 enchant.aspectoffire.1=Sets an enemy on fire for 10s
 enchant.aspectoffire.2=Sets an enemy on fire for 20s
 enchant.aspectoffire.3=Sets an enemy on fire for 30s
+enchant.flame.1=Sets an enemy on flame for 3s
+enchant.flame.2=Sets an enemy on flame for 4s
+enchant.flame.3=Sets an enemy on flame for 5s
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

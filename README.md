@@ -55,3 +55,6 @@
 | 18 | Aspect Of Fire | 1 | 600 | Sets an enemy on fire for 10s |
 | 18 | Aspect Of Fire | 2 | 550 | Sets an enemy on fire for 20s |
 | 18 | Aspect Of Fire | 3 | 400 | Sets an enemy on fire for 30s |
+| 19 | Flame | 1 | 400 | Sets an enemy on flame for 3s |
+| 19 | Flame | 2 | 300 | Sets an enemy on flame for 4s |
+| 19 | Flame | 3 | 300 | Sets an enemy on flame for 5s |

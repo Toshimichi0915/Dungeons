@@ -5,6 +5,7 @@ import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.events.PlayerShieldEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -35,7 +36,8 @@ public class SpringInsideEnchanter extends Enchanter implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onBlock(PlayerShieldEvent e) {
         if (!getPlayer().equals(e.getEntity())) return;
+        if (!(e.getDamager() instanceof LivingEntity)) return;
         double modifier = 0.1 * getEnchant().getLevel();
-        e.getEntity().damage(e.getDamage() * modifier, getPlayer());
+        ((LivingEntity) e.getDamager()).damage(e.getDamage() * modifier, getPlayer());
     }
 }

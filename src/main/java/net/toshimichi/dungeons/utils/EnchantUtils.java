@@ -8,8 +8,9 @@ import net.toshimichi.dungeons.enchants.Title;
 import org.apache.commons.lang3.RandomUtils;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -60,38 +61,45 @@ public class EnchantUtils {
             manager.setMaxLives(itemStack, lives);
             manager.setLives(itemStack, lives);
         } else {
-            for (Enchant e : manager.getAllEnchants()) {
-                if (!EnchantType.matchEnchantType(itemStack, e.getEnchantType())) continue;
-                if (tier >= 2) {
-                    lottery.add(e.getRarity(), e);
-                } else {
-                    if (e.getTitle() == Title.UNIQUE) continue;
-                    if (e.getTitle() == Title.RARE)
-                        lottery.add(e.getRarity() / 2, e);
-                    else
-                        lottery.add(e.getRarity(), e);
-                }
-            }
-            Set<Enchant> enchants = manager.getEnchants(itemStack);
-            List<Enchant> upgrade = enchants.stream()
-                    .filter(p -> p.getLevel() < 3).collect(Collectors.toList());
+            List<Enchant> enchants = new ArrayList<>(manager.getEnchants(itemStack));
+            enchants.sort(Comparator.comparingInt(Enchant::getId));
             int modifier;
             if (tier >= 2)
                 modifier = RandomUtils.nextInt() % 30;
             else
                 modifier = RandomUtils.nextInt() % 20;
 
-            boolean upgraded = false;
-            if (upgrade.size() > 0 && RandomUtils.nextInt() % 2 == 0) {
-                Enchant target = upgrade.get(RandomUtils.nextInt() % upgrade.size());
-                Enchant after = manager.getEnchant(target.getId(), target.getLevel() + 1);
-                if (after != null) {
-                    enchants.remove(target);
-                    enchants.add(after);
-                    upgraded = true;
+            if (RandomUtils.nextInt() % 2 == 0) {
+                Enchant target;
+                Enchant after;
+                while(true) {
+                    target = enchants.get(RandomUtils.nextInt() % enchants.size());
+                    Enchant targetCopy = target;
+                    List<Enchant> upgrades = manager.getAllEnchants().stream()
+                            .filter(p -> p.getId() == targetCopy.getId())
+                            .filter(p -> p.getLevel() > targetCopy.getLevel())
+                            .collect(Collectors.toList());
+                    if (upgrades.isEmpty())
+                        continue;
+                    upgrades.forEach(a->lottery.add(a.getRarity(), a));
+                    after = lottery.draw();
+                    break;
                 }
-            }
-            if (!upgraded) {
+                enchants.remove(target);
+                enchants.add(after);
+            } else {
+                for (Enchant e : manager.getAllEnchants()) {
+                    if (!EnchantType.matchEnchantType(itemStack, e.getEnchantType())) continue;
+                    if (tier >= 2) {
+                        lottery.add(e.getRarity(), e);
+                    } else {
+                        if (e.getTitle() == Title.UNIQUE) continue;
+                        if (e.getTitle() == Title.RARE)
+                            lottery.add(e.getRarity() / 2, e);
+                        else
+                            lottery.add(e.getRarity(), e);
+                    }
+                }
                 AtomicReference<Enchant> ref = new AtomicReference<>();
                 do {
                     ref.set(lottery.draw());

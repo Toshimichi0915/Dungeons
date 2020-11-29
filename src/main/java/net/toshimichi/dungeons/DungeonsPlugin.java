@@ -29,6 +29,9 @@ import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
 import net.toshimichi.dungeons.enchants.shield.SpringInside1;
 import net.toshimichi.dungeons.enchants.shield.SpringInside2;
 import net.toshimichi.dungeons.enchants.shield.SpringInside3;
+import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire1;
+import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire2;
+import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire3;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire1;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire2;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire3;
@@ -235,7 +238,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Telebow1(), new Telebow2(), new Telebow3(), new Bugbow(),
                 new Efficiency1(), new Efficiency2(), new Efficiency3(), new Efficiency4(), new Efficiency5(),
                 new SilkTouch1(),
-                new Katana1(), new Katana2(), new Katana3());
+                new Katana1(), new Katana2(), new Katana3(),
+                new AspectOfFire1(), new AspectOfFire2(), new AspectOfFire3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

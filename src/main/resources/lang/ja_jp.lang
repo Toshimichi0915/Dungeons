@@ -1,4 +1,4 @@
-version=6
+version=7
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -56,6 +56,9 @@ enchant.silktouch.1=ブロック破壊時にそのままの形でドロップ
 enchant.katana.1=敵のノックバックを&e 10% &7減らす
 enchant.katana.2=敵のノックバックを&e 20% &7減らす
 enchant.katana.3=敵のノックバックを&e 40% &7減らす
+enchant.aspectoffire.1=敵を 10秒 燃やす
+enchant.aspectoffire.2=敵を 20秒 燃やす
+enchant.aspectoffire.3=敵を 30秒 燃やす
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

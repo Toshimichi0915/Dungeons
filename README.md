@@ -52,4 +52,6 @@
 | 17 | Katana | 1 | 400 | Reduces enemy's knockback by 10% |
 | 17 | Katana | 2 | 400 |  Reduces enemy's knockback by 20% |
 | 17 | Katana | 3 | 200 |  Reduces enemy's knockback by 40% |
-
+| 18 | Aspect Of Fire | 1 | 600 | Sets an enemy on fire for 10s |
+| 18 | Aspect Of Fire | 2 | 550 | Sets an enemy on fire for 20s |
+| 18 | Aspect Of Fire | 3 | 400 | Sets an enemy on fire for 30s |

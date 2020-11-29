@@ -26,9 +26,9 @@ import net.toshimichi.dungeons.enchants.bow.telebow.Telebow3;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley1;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley2;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
-import net.toshimichi.dungeons.enchants.shield.SpringInside1;
-import net.toshimichi.dungeons.enchants.shield.SpringInside2;
-import net.toshimichi.dungeons.enchants.shield.SpringInside3;
+import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside1;
+import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside2;
+import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside3;
 import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire1;
 import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire2;
 import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire3;
@@ -295,6 +295,7 @@ public class DungeonsPlugin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new LangListener(), this);
         Bukkit.getPluginManager().registerEvents(new BossBarChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ShieldListener(), this);
 
         Bukkit.getOnlinePlayers().forEach(enchantManager::refresh);
 

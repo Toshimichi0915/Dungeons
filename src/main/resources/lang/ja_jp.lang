@@ -62,6 +62,9 @@ enchant.aspectoffire.3=敵を 30秒 燃やす
 enchant.flame.1=敵を焔で 3秒 燃やす
 enchant.flame.2=敵を焔で 4秒 燃やす
 enchant.flame.3=敵を焔で 5秒 燃やす
+enchant.parry.1=ガード時,&e 2% &7の確率でチャージを2秒無効化
+enchant.parry.2=ガード時,&e 4% &7の確率でチャージを2秒無効化
+enchant.parry.3=ガード時,&e 6% &7の確率でチャージを2秒無効化
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

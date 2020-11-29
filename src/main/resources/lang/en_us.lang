@@ -62,6 +62,9 @@ enchant.aspectoffire.3=Sets an enemy on fire for 30s
 enchant.flame.1=Sets an enemy on flame for 3s
 enchant.flame.2=Sets an enemy on flame for 4s
 enchant.flame.3=Sets an enemy on flame for 5s
+enchant.parry.1=&e 2% &7chance to disable enemy's charge for 2s
+enchant.parry.2=&e 4% &7chance to disable enemy's charge for 2s
+enchant.parry.3=&e 6% &7chance to disable enemy's charge for 2s
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

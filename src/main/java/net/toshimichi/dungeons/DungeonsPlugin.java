@@ -26,6 +26,9 @@ import net.toshimichi.dungeons.enchants.bow.telebow.Telebow3;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley1;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley2;
 import net.toshimichi.dungeons.enchants.bow.volley.Volley3;
+import net.toshimichi.dungeons.enchants.shield.parry.Parry1;
+import net.toshimichi.dungeons.enchants.shield.parry.Parry2;
+import net.toshimichi.dungeons.enchants.shield.parry.Parry3;
 import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside1;
 import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside2;
 import net.toshimichi.dungeons.enchants.shield.springinside.SpringInside3;
@@ -243,7 +246,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new SilkTouch1(),
                 new Katana1(), new Katana2(), new Katana3(),
                 new AspectOfFire1(), new AspectOfFire2(), new AspectOfFire3(),
-                new Flame1(), new Flame2(), new Flame3());
+                new Flame1(), new Flame2(), new Flame3(),
+                new Parry1(), new Parry2(), new Parry3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

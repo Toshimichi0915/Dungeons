@@ -54,8 +54,8 @@ enchant.efficiency.4=ブロック破壊速度を&e {modifier}% &7上昇
 enchant.efficiency.5=ブロック破壊速度を&e {modifier}% &7上昇
 enchant.silktouch.1=ブロック破壊時にそのままの形でドロップ
 enchant.katana.1=敵のノックバックを&e 10% &7減らす
-enchant.katana.1=敵のノックバックを&e 20% &7減らす
-enchant.katana.1=敵のノックバックを&e 40% &7減らす
+enchant.katana.2=敵のノックバックを&e 20% &7減らす
+enchant.katana.3=敵のノックバックを&e 40% &7減らす
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

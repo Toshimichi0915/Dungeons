@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.armor.protection;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class ProtectionEnchanter extends Enchanter implements Listener {
+public class ProtectionEnchanter extends ArmorEnchanter implements Listener {
     public ProtectionEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);
     }
@@ -32,11 +33,6 @@ public class ProtectionEnchanter extends Enchanter implements Listener {
     @Override
     protected void onDisabled() {
         HandlerList.unregisterAll(this);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Arrays.asList(InventoryUtils.getPrimaryItemStacks(getPlayer())).contains(getItemStack());
     }
 
     @EventHandler

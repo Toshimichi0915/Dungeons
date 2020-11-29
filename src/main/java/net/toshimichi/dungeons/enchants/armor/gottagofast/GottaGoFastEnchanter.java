@@ -2,6 +2,7 @@ package net.toshimichi.dungeons.enchants.armor.gottagofast;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import org.apache.commons.lang.math.RandomUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -10,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-public class GottaGoFastEnchanter extends Enchanter {
+public class GottaGoFastEnchanter extends ArmorEnchanter {
 
     private int count;
     private float changed;
@@ -48,8 +49,4 @@ public class GottaGoFastEnchanter extends Enchanter {
         getPlayer().setWalkSpeed(getPlayer().getWalkSpeed() - changed);
     }
 
-    @Override
-    public boolean isAvailable() {
-        return getItemStack().equals(getPlayer().getInventory().getItem(EquipmentSlot.FEET));
-    }
 }

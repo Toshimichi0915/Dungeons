@@ -3,6 +3,7 @@ package net.toshimichi.dungeons.enchants.armor.autosmelt;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -15,7 +16,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-public class AutoSmeltEnchanter extends Enchanter implements Listener {
+public class AutoSmeltEnchanter extends ArmorEnchanter implements Listener {
 
     public AutoSmeltEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);
@@ -51,10 +52,5 @@ public class AutoSmeltEnchanter extends Enchanter implements Listener {
             e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), drop);
         }
         e.getBlock().setType(Material.AIR);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return getItemStack().equals(getPlayer().getInventory().getItem(EquipmentSlot.HEAD));
     }
 }

@@ -3,12 +3,13 @@ package net.toshimichi.dungeons.enchants.armor.wizard;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class WizardEnchanter extends Enchanter {
+public class WizardEnchanter extends ArmorEnchanter {
 
     private int delta;
 
@@ -38,8 +39,4 @@ public class WizardEnchanter extends Enchanter {
         DungeonsPlugin.getManaManager().setMaxMana(getPlayer(), maxMana - delta);
     }
 
-    @Override
-    public boolean isAvailable() {
-        return Arrays.asList(getPlayer().getInventory().getArmorContents()).contains(getItemStack());
-    }
 }

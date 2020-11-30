@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.wand;
+package net.toshimichi.dungeons.enchants.wand.sanctity;
 
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Sanctity3 implements Enchant {
+public class Sanctity1 implements Enchant {
     @Override
     public int getId() {
         return 3;
@@ -18,23 +18,23 @@ public class Sanctity3 implements Enchant {
 
     @Override
     public String getName() {
-        return ChatColor.LIGHT_PURPLE + "RARE! " + ChatColor.BLUE + "Sanctity III";
+        return ChatColor.LIGHT_PURPLE + "RARE! " + ChatColor.BLUE + "Sanctity I";
     }
 
     @Override
     public int getLevel() {
-        return 3;
+        return 1;
     }
 
     @Override
     public int getRarity() {
-        return 50;
+        return 200;
     }
 
     @Override
     public String getDescription(ItemStack itemStack, Locale locale) {
-//        return  "体力を" + ChatColor.RED + "3❤" + ChatColor.GRAY + "回復";
-        return new LocaleBuilder("enchant.sanctity.3").locale(locale).build();
+//        return  "体力を" + ChatColor.RED + "1❤" + ChatColor.GRAY + "回復";
+        return new LocaleBuilder("enchant.sanctity.1").locale(locale).build();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.toshimichi.dungeons.enchants.wand;
+package net.toshimichi.dungeons.enchants.wand.sanctity;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
@@ -39,10 +39,13 @@ public class SanctityEnchanter extends Enchanter implements Listener {
         HandlerList.unregisterAll(this);
     }
 
-    private boolean tryUse() {
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (!getPlayer().equals(e.getPlayer())) return;
+        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         int level = getEnchant().getLevel();
-        if (SilentCooldown.getCooldown(getItemStack(), "enchant.sanctity.cooldown") > 1) return false;
-        if (!DungeonsPlugin.getManaManager().consumeMana(getPlayer(), 20 * level)) return false;
+        if (SilentCooldown.getCooldown(getItemStack(), "enchant.sanctity.cooldown") > 1) return;
+        if (!DungeonsPlugin.getManaManager().consumeMana(getPlayer(), 20 * level)) return;
         SilentCooldown.setCooldown(getItemStack(), "enchant.sanctity.cooldown", 10);
         double healAmount;
         if (level == 1)
@@ -62,15 +65,7 @@ public class SanctityEnchanter extends Enchanter implements Listener {
             loc.add(RandomUtils.nextDouble() - 0.5, 0, RandomUtils.nextDouble() - 0.5);
             getPlayer().getWorld().spawnParticle(Particle.HEART, loc, 0, 0, 0.2, 0);
         }
-        return true;
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (!e.getPlayer().equals(getPlayer())) return;
-        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (tryUse())
-            e.setCancelled(true);
+        e.setCancelled(true);
     }
 
     @Override

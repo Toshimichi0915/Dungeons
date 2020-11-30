@@ -58,9 +58,12 @@ import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness2;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness3;
 import net.toshimichi.dungeons.enchants.tool.efficiency.*;
 import net.toshimichi.dungeons.enchants.tool.silktouch.SilkTouch1;
-import net.toshimichi.dungeons.enchants.wand.Sanctity1;
-import net.toshimichi.dungeons.enchants.wand.Sanctity2;
-import net.toshimichi.dungeons.enchants.wand.Sanctity3;
+import net.toshimichi.dungeons.enchants.wand.portal.Portal1;
+import net.toshimichi.dungeons.enchants.wand.portal.Portal2;
+import net.toshimichi.dungeons.enchants.wand.portal.Portal3;
+import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity1;
+import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity2;
+import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity3;
 import net.toshimichi.dungeons.gui.GuiManager;
 import net.toshimichi.dungeons.gui.SimpleGuiManager;
 import net.toshimichi.dungeons.lang.*;
@@ -251,7 +254,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new AspectOfFire1(), new AspectOfFire2(), new AspectOfFire3(),
                 new Flame1(), new Flame2(), new Flame3(),
                 new Parry1(), new Parry2(), new Parry3(),
-                new RingArmor1(), new RingArmor2(), new RingArmor3());
+                new RingArmor1(), new RingArmor2(), new RingArmor3(),
+                new Portal1(), new Portal2(), new Portal3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

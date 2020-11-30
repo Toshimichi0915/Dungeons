@@ -1,4 +1,4 @@
-version=10
+version=11
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -68,6 +68,9 @@ enchant.parry.3=ガード時,&e 6% &7の確率でチャージを2秒無効化
 enchant.ringarmor.1=矢によるダメージを&c 30% &7軽減
 enchant.ringarmor.2=矢によるダメージを&c 45% &7軽減
 enchant.ringarmor.3=矢によるダメージを&c 60% &7軽減
+enchant.portal.1=周囲2ブロックのアイテムを消去 (40マナ)
+enchant.portal.2=周囲3ブロックのアイテムを消去 (40マナ)
+enchant.portal.3=周囲4ブロックのアイテムを消去 (40マナ)
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

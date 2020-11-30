@@ -61,3 +61,6 @@
 | 20 | Parry | 1 | 700 | 2% chance to disable enemy's charge for 2s |
 | 20 | Parry | 2 | 650 | 4% chance to disable enemy's charge for 2s |
 | 20 | Parry | 3 | 600 | 6% chance to disable enemy's charge for 2s |
+| 21 | Ring Armor | 1 | 1200 | Reduces arrow damage by 30%
+| 21 | Ring Armor | 2 | 1000 | Reduces arrow damage by 45%
+| 21 | Ring Armor | 3 | 900 | Reduces arrow damage by 60%

@@ -1,4 +1,4 @@
-version=9
+version=10
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -65,6 +65,9 @@ enchant.flame.3=敵を焔で 5秒 燃やす
 enchant.parry.1=ガード時,&e 2% &7の確率でチャージを2秒無効化
 enchant.parry.2=ガード時,&e 4% &7の確率でチャージを2秒無効化
 enchant.parry.3=ガード時,&e 6% &7の確率でチャージを2秒無効化
+enchant.ringarmor.1=矢によるダメージを&c 30% &7軽減
+enchant.ringarmor.2=矢によるダメージを&c 45% &7軽減
+enchant.ringarmor.3=矢によるダメージを&c 60% &7軽減
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

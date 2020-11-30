@@ -68,9 +68,9 @@ enchant.parry.3=&e6% &7chance to disable enemy's charge for 2s
 enchant.ringarmor.1=Reduces arrow damage by&c 30%
 enchant.ringarmor.2=Reduces arrow damage by&c 45%
 enchant.ringarmor.3=Reduces arrow damage by&c 60%
-enchant.portal.1=Removes items within 2 blocks radius (40mana)
-enchant.portal.2=Removes items within 4 blocks radius (40mana)
-enchant.portal.3=Removes items within 6 blocks radius (40mana)
+enchant.portal.1=Removes items within 2 blocks radius (40 mana)
+enchant.portal.2=Removes items within 4 blocks radius (40 mana)
+enchant.portal.3=Removes items within 6 blocks radius (40 mana)
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

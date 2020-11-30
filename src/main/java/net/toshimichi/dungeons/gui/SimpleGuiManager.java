@@ -57,4 +57,9 @@ public class SimpleGuiManager implements GuiManager {
         guis.remove(player);
     }
 
+    @Override
+    public void closeAll() {
+        guis.keySet().forEach(this::close);
+    }
+
 }

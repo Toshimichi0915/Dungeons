@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.Inventory;
 
 public class GuiListener implements Listener {
@@ -33,5 +34,11 @@ public class GuiListener implements Listener {
     public void onClose(InventoryCloseEvent e) {
         if (!(e.getPlayer() instanceof Player)) return;
         DungeonsPlugin.getGuiManager().close((Player) e.getPlayer());
+    }
+
+    @EventHandler
+    public void onDisable(PluginDisableEvent e) {
+        if(!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
+        DungeonsPlugin.getGuiManager().closeAll();
     }
 }

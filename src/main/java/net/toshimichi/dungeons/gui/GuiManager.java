@@ -46,4 +46,9 @@ public interface GuiManager {
      * @param player プレイヤー
      */
     void close(Player player);
+
+    /**
+     * 現在開かれている全てのGUIを安全な方法で閉じます.
+     */
+    void closeAll();
 }

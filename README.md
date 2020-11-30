@@ -64,3 +64,6 @@
 | 21 | Ring Armor | 1 | 1200 | Reduces arrow damage by 30%
 | 21 | Ring Armor | 2 | 1000 | Reduces arrow damage by 45%
 | 21 | Ring Armor | 3 | 900 | Reduces arrow damage by 60%
+| 22 | Portal | 1 | 400 | Removes items within 2 blocks radius (40 mana) |
+| 22 | Portal | 2 | 300 | Removes items within 4 blocks radius (40 mana) |
+| 22 | Portal | 3 | 300 | Removes items within 6 blocks radius (40 mana) |

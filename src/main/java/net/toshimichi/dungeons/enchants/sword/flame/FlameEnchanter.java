@@ -51,7 +51,7 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
         HandlerList.unregisterAll(this);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
         if (!(e.getEntity() instanceof LivingEntity)) return;
@@ -67,7 +67,7 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
         e.getEntity().setFireTicks(ticks);
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onDamage1(EntityDamageEvent e) {
         if (!burnt.containsKey(e.getEntity())) return;
         if (e.getCause() != EntityDamageEvent.DamageCause.FIRE_TICK) return;

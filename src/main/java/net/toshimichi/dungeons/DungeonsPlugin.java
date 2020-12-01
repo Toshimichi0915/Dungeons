@@ -65,7 +65,7 @@ import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity1;
 import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity2;
 import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity3;
 import net.toshimichi.dungeons.gui.GuiManager;
-import net.toshimichi.dungeons.gui.SimpleGuiManager;
+import net.toshimichi.dungeons.gui.LocalGuiManager;
 import net.toshimichi.dungeons.lang.*;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
@@ -260,7 +260,7 @@ public class DungeonsPlugin extends JavaPlugin {
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
-        guiManager = new SimpleGuiManager();
+        guiManager = new LocalGuiManager();
 
         if (Bukkit.getPluginManager().getPlugin("Vault") != null &&
                 Bukkit.getServicesManager().load(net.milkbowl.vault.economy.Economy.class) != null) {

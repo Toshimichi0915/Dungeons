@@ -22,4 +22,10 @@ public class LocalNbtIntArray implements NbtIntArray {
     public int[] getAsIntArray() {
         return array;
     }
+
+    @Override
+    public void set(int i, int[] array) {
+        System.arraycopy(array, 0, array, i, array.length);
+        copy = null;
+    }
 }

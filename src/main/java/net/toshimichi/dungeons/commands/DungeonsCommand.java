@@ -7,6 +7,7 @@ import net.toshimichi.dungeons.commands.admin.economy.EconomyCommand;
 import net.toshimichi.dungeons.commands.admin.enchant.EnchantCommand;
 import net.toshimichi.dungeons.commands.admin.lang.LangCommand;
 import net.toshimichi.dungeons.commands.admin.mana.ManaCommand;
+import net.toshimichi.dungeons.commands.admin.nbt.NbtCommand;
 import net.toshimichi.dungeons.commands.admin.stash.StashCommand;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class DungeonsCommand extends BranchCommand {
         result.put("walkspeed", new WalkSpeedCommand());
         result.put("dummy", new DummyCommand());
         result.put("model", new CustomModelDataCommand());
+        result.put("nbt", new NbtCommand());
         return result;
     }
 

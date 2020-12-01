@@ -10,6 +10,4 @@ public interface NbtItemStack {
     ItemStack toItemStack();
 
     NbtCompound getNbtCompound();
-
-    void updateNbtCompound();
 }

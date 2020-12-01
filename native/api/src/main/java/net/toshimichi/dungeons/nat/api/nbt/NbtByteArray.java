@@ -10,4 +10,6 @@ public interface NbtByteArray extends Nbt {
             copy[i] = array[i];
         return copy;
     }
+
+    void set(int i, byte[] b);
 }

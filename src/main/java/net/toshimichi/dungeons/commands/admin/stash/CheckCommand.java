@@ -25,9 +25,9 @@ public class CheckCommand implements PlayerCommand {
 
     private TextComponent getTextComponent(ItemStack itemStack) {
         ServicesManager services = Bukkit.getServicesManager();
-        NbtItemStackFactory factory = services.load(net.toshimichi.dungeons.nat.api.NbtItemStackFactory.class);
+        NbtItemStackFactory factory = services.load(NbtItemStackFactory.class);
         NbtItemStack nbtItemStack = factory.newNbtItemStack(itemStack);
-        LocaleLanguage lang = services.load(net.toshimichi.dungeons.nat.api.LocaleLanguage.class);
+        LocaleLanguage lang = services.load(LocaleLanguage.class);
         String name = nbtItemStack.getName();
         TextComponent result = new TextComponent(name + ChatColor.GRAY + " x" + itemStack.getAmount());
         StringBuilder builder = new StringBuilder(name);

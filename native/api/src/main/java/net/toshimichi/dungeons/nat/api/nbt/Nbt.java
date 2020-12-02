@@ -1,7 +1,5 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-import java.util.List;
-
 public interface Nbt {
 
     default byte getAsByte() {
@@ -36,7 +34,7 @@ public interface Nbt {
         throw new NbtException(getClass().getName() + " cannot be cast to byte String");
     }
 
-    default List<Nbt> getAsList() {
+    default NbtList getAsList() {
         throw new NbtException(getClass().getName() + " cannot be cast to byte List");
     }
 

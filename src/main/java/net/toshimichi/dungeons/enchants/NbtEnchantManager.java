@@ -3,23 +3,27 @@ package net.toshimichi.dungeons.enchants;
 import net.md_5.bungee.api.ChatColor;
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.lang.Locale;
+import net.toshimichi.dungeons.nat.api.NbtItemStack;
+import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
+import net.toshimichi.dungeons.nat.api.nbt.*;
+import net.toshimichi.dungeons.nbt.LocalNbtMapper;
+import net.toshimichi.dungeons.nbt.NbtMapper;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import net.toshimichi.dungeons.utils.Nonce;
 import net.toshimichi.dungeons.utils.RomanNumber;
-import org.bukkit.NamespacedKey;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
 public class NbtEnchantManager implements EnchantManager {
 
-    private final EnchantDataType enchantDataType;
+    private final NbtItemStackFactory factory;
+    private final NbtMapper mapper;
     private final Set<Enchant> enchants = new HashSet<>();
     private final WeakHashMap<Player, Set<Enchanter>> enchanters = new WeakHashMap<>();
 
@@ -29,7 +33,9 @@ public class NbtEnchantManager implements EnchantManager {
      * @param arr エンチャントの一覧
      */
     public NbtEnchantManager(Enchant... arr) {
-        enchantDataType = new EnchantDataType(arr);
+        factory = Bukkit.getServicesManager().load(NbtItemStackFactory.class);
+        mapper = new LocalNbtMapper();
+        mapper.addNbtSerializer(new EnchantNbtSerializer(this));
         enchants.addAll(Arrays.asList(arr));
     }
 
@@ -97,14 +103,11 @@ public class NbtEnchantManager implements EnchantManager {
 
     @Override
     public Set<Enchant> getEnchants(ItemStack itemStack) {
-        if (itemStack == null) return new HashSet<>();
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) return new HashSet<>();
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        if (!container.has(new NamespacedKey(DungeonsPlugin.getPlugin(), "enchants"), enchantDataType))
-            return new HashSet<>();
-        Enchant[] enchants = container.get(new NamespacedKey(DungeonsPlugin.getPlugin(), "enchants"), enchantDataType);
-        return new HashSet<>(Arrays.asList(enchants));
+        HashSet<Enchant> empty = new HashSet<>();
+        if (itemStack == null) return empty;
+        Nbt enchantsNbt = factory.newNbtItemStack(itemStack).getNbt("dungeons", "enchants");
+        if (!(enchantsNbt instanceof NbtList)) return empty;
+        return new HashSet<>(Arrays.asList(mapper.deserialize(enchantsNbt, Enchant[].class)));
     }
 
     @Override
@@ -193,34 +196,22 @@ public class NbtEnchantManager implements EnchantManager {
     @Override
     public void setEnchants(ItemStack itemStack, Enchant... enchants) {
         Nonce.newNonce(itemStack);
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) throw new IllegalArgumentException("Cannot get ItemMeta of " + itemStack);
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        container.set(new NamespacedKey(DungeonsPlugin.getPlugin(), "enchants"), enchantDataType, enchants);
-        itemStack.setItemMeta(meta);
-
+        NbtItemStack nbtItem = factory.newNbtItemStack(itemStack);
+        nbtItem.setNbt("dungeons", "enchants", mapper.serialize(enchants));
+        itemStack.setItemMeta(nbtItem.toItemStack().getItemMeta());
         refresh(itemStack);
     }
 
     private int getIntData(ItemStack itemStack, String label) {
-        if (itemStack == null) return -1;
-        if (!itemStack.hasItemMeta()) return -1;
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta == null) return -1;
-        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
-        Integer tier = container.get(new NamespacedKey(DungeonsPlugin.getPlugin(), label), PersistentDataType.INTEGER);
-        if (tier == null) return -1;
-        return tier;
+        Nbt nbt = factory.newNbtItemStack(itemStack).getNbt("dungeons", label);
+        if (!(nbt instanceof NbtInt)) return -1;
+        return nbt.getAsInt();
     }
 
     private void setIntData(ItemStack itemStack, String label, int data) {
-        if (itemStack == null) return;
-        if (!itemStack.hasItemMeta()) return;
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta == null) return;
-        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
-        container.set(new NamespacedKey(DungeonsPlugin.getPlugin(), label), PersistentDataType.INTEGER, data);
-        itemStack.setItemMeta(itemMeta);
+        NbtItemStack nbtItem = factory.newNbtItemStack(itemStack);
+        nbtItem.setNbt("dungeons", label, new LocalNbtInt(data));
+        itemStack.setItemMeta(nbtItem.toItemStack().getItemMeta());
     }
 
     @Override
@@ -262,24 +253,19 @@ public class NbtEnchantManager implements EnchantManager {
     @Override
     public Locale getLocale(ItemStack itemStack) {
         if (itemStack == null) return null;
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) return null;
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        String str = container.get(new NamespacedKey(DungeonsPlugin.getPlugin(), "locale"), PersistentDataType.STRING);
-        if (str == null) return null;
-        return DungeonsPlugin.getLocales().stream().filter(p -> p.get("general.lang.name").equals(str)).findAny().orElse(null);
+        Nbt nbt = factory.newNbtItemStack(itemStack).getNbt("dungeons", "locale");
+        if (!(nbt instanceof NbtString)) return null;
+        return DungeonsPlugin.getLocales().stream()
+                .filter(p -> p.get("general.lang.name").equals(nbt.getAsString()))
+                .findAny()
+                .orElse(null);
     }
 
     @Override
     public void setLocale(ItemStack itemStack, Locale locale) {
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) return;
-        if (locale != null && locale.get("general.lang.name") != null)
-            meta.getPersistentDataContainer().set(new NamespacedKey(DungeonsPlugin.getPlugin(), "locale"), PersistentDataType.STRING, locale.get("general.lang.name"));
-        else
-            meta.getPersistentDataContainer().remove(new NamespacedKey(DungeonsPlugin.getPlugin(), "locale"));
-        itemStack.setItemMeta(meta);
-
+        NbtItemStack nbtItem = factory.newNbtItemStack(itemStack);
+        nbtItem.setNbt("dungeons", "locale", new LocalNbtString(locale.get("general.lang.name")));
+        itemStack.setItemMeta(nbtItem.toItemStack().getItemMeta());
         refresh(itemStack);
     }
 

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-public interface NbtDouble extends NbtFloat {
+public interface NbtDouble extends Nbt {
 
     @Override
     default double getAsDouble() {

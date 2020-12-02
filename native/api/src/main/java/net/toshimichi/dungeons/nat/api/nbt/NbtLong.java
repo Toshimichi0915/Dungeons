@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-public interface NbtLong extends NbtInt {
+public interface NbtLong extends Nbt {
 
     @Override
     default float getAsFloat() {

@@ -1,4 +1,4 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-public interface NbtString extends Nbt{
+public interface NbtString extends Nbt {
 }

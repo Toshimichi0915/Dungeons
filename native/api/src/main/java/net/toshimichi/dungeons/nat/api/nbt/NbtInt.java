@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-public interface NbtInt extends NbtShort {
+public interface NbtInt extends Nbt {
 
     @Override
     default long getAsLong() {

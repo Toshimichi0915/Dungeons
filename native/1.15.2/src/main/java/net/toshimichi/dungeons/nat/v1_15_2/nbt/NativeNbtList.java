@@ -17,7 +17,7 @@ public class NativeNbtList extends AbstractList<Nbt> implements NbtList {
 
     @Override
     public Nbt get(int index) {
-        return converter.fromNative(l.b(index));
+        return converter.fromNative(l.get(index));
     }
 
     @Override
@@ -39,5 +39,10 @@ public class NativeNbtList extends AbstractList<Nbt> implements NbtList {
     @Override
     public boolean add(Nbt nbt) {
         return l.add(converter.toNative(nbt));
+    }
+
+    @Override
+    public String toString() {
+        return l.toString();
     }
 }

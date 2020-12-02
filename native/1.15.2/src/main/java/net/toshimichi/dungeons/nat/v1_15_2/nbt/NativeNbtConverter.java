@@ -8,6 +8,8 @@ import java.util.Map;
 public class NativeNbtConverter implements NbtConverter {
     @Override
     public NBTBase toNative(Nbt nbt) {
+        if(nbt == null)
+            return null;
 
         if (nbt instanceof NbtCompound) {
             NbtCompound cast = (NbtCompound) nbt;
@@ -49,7 +51,9 @@ public class NativeNbtConverter implements NbtConverter {
 
     @Override
     public Nbt fromNative(NBTBase base) {
-        if (base instanceof NBTTagCompound)
+        if (base == null)
+            return null;
+        else if (base instanceof NBTTagCompound)
             return new NativeNbtCompound(this, (NBTTagCompound) base);
         else if (base instanceof NBTTagList)
             return new NativeNbtList(this, (NBTTagList) base);

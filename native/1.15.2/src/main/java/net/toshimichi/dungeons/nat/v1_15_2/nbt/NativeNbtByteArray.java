@@ -23,4 +23,9 @@ public class NativeNbtByteArray implements NbtByteArray {
             array.set(j + i, NBTTagByte.a(b[j]));
         }
     }
+
+    @Override
+    public String toString() {
+        return array.toString();
+    }
 }

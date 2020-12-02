@@ -15,4 +15,9 @@ public class NativeNbtByte implements NbtByte {
     public byte getAsByte() {
         return b.asByte();
     }
+
+    @Override
+    public String toString() {
+        return b.toString();
+    }
 }

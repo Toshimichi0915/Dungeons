@@ -23,4 +23,9 @@ public class NativeNbtIntArray implements NbtIntArray {
             array.set(j + i, NBTTagInt.a(b[j]));
         }
     }
+
+    @Override
+    public String toString() {
+        return array.toString();
+    }
 }

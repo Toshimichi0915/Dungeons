@@ -30,4 +30,9 @@ public class NativeNbtLong implements NbtLong {
     public long getAsLong() {
         return l.asLong();
     }
+
+    @Override
+    public String toString() {
+        return l.toString();
+    }
 }

@@ -15,4 +15,9 @@ public class NativeNbtString implements NbtString {
     public String getAsString() {
         return s.asString();
     }
+
+    @Override
+    public String toString() {
+        return s.toString();
+    }
 }

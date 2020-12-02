@@ -7,7 +7,7 @@ import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 public class NativeNbtItemStackFactory implements NbtItemStackFactory {
-    
+
     private static final NativeNbtConverter converter = new NativeNbtConverter();
     @Override
     public NbtItemStack newNbtItemStack(ItemStack itemStack) {

@@ -1,5 +1,7 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
+import java.util.Arrays;
+
 public class LocalNbtIntArray implements NbtIntArray {
     private byte[] copy;
     private final int[] array;
@@ -27,5 +29,10 @@ public class LocalNbtIntArray implements NbtIntArray {
     public void set(int i, int[] array) {
         System.arraycopy(array, 0, array, i, array.length);
         copy = null;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(array);
     }
 }

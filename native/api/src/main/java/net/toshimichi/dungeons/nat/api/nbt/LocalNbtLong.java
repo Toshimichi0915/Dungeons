@@ -27,4 +27,9 @@ public class LocalNbtLong implements NbtLong {
     public long getAsLong() {
         return l;
     }
+
+    @Override
+    public String toString() {
+        return Long.toString(l);
+    }
 }

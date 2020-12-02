@@ -17,4 +17,9 @@ public class LocalNbtDouble implements NbtDouble {
     public double getAsDouble() {
         return d;
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(d);
+    }
 }

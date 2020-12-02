@@ -17,4 +17,9 @@ public class LocalNbtShort implements NbtShort {
     public short getAsShort() {
         return s;
     }
+
+    @Override
+    public String toString() {
+        return Short.toString(s);
+    }
 }

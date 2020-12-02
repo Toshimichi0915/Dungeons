@@ -25,4 +25,9 @@ public class NativeNbtInt implements NbtInt {
     public int getAsInt() {
         return i.asInt();
     }
+
+    @Override
+    public String toString() {
+        return i.toString();
+    }
 }

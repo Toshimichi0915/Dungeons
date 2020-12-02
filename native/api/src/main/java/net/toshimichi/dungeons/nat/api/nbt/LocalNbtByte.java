@@ -12,4 +12,9 @@ public class LocalNbtByte implements NbtLong {
     public byte getAsByte() {
         return b;
     }
+
+    @Override
+    public String toString() {
+        return Byte.toString(b);
+    }
 }

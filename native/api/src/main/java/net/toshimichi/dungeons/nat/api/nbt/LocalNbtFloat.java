@@ -12,4 +12,9 @@ public class LocalNbtFloat implements NbtFloat {
     public float getAsFloat() {
         return f;
     }
+
+    @Override
+    public String toString() {
+        return Float.toString(f);
+    }
 }

@@ -12,4 +12,9 @@ public class LocalNbtString implements NbtString {
     public String getAsString() {
         return s;
     }
+
+    @Override
+    public String toString() {
+        return s;
+    }
 }

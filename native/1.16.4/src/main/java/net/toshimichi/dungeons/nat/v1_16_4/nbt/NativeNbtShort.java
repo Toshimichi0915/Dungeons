@@ -20,4 +20,9 @@ public class NativeNbtShort implements NbtShort {
     public short getAsShort() {
         return s.asShort();
     }
+
+    @Override
+    public String toString() {
+        return s.toString();
+    }
 }

@@ -1,25 +1,26 @@
 package net.toshimichi.dungeons.commands.admin.nbt;
 
 import net.toshimichi.dungeons.commands.Arguments;
+import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
-import net.toshimichi.dungeons.nat.api.NbtItemStack;
 import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
-import net.toshimichi.dungeons.nat.api.nbt.Nbt;
+import net.toshimichi.dungeons.nat.api.nbt.NbtCompound;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Map;
 
 public class ListCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         ItemStack itemStack = player.getInventory().getItemInMainHand();
+        if (itemStack.getType() == Material.AIR)
+            throw new CommandException("解析したいアイテムを手に持ってください");
         NbtItemStackFactory factory = Bukkit.getServicesManager().load(NbtItemStackFactory.class);
-        NbtItemStack nbtItemStack = factory.newNbtItemStack(itemStack);
-        for(Map.Entry<String, Nbt> entry : nbtItemStack.getNbtCompound().entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+        NbtCompound compound = factory.newNbtItemStack(itemStack).getNbtCompound();
+        if (compound == null)
+            throw new CommandException("このアイテムにNBTタグは存在しません");
+        player.sendMessage(compound.toString());
     }
 
     @Override

@@ -89,4 +89,9 @@ public class NativeNbtCompound implements NbtCompound {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return c.toString();
+    }
 }

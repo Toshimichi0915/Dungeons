@@ -40,4 +40,9 @@ public class NativeNbtList extends AbstractList<Nbt> implements NbtList {
     public boolean add(Nbt nbt) {
         return l.add(converter.toNative(nbt));
     }
+
+    @Override
+    public String toString() {
+        return l.toString();
+    }
 }

@@ -15,4 +15,9 @@ public class NativeNbtFloat implements NbtFloat {
     public float getAsFloat() {
         return f.asFloat();
     }
+
+    @Override
+    public String toString() {
+        return f.toString();
+    }
 }

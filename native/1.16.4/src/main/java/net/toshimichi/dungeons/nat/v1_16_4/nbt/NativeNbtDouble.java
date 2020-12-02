@@ -22,4 +22,9 @@ public class NativeNbtDouble implements NbtDouble {
     public double getAsDouble() {
         return d.asDouble();
     }
+
+    @Override
+    public String toString() {
+        return d.toString();
+    }
 }

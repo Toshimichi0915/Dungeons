@@ -22,4 +22,9 @@ public class LocalNbtInt implements NbtInt {
     public int getAsInt() {
         return i;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(i);
+    }
 }

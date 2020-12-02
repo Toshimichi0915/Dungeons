@@ -27,7 +27,17 @@ public class NativeNbtItemStack implements NbtItemStack {
     }
 
     @Override
+    public boolean hasNbtCompound() {
+        return itemStack.hasTag();
+    }
+
+    @Override
     public NbtCompound getNbtCompound() {
         return (NbtCompound)converter.fromNative(itemStack.getTag());
+    }
+
+    @Override
+    public NbtCompound newNbtCompound() {
+        return (NbtCompound)converter.fromNative(itemStack.getOrCreateTag());
     }
 }

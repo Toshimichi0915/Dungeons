@@ -9,5 +9,9 @@ public interface NbtItemStack {
 
     ItemStack toItemStack();
 
+    boolean hasNbtCompound();
+
     NbtCompound getNbtCompound();
+
+    NbtCompound newNbtCompound();
 }

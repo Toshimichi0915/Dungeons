@@ -15,6 +15,6 @@ public class LocalNbtString implements NbtString {
 
     @Override
     public String toString() {
-        return s;
+        return "\"" + s + "\"";
     }
 }

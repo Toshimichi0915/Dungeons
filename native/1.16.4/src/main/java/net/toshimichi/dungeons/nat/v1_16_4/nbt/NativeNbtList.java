@@ -1,7 +1,5 @@
 package net.toshimichi.dungeons.nat.v1_16_4.nbt;
 
-import net.minecraft.server.v1_16_R3.NBTBase;
-import net.minecraft.server.v1_16_R3.NBTList;
 import net.minecraft.server.v1_16_R3.NBTTagList;
 import net.toshimichi.dungeons.nat.api.nbt.Nbt;
 import net.toshimichi.dungeons.nat.api.nbt.NbtList;

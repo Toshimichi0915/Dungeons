@@ -70,3 +70,6 @@
 | 23 | Guts | 1 | 300 | Increases 0.5❤ |
 | 23 | Guts | 2 | 270 | Increases 1❤ |
 | 23 | Guts | 3 | 240 | Increases 1.5❤ |
+| 24 | Bottomless Quiver | 1 | 400 | 10% chance not to consume an arrow |
+| 24 | Bottomless Quiver | 2 | 300 | 20% chance not to consume an arrow |
+| 24 | Bottomless Quiver | 3 | 300 | 30% chance not to consume an arrow |

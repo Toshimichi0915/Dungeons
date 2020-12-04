@@ -19,6 +19,9 @@ import net.toshimichi.dungeons.enchants.armor.ringarmor.RingArmor3;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard1;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard2;
 import net.toshimichi.dungeons.enchants.armor.wizard.Wizard3;
+import net.toshimichi.dungeons.enchants.bow.bottomlessquiver.BottomlessQuiver1;
+import net.toshimichi.dungeons.enchants.bow.bottomlessquiver.BottomlessQuiver2;
+import net.toshimichi.dungeons.enchants.bow.bottomlessquiver.BottomlessQuiver3;
 import net.toshimichi.dungeons.enchants.bow.fletching.Fletching1;
 import net.toshimichi.dungeons.enchants.bow.fletching.Fletching2;
 import net.toshimichi.dungeons.enchants.bow.fletching.Fletching3;
@@ -259,7 +262,8 @@ public class DungeonsPlugin extends JavaPlugin {
                 new Parry1(), new Parry2(), new Parry3(),
                 new RingArmor1(), new RingArmor2(), new RingArmor3(),
                 new Portal1(), new Portal2(), new Portal3(),
-                new Guts1(), new Guts2(), new Guts3());
+                new Guts1(), new Guts2(), new Guts3(),
+                new BottomlessQuiver1(), new BottomlessQuiver2(), new BottomlessQuiver3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

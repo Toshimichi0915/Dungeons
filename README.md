@@ -67,3 +67,6 @@
 | 22 | Portal | 1 | 400 | Removes items within 2 blocks radius (40 mana) |
 | 22 | Portal | 2 | 300 | Removes items within 4 blocks radius (40 mana) |
 | 22 | Portal | 3 | 300 | Removes items within 6 blocks radius (40 mana) |
+| 23 | Guts | 1 | 300 | Increases 0.5❤ |
+| 23 | Guts | 2 | 270 | Increases 1❤ |
+| 23 | Guts | 3 | 240 | Increases 1.5❤ |

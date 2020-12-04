@@ -1,4 +1,4 @@
-version=11
+version=12
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -71,6 +71,9 @@ enchant.ringarmor.3=Reduces arrow damage by&c 60%
 enchant.portal.1=Removes items within 2 blocks radius (40 mana)
 enchant.portal.2=Removes items within 4 blocks radius (40 mana)
 enchant.portal.3=Removes items within 6 blocks radius (40 mana)
+enchant.guts.1=Increases&c 0.5❤
+enchant.guts.2=Increases&c 1❤
+enchant.guts.3=Increases&c 1.5❤
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

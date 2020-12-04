@@ -95,6 +95,7 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
         if (!getPlayer().equals(arrow.getShooter())) return;
         Location loc = arrow.getLocation();
         loc.setDirection(getPlayer().getLocation().getDirection());
+        getPlayer().setFallDistance(0);
         getPlayer().teleport(loc);
         getPlayer().getWorld().playSound(getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.7F, 2);
     }

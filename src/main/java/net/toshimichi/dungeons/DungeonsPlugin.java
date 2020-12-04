@@ -324,6 +324,7 @@ public class DungeonsPlugin extends JavaPlugin {
         registerService(new ManaRegenService());
         registerService(new BossBarChatService());
         registerService(new GuiService());
+        registerService(new VelocityService());
     }
 
     @Override

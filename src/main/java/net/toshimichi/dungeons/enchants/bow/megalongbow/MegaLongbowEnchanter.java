@@ -2,10 +2,9 @@ package net.toshimichi.dungeons.enchants.bow.megalongbow;
 
 import net.toshimichi.dungeons.DungeonsPlugin;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
+import net.toshimichi.dungeons.utils.VelocityUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,9 +45,8 @@ public class MegaLongbowEnchanter extends BowEnchanter implements Listener {
         ProjectileSource source = arrow.getShooter();
         if (source == null) return;
         if (!getPlayer().equals(source)) return;
-        Vector vector = arrow.getVelocity().normalize();
-        vector.setY(getPlayer().getEyeLocation().getDirection().getY());
-        vector.normalize().multiply(3);
+        Vector vector = getPlayer().getEyeLocation().getDirection().multiply(3);
+        vector.add(VelocityUtils.getVelocity(getPlayer()));
         arrow.setVelocity(vector);
         arrow.setCritical(true);
 

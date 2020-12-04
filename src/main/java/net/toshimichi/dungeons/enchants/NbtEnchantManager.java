@@ -26,6 +26,7 @@ public class NbtEnchantManager implements EnchantManager {
     private final NbtMapper mapper;
     private final Set<Enchant> enchants = new HashSet<>();
     private final WeakHashMap<Player, Set<Enchanter>> enchanters = new WeakHashMap<>();
+    private final Set<Enchanter> enabled = Collections.newSetFromMap(new WeakHashMap<>());
 
     /**
      * エンチャントの一覧を指定してインスタンスを作成します.
@@ -63,11 +64,7 @@ public class NbtEnchantManager implements EnchantManager {
                 .stream()
                 .map(a -> a.getEnchanter(player, itemStack))
                 .filter(Objects::nonNull)
-                .filter(Enchanter::isAvailable)
-                .forEach(a -> {
-                    a.enable();
-                    addEnchanter(player, a);
-                });
+                .forEach(a -> addEnchanter(player, a));
     }
 
     @Override
@@ -97,7 +94,18 @@ public class NbtEnchantManager implements EnchantManager {
     @Override
     public void tick() {
         for (Set<Enchanter> set : enchanters.values()) {
-            set.forEach(Enchanter::tick);
+            for (Enchanter e : set) {
+                if (e.isAvailable()) {
+                    if (!enabled.contains(e))
+                        e.enable();
+                    enabled.add(e);
+                    e.tick();
+                } else {
+                    if (enabled.contains(e))
+                        e.disable();
+                    enabled.remove(e);
+                }
+            }
         }
     }
 

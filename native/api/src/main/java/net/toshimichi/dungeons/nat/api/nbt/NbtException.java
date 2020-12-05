@@ -1,5 +1,8 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
+/**
+ * NBTの変換に失敗したとき発生する例外です.
+ */
 public class NbtException extends RuntimeException {
     public NbtException() {
     }

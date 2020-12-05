@@ -1,5 +1,8 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
+/**
+ * {@code byte} に変換できる {@link Nbt} を表します.
+ */
 public interface NbtByte extends Nbt {
 
     @Override

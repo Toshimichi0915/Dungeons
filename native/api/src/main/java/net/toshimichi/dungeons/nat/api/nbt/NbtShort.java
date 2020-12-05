@@ -1,5 +1,8 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
+/**
+ * {@code short} に変換できる {@link Nbt} を表します.
+ */
 public interface NbtShort extends Nbt {
 
     @Override

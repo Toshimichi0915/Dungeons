@@ -1,9 +1,10 @@
 package net.toshimichi.dungeons.nat.api.nbt;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * {@link NbtCompound} に変換できる {@link Nbt} を表します.
+ */
 public interface NbtCompound extends Nbt, Map<String, Nbt> {
 
     @Override

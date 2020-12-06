@@ -32,7 +32,6 @@ dependencies {
     shadow 'com.github.MilkBowl:VaultAPI:1.7'
 
     implementation project(':native:api')
-    runtime project(':native:1.15.2')
     runtime project(':native:1.16.4')
 }
 

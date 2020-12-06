@@ -18,7 +18,6 @@ public class NativeInstaller implements Installer {
 
     @Override
     public void install(ServicesManager manager, Plugin plugin) {
-        manager.register(EditSessionFactory.class, new FastEditSessionFactory(), plugin, ServicePriority.High);
         manager.register(LocaleLanguage.class, new NativeLocaleLanguage(), plugin, ServicePriority.High);
         manager.register(NbtItemStackFactory.class, new NativeNbtItemStackFactory(), plugin, ServicePriority.High);
         manager.register(CooldownUtils.class, new NativeCooldownUtils(), plugin, ServicePriority.High);

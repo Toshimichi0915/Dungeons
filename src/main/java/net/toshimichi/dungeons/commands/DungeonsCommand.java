@@ -9,7 +9,6 @@ import net.toshimichi.dungeons.commands.admin.lang.LangCommand;
 import net.toshimichi.dungeons.commands.admin.mana.ManaCommand;
 import net.toshimichi.dungeons.commands.admin.nbt.NbtCommand;
 import net.toshimichi.dungeons.commands.admin.stash.StashCommand;
-import net.toshimichi.dungeons.commands.admin.world.WorldCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +27,6 @@ public class DungeonsCommand extends BranchCommand {
         result.put("dummy", new DummyCommand());
         result.put("model", new CustomModelDataCommand());
         result.put("nbt", new NbtCommand());
-        result.put("world", new WorldCommand());
         return result;
     }
 

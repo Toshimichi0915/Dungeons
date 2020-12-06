@@ -1,3 +1,2 @@
 native:
-  - net.toshimichi.dungeons.nat.v1_15_2.NativeInstaller
   - net.toshimichi.dungeons.nat.v1_16_4.NativeInstaller

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.wand.portal;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import org.bukkit.Bukkit;
@@ -21,7 +21,7 @@ public class PortalEnchanter extends Enchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PortalEnchanter extends Enchanter implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if (!getPlayer().equals(e.getPlayer())) return;
         if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (!DungeonsPlugin.getManaManager().consumeMana(getPlayer(), 40)) return;
+        if (!Dungeons.getInstance().getManaManager().consumeMana(getPlayer(), 40)) return;
 
         int radius;
         if (getEnchant().getLevel() == 1)

@@ -87,6 +87,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -99,7 +100,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DungeonsPlugin extends JavaPlugin {
+public class DungeonsPlugin extends JavaPlugin implements Dungeons{
 
     private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;
@@ -117,46 +118,55 @@ public class DungeonsPlugin extends JavaPlugin {
     private File confFile;
     private YamlConfiguration conf;
 
-    public static JavaPlugin getPlugin() {
+    @Override
+    public JavaPlugin getPlugin() {
         return plugin;
     }
 
-    public static EnchantManager getEnchantManager() {
+    @Override
+    public EnchantManager getEnchantManager() {
         return enchantManager;
     }
 
-    public static ManaManager getManaManager() {
+    @Override
+    public ManaManager getManaManager() {
         return manaManager;
     }
 
-    public static Economy getEconomy() {
+    @Override
+    public Economy getEconomy() {
         return economy;
     }
 
-    public static Stash getStash() {
+    @Override
+    public Stash getStash() {
         return stash;
     }
 
-    public static IpStackApi getIpStackApi() {
+    @Override
+    public IpStackApi getIpStackApi() {
         return ipStackApi;
     }
 
-    public static GuiManager getGuiManager() {
+    @Override
+    public GuiManager getGuiManager() {
         return guiManager;
     }
 
-    public static LocaleManager getLocaleManager() {
+    @Override
+    public LocaleManager getLocaleManager() {
         return localeManager;
     }
 
-    public static List<Locale> getLocales() {
+    @Override
+    public List<Locale> getLocales() {
         return new ArrayList<>(locales);
     }
 
-    public static Locale getDefaultLocale() {
+    @Override
+    public Locale getDefaultLocale() {
         return defaultLocale;
     }
-
 
     private void copyLang(String locale) throws IOException {
         File f = new File(getDataFolder(), "lang/" + locale + ".lang");
@@ -181,7 +191,7 @@ public class DungeonsPlugin extends JavaPlugin {
     private void registerService(Service service) {
         services.add(service);
         service.start();
-        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), service, 1, 1);
+        Bukkit.getScheduler().runTaskTimer(getPlugin(), service, 1, 1);
     }
 
     @Override
@@ -212,6 +222,7 @@ public class DungeonsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getServicesManager().register(Dungeons.class, this, this, ServicePriority.Normal);
         confFile = new File(getDataFolder(), "config.yaml");
         saveDefaultConfig();
         plugin = this;

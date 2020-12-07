@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.sword.flame;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
@@ -22,7 +22,7 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
     private static final WeakHashMap<LivingEntity, Integer> burnt = new WeakHashMap<>();
 
     static {
-        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Dungeons.getInstance().getPlugin(), () -> {
             for (Map.Entry<LivingEntity, Integer> entry : burnt.entrySet()) {
                 int next = entry.getValue() - 1;
                 if (next <= 0 || entry.getKey().getFireTicks() <= 0)
@@ -39,7 +39,7 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override

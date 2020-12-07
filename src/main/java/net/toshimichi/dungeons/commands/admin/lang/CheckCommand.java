@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.lang;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
@@ -14,16 +15,16 @@ import java.io.IOException;
 public class CheckCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        player.sendMessage("選択中の言語: " + DungeonsPlugin.getLocaleManager().getLocale(player).get("general.lang.name"));
-        player.sendMessage("推奨された言語: " + DungeonsPlugin.getLocaleManager().getSuggestedLocale(player).get("general.lang.name"));
+        player.sendMessage("選択中の言語: " + Dungeons.getInstance().getLocaleManager().getLocale(player).get("general.lang.name"));
+        player.sendMessage("推奨された言語: " + Dungeons.getInstance().getLocaleManager().getSuggestedLocale(player).get("general.lang.name"));
         player.sendMessage("ゲーム内言語: " + player.getLocale());
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             String ip = player.getAddress().getHostName();
-            boolean available = DungeonsPlugin.getIpStackApi().isAvailable();
+            boolean available = Dungeons.getInstance().getIpStackApi().isAvailable();
             if (!available) return;
             IpStackInfo info;
             try {
-                info = DungeonsPlugin.getIpStackApi().getInfo(ip);
+                info = Dungeons.getInstance().getIpStackApi().getInfo(ip);
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
@@ -36,7 +37,7 @@ public class CheckCommand implements PlayerCommand {
             for (IpStackLanguage lang : loc.getLanguages()) {
                 if (lang == null) continue;
                 int finalCount = count;
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                     player.sendMessage("プレイヤーの国の言語(" + finalCount + "): " + lang.getName());
                 });
                 count++;

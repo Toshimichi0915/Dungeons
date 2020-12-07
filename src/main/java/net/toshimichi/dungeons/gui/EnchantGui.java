@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.gui;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.misc.Stash;
 import net.toshimichi.dungeons.music.MusicPlayer;
 import net.toshimichi.dungeons.music.PersonalMusicPlayer;
@@ -82,17 +82,17 @@ public class EnchantGui implements Gui, Listener {
                 p.sendMessage(getString("mysticwell.full", p, null));
                 return;
             }
-            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
                 try {
-                    DungeonsPlugin.getStash().clearStash(p.getUniqueId(), "mystic_well");
+                    Dungeons.getInstance().getStash().clearStash(p.getUniqueId(), "mystic_well");
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                    Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                         InventoryUtils.reduce(p.getInventory(), mysticWell);
                         p.sendMessage(getString("mysticwell.unknown", p, null));
                     });
                 }
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                     p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
                     forceUpdate = true;
                 });
@@ -104,17 +104,17 @@ public class EnchantGui implements Gui, Listener {
             if (state != EnchantState.AVAILABLE) return;
             ItemStack enchanted = mysticWell.clone();
             EnchantUtils.enchant(enchanted);
-            DungeonsPlugin.getEnchantManager().setLocale(enchanted, DungeonsPlugin.getLocaleManager().getLocale(p));
-            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
-                DungeonsPlugin.getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(mysticWell));
+            Dungeons.getInstance().getEnchantManager().setLocale(enchanted, Dungeons.getInstance().getLocaleManager().getLocale(p));
+            Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
+                Dungeons.getInstance().getEconomy().withdraw(p.getUniqueId(), EnchantUtils.getCost(mysticWell));
                 try {
-                    DungeonsPlugin.getStash().setItemStacks(p.getUniqueId(), "mystic_well", enchanted);
+                    Dungeons.getInstance().getStash().setItemStacks(p.getUniqueId(), "mystic_well", enchanted);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                    Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                             p.sendMessage(getString("mysticwell.unknown", p, null)));
                 }
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> forceUpdate = true);
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> forceUpdate = true);
             });
             musicPlayer = new PersonalMusicPlayer(music, p);
             musicPlayer.start();
@@ -126,14 +126,14 @@ public class EnchantGui implements Gui, Listener {
     public void onOpen(Player player, Inventory inventory) {
         this.player = player;
         this.inventory = inventory;
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
 
-        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             if (counter % 200 != 0 && !forceUpdate) return;
             forceUpdate = false;
             EnchantState state = EnchantState.getEnchantState(player);
             ItemStack mysticWell;
-            Stash stash = DungeonsPlugin.getStash();
+            Stash stash = Dungeons.getInstance().getStash();
             List<ItemStack> well = null;
             try {
                 well = stash.getItemStacks(player.getUniqueId(), "mystic_well");
@@ -144,9 +144,9 @@ public class EnchantGui implements Gui, Listener {
                 mysticWell = null;
             else
                 mysticWell = well.get(0);
-            int money = DungeonsPlugin.getEconomy().getBalance(player.getUniqueId());
+            int money = Dungeons.getInstance().getEconomy().getBalance(player.getUniqueId());
 
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                 this.state = state;
                 this.mysticWell = mysticWell;
                 this.money = money;
@@ -185,7 +185,7 @@ public class EnchantGui implements Gui, Listener {
 
             ItemStack button = new ItemStack(state.getMaterial());
             int cost = EnchantUtils.getCost(mysticWell);
-            int tier = DungeonsPlugin.getEnchantManager().getTier(mysticWell);
+            int tier = Dungeons.getInstance().getEnchantManager().getTier(mysticWell);
             ChatColor chatColor;
             if (tier == 0) chatColor = ChatColor.GREEN;
             else if (tier == 1) chatColor = ChatColor.YELLOW;
@@ -243,14 +243,14 @@ public class EnchantGui implements Gui, Listener {
             player.sendMessage(getString("mysticwell.already_set", player, null));
             return;
         }
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
-                DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "mystic_well", e.getCurrentItem());
+                Dungeons.getInstance().getStash().setItemStacks(player.getUniqueId(), "mystic_well", e.getCurrentItem());
             } catch (IOException ex) {
                 ex.printStackTrace();
                 return;
             }
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                 player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 0.5F);
                 InventoryUtils.reduce(player.getInventory(), e.getCurrentItem());
                 forceUpdate = true;

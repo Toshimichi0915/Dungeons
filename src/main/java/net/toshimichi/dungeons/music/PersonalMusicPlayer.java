@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.music;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -45,7 +45,7 @@ public class PersonalMusicPlayer implements MusicPlayer {
                 }
                 pos++;
             }
-        }.runTaskTimer(DungeonsPlugin.getPlugin(), 1, 1);
+        }.runTaskTimer(Dungeons.getInstance().getPlugin(), 1, 1);
     }
 
     @Override

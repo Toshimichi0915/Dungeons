@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.sword.billionaire;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
@@ -25,15 +25,15 @@ public class BillionaireEnchanter extends SwordEnchanter implements Listener {
     }
 
     private void updateMoney() {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
-            int money = DungeonsPlugin.getEconomy().getBalance(getPlayer().getUniqueId());
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> estimatedMoney = money);
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
+            int money = Dungeons.getInstance().getEconomy().getBalance(getPlayer().getUniqueId());
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> estimatedMoney = money);
         });
     }
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
         updateMoney();
     }
 
@@ -68,8 +68,8 @@ public class BillionaireEnchanter extends SwordEnchanter implements Listener {
             return;
         estimatedMoney -= cost;
         e.setDamage(e.getDamage() * modifier);
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () ->
-                DungeonsPlugin.getEconomy().withdraw(getPlayer().getUniqueId(), cost));
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () ->
+                Dungeons.getInstance().getEconomy().withdraw(getPlayer().getUniqueId(), cost));
         getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.7F);
     }
 }

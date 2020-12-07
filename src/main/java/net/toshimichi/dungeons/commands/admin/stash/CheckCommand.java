@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.commands.admin.stash;
 
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
@@ -54,10 +54,10 @@ public class CheckCommand implements PlayerCommand {
 
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        Stash stash = DungeonsPlugin.getStash();
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Stash stash = Dungeons.getInstance().getStash();
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             List<ItemStack> list = stash.getItemStacksSilently(player.getUniqueId(), arguments.getString(0, "Stashの名前"));
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                 if (list.isEmpty()) {
                     player.sendMessage("Stashには何も入っていません");
                     return;

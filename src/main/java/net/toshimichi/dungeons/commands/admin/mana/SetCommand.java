@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.mana;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.entity.Player;
@@ -8,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SetCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        DungeonsPlugin.getManaManager().setMana(player, arguments.getInt(0, "魔力"));
+        Dungeons.getInstance().getManaManager().setMana(player, arguments.getInt(0, "魔力"));
     }
 
     @Override

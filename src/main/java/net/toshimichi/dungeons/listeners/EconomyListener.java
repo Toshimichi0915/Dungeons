@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +14,9 @@ import java.io.IOException;
 public class EconomyListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
-                DungeonsPlugin.getEconomy().save(e.getPlayer().getUniqueId());
+                Dungeons.getInstance().getEconomy().save(e.getPlayer().getUniqueId());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -26,9 +26,9 @@ public class EconomyListener implements Listener {
     @EventHandler
     public void onSave(WorldSaveEvent e) {
         for (Player p : e.getWorld().getPlayers()) {
-            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
                 try {
-                    DungeonsPlugin.getEconomy().save(p.getUniqueId());
+                    Dungeons.getInstance().getEconomy().save(p.getUniqueId());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -38,7 +38,7 @@ public class EconomyListener implements Listener {
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) throws IOException {
-        if (!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
-        DungeonsPlugin.getEconomy().saveAll();
+        if (!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
+        Dungeons.getInstance().getEconomy().saveAll();
     }
 }

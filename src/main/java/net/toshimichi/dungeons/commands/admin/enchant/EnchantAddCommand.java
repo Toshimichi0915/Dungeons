@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.enchant;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
@@ -19,7 +20,7 @@ public class EnchantAddCommand implements PlayerCommand {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType() == Material.AIR)
             throw new CommandException("エンチャントするアイテムを手に持ってください");
-        EnchantManager em = DungeonsPlugin.getEnchantManager();
+        EnchantManager em = Dungeons.getInstance().getEnchantManager();
         Set<Enchant> set = em.getEnchants(item);
         int id = arguments.getInt(0, "id");
         int level = arguments.getInt(1, "level");
@@ -28,7 +29,7 @@ public class EnchantAddCommand implements PlayerCommand {
             throw new CommandException("そのエンチャントは存在しません");
         set.add(opt.get());
         em.setEnchants(item, set.toArray(new Enchant[0]));
-        em.setLocale(item, DungeonsPlugin.getLocaleManager().getLocale(player));
+        em.setLocale(item, Dungeons.getInstance().getLocaleManager().getLocale(player));
     }
 
     @Override

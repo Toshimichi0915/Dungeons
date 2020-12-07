@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.enchant;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.SubCommand;
 import net.toshimichi.dungeons.enchants.Enchant;
@@ -34,7 +35,7 @@ public class AllCommand implements SubCommand {
 
     @Override
     public void onCommand(CommandSender sender, Arguments args, String cmd) {
-        EnchantManager manager = DungeonsPlugin.getEnchantManager();
+        EnchantManager manager = Dungeons.getInstance().getEnchantManager();
 
         ArrayList<Enchant> enchants = new ArrayList<>(manager.getAllEnchants());
 

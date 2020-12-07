@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.enchant;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
@@ -15,8 +16,8 @@ import org.bukkit.inventory.ItemStack;
 public class LangCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        EnchantManager enchantManager = DungeonsPlugin.getEnchantManager();
-        LocaleManager localeManager = DungeonsPlugin.getLocaleManager();
+        EnchantManager enchantManager = Dungeons.getInstance().getEnchantManager();
+        LocaleManager localeManager = Dungeons.getInstance().getLocaleManager();
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (itemStack.getType() == Material.AIR)

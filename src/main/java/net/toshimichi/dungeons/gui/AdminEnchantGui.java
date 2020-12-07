@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.gui;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -72,16 +72,16 @@ public class AdminEnchantGui implements Gui, Listener {
     }
 
     private void setAdminWell(ItemStack itemStack) {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
                 if (itemStack != null)
-                    DungeonsPlugin.getStash().setItemStacks(player.getUniqueId(), "admin_well", itemStack);
+                    Dungeons.getInstance().getStash().setItemStacks(player.getUniqueId(), "admin_well", itemStack);
                 else
-                    DungeonsPlugin.getStash().clearStash(player.getUniqueId(), "admin_well");
+                    Dungeons.getInstance().getStash().clearStash(player.getUniqueId(), "admin_well");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> forceUpdate = true);
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> forceUpdate = true);
         });
     }
 
@@ -151,7 +151,7 @@ public class AdminEnchantGui implements Gui, Listener {
             ItemStack itemStack = adminWell;
             if (itemStack == null) return;
             itemStack = itemStack.clone();
-            List<Locale> locales = DungeonsPlugin.getLocales();
+            List<Locale> locales = Dungeons.getInstance().getLocales();
             Locale locale = locales.get((locales.indexOf(manager.getLocale(itemStack)) + 1) % locales.size());
             manager.setLocale(itemStack, locale);
             setAdminWell(itemStack);
@@ -162,10 +162,10 @@ public class AdminEnchantGui implements Gui, Listener {
             ItemStack itemStack = adminWell;
             if (itemStack == null) return;
             itemStack = itemStack.clone();
-            Set<Enchant> applied = DungeonsPlugin.getEnchantManager().getEnchants(itemStack);
+            Set<Enchant> applied = Dungeons.getInstance().getEnchantManager().getEnchants(itemStack);
             applied.removeIf(f -> f.getId() == e.getId());
             applied.add(e);
-            DungeonsPlugin.getEnchantManager().setEnchants(itemStack, applied.toArray(new Enchant[0]));
+            Dungeons.getInstance().getEnchantManager().setEnchants(itemStack, applied.toArray(new Enchant[0]));
             setAdminWell(itemStack);
         });
         return items;
@@ -175,12 +175,12 @@ public class AdminEnchantGui implements Gui, Listener {
     public void onOpen(Player player, Inventory inventory) {
         this.player = player;
         this.inventory = inventory;
-        manager = DungeonsPlugin.getEnchantManager();
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
-        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        manager = Dungeons.getInstance().getEnchantManager();
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
+        updater = Bukkit.getScheduler().runTaskTimerAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             if (counter % 200 != 0 && !forceUpdate) return;
             forceUpdate = false;
-            Stash stash = DungeonsPlugin.getStash();
+            Stash stash = Dungeons.getInstance().getStash();
             List<ItemStack> well;
             try {
                 well = stash.getItemStacks(player.getUniqueId(), "admin_well");
@@ -188,7 +188,7 @@ public class AdminEnchantGui implements Gui, Listener {
                 e.printStackTrace();
                 return;
             }
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                 if (well.isEmpty())
                     adminWell = null;
                 else
@@ -242,7 +242,7 @@ public class AdminEnchantGui implements Gui, Listener {
             ItemStackUtils.setDisplay(inv.getItem(16), "付与するエンチャントのレベルを変更する\n選択されたレベル: " + selectedEnchant.getLevel());
 
         StringBuilder localeBuilder = new StringBuilder("アイテムの言語を変更する\n");
-        for (Locale locale : DungeonsPlugin.getLocales()) {
+        for (Locale locale : Dungeons.getInstance().getLocales()) {
             if (locale.equals(manager.getLocale(adminWell)))
                 localeBuilder.append(ChatColor.GREEN);
             localeBuilder.append(locale.get("general.lang.name"));

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.services;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -12,14 +12,14 @@ public class ManaRegenService implements Service {
     public void run() {
         if (counter++ % 20 != 0) return;
         for (Player p : Bukkit.getOnlinePlayers()) {
-            int mana = DungeonsPlugin.getManaManager().getMana(p);
-            int maxMana = DungeonsPlugin.getManaManager().getMaxMana(p);
+            int mana = Dungeons.getInstance().getManaManager().getMana(p);
+            int maxMana = Dungeons.getInstance().getManaManager().getMaxMana(p);
             if (mana >= maxMana) return;
             int regen = maxMana / 30;
             if (mana + regen >= maxMana) {
-                DungeonsPlugin.getManaManager().setMana(p, maxMana);
+                Dungeons.getInstance().getManaManager().setMana(p, maxMana);
             } else {
-                DungeonsPlugin.getManaManager().setMana(p, mana + regen);
+                Dungeons.getInstance().getManaManager().setMana(p, mana + regen);
             }
         }
     }

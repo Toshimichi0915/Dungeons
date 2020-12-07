@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.sword.katana;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
@@ -19,7 +19,7 @@ public class KatanaEnchanter extends SwordEnchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class KatanaEnchanter extends SwordEnchanter implements Listener {
             modifier = 0.8;
         else
             modifier = 0.6;
-        Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+        Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                 e.getEntity().setVelocity(e.getEntity().getVelocity().multiply(modifier)));
     }
 }

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.sword.painfocus;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.sword.SwordEnchanter;
@@ -21,7 +21,7 @@ public class PainFocusEnchanter extends SwordEnchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override

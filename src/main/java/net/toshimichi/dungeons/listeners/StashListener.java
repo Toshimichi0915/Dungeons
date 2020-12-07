@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +14,9 @@ import java.io.IOException;
 public class StashListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
-                DungeonsPlugin.getStash().save(e.getPlayer().getUniqueId());
+                Dungeons.getInstance().getStash().save(e.getPlayer().getUniqueId());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -26,9 +26,9 @@ public class StashListener implements Listener {
     @EventHandler
     public void onSave(WorldSaveEvent e) {
         for (Player p : e.getWorld().getPlayers()) {
-            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
                 try {
-                    DungeonsPlugin.getStash().save(p.getUniqueId());
+                    Dungeons.getInstance().getStash().save(p.getUniqueId());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -38,9 +38,9 @@ public class StashListener implements Listener {
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) {
-        if (!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
+        if (!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
         try {
-            DungeonsPlugin.getStash().saveAll();
+            Dungeons.getInstance().getStash().saveAll();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

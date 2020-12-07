@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.armor.protection;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
@@ -22,7 +22,7 @@ public class ProtectionEnchanter extends ArmorEnchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override

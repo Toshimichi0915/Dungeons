@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.enchants.bow.telebow;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
@@ -28,7 +28,7 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
     private static final WeakHashMap<Player, Arrow> arrows = new WeakHashMap<>();
 
     static {
-        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Dungeons.getInstance().getPlugin(), () -> {
             for (Map.Entry<Player, Integer> entry : cooldown.entrySet()) {
                 int next = entry.getValue() - 1;
                 if (next <= 0)
@@ -48,7 +48,7 @@ public class TelebowEnchanter extends BowEnchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override

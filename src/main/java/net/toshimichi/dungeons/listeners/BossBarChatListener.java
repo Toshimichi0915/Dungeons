@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.utils.BossBarChat;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,7 @@ public class BossBarChatListener implements Listener {
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) {
-        if (!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
+        if (!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
         Bukkit.getOnlinePlayers().forEach(BossBarChat::clear);
     }
 }

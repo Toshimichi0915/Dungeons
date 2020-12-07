@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.lang;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
@@ -12,7 +13,7 @@ public class SetCommand implements PlayerCommand {
 
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        LocaleManager manager = DungeonsPlugin.getLocaleManager();
+        LocaleManager manager = Dungeons.getInstance().getLocaleManager();
         String lang = arguments.getString(0, "言語名");
         Locale selected = manager.getLocale(lang);
         if (selected == null)

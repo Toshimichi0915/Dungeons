@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.utils;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.EnchantType;
@@ -23,7 +23,7 @@ public class EnchantUtils {
      * @return 費用
      */
     public static int getCost(ItemStack itemStack) {
-        int tier = DungeonsPlugin.getEnchantManager().getTier(itemStack);
+        int tier = Dungeons.getInstance().getEnchantManager().getTier(itemStack);
         if (tier < 0) return -1;
         else if (tier == 0) return 2000;
         else if (tier == 1) return 4000;
@@ -37,8 +37,8 @@ public class EnchantUtils {
      * @param itemStack エンチャントするアイテム
      */
     public static void enchant(ItemStack itemStack) {
-        EnchantManager manager = DungeonsPlugin.getEnchantManager();
-        int tier = DungeonsPlugin.getEnchantManager().getTier(itemStack);
+        EnchantManager manager = Dungeons.getInstance().getEnchantManager();
+        int tier = Dungeons.getInstance().getEnchantManager().getTier(itemStack);
         Lottery<Enchant> lottery = new Lottery<>();
         if (tier == 0) {
             manager.getAllEnchants().stream()

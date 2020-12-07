@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.wand.sanctity;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.utils.SilentCooldown;
@@ -26,7 +26,7 @@ public class SanctityEnchanter extends Enchanter implements Listener {
 
     @Override
     protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override
@@ -45,7 +45,7 @@ public class SanctityEnchanter extends Enchanter implements Listener {
         if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         int level = getEnchant().getLevel();
         if (SilentCooldown.getCooldown(getItemStack(), "enchant.sanctity.cooldown") > 1) return;
-        if (!DungeonsPlugin.getManaManager().consumeMana(getPlayer(), 20 * level)) return;
+        if (!Dungeons.getInstance().getManaManager().consumeMana(getPlayer(), 20 * level)) return;
         SilentCooldown.setCooldown(getItemStack(), "enchant.sanctity.cooldown", 10);
         double healAmount;
         if (level == 1)

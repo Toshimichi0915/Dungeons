@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.commands.admin.stash;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.Bukkit;
@@ -13,17 +13,17 @@ import java.util.Set;
 public class ListCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             Set<String> set;
             try {
-                set = DungeonsPlugin.getStash().getStashes(player.getUniqueId());
+                set = Dungeons.getInstance().getStash().getStashes(player.getUniqueId());
             } catch (IOException e) {
                 e.printStackTrace();
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                         player.sendMessage(ChatColor.RED + "Stashをロードできませんでした"));
                 return;
             }
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                     set.forEach(player::sendMessage));
         });
     }

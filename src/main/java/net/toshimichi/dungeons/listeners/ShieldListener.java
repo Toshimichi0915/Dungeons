@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.events.PlayerShieldEvent;
 import net.toshimichi.dungeons.nat.api.CooldownUtils;
 import org.bukkit.Bukkit;
@@ -27,7 +27,7 @@ public class ShieldListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onShieldHit(PlayerShieldEvent e) {
         if (!(e.getEntity() instanceof Player)) return;
-        Bukkit.getScheduler().runTaskLater(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskLater(Dungeons.getInstance().getPlugin(), () -> {
             CooldownUtils utils = Bukkit.getServicesManager().load(CooldownUtils.class);
             int cooldown = utils.getCooldown((Player) e.getEntity(), Material.SHIELD);
             if (cooldown > 0)

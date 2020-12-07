@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.lang;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.lang.ipstack.IpStackInfo;
 import net.toshimichi.dungeons.lang.ipstack.IpStackLanguage;
 import org.bukkit.entity.Player;
@@ -33,7 +33,7 @@ public class IpStackLocaleFactory implements LocaleFactory {
     @Override
     public boolean match(Player player) {
         try {
-            IpStackInfo info = DungeonsPlugin.getIpStackApi().getInfo(player.getAddress().getHostName());
+            IpStackInfo info = Dungeons.getInstance().getIpStackApi().getInfo(player.getAddress().getHostName());
             Set<IpStackLanguage> languages = info.getLocation().getLanguages();
             for (IpStackLanguage lang : languages) {
                 if (lang.getCode().equals(code))
@@ -48,7 +48,7 @@ public class IpStackLocaleFactory implements LocaleFactory {
 
     @Override
     public boolean isAvailable() {
-        return DungeonsPlugin.getIpStackApi().isAvailable();
+        return Dungeons.getInstance().getIpStackApi().isAvailable();
     }
 
     @Override

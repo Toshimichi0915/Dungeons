@@ -1,7 +1,7 @@
 package net.toshimichi.dungeons.gui;
 
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.misc.YamlStash;
 import net.toshimichi.dungeons.utils.EnchantUtils;
 import org.bukkit.Material;
@@ -81,20 +81,20 @@ public enum EnchantState {
     public static EnchantState getEnchantState(Player player) {
         List<ItemStack> mysticWell;
         try {
-            mysticWell = DungeonsPlugin.getStash().getItemStacks(player.getUniqueId(), "mystic_well");
+            mysticWell = Dungeons.getInstance().getStash().getItemStacks(player.getUniqueId(), "mystic_well");
         } catch (IOException e) {
             e.printStackTrace();
             return EnchantState.ERROR;
         }
         if (mysticWell.isEmpty())
             return EnchantState.NOT_SET;
-        int tier = DungeonsPlugin.getEnchantManager().getTier(mysticWell.get(0));
+        int tier = Dungeons.getInstance().getEnchantManager().getTier(mysticWell.get(0));
         if (tier < 0)
             return EnchantState.INVALID;
         else if (tier == 3)
             return EnchantState.MAXED_OUT;
 
-        if (EnchantUtils.getCost(mysticWell.get(0)) > DungeonsPlugin.getEconomy().getBalance(player.getUniqueId()))
+        if (EnchantUtils.getCost(mysticWell.get(0)) > Dungeons.getInstance().getEconomy().getBalance(player.getUniqueId()))
             return EnchantState.NO_GOLD;
 
         return EnchantState.AVAILABLE;

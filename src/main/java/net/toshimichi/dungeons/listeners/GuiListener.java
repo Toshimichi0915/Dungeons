@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.gui.Gui;
 import net.toshimichi.dungeons.gui.GuiItem;
 import net.toshimichi.dungeons.gui.GuiItemListener;
@@ -16,11 +16,11 @@ public class GuiListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClick(InventoryClickEvent e) {
         if (!(e.getWhoClicked() instanceof Player)) return;
-        Inventory opened = DungeonsPlugin.getGuiManager().getInventory((Player) e.getWhoClicked());
+        Inventory opened = Dungeons.getInstance().getGuiManager().getInventory((Player) e.getWhoClicked());
         if (opened == null) return;
         if (!opened.equals(e.getClickedInventory())) return;
         int slot = e.getSlot();
-        Gui info = DungeonsPlugin.getGuiManager().getGui((Player) e.getWhoClicked());
+        Gui info = Dungeons.getInstance().getGuiManager().getGui((Player) e.getWhoClicked());
         if (slot >= info.getItems().length) return;
         e.setCancelled(true);
         GuiItem item = info.getItems()[slot];
@@ -33,12 +33,12 @@ public class GuiListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClose(InventoryCloseEvent e) {
         if (!(e.getPlayer() instanceof Player)) return;
-        DungeonsPlugin.getGuiManager().close((Player) e.getPlayer());
+        Dungeons.getInstance().getGuiManager().close((Player) e.getPlayer());
     }
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) {
-        if(!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
-        DungeonsPlugin.getGuiManager().closeAll();
+        if(!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
+        Dungeons.getInstance().getGuiManager().closeAll();
     }
 }

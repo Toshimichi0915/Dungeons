@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.services;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.utils.BossBarChat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,14 +17,14 @@ public class BossBarChatService implements Service {
 
     @Override
     public void start() {
-        Bukkit.getScheduler().runTaskTimer(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Dungeons.getInstance().getPlugin(), () -> {
             if (!asyncComplete) return;
             asyncComplete = false;
             ArrayList<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-            Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
                 for (Player p : players) {
-                    int money = DungeonsPlugin.getEconomy().getBalance(p.getUniqueId());
-                    Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                    int money = Dungeons.getInstance().getEconomy().getBalance(p.getUniqueId());
+                    Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                             moneyMap.put(p, money));
                 }
                 asyncComplete = true;
@@ -45,8 +45,8 @@ public class BossBarChatService implements Service {
             }
             Player p = iterator.next();
             String gold = ChatColor.GOLD + Integer.toString(moneyMap.getOrDefault(p, 0)) + "g";
-            String mana = "" + ChatColor.AQUA + DungeonsPlugin.getManaManager().getMana(p) + "/" +
-                    DungeonsPlugin.getManaManager().getMaxMana(p);
+            String mana = "" + ChatColor.AQUA + Dungeons.getInstance().getManaManager().getMana(p) + "/" +
+                    Dungeons.getInstance().getManaManager().getMaxMana(p);
             BossBarChat.setPrimaryMessage(p, gold + " " + mana + " " + time);
         }
     }

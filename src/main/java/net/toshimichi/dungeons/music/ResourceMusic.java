@@ -2,7 +2,7 @@ package net.toshimichi.dungeons.music;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import org.apache.commons.io.IOUtils;
 import org.bukkit.Sound;
 
@@ -18,7 +18,7 @@ public class ResourceMusic implements Music {
     private final Multimap<Integer, PlainMusicSound> sounds = ArrayListMultimap.create();
 
     public ResourceMusic(String resourceName) throws IOException {
-        String text = IOUtils.toString(DungeonsPlugin.getPlugin().getResource(resourceName), StandardCharsets.UTF_8);
+        String text = IOUtils.toString(Dungeons.getInstance().getPlugin().getResource(resourceName), StandardCharsets.UTF_8);
         int length = 0;
         for (String line : text.split("[\\r\\n]+")) {
             String[] split = line.split("[\\s\\t,]+");

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.armor.wizard;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
@@ -19,14 +19,14 @@ public class WizardEnchanter extends ArmorEnchanter {
 
     @Override
     protected void onEnabled() {
-        int maxMana = DungeonsPlugin.getManaManager().getMaxMana(getPlayer());
+        int maxMana = Dungeons.getInstance().getManaManager().getMaxMana(getPlayer());
         if (getEnchant().getLevel() == 1)
             delta = 10;
         else if (getEnchant().getLevel() == 2)
             delta = 15;
         else if (getEnchant().getLevel() == 3)
             delta = 30;
-        DungeonsPlugin.getManaManager().setMaxMana(getPlayer(), maxMana + delta);
+        Dungeons.getInstance().getManaManager().setMaxMana(getPlayer(), maxMana + delta);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class WizardEnchanter extends ArmorEnchanter {
 
     @Override
     protected void onDisabled() {
-        int maxMana = DungeonsPlugin.getManaManager().getMaxMana(getPlayer());
-        DungeonsPlugin.getManaManager().setMaxMana(getPlayer(), maxMana - delta);
+        int maxMana = Dungeons.getInstance().getManaManager().getMaxMana(getPlayer());
+        Dungeons.getInstance().getManaManager().setMaxMana(getPlayer(), maxMana - delta);
     }
 
 }

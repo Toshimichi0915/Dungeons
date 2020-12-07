@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.commands.admin.enchant;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
@@ -14,8 +15,8 @@ public class MaxLivesCommand implements PlayerCommand {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType() == Material.AIR)
             throw new CommandException("最大残機を設定するアイテムを手に持ってください");
-        DungeonsPlugin.getEnchantManager().setMaxLives(item, arguments.getInt(0, "最大残機"));
-        DungeonsPlugin.getEnchantManager().setLocale(item, DungeonsPlugin.getLocaleManager().getLocale(player));
+        Dungeons.getInstance().getEnchantManager().setMaxLives(item, arguments.getInt(0, "最大残機"));
+        Dungeons.getInstance().getEnchantManager().setLocale(item, Dungeons.getInstance().getLocaleManager().getLocale(player));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.commands.admin.stash;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import org.bukkit.Bukkit;
@@ -13,12 +13,12 @@ public class ClearCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
         String space = arguments.getString(0, "Stashの名前");
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
-                DungeonsPlugin.getStash().clearStash(player.getUniqueId(), space);
+                Dungeons.getInstance().getStash().clearStash(player.getUniqueId(), space);
             } catch (IOException e) {
                 e.printStackTrace();
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                         player.sendMessage(ChatColor.RED + "Stashをロードできませんでした"));
             }
         });

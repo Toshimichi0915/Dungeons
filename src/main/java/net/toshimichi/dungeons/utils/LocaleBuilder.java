@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.utils;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.lang.LocaleManager;
 import org.bukkit.ChatColor;
@@ -100,7 +100,7 @@ public class LocaleBuilder {
     public String build() {
         if (key == null) return "";
         String result = null;
-        LocaleManager mng = DungeonsPlugin.getLocaleManager();
+        LocaleManager mng = Dungeons.getInstance().getLocaleManager();
 
         if (locale != null)
             result = locale.get(key);
@@ -108,7 +108,7 @@ public class LocaleBuilder {
             result = mng.getLocale(player).get(key);
 
         if (result == null)
-            result = DungeonsPlugin.getDefaultLocale().get(key);
+            result = Dungeons.getInstance().getDefaultLocale().get(key);
         if (result == null && player != null)
             result = mng.getSuggestedLocale(player).get(key);
         if (result == null)

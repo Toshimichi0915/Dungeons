@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.enchants.bow.bottomlessquiver;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import org.apache.commons.lang.math.RandomUtils;
@@ -29,7 +29,7 @@ public class BottomlessQuiverEnchanter extends BowEnchanter implements Listener 
     @Override
     protected void onEnabled() {
         copy = new ItemStack[getPlayer().getInventory().getContents().length];
-        Bukkit.getPluginManager().registerEvents(this, DungeonsPlugin.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BottomlessQuiverEnchanter extends BowEnchanter implements Listener 
             copy[i] = contents[i].clone();
         }
 
-        Bukkit.getScheduler().runTaskLater(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskLater(Dungeons.getInstance().getPlugin(), () -> {
             ItemStack[] current = getPlayer().getInventory().getContents();
             for (int i = 0; i < current.length; i++) {
                 if (copy[i] == null) continue;

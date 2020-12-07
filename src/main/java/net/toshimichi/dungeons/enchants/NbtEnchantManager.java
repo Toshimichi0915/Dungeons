@@ -1,7 +1,7 @@
 package net.toshimichi.dungeons.enchants;
 
 import net.md_5.bungee.api.ChatColor;
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.nat.api.NbtItemStack;
 import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
@@ -263,7 +263,7 @@ public class NbtEnchantManager implements EnchantManager {
         if (itemStack == null) return null;
         Nbt nbt = factory.newNbtItemStack(itemStack).getNbt("dungeons", "locale");
         if (!(nbt instanceof NbtString)) return null;
-        return DungeonsPlugin.getLocales().stream()
+        return Dungeons.getInstance().getLocales().stream()
                 .filter(p -> p.get("general.lang.name").equals(nbt.getAsString()))
                 .findAny()
                 .orElse(null);

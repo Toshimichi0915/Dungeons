@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.listeners;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.gui.EnchantGui;
 import net.toshimichi.dungeons.utils.InventoryUtils;
@@ -29,11 +29,11 @@ import java.util.Arrays;
 public class EnchantListener implements Listener {
 
     private void refresh(Player p) {
-        DungeonsPlugin.getEnchantManager().refresh(p);
+        Dungeons.getInstance().getEnchantManager().refresh(p);
     }
 
     private void refreshLater(Player p) {
-        Bukkit.getScheduler().runTaskLater(DungeonsPlugin.getPlugin(), () -> refresh(p), 1);
+        Bukkit.getScheduler().runTaskLater(Dungeons.getInstance().getPlugin(), () -> refresh(p), 1);
     }
 
     @EventHandler
@@ -44,14 +44,14 @@ public class EnchantListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         refresh(e.getPlayer());
-        DungeonsPlugin.getEnchantManager().disable(e.getPlayer());
+        Dungeons.getInstance().getEnchantManager().disable(e.getPlayer());
     }
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) {
-        if (!e.getPlugin().equals(DungeonsPlugin.getPlugin())) return;
+        if (!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
         for (Player p : Bukkit.getOnlinePlayers())
-            DungeonsPlugin.getEnchantManager().disable(p);
+            Dungeons.getInstance().getEnchantManager().disable(p);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -62,7 +62,7 @@ public class EnchantListener implements Listener {
         ArrayList<ItemStack> keepInv = new ArrayList<>();
         PlayerInventory inventory = e.getEntity().getInventory();
         ItemStack[] contents = e.getEntity().getInventory().getContents();
-        EnchantManager manager = DungeonsPlugin.getEnchantManager();
+        EnchantManager manager = Dungeons.getInstance().getEnchantManager();
 
         //reduce a life from mystics
         for (ItemStack itemStack : contents) {
@@ -89,7 +89,7 @@ public class EnchantListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onUse(PlayerItemDamageEvent e) {
         if (!Arrays.asList(InventoryUtils.getPrimaryItemStacks(e.getPlayer())).contains(e.getItem())) return;
-        if (DungeonsPlugin.getEnchantManager().getTier(e.getItem()) < 0) return;
+        if (Dungeons.getInstance().getEnchantManager().getTier(e.getItem()) < 0) return;
         e.setCancelled(true);
     }
 
@@ -99,7 +99,7 @@ public class EnchantListener implements Listener {
         if (!(e.getPlayer() instanceof Player)) return;
         Player p = (Player) e.getPlayer();
         e.setCancelled(true);
-        DungeonsPlugin.getGuiManager().show(p, new EnchantGui());
+        Dungeons.getInstance().getGuiManager().show(p, new EnchantGui());
         p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
     }
 }

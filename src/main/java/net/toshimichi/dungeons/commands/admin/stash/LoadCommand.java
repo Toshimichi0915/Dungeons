@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.commands.admin.stash;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.misc.Stash;
@@ -17,23 +17,23 @@ import java.util.List;
 public class LoadCommand implements PlayerCommand {
     @Override
     public void onCommand(Player player, Arguments arguments, String cmd) {
-        Stash stash = DungeonsPlugin.getStash();
+        Stash stash = Dungeons.getInstance().getStash();
         String space = arguments.getString(0, "Stashの名前");
         ItemStack[] oldContents = player.getInventory().getContents();
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             List<ItemStack> list = stash.getItemStacksSilently(player.getUniqueId(), space);
 
-            Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                 HashMap<Integer, ItemStack> fail = player.getInventory().addItem(list.toArray(new ItemStack[0]));
                 List<ItemStack> failList = new ArrayList<>(fail.values());
 
-                Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+                Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
                     try {
                         stash.setItemStacks(player.getUniqueId(), space, failList.toArray(new ItemStack[0]));
                     } catch (IOException e) {
                         e.printStackTrace();
                         //revert the inventory
-                        Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () -> {
+                        Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () -> {
                             player.getInventory().setContents(oldContents);
                             player.sendMessage(ChatColor.RED + "Stashを編集できませんでした");
                         });

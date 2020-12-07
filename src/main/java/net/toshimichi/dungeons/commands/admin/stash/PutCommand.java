@@ -1,6 +1,6 @@
 package net.toshimichi.dungeons.commands.admin.stash;
 
-import net.toshimichi.dungeons.DungeonsPlugin;
+import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;
@@ -19,14 +19,14 @@ public class PutCommand implements PlayerCommand {
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (itemStack.getType() == Material.AIR)
             throw new CommandException("stashに入れるアイテムを手に持ってください");
-        Stash stash = DungeonsPlugin.getStash();
-        Bukkit.getScheduler().runTaskAsynchronously(DungeonsPlugin.getPlugin(), () -> {
+        Stash stash = Dungeons.getInstance().getStash();
+        Bukkit.getScheduler().runTaskAsynchronously(Dungeons.getInstance().getPlugin(), () -> {
             try {
                 stash.addItemStack(player.getUniqueId(), arguments.getString(0, "Stashの名前"), itemStack);
                 player.getInventory().setItemInMainHand(null);
             } catch (IOException e) {
                 e.printStackTrace();
-                Bukkit.getScheduler().runTask(DungeonsPlugin.getPlugin(), () ->
+                Bukkit.getScheduler().runTask(Dungeons.getInstance().getPlugin(), () ->
                         player.sendMessage(ChatColor.RED + "Stashをロードできませんでした"));
             }
         });

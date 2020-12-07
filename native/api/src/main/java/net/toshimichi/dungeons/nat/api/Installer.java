@@ -16,7 +16,7 @@ public interface Installer {
      * この {@link Installer} が提供するサービスをインストールします.
      *
      * @param manager 使用する {@link ServicesManager}
-     * @param plugin プラグイン
+     * @param plugin  プラグイン
      */
     void install(ServicesManager manager, Plugin plugin);
 }

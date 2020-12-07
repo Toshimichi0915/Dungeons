@@ -100,7 +100,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DungeonsPlugin extends JavaPlugin implements Dungeons{
+public class DungeonsPlugin extends JavaPlugin implements Dungeons {
 
     private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;

@@ -14,6 +14,7 @@ public class VelocityUtils {
 
     /**
      * プレイヤーの移動速度を返します.
+     *
      * @param player プレイヤー
      * @return プレイヤーの移動速度
      */
@@ -23,7 +24,8 @@ public class VelocityUtils {
 
     /**
      * プレイヤーの移動速度を設定します.
-     * @param player プレイヤー
+     *
+     * @param player   プレイヤー
      * @param velocity プレイヤーの移動速度
      */
     public static void setVelocity(Player player, Vector velocity) {

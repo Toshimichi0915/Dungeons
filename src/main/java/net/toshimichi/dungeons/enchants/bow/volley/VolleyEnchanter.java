@@ -2,7 +2,6 @@ package net.toshimichi.dungeons.enchants.bow.volley;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.apache.commons.lang3.RandomUtils;

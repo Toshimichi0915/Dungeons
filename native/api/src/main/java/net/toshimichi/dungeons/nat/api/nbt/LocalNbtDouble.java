@@ -10,7 +10,7 @@ public class LocalNbtDouble implements NbtDouble {
 
     @Override
     public float getAsFloat() {
-        return (float)d;
+        return (float) d;
     }
 
     @Override

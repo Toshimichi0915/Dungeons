@@ -10,17 +10,17 @@ public class LocalNbtLong implements NbtLong {
 
     @Override
     public byte getAsByte() {
-        return (byte)l;
+        return (byte) l;
     }
 
     @Override
     public short getAsShort() {
-        return (short)l;
+        return (short) l;
     }
 
     @Override
     public int getAsInt() {
-        return (int)l;
+        return (int) l;
     }
 
     @Override

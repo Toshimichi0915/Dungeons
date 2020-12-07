@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,7 +47,7 @@ public interface Enchant {
      * エンチャントの表示上の説明を返します.
      *
      * @param itemStack エンチャントされているアイテム
-     * @param locale 使用する言語
+     * @param locale    使用する言語
      * @return エンチャントの表示上の説明
      */
     String getDescription(ItemStack itemStack, Locale locale);

@@ -2,11 +2,9 @@ package net.toshimichi.dungeons.enchants.bow.fletching;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.bow.BowEnchanter;
 import net.toshimichi.dungeons.events.PlayerDamageEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

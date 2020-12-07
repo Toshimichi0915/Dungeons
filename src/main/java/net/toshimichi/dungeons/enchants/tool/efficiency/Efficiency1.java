@@ -1,6 +1,9 @@
 package net.toshimichi.dungeons.enchants.tool.efficiency;
 
-import net.toshimichi.dungeons.enchants.*;
+import net.toshimichi.dungeons.enchants.EnchantType;
+import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.NullEnchanter;
+import net.toshimichi.dungeons.enchants.Title;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

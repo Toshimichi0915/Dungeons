@@ -2,12 +2,9 @@ package net.toshimichi.dungeons.enchants.armor.wizard;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 public class WizardEnchanter extends ArmorEnchanter {
 

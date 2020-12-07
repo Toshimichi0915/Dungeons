@@ -34,7 +34,7 @@ abstract public class Efficiency implements Enchant {
 
         return new LocaleBuilder("enchant.efficiency." + level)
                 .locale(locale)
-                .replace("{modifier}", Integer.toString((int)modifier))
+                .replace("{modifier}", Integer.toString((int) modifier))
                 .build();
     }
 }

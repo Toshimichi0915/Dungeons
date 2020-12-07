@@ -2,7 +2,6 @@ package net.toshimichi.dungeons.enchants.armor.autosmelt;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -13,7 +12,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class AutoSmeltEnchanter extends ArmorEnchanter implements Listener {

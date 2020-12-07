@@ -1,7 +1,6 @@
 package net.toshimichi.dungeons.commands.admin.lang;
 
 import net.toshimichi.dungeons.Dungeons;
-import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.CommandException;
 import net.toshimichi.dungeons.commands.PlayerCommand;

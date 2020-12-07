@@ -38,7 +38,7 @@ public class GuiListener implements Listener {
 
     @EventHandler
     public void onDisable(PluginDisableEvent e) {
-        if(!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
+        if (!e.getPlugin().equals(Dungeons.getInstance().getPlugin())) return;
         Dungeons.getInstance().getGuiManager().closeAll();
     }
 }

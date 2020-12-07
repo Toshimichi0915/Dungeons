@@ -72,7 +72,7 @@ public class EnchantUtils {
             if (RandomUtils.nextInt() % 2 == 0) {
                 Enchant target;
                 Enchant after;
-                while(true) {
+                while (true) {
                     target = enchants.get(RandomUtils.nextInt() % enchants.size());
                     Enchant targetCopy = target;
                     List<Enchant> upgrades = manager.getAllEnchants().stream()
@@ -81,7 +81,7 @@ public class EnchantUtils {
                             .collect(Collectors.toList());
                     if (upgrades.isEmpty())
                         continue;
-                    upgrades.forEach(a->lottery.add(a.getRarity(), a));
+                    upgrades.forEach(a -> lottery.add(a.getRarity(), a));
                     after = lottery.draw();
                     break;
                 }

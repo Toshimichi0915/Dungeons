@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class NativeNbtItemStackFactory implements NbtItemStackFactory {
 
     private static final NativeNbtConverter converter = new NativeNbtConverter();
+
     @Override
     public NbtItemStack newNbtItemStack(ItemStack itemStack) {
         return new NativeNbtItemStack(converter, CraftItemStack.asNMSCopy(itemStack));

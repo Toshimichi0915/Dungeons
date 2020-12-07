@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.nat.v1_16_4.nbt;
 
-import net.minecraft.server.v1_16_R3.NBTTagEnd;
 import net.minecraft.server.v1_16_R3.NBTTagString;
 import net.toshimichi.dungeons.nat.api.nbt.NbtString;
 

@@ -8,7 +8,7 @@ import java.util.Map;
 public class NativeNbtConverter implements NbtConverter {
     @Override
     public NBTBase toNative(Nbt nbt) {
-        if(nbt == null)
+        if (nbt == null)
             return null;
 
         if (nbt instanceof NbtCompound) {

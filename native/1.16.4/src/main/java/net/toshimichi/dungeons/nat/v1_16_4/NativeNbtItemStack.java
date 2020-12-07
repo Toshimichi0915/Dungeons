@@ -33,11 +33,11 @@ public class NativeNbtItemStack implements NbtItemStack {
 
     @Override
     public NbtCompound getNbtCompound() {
-        return (NbtCompound)converter.fromNative(itemStack.getTag());
+        return (NbtCompound) converter.fromNative(itemStack.getTag());
     }
 
     @Override
     public NbtCompound newNbtCompound() {
-        return (NbtCompound)converter.fromNative(itemStack.getOrCreateTag());
+        return (NbtCompound) converter.fromNative(itemStack.getOrCreateTag());
     }
 }

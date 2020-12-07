@@ -1,6 +1,9 @@
 package net.toshimichi.dungeons.nat.v1_16_4;
 
-import net.toshimichi.dungeons.nat.api.*;
+import net.toshimichi.dungeons.nat.api.CooldownUtils;
+import net.toshimichi.dungeons.nat.api.Installer;
+import net.toshimichi.dungeons.nat.api.LocaleLanguage;
+import net.toshimichi.dungeons.nat.api.NbtItemStackFactory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;

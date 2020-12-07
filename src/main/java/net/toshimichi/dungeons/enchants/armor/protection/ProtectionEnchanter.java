@@ -2,9 +2,7 @@ package net.toshimichi.dungeons.enchants.armor.protection;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
 import net.toshimichi.dungeons.enchants.armor.ArmorEnchanter;
-import net.toshimichi.dungeons.utils.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,8 +10,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 public class ProtectionEnchanter extends ArmorEnchanter implements Listener {
     public ProtectionEnchanter(Enchant enchant, Player player, ItemStack itemStack) {

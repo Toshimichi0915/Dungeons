@@ -10,7 +10,7 @@ public class LocalNbtShort implements NbtShort {
 
     @Override
     public byte getAsByte() {
-        return (byte)s;
+        return (byte) s;
     }
 
     @Override

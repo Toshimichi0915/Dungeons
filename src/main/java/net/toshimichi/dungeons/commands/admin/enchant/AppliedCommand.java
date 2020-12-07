@@ -2,7 +2,6 @@ package net.toshimichi.dungeons.commands.admin.enchant;
 
 import net.md_5.bungee.api.ChatColor;
 import net.toshimichi.dungeons.Dungeons;
-import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.commands.Arguments;
 import net.toshimichi.dungeons.commands.PlayerCommand;
 import net.toshimichi.dungeons.enchants.Enchanter;

@@ -47,6 +47,7 @@ import net.toshimichi.dungeons.enchants.sword.aspectoffire.AspectOfFire3;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire1;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire2;
 import net.toshimichi.dungeons.enchants.sword.billionaire.Billionaire3;
+import net.toshimichi.dungeons.enchants.sword.fixed.Fixed1;
 import net.toshimichi.dungeons.enchants.sword.flame.Flame1;
 import net.toshimichi.dungeons.enchants.sword.flame.Flame2;
 import net.toshimichi.dungeons.enchants.sword.flame.Flame3;
@@ -278,7 +279,8 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
                 new Portal1(), new Portal2(), new Portal3(),
                 new Guts1(), new Guts2(), new Guts3(),
                 new BottomlessQuiver1(), new BottomlessQuiver2(), new BottomlessQuiver3(),
-                new Fortune1(), new Fortune2(), new Fortune3());
+                new Fortune1(), new Fortune2(), new Fortune3(),
+                new Fixed1());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

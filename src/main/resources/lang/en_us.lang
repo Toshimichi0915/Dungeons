@@ -1,4 +1,4 @@
-version=14
+version=15
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -80,6 +80,7 @@ enchant.bottomlessquiver.3=&e30% &7chance not to consume an arrow
 enchant.fortune.1=Increases ore drop slightly
 enchant.fortune.2=Increases ore drop
 enchant.fortune.3=Increases ore drop greatly
+enchant.fixed.1=Deals 1 damage
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

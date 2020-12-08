@@ -1,4 +1,4 @@
-version=13
+version=14
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -77,6 +77,9 @@ enchant.guts.3=Increases&c 1.5❤
 enchant.bottomlessquiver.1=&e10% &7chance not to consume an arrow
 enchant.bottomlessquiver.2=&e20% &7chance not to consume an arrow
 enchant.bottomlessquiver.3=&e30% &7chance not to consume an arrow
+enchant.fortune.1=Increases ore drop slightly
+enchant.fortune.2=Increases ore drop
+enchant.fortune.3=Increases ore drop greatly
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

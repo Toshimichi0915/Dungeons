@@ -73,3 +73,6 @@
 | 24 | Bottomless Quiver | 1 | 400 | 10% chance not to consume an arrow |
 | 24 | Bottomless Quiver | 2 | 300 | 20% chance not to consume an arrow |
 | 24 | Bottomless Quiver | 3 | 300 | 30% chance not to consume an arrow |
+| 25 | Fortune | 1 | 350 | Increases ore drop slightly |
+| 25 | Fortune | 2 | 300 | Increases ore drop |
+| 25 | Fortune | 3 | 200 | Increases ore drop greatly |

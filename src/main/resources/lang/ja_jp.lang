@@ -1,4 +1,4 @@
-version=13
+version=14
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -77,6 +77,9 @@ enchant.guts.3=体力を&c 1.5❤ &7増加
 enchant.bottomlessquiver.1=&e10% &7の確率で矢を消費しない
 enchant.bottomlessquiver.1=&e20% &7の確率で矢を消費しない
 enchant.bottomlessquiver.1=&e30% &7の確率で矢を消費しない
+enchant.fortune.1=鉱石のドロップがわずかに増加
+enchant.fortune.2=鉱石のドロップが増加
+enchant.fortune.3=鉱石のドロップが大幅に増加
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

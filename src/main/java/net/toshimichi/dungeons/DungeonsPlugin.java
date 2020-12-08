@@ -63,6 +63,9 @@ import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness1;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness2;
 import net.toshimichi.dungeons.enchants.sword.sharpness.Sharpness3;
 import net.toshimichi.dungeons.enchants.tool.efficiency.*;
+import net.toshimichi.dungeons.enchants.tool.fortune.Fortune1;
+import net.toshimichi.dungeons.enchants.tool.fortune.Fortune2;
+import net.toshimichi.dungeons.enchants.tool.fortune.Fortune3;
 import net.toshimichi.dungeons.enchants.tool.silktouch.SilkTouch1;
 import net.toshimichi.dungeons.enchants.wand.portal.Portal1;
 import net.toshimichi.dungeons.enchants.wand.portal.Portal2;
@@ -274,7 +277,8 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
                 new RingArmor1(), new RingArmor2(), new RingArmor3(),
                 new Portal1(), new Portal2(), new Portal3(),
                 new Guts1(), new Guts2(), new Guts3(),
-                new BottomlessQuiver1(), new BottomlessQuiver2(), new BottomlessQuiver3());
+                new BottomlessQuiver1(), new BottomlessQuiver2(), new BottomlessQuiver3(),
+                new Fortune1(), new Fortune2(), new Fortune3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

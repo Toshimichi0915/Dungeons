@@ -69,25 +69,24 @@ public class EnchantUtils {
             else
                 modifier = RandomUtils.nextInt() % 20;
 
-            if (RandomUtils.nextInt() % 2 == 0) {
+            boolean newEnchant = RandomUtils.nextInt() % 2 == 0;
+            if (!newEnchant) {
                 Enchant target;
                 Enchant after;
-                while (true) {
-                    target = enchants.get(RandomUtils.nextInt() % enchants.size());
-                    Enchant targetCopy = target;
-                    List<Enchant> upgrades = manager.getAllEnchants().stream()
-                            .filter(p -> p.getId() == targetCopy.getId())
-                            .filter(p -> p.getLevel() > targetCopy.getLevel())
-                            .collect(Collectors.toList());
-                    if (upgrades.isEmpty())
-                        continue;
+                List<Enchant> upgrades = manager.getAllEnchants().stream()
+                        .filter(p -> enchants.stream().anyMatch(p1 -> p.getId() == p1.getId() && p.getLevel() > p1.getLevel()))
+                        .collect(Collectors.toList());
+                if (upgrades.isEmpty()) {
+                    newEnchant = true;
+                } else {
                     upgrades.forEach(a -> lottery.add(a.getRarity(), a));
                     after = lottery.draw();
-                    break;
+                    target = enchants.stream().filter(p -> p.getId() == after.getId()).findAny().orElse(null);
+                    enchants.remove(target);
+                    enchants.add(after);
                 }
-                enchants.remove(target);
-                enchants.add(after);
-            } else {
+            }
+            if (newEnchant) {
                 for (Enchant e : manager.getAllEnchants()) {
                     if (!EnchantType.matchEnchantType(itemStack, e.getEnchantType())) continue;
                     if (tier >= 2) {

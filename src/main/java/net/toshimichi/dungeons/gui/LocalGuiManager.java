@@ -59,7 +59,7 @@ public class LocalGuiManager implements GuiManager {
 
     @Override
     public void closeAll() {
-        guis.keySet().forEach(this::close);
+        new HashSet<>(guis.keySet()).forEach(this::close);
     }
 
 }

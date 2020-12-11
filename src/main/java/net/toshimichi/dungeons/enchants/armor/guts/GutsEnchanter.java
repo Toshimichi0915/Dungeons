@@ -8,8 +8,6 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class GutsEnchanter extends ArmorEnchanter {
 
     private AttributeInstance instance;
@@ -33,7 +31,8 @@ public class GutsEnchanter extends ArmorEnchanter {
 
     @Override
     protected void onDisabled() {
-        instance.removeModifier(modifier);
+        if (instance != null && modifier != null)
+            instance.removeModifier(modifier);
     }
 
 }

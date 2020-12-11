@@ -24,7 +24,8 @@ abstract public class Enchanter {
      * エンチャントを有効にします.
      */
     public void enable() {
-        onEnabled();
+        if (!enabled)
+            onEnabled();
         enabled = true;
     }
 
@@ -42,8 +43,9 @@ abstract public class Enchanter {
      * エンチャントを無効にします.
      */
     public void disable() {
+        if (enabled)
+            onDisabled();
         enabled = false;
-        onDisabled();
     }
 
     /**

@@ -8,8 +8,11 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public class GutsEnchanter extends ArmorEnchanter {
 
+    private AttributeInstance instance;
     private AttributeModifier modifier;
 
     public GutsEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
@@ -18,9 +21,9 @@ public class GutsEnchanter extends ArmorEnchanter {
 
     @Override
     protected void onEnabled() {
-        modifier = new AttributeModifier(getPlayer().getUniqueId(), "guts", getEnchant().getLevel(), AttributeModifier.Operation.ADD_NUMBER);
-        AttributeInstance attr = getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        attr.addModifier(modifier);
+        instance = getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        modifier = new AttributeModifier("guts", getEnchant().getLevel(), AttributeModifier.Operation.ADD_NUMBER);
+        instance.addModifier(modifier);
     }
 
     @Override
@@ -30,8 +33,7 @@ public class GutsEnchanter extends ArmorEnchanter {
 
     @Override
     protected void onDisabled() {
-        if (modifier != null)
-            getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).removeModifier(modifier);
+        instance.removeModifier(modifier);
     }
 
 }

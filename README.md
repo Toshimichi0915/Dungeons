@@ -77,3 +77,6 @@
 | 25 | Fortune | 2 | 300 | Increases ore drop |
 | 25 | Fortune | 3 | 200 | Increases ore drop greatly |
 | 26 | Fixed | 1 | 3 | Deals 1 damage|
+| 27 | Wasp | 1 | 250 | Applies weakness II on hit |
+| 27 | Wasp | 2 | 220 | Applies weakness III on hit |
+| 27 | Wasp | 3 | 150 | Applies weakness IV on hit |

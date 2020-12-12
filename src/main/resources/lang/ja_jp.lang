@@ -1,4 +1,4 @@
-version=15
+version=16
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -81,6 +81,9 @@ enchant.fortune.1=鉱石のドロップがわずかに増加
 enchant.fortune.2=鉱石のドロップが増加
 enchant.fortune.3=鉱石のドロップが大幅に増加
 enchant.fixed.1=固定ダメージ1
+enchant.wasp.1=&c弱体化 II &7を付与
+enchant.wasp.2=&c弱体化 III &7を付与
+enchant.wasp.3=&c弱体化 IV &7を付与
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

@@ -38,8 +38,8 @@ public class WaspEnchanter extends BowEnchanter implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
-        if(!getPlayer().equals(e.getTrueDamager())) return;
-        if(!(e.getEntity() instanceof LivingEntity)) return;
+        if (!getPlayer().equals(e.getTrueDamager())) return;
+        if (!(e.getEntity() instanceof LivingEntity)) return;
         LivingEntity le = (LivingEntity) e.getEntity();
         le.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, getEnchant().getLevel()));
     }

@@ -3,7 +3,6 @@ package net.toshimichi.dungeons.enchants.tool.fortune;
 import net.toshimichi.dungeons.enchants.*;
 import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.utils.LocaleBuilder;
-import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -81,3 +81,9 @@
 | 27 | Wasp | 1 | 250 | Applies weakness II on hit |
 | 27 | Wasp | 2 | 220 | Applies weakness III on hit |
 | 27 | Wasp | 3 | 150 | Applies weakness IV on hit |
+| 28 | Feather Falling | 1 | 450 | Reduces fall damage by 30% |
+| 28 | Feather Falling | 2 | 450 | Reduces fall damage by 60% |
+| 28 | Feather Falling | 3 | 250 | Reduces fall damage by 90% |
+| 29 | Respiration | 1 | 400 | Increases underwater breathing time by 15s |
+| 29 | Respiration | 2 | 200 | Increases underwater breathing time by 30s |
+| 29 | Respiration | 3 | 200 | Increases underwater breathing time by 45s |

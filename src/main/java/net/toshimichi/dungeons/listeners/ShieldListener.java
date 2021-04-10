@@ -30,8 +30,9 @@ public class ShieldListener implements Listener {
         Bukkit.getScheduler().runTaskLater(Dungeons.getInstance().getPlugin(), () -> {
             CooldownUtils utils = Bukkit.getServicesManager().load(CooldownUtils.class);
             int cooldown = utils.getCooldown((Player) e.getEntity(), Material.SHIELD);
-            if (cooldown > 0)
-                e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.BLOCK_ANVIL_HIT, 0.5F, 0.7F);
+            if (cooldown > 0) {
+                ((Player) e.getDamager()).playSound(e.getEntity().getLocation(), Sound.ITEM_SHIELD_BREAK, 0.5F, 1);
+            }
         }, 1);
     }
 

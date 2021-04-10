@@ -55,7 +55,7 @@ public class FlameEnchanter extends SwordEnchanter implements Listener {
     public void onDamage(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
         if (!(e.getEntity() instanceof LivingEntity)) return;
-        if (!e.getTrueDamager().equals(getPlayer())) return;
+        if (!getPlayer().equals(e.getTrueDamager())) return;
         int ticks;
         if (getEnchant().getLevel() == 1)
             ticks = 60;

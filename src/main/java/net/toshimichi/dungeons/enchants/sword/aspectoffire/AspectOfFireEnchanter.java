@@ -34,7 +34,7 @@ public class AspectOfFireEnchanter extends SwordEnchanter implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onEntityDamage(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
-        if (!e.getTrueDamager().equals(getPlayer())) return;
+        if (!getPlayer().equals(e.getTrueDamager())) return;
         int ticks;
         if (getEnchant().getLevel() == 1)
             ticks = 200;

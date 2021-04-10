@@ -35,7 +35,7 @@ public class PainFocusEnchanter extends SwordEnchanter implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
-        if (!e.getTrueDamager().equals(getPlayer())) return;
+        if (!getPlayer().equals(e.getTrueDamager())) return;
         double coefficient;
         double pain = getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - getPlayer().getHealth();
         if (getEnchant().getLevel() == 1)

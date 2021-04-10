@@ -1,4 +1,4 @@
-version=16
+version=17
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -84,6 +84,12 @@ enchant.fixed.1=固定ダメージ1
 enchant.wasp.1=&c弱体化 II &7を付与
 enchant.wasp.2=&c弱体化 III &7を付与
 enchant.wasp.3=&c弱体化 IV &7を付与
+enchant.featherfalling.1=落下ダメージを&c 30% 減少
+enchant.featherfalling.2=落下ダメージを&c 60% 減少
+enchant.featherfalling.3=落下ダメージを&c 90% 減少
+enchant.respiration.1=水中の呼吸時間を&e 15秒 &7増加
+enchant.respiration.2=水中の呼吸時間を&e 30秒 &7増加
+enchant.respiration.3=水中の呼吸時間を&e 45秒 &7増加
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!

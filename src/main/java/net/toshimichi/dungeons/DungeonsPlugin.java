@@ -4,6 +4,9 @@ import net.toshimichi.dungeons.commands.DungeonsCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.NbtEnchantManager;
 import net.toshimichi.dungeons.enchants.armor.autosmelt.AutoSmelt1;
+import net.toshimichi.dungeons.enchants.armor.featherfalling.FeatherFalling1;
+import net.toshimichi.dungeons.enchants.armor.featherfalling.FeatherFalling2;
+import net.toshimichi.dungeons.enchants.armor.featherfalling.FeatherFalling3;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast1;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast2;
 import net.toshimichi.dungeons.enchants.armor.gottagofast.GottaGoFast3;
@@ -13,6 +16,9 @@ import net.toshimichi.dungeons.enchants.armor.guts.Guts3;
 import net.toshimichi.dungeons.enchants.armor.protection.Protection1;
 import net.toshimichi.dungeons.enchants.armor.protection.Protection2;
 import net.toshimichi.dungeons.enchants.armor.protection.Protection3;
+import net.toshimichi.dungeons.enchants.armor.respiration.Respiration1;
+import net.toshimichi.dungeons.enchants.armor.respiration.Respiration2;
+import net.toshimichi.dungeons.enchants.armor.respiration.Respiration3;
 import net.toshimichi.dungeons.enchants.armor.ringarmor.RingArmor1;
 import net.toshimichi.dungeons.enchants.armor.ringarmor.RingArmor2;
 import net.toshimichi.dungeons.enchants.armor.ringarmor.RingArmor3;
@@ -284,7 +290,9 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
                 new BottomlessQuiver1(), new BottomlessQuiver2(), new BottomlessQuiver3(),
                 new Fortune1(), new Fortune2(), new Fortune3(),
                 new Fixed1(),
-                new Wasp1(), new Wasp2(), new Wasp3());
+                new Wasp1(), new Wasp2(), new Wasp3(),
+                new FeatherFalling1(), new FeatherFalling2(), new FeatherFalling3(),
+                new Respiration1(), new Respiration2(), new Respiration3());
 
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));

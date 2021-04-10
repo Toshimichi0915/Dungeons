@@ -1,6 +1,7 @@
 # Dungeons
 
 ## Enchant list
+
 | ID | Name | Level | Frequency | Description |
 | --- | --- | --- | --- | --- |
 | 1 | Sharpness | 1 | 1000 | Increases damage by 8% |

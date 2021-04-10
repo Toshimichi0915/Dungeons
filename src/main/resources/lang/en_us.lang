@@ -1,4 +1,4 @@
-version=16
+version=17
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -84,6 +84,12 @@ enchant.fixed.1=Deals 1 damage
 enchant.wasp.1=Applies &cweakness II &7on hit
 enchant.wasp.2=Applies &cweakness III &7on hit
 enchant.wasp.3=Applies &cweakness IV &7on hit
+enchant.featherfalling.1=Reduces fall damage by&c 30%
+enchant.featherfalling.2=Reduces fall damage by&c 60%
+enchant.featherfalling.3=Reduces fall damage by&c 90%
+enchant.respiration.1=Increases underwater breathing time by&e 15s
+enchant.respiration.2=Increases underwater breathing time by&e 30s
+enchant.respiration.3=Increases underwater breathing time by&e 45s
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!

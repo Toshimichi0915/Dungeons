@@ -38,7 +38,7 @@ public class LifestealEnchanter extends SwordEnchanter implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onAttack(EntityDamageByEntityEvent e1) {
         PlayerDamageEvent e = new PlayerDamageEvent(e1);
-        if(!getPlayer().equals(e.getTrueDamager())) return;
+        if (!getPlayer().equals(e.getTrueDamager())) return;
         double after = getPlayer().getHealth();
         if (getEnchant().getLevel() == 1)
             after += e.getFinalDamage() * 0.05;

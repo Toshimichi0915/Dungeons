@@ -111,15 +111,15 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
 
     private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;
-    private static EnchantManager enchantManager;
-    private static ManaManager manaManager;
-    private static Economy economy;
-    private static Stash stash;
-    private static IpStackApi ipStackApi;
-    private static LocaleManager localeManager;
-    private static GuiManager guiManager;
-    private static ArrayList<Locale> locales;
-    private static Locale defaultLocale;
+    private EnchantManager enchantManager;
+    private ManaManager manaManager;
+    private Economy economy;
+    private Stash stash;
+    private IpStackApi ipStackApi;
+    private LocaleManager localeManager;
+    private GuiManager guiManager;
+    private ArrayList<Locale> locales;
+    private Locale defaultLocale;
 
     private final ArrayList<Service> services = new ArrayList<>();
     private File confFile;
@@ -195,7 +195,7 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
         return new PropertiesLocale(f);
     }
 
-    private void registerService(Service service) {
+    private void registerService(Service service) throws Exception {
         services.add(service);
         service.start();
         Bukkit.getScheduler().runTaskTimer(getPlugin(), service, 1, 1);
@@ -329,6 +329,7 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
 
         //Register event listeners and runners
         Bukkit.getPluginManager().registerEvents(new EnchantListener(), this);
+        Bukkit.getPluginManager().registerEvents(new AnvilListener(), this);
         Bukkit.getPluginManager().registerEvents(new HpBarListener(), this);
         Bukkit.getPluginManager().registerEvents(new StashListener(), this);
         Bukkit.getPluginManager().registerEvents(new EconomyListener(), this);
@@ -340,12 +341,16 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
 
         Bukkit.getOnlinePlayers().forEach(enchantManager::refresh);
 
-        registerService(new ManaBarService());
-        registerService(new EnchantService());
-        registerService(new ManaRegenService());
-        registerService(new BossBarChatService());
-        registerService(new GuiService());
-        registerService(new VelocityService());
+        try {
+            registerService(new ManaBarService());
+            registerService(new EnchantService());
+            registerService(new ManaRegenService());
+            registerService(new BossBarChatService());
+            registerService(new GuiService());
+            registerService(new VelocityService());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

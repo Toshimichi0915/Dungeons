@@ -88,7 +88,7 @@ enchant.wasp.3=&c弱体化 IV &7を付与
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!
 mysticwell.set={color}錬金台にアイテムが入っています!\n{color}クリックしてアイテムを回収します
-mysticwell.already_set=&c錬金台にすでにアイテムが嵌っています!
+mysticwell.already_set=&c錬金台にすでにアイテムが入っています!
 mysticwell.full=&cインベントリに空きがありません!
 mysticwell.unknown=&c不明なエラーが発生しました!
 mysticwell.enchanting=エンチャント中!
@@ -99,3 +99,18 @@ mysticwell.button.invalid=&cMystic Well\n&7このアイテムはエンチャン�
 mysticwell.button.not_set=&cMystic Well\n&7エンチャントするアイテムを錬金台に入れてください
 mysticwell.button.unknown=&cMystic Well\n&7不明なエラーが発生しました
 
+
+anvil.title=Anvil
+anvil.set={color}鉄床にアイテムが入っています!!\n{color}クリックしてアイテムを回収します
+anvil.left_not_set={color}鉄床の左スロットに入れるアイテムをクリックしてください!
+anvil.right_not_set={color}鉄床の右スロットに入れるアイテムをクリックしてください!
+anvil.already_set=&c鉄床にすでにアイテムが入っています!
+anvil.button.available=&cAnvil\n&eクリックで合成します!!\n\n&e&m>{space}<\n{result}\n&e&m>{space}<
+anvil.button.left_not_set=&cAnvil\n&7鉄床の左スロットにアイテムを入れてください!
+anvil.button.right_not_set=&cAnvil\n&7鉄床の右スロットにアイテムを入れてください!
+anvil.button.token_invalid=&cAnvil\n&7アイテムにエンチャントが付きすぎています!
+anvil.button.rare_invalid=&cAnvil\n&7レアエンチャントがついているアイテムは合成できません!
+anvil.button.already_set=&cAnvil\n&7合成スロットにアイテムが入っています!
+anvil.button.no_xp=&cAnvil\n&b {xp}&7 レベル足りません
+anvil.button.unknown=&cAnvil\n&7不明なエラーが発生しました
+anvil.button.invalid=&cAnvil\n&7これらのアイテムは合成できません!

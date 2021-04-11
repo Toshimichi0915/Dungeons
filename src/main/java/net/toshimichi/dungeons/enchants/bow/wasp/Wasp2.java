@@ -22,7 +22,7 @@ public class Wasp2 implements Enchant {
 
     @Override
     public int getLevel() {
-        return 1;
+        return 2;
     }
 
     @Override

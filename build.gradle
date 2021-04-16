@@ -70,7 +70,10 @@ subprojects {
     }
 }
 
-compileJava.options.encoding = 'UTF-8'
-compileTestJava.options.encoding = 'UTF-8'
-javadoc.options.encoding = 'UTF-8'
+allprojects {
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    javadoc.options.encoding = 'UTF-8'
+}
 
+tasks.build.dependsOn(tasks.shadowJar)

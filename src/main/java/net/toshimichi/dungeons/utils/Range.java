@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * 1つの {@link Pos} により示される空間上の範囲を示します.
  */
-public class Range implements Cloneable, Serializable, ConfigurationSerializable {
+final public class Range implements Cloneable, Serializable, ConfigurationSerializable {
     private final Pos pos1;
     private final Pos pos2;
 

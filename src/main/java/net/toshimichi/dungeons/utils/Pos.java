@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 整数で表される座標です.
  */
-public class Pos implements Cloneable, Serializable, ConfigurationSerializable {
+final public class Pos implements Cloneable, Serializable, ConfigurationSerializable {
     private final int x;
     private final int y;
     private final int z;

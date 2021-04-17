@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @param <T> 抽選の対象
  */
-public class Lottery<T> implements ConfigurationSerializable {
+final public class Lottery<T> implements ConfigurationSerializable {
     private static final Random rand = new SecureRandom();
     private int size;
     private final LinkedHashMap<Integer, T> map = new LinkedHashMap<>();

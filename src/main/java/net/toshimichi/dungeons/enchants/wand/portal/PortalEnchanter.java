@@ -53,5 +53,6 @@ public class PortalEnchanter extends Enchanter implements Listener {
             if (getPlayer().getLocation().distanceSquared(entity.getLocation()) > radius * radius) return;
             entity.remove();
         }
+        e.setCancelled(true);
     }
 }

@@ -20,6 +20,7 @@ abstract public class NormalDungeon implements Dungeon {
 
     private final File activeRoomSaveDir;
     private final String id;
+    private final ArrayList<NormalRoomFactory> roomFactories = new ArrayList<>();
     private World world;
     private ArrayList<NormalRoom> rooms = new ArrayList<>();
     private ArrayList<NormalPassage> passages = new ArrayList<>();
@@ -73,6 +74,15 @@ abstract public class NormalDungeon implements Dungeon {
     }
 
     @Override
+    public ArrayList<NormalRoomFactory> getRoomFactories() {
+        return new ArrayList<>(roomFactories);
+    }
+
+    protected void addRoomFactory(NormalRoomFactory roomFactory) {
+        roomFactories.add(roomFactory);
+    }
+
+    @Override
     public void update(int ticks) {
     }
 
@@ -100,23 +110,31 @@ abstract public class NormalDungeon implements Dungeon {
         world = Bukkit.getWorld(UUID.fromString(section.getString("world")));
         creationPoints = section.getInt("creationPoints");
         passages = new ArrayList<>();
-        for (String passageId : section.getConfigurationSection("passages").getKeys(false)) {
-            String passageBase = "passages." + passageId + ".";
-            NormalRoom room1 = (NormalRoom) getRoomById(section.getString(passageBase + "room1"));
-            NormalRoom room2 = (NormalRoom) getRoomById(section.getString(passageBase + "room2"));
-            Range gateway1 = (Range) section.get("gateway1");
-            Range gateway2 = (Range) section.get("gateway2");
-            passages.add(new NormalPassage(passageId, room1, room2, gateway1, gateway2));
-            passageIdCounter++;
+        passageIdCounter = 0;
+        ConfigurationSection passagesSection = section.getConfigurationSection("passages");
+        if (passagesSection != null) {
+            for (String passageId : passagesSection.getKeys(false)) {
+                String passageBase = "passages." + passageId + ".";
+                NormalRoom room1 = (NormalRoom) getRoomById(section.getString(passageBase + "room1"));
+                NormalRoom room2 = (NormalRoom) getRoomById(section.getString(passageBase + "room2"));
+                Range gateway1 = (Range) section.get("gateway1");
+                Range gateway2 = (Range) section.get("gateway2");
+                passages.add(new NormalPassage(passageId, room1, room2, gateway1, gateway2));
+                passageIdCounter++;
+            }
         }
 
         rooms = new ArrayList<>();
-        for (String roomId : section.getConfigurationSection("rooms").getKeys(false)) {
-            String roomBase = "rooms." + roomId + ".";
-            NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(section.getString(roomBase + "factory"));
-            NormalRoom room = factory.newEmptyRoom(roomId);
-            rooms.add(room);
-            roomIdCounter++;
+        roomIdCounter = 0;
+        ConfigurationSection roomsSection = section.getConfigurationSection("rooms");
+        if (roomsSection != null) {
+            for (String roomId : roomsSection.getKeys(false)) {
+                String roomBase = "rooms." + roomId + ".";
+                NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(section.getString(roomBase + "factory"));
+                NormalRoom room = factory.newEmptyRoom(roomId);
+                rooms.add(room);
+                roomIdCounter++;
+            }
         }
 
         for (NormalRoom room : rooms) {
@@ -142,7 +160,7 @@ abstract public class NormalDungeon implements Dungeon {
 
     private File getFile(NormalActiveRoom activeRoom) {
         NormalRoom room = activeRoom.getRoom();
-        return new File(activeRoomSaveDir, room.getId().substring(0, 2) + "/" + room.getId() + ".yml");
+        return new File(activeRoomSaveDir, room.getId().substring(0, 2) + "/" + room.getId() + ".yaml");
     }
 
     public NormalActiveRoom loadActiveRoom(NormalRoom room) {

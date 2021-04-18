@@ -91,7 +91,10 @@ import net.toshimichi.dungeons.listeners.*;
 import net.toshimichi.dungeons.misc.*;
 import net.toshimichi.dungeons.nat.api.Installer;
 import net.toshimichi.dungeons.services.*;
+import net.toshimichi.dungeons.utils.CompleteBlock;
 import net.toshimichi.dungeons.utils.Lottery;
+import net.toshimichi.dungeons.utils.Pos;
+import net.toshimichi.dungeons.utils.Range;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -240,6 +243,9 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
         saveDefaultConfig();
         plugin = this;
         ConfigurationSerialization.registerClass(Lottery.class);
+        ConfigurationSerialization.registerClass(CompleteBlock.class);
+        ConfigurationSerialization.registerClass(Pos.class);
+        ConfigurationSerialization.registerClass(Range.class);
 
         //Inject natives
         YamlConfiguration nativeConf = new YamlConfiguration();

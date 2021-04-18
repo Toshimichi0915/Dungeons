@@ -4,6 +4,8 @@ import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.Dungeon;
 import net.toshimichi.dungeons.world.Passage;
 import net.toshimichi.dungeons.world.Room;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,11 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 abstract public class NormalDungeon implements Dungeon {
 
     private final File activeRoomSaveDir;
     private final String id;
+    private World world;
     private ArrayList<NormalRoom> rooms = new ArrayList<>();
     private ArrayList<NormalPassage> passages = new ArrayList<>();
     private String name;
@@ -45,6 +49,15 @@ abstract public class NormalDungeon implements Dungeon {
     }
 
     @Override
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    @Override
     public List<? extends Room> getRooms() {
         return new ArrayList<>(rooms);
     }
@@ -66,6 +79,7 @@ abstract public class NormalDungeon implements Dungeon {
     @Override
     public void save(ConfigurationSection section) {
         section.set("name", name);
+        section.set("world", world.getUID().toString());
         section.set("creationPoints", creationPoints);
         for (NormalPassage passage : passages) {
             String passageBase = "passages." + passage.getId() + ".";
@@ -83,6 +97,7 @@ abstract public class NormalDungeon implements Dungeon {
     @Override
     public void load(ConfigurationSection section) {
         name = section.getString("name");
+        world = Bukkit.getWorld(UUID.fromString(section.getString("world")));
         creationPoints = section.getInt("creationPoints");
         passages = new ArrayList<>();
         for (String passageId : section.getConfigurationSection("passages").getKeys(false)) {

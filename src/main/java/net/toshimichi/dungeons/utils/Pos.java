@@ -2,6 +2,7 @@ package net.toshimichi.dungeons.utils;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.io.Serializable;
@@ -104,6 +105,10 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
      */
     public Location toLocation(World world) {
         return new Location(world, x, y, z);
+    }
+
+    public Block toBlock(World world) {
+        return world.getBlockAt(x, y, z);
     }
 
     @Override

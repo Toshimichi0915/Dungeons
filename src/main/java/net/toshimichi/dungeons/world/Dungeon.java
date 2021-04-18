@@ -1,5 +1,6 @@
 package net.toshimichi.dungeons.world;
 
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface Dungeon {
     String getName();
 
     void setName(String name);
+
+    World getWorld();
 
     List<? extends Room> getRooms();
 

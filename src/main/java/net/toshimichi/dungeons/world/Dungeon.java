@@ -14,7 +14,7 @@ public interface Dungeon {
 
     List<? extends Room> getRooms();
 
-    default Room findRoom(String id) {
+    default Room getRoomById(String id) {
         for (Room room : getRooms()) {
             if (room.getId().equals(id)) {
                 return room;
@@ -29,7 +29,20 @@ public interface Dungeon {
 
     List<? extends RoomFactory> getRoomFactories();
 
+    default RoomFactory getRoomFactoryById(String id) {
+        for(RoomFactory factory : getRoomFactories()) {
+            if(factory.getId().equals(id)) {
+                return factory;
+            }
+        }
+        return null;
+    }
+
     void save(ConfigurationSection section);
 
     void load(ConfigurationSection section);
+
+    void update(int ticks);
+
+    String newRoomId();
 }

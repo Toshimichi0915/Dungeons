@@ -13,4 +13,6 @@ public interface ActiveRoom {
     void addModifiedBlock(ModifiedBlock block);
 
     void removeModifiedBlock(Pos pos);
+
+    void update(int ticks);
 }

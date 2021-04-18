@@ -1,6 +1,8 @@
-package net.toshimichi.dungeons.world;
+package net.toshimichi.dungeons.world.normal;
 
 import net.toshimichi.dungeons.utils.Pos;
+import net.toshimichi.dungeons.world.ActiveRoom;
+import net.toshimichi.dungeons.world.ModifiedBlock;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.Collection;
@@ -34,6 +36,10 @@ public class NormalActiveRoom implements ActiveRoom {
     @Override
     public void removeModifiedBlock(Pos pos) {
         modifiedBlocks.removeIf(block -> block.getCompleteBlock().getPos().equals(pos));
+    }
+
+    @Override
+    public void update(int ticks) {
     }
 
     @SuppressWarnings("unchecked")

@@ -34,7 +34,7 @@ abstract public class NormalRoom implements Room {
         this.roomFactory = roomFactory;
         this.id = id;
         this.direction = direction;
-        dungeon.connect(room1, gate1, this, openGate);
+        dungeon.addPassage(dungeon.connect(room1, gate1, this, openGate));
         initArea(openGate, direction);
     }
 

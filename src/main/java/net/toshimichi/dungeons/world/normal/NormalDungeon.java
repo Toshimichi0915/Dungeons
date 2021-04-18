@@ -2,7 +2,6 @@ package net.toshimichi.dungeons.world.normal;
 
 import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.Dungeon;
-import net.toshimichi.dungeons.world.Passage;
 import net.toshimichi.dungeons.world.Room;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -59,8 +58,12 @@ abstract public class NormalDungeon implements Dungeon {
     }
 
     @Override
-    public List<? extends Room> getRooms() {
+    public List<NormalRoom> getRooms() {
         return new ArrayList<>(rooms);
+    }
+
+    public void addRoom(NormalRoom room) {
+        rooms.add(room);
     }
 
     @Override
@@ -99,7 +102,9 @@ abstract public class NormalDungeon implements Dungeon {
             section.set(passageBase + "gateway2", passage.getGateway2());
         }
         for (NormalRoom room : rooms) {
-            room.save(section.createSection("rooms." + room.getId() + "."));
+            ConfigurationSection roomSection = section.createSection("rooms." + room.getId());
+            room.save(roomSection);
+            roomSection.set("factory", room.getRoomFactory().getId());
         }
     }
 
@@ -114,11 +119,10 @@ abstract public class NormalDungeon implements Dungeon {
         ConfigurationSection passagesSection = section.getConfigurationSection("passages");
         if (passagesSection != null) {
             for (String passageId : passagesSection.getKeys(false)) {
-                String passageBase = "passages." + passageId + ".";
-                NormalRoom room1 = (NormalRoom) getRoomById(section.getString(passageBase + "room1"));
-                NormalRoom room2 = (NormalRoom) getRoomById(section.getString(passageBase + "room2"));
-                Range gateway1 = (Range) section.get("gateway1");
-                Range gateway2 = (Range) section.get("gateway2");
+                NormalRoom room1 = (NormalRoom) getRoomById(passagesSection.getString(passageId + ".room1"));
+                NormalRoom room2 = (NormalRoom) getRoomById(passagesSection.getString(passageId + ".room2"));
+                Range gateway1 = (Range) passagesSection.get(passageId + ".gateway1");
+                Range gateway2 = (Range) passagesSection.get(passageId + ".gateway2");
                 passages.add(new NormalPassage(passageId, room1, room2, gateway1, gateway2));
                 passageIdCounter++;
             }
@@ -129,9 +133,9 @@ abstract public class NormalDungeon implements Dungeon {
         ConfigurationSection roomsSection = section.getConfigurationSection("rooms");
         if (roomsSection != null) {
             for (String roomId : roomsSection.getKeys(false)) {
-                String roomBase = "rooms." + roomId + ".";
-                NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(section.getString(roomBase + "factory"));
+                NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(roomsSection.getString(roomId + ".factory"));
                 NormalRoom room = factory.newEmptyRoom(roomId);
+                room.load(roomsSection.getConfigurationSection(roomId));
                 rooms.add(room);
                 roomIdCounter++;
             }
@@ -188,7 +192,7 @@ abstract public class NormalDungeon implements Dungeon {
         }
     }
 
-    public Passage connect(Room room1, Range gateway1, Room room2, Range gateway2) {
+    public NormalPassage connect(Room room1, Range gateway1, Room room2, Range gateway2) {
         NormalRoom normalRoom1 = (NormalRoom) getRoomById(room1.getId());
         NormalRoom normalRoom2 = (NormalRoom) getRoomById(room2.getId());
         if (normalRoom1 == null || !normalRoom1.equals(room1)) {

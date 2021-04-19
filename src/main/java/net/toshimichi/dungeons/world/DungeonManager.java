@@ -7,7 +7,7 @@ public interface DungeonManager {
 
     List<DungeonFactory> getDungeonFactories();
 
-    Dungeon newDungeon(String factoryIdd);
+    Dungeon newDungeon(String factoryId);
 
     void load();
 

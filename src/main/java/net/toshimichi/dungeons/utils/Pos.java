@@ -33,6 +33,7 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
 
     /**
      * {@link BlockVector3} に対応するインスタンスを作成します.
+     *
      * @param vector3 ブロックの座標
      */
     public Pos(BlockVector3 vector3) {

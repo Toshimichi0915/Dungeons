@@ -34,6 +34,7 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
      * {@link Region} に対応するインスタンスを作成します.
      * 1つ目の空間座標は {@link Region#getMinimumPoint()} に対応し, 2つ目の空間座標は
      * {@link Region#getMaximumPoint()} に対応することが保証されます.
+     *
      * @param region 対応する {@link Region}
      */
     public Range(Region region) {
@@ -67,7 +68,7 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
      * @return x y z座標が共に最も小さい地点
      */
     public Pos getMinPoint() {
-        if(minPoint == null) {
+        if (minPoint == null) {
             int x = Math.min(pos1.getX(), pos2.getX());
             int y = Math.min(pos1.getY(), pos2.getY());
             int z = Math.min(pos1.getZ(), pos2.getZ());
@@ -82,7 +83,7 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
      * @return x y z座標が共に最も大さい地点
      */
     public Pos getMaxPoint() {
-        if(maxPoint == null) {
+        if (maxPoint == null) {
             int x = Math.max(pos1.getX(), pos2.getX());
             int y = Math.max(pos1.getY(), pos2.getY());
             int z = Math.max(pos1.getZ(), pos2.getZ());

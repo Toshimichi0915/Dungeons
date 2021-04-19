@@ -3,7 +3,7 @@ version: @version@
 main: net.toshimichi.dungeons.DungeonsPlugin
 api-version: @api@
 softdepend: [ "Vault" ]
-depend: ["WorldEdit"]
+depend: [ "WorldEdit" ]
 
 commands:
   dungeons:

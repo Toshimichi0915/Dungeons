@@ -95,6 +95,8 @@ import net.toshimichi.dungeons.utils.CompleteBlock;
 import net.toshimichi.dungeons.utils.Lottery;
 import net.toshimichi.dungeons.utils.Pos;
 import net.toshimichi.dungeons.utils.Range;
+import net.toshimichi.dungeons.world.DungeonManager;
+import net.toshimichi.dungeons.world.YamlDungeonManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -121,6 +123,7 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
     private static final Charset charset = StandardCharsets.UTF_8;
     private static DungeonsPlugin plugin;
     private EnchantManager enchantManager;
+    private DungeonManager dungeonManager;
     private ManaManager manaManager;
     private Economy economy;
     private Stash stash;
@@ -142,6 +145,11 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
     @Override
     public EnchantManager getEnchantManager() {
         return enchantManager;
+    }
+
+    @Override
+    public DungeonManager getDungeonManager() {
+        return dungeonManager;
     }
 
     @Override
@@ -299,7 +307,8 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
                 new Wasp1(), new Wasp2(), new Wasp3(),
                 new FeatherFalling1(), new FeatherFalling2(), new FeatherFalling3(),
                 new Respiration1(), new Respiration2(), new Respiration3());
-
+        dungeonManager = new YamlDungeonManager(new File(getDataFolder(), "world"), new ArrayList<>());
+        dungeonManager.load();
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
@@ -370,6 +379,7 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
     @Override
     public void onDisable() {
         Bukkit.getOnlinePlayers().forEach(enchantManager::disable);
+        dungeonManager.save();
         services.forEach(Service::stop);
     }
 }

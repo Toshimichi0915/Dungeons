@@ -134,8 +134,7 @@ abstract public class NormalDungeon implements Dungeon {
         if (roomsSection != null) {
             for (String roomId : roomsSection.getKeys(false)) {
                 NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(roomsSection.getString(roomId + ".factory"));
-                NormalRoom room = factory.newEmptyRoom(roomId);
-                room.load(roomsSection.getConfigurationSection(roomId));
+                NormalRoom room = factory.load(roomId, roomsSection.getConfigurationSection(roomId));
                 rooms.add(room);
                 roomIdCounter++;
             }

@@ -25,8 +25,6 @@ public interface Room {
 
     RoomFactory getRoomFactory();
 
-    void build();
-
     ActiveRoom load();
 
     boolean isLoaded();

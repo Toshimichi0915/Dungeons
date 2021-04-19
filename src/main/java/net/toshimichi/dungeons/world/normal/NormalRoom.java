@@ -1,7 +1,6 @@
 package net.toshimichi.dungeons.world.normal;
 
 import net.toshimichi.dungeons.utils.Direction;
-import net.toshimichi.dungeons.utils.Pos;
 import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.ActiveRoom;
 import net.toshimichi.dungeons.world.Room;
@@ -27,47 +26,6 @@ abstract public class NormalRoom implements Room {
         this.dungeon = dungeon;
         this.roomFactory = roomFactory;
         this.id = id;
-    }
-
-    public NormalRoom(NormalDungeon dungeon, NormalRoomFactory roomFactory, String id, Room room1, Range gate1, Range openGate, Direction direction) {
-        this.dungeon = dungeon;
-        this.roomFactory = roomFactory;
-        this.id = id;
-        this.direction = direction;
-        dungeon.addPassage(dungeon.connect(room1, gate1, this, openGate));
-        initArea(openGate, direction);
-    }
-
-    public NormalRoom(NormalDungeon dungeon, NormalRoomFactory roomFactory, String id, Range openGate, Direction direction) {
-        this.dungeon = dungeon;
-        this.roomFactory = roomFactory;
-        this.id = id;
-        this.direction = direction;
-        usableGateways.add(openGate);
-        initArea(openGate, direction);
-    }
-
-    private void initArea(Range openGate, Direction direction) {
-        int gateX = (int) (openGate.getMinPoint().getX() * openGate.getXLength() * 0.5);
-        int gateY = openGate.getMinPoint().getY();
-        int gateZ = (int) (openGate.getMinPoint().getZ() * openGate.getXLength() * 0.5);
-        if (direction.getX() != 0) {
-            gateX += (int) (openGate.getXLength() * direction.getX() * 0.5);
-        }
-        if (direction.getZ() != 0) {
-            gateZ += (int) (openGate.getZLength() * direction.getZ() * 0.5);
-        }
-
-        int lengthX = roomFactory.getSize().getX();
-        int lengthY = roomFactory.getSize().getY();
-        int lengthZ = roomFactory.getSize().getZ();
-        int centerX = (int) (lengthX * direction.getX() * 0.5 + direction.getX() + gateX);
-        int centerY = (int) (lengthY * 0.5 + gateY);
-        int centerZ = (int) (lengthZ * direction.getZ() * 0.5 + direction.getZ() + gateZ);
-
-        Pos minPos = new Pos(centerX - lengthX, centerY - lengthY, centerZ - lengthZ);
-        Pos maxPos = new Pos(centerX + lengthX, centerY + lengthY, centerZ + lengthZ);
-        area = new Range(minPos, maxPos);
     }
 
     @Override
@@ -107,10 +65,6 @@ abstract public class NormalRoom implements Room {
     @Override
     public RoomFactory getRoomFactory() {
         return roomFactory;
-    }
-
-    @Override
-    public void build() {
     }
 
     @Override

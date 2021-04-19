@@ -1,9 +1,7 @@
 package net.toshimichi.dungeons.world.normal;
 
-import net.toshimichi.dungeons.utils.Direction;
-import net.toshimichi.dungeons.utils.Range;
-import net.toshimichi.dungeons.world.Room;
 import net.toshimichi.dungeons.world.RoomFactory;
+import org.bukkit.configuration.ConfigurationSection;
 
 abstract public class NormalRoomFactory implements RoomFactory {
 
@@ -14,13 +12,7 @@ abstract public class NormalRoomFactory implements RoomFactory {
     }
 
     @Override
-    abstract public NormalRoom newConnectedRoom(String id, Room room1, Range gate1, Range openGate, Direction direction);
-
-    @Override
-    abstract public NormalRoom newDistinctRoom(String id, Range openGate, Direction direction);
-
-    @Override
-    abstract public NormalRoom newEmptyRoom(String id);
+    abstract public NormalRoom load(String id, ConfigurationSection section);
 
     @Override
     public NormalDungeon getDungeon() {

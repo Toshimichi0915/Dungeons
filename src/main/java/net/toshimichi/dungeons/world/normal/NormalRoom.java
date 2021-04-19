@@ -111,7 +111,7 @@ abstract public class NormalRoom implements Room {
     abstract protected NormalActiveRoom newActiveRoom();
 
     @SuppressWarnings("unchecked")
-    protected void load(ConfigurationSection section) {
+    public void load(ConfigurationSection section) {
         setName(section.getString("name"));
         setArea((Range) section.get("area"));
         setDirection(Direction.valueOf(section.getString("direction")));
@@ -123,7 +123,7 @@ abstract public class NormalRoom implements Room {
         setPassages(passages);
     }
 
-    protected void save(ConfigurationSection section) {
+    public void save(ConfigurationSection section) {
         section.set("name", getName());
         section.set("area", getArea());
         section.set("direction", direction.name());

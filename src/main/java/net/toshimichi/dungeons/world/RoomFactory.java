@@ -10,7 +10,7 @@ public interface RoomFactory {
 
     String getId();
 
-    abstract Room load(String id, ConfigurationSection section);
+    Room load(String id, ConfigurationSection section);
 
     Pos getSize();
 

@@ -20,6 +20,9 @@ repositories {
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
     }
     maven {
+        url = 'https://maven.enginehub.org/repo/'
+    }
+    maven {
         url = 'https://jitpack.io'
     }
 }
@@ -30,6 +33,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.8.0'
     shadow "org.spigotmc:spigot-api:$spigot"
     shadow 'com.github.MilkBowl:VaultAPI:1.7'
+    shadow 'com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT'
 
     implementation project(':native:api')
     runtime project(':native:1.16.4')

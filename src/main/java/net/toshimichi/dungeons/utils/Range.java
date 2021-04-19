@@ -1,5 +1,6 @@
 package net.toshimichi.dungeons.utils;
 
+import com.sk89q.worldedit.regions.Region;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.io.Serializable;
@@ -23,6 +24,17 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
     public Range(Pos pos1, Pos pos2) {
         this.pos1 = pos1;
         this.pos2 = pos2;
+    }
+
+    /**
+     * {@link Region} に対応するインスタンスを作成します.
+     * 1つ目の空間座標は {@link Region#getMinimumPoint()} に対応し, 2つ目の空間座標は
+     * {@link Region#getMaximumPoint()} に対応することが保証されます.
+     * @param region 対応する {@link Region}
+     */
+    public Range(Region region) {
+        this.pos1 = new Pos(region.getMinimumPoint());
+        this.pos2 = new Pos(region.getMaximumPoint());
     }
 
     /**

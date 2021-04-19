@@ -1,6 +1,7 @@
 package net.toshimichi.dungeons.utils;
 
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.math.Vector3;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -40,6 +41,17 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
         this.x = vector3.getX();
         this.y = vector3.getY();
         this.z = vector3.getZ();
+    }
+
+    /**
+     * {@link Vector3} に対応するインスタンスを作成します.
+     * また元々のベクトルに小数点が含まれていた場合は切り落とされます.
+     * @param vector3 ブロックの座標.
+     */
+    public Pos(Vector3 vector3) {
+        this.x = (int)vector3.getX();
+        this.y = (int)vector3.getY();
+        this.z = (int)vector3.getZ();
     }
 
     /**
@@ -136,6 +148,14 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
      */
     public BlockVector3 toBlockVector3() {
         return BlockVector3.at(x, y, z);
+    }
+
+    /**
+     * このインスタンスを {@link Vector3} に変換します.
+     * @return 変換された {@link Vector3}
+     */
+    public Vector3 toVector3() {
+        return Vector3.at(x, y, z);
     }
 
     @Override

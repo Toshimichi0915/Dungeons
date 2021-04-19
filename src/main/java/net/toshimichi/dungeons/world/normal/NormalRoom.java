@@ -1,12 +1,14 @@
 package net.toshimichi.dungeons.world.normal;
 
 import net.toshimichi.dungeons.utils.Direction;
+import net.toshimichi.dungeons.utils.Pos;
 import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.ActiveRoom;
 import net.toshimichi.dungeons.world.Room;
 import net.toshimichi.dungeons.world.RoomFactory;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.time.chrono.JapaneseEra;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ abstract public class NormalRoom implements Room {
     private ArrayList<NormalPassage> passages = new ArrayList<>();
     private ArrayList<Range> usableGateways = new ArrayList<>();
     private NormalActiveRoom activeRoom;
+    private Pos origin;
     private Range area;
     private Direction direction;
 
@@ -26,6 +29,15 @@ abstract public class NormalRoom implements Room {
         this.dungeon = dungeon;
         this.roomFactory = roomFactory;
         this.id = id;
+    }
+
+    public NormalRoom(NormalDungeon dungeon, NormalRoomFactory roomFactory, String id, Pos origin, Direction direction) {
+        this(dungeon, roomFactory, id);
+        this.origin = origin;
+        this.direction = direction;
+        this.area = new Range(new Pos(0, 0, 0), getRoomFactory().getSize())
+                .rotate(0, Direction.EAST.getAngle(direction) / 90, 0)
+                .move(origin);
     }
 
     @Override

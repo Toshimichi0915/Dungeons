@@ -1,6 +1,8 @@
 package net.toshimichi.dungeons.world.empty;
 
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import net.toshimichi.dungeons.utils.Direction;
+import net.toshimichi.dungeons.utils.Pos;
 import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.normal.NormalDungeon;
 import net.toshimichi.dungeons.world.normal.NormalRoom;
@@ -30,5 +32,10 @@ public class EmptySchematicRoomFactory extends SchematicRoomFactory {
         EmptyRoom room = new EmptyRoom(getDungeon(), this, id);
         room.load(section);
         return room;
+    }
+
+    public NormalRoom build(String id, Pos origin, Direction direction) {
+        build(origin, direction);
+        return new EmptyRoom(getDungeon(), this, id, origin, direction);
     }
 }

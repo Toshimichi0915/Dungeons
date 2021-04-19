@@ -1,5 +1,6 @@
 package net.toshimichi.dungeons.utils;
 
+import com.sk89q.worldedit.math.transform.AffineTransform;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
@@ -135,6 +136,31 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
                 }
             }
         }
+    }
+
+    /**
+     * このインスタンスによって表される立方体を, 指定された方向ベクトルに並行移動させます.
+     * @param pos 方向ベクトル
+     * @return 平行移動された立方体
+     */
+    public Range move(Pos pos) {
+        return new Range(getPos1().add(pos), getPos2().add(pos));
+    }
+
+    /**
+     * このインスタンスによって表される立方体を, 指定された軸回りに回転させます.
+     * @param x {@code x軸の回転角 / 90}
+     * @param y {@code y軸の回転角 / 90}
+     * @param z {@code z軸の回転角 / 90}
+     * @return 回転された立方体
+     */
+    public Range rotate(int x, int y, int z) {
+        AffineTransform transform = new AffineTransform();
+        transform.rotateX(x * 90);
+        transform.rotateY(y * 90);
+        transform.rotateZ(z * 90);
+        return new Range(new Pos(transform.apply(getPos1().toVector3())),
+                new Pos(transform.apply(getPos2().toVector3())));
     }
 
     @Override

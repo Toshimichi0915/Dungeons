@@ -15,6 +15,10 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
     private final Pos pos1;
     private final Pos pos2;
 
+    // lazy-init
+    private Pos minPoint;
+    private Pos maxPoint;
+
     /**
      * 1つの {@link Pos} によって範囲を指定しインスタンスを作成します.
      *
@@ -35,6 +39,8 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
     public Range(Region region) {
         this.pos1 = new Pos(region.getMinimumPoint());
         this.pos2 = new Pos(region.getMaximumPoint());
+        this.minPoint = this.pos1;
+        this.maxPoint = this.pos2;
     }
 
     /**
@@ -61,10 +67,13 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
      * @return x y z座標が共に最も小さい地点
      */
     public Pos getMinPoint() {
-        int x = Math.min(pos1.getX(), pos2.getX());
-        int y = Math.min(pos1.getY(), pos2.getY());
-        int z = Math.min(pos1.getZ(), pos2.getZ());
-        return new Pos(x, y, z);
+        if(minPoint == null) {
+            int x = Math.min(pos1.getX(), pos2.getX());
+            int y = Math.min(pos1.getY(), pos2.getY());
+            int z = Math.min(pos1.getZ(), pos2.getZ());
+            minPoint = new Pos(x, y, z);
+        }
+        return minPoint;
     }
 
     /**
@@ -73,10 +82,13 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
      * @return x y z座標が共に最も大さい地点
      */
     public Pos getMaxPoint() {
-        int x = Math.max(pos1.getX(), pos2.getX());
-        int y = Math.max(pos1.getY(), pos2.getY());
-        int z = Math.max(pos1.getZ(), pos2.getZ());
-        return new Pos(x, y, z);
+        if(maxPoint == null) {
+            int x = Math.max(pos1.getX(), pos2.getX());
+            int y = Math.max(pos1.getY(), pos2.getY());
+            int z = Math.max(pos1.getZ(), pos2.getZ());
+            maxPoint = new Pos(x, y, z);
+        }
+        return maxPoint;
     }
 
     /**

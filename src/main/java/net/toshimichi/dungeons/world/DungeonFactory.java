@@ -1,7 +1,5 @@
 package net.toshimichi.dungeons.world;
 
-import org.bukkit.World;
-
 import java.io.File;
 
 public interface DungeonFactory {

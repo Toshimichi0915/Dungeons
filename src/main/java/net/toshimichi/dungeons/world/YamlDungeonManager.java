@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.world;
 
-import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 

@@ -33,8 +33,8 @@ public interface Dungeon {
     List<? extends RoomFactory> getRoomFactories();
 
     default RoomFactory getRoomFactoryById(String id) {
-        for(RoomFactory factory : getRoomFactories()) {
-            if(factory.getId().equals(id)) {
+        for (RoomFactory factory : getRoomFactories()) {
+            if (factory.getId().equals(id)) {
                 return factory;
             }
         }

@@ -5,25 +5,12 @@ import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.Room;
 import net.toshimichi.dungeons.world.RoomFactory;
 
-import java.util.List;
-
 abstract public class NormalRoomFactory implements RoomFactory {
 
     private final NormalDungeon dungeon;
 
     public NormalRoomFactory(NormalDungeon dungeon) {
         this.dungeon = dungeon;
-    }
-
-    protected NormalRoom useGateway(Room room, Range gateway) {
-        NormalRoom normalRoom = (NormalRoom) dungeon.getRoomById(room.getId());
-        if (normalRoom == null || !normalRoom.equals(room)) {
-            throw new IllegalStateException("Specified room is not in the dungeon");
-        }
-        List<Range> gateways = normalRoom.getUsableGateways();
-        gateways.remove(gateway);
-        normalRoom.setUsableGateways(gateways);
-        return normalRoom;
     }
 
     @Override

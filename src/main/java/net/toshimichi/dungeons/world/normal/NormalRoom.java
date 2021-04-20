@@ -30,19 +30,12 @@ abstract public class NormalRoom implements Room {
         this.id = id;
     }
 
-    private Range affine(Range range) {
-        return range.rotate(0, Direction.EAST.getAngle(direction) / 90, 0).move(origin);
-    }
-
     public NormalRoom(NormalDungeon dungeon, NormalRoomFactory roomFactory, String id, Pos origin, Direction direction) {
         this(dungeon, roomFactory, id);
         this.origin = origin;
         this.direction = direction;
-        for (Range gateway : getRoomFactory().getGateways()) {
-            gateway = affine(gateway);
-            usableGateways.add(gateway);
-        }
-        this.area = affine(new Range(new Pos(0, 0, 0), getRoomFactory().getSize()));
+        this.area = new Range(origin, getRoomFactory().getArea(origin, direction));
+        this.usableGateways.addAll(getRoomFactory().getGateways(origin, direction));
     }
 
     @Override

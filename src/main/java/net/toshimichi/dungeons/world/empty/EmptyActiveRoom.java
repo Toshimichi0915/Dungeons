@@ -1,6 +1,5 @@
 package net.toshimichi.dungeons.world.empty;
 
-import net.toshimichi.dungeons.world.ActiveRoom;
 import net.toshimichi.dungeons.world.normal.NormalActiveRoom;
 import net.toshimichi.dungeons.world.normal.NormalRoom;
 

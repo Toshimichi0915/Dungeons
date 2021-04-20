@@ -13,8 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmptySchematicRoomFactory extends SchematicRoomFactory {
+
     public EmptySchematicRoomFactory(NormalDungeon dungeon, Clipboard clipboard) {
         super(dungeon, clipboard);
+    }
+
+    @Override
+    public List<? extends Range> getGateways() {
+        return new ArrayList<>();
     }
 
     @Override
@@ -22,10 +28,6 @@ public class EmptySchematicRoomFactory extends SchematicRoomFactory {
         return "empty-schematic";
     }
 
-    @Override
-    public List<? extends Range> getGateways() {
-        return new ArrayList<>();
-    }
 
     @Override
     public NormalRoom load(String id, ConfigurationSection section) {

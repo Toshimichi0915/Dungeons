@@ -17,8 +17,12 @@ import net.toshimichi.dungeons.world.normal.NormalRoom;
 import net.toshimichi.dungeons.world.normal.NormalRoomFactory;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 abstract public class SchematicRoomFactory extends NormalRoomFactory {
 
+    public static final Direction ORIGIN = Direction.EAST;
     private final Clipboard clipboard;
 
     public SchematicRoomFactory(NormalDungeon dungeon, Clipboard clipboard) {
@@ -26,9 +30,24 @@ abstract public class SchematicRoomFactory extends NormalRoomFactory {
         this.clipboard = clipboard;
     }
 
+    abstract public List<? extends Range> getGateways();
+
+    private Range affine(Range range, Pos origin, Direction direction) {
+        return range.rotate(0, (int) Math.toDegrees(ORIGIN.rad(direction)) / 90, 0).move(origin);
+    }
+
     @Override
-    public Pos getSize() {
-        Range range = new Range(clipboard.getRegion());
+    public List<? extends Range> getGateways(Pos origin, Direction direction) {
+        ArrayList<Range> result = new ArrayList<>();
+        for (Range range : getGateways()) {
+            result.add(affine(range, origin, direction));
+        }
+        return result;
+    }
+
+    @Override
+    public Pos getArea(Pos origin, Direction direction) {
+        Range range = affine(new Range(clipboard.getRegion()), origin, direction);
         return new Pos(range.getXLength(), range.getYLength(), range.getZLength());
     }
 
@@ -39,7 +58,7 @@ abstract public class SchematicRoomFactory extends NormalRoomFactory {
         try (EditSession editSession = WorldEdit.getInstance().newEditSession(BukkitAdapter.adapt(getDungeon().getWorld()))) {
             ClipboardHolder holder = new ClipboardHolder(clipboard);
             AffineTransform transform = new AffineTransform();
-            transform.rotateY(Direction.EAST.getAngle(direction));
+            transform.rotateY(Direction.EAST.rad(direction));
             holder.setTransform(transform);
             Operation operation = holder.createPaste(editSession)
                     .to(origin.toBlockVector3())

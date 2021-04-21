@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.util.Vector;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -33,6 +34,17 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
     }
 
     /**
+     * {@link Vector} に対応するインスタンスを作成します.
+     * また元々のベクトルに小数点が含まれていた場合は切り落とされます.
+     * @param vector ブロックの座標.
+     */
+    public Pos(Vector vector) {
+        this.x = (int) Math.floor(vector.getX());
+        this.y = (int) Math.floor(vector.getY());
+        this.z = (int) Math.floor(vector.getZ());
+    }
+
+    /**
      * {@link BlockVector3} に対応するインスタンスを作成します.
      *
      * @param vector3 ブロックの座標
@@ -46,12 +58,12 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
     /**
      * {@link Vector3} に対応するインスタンスを作成します.
      * また元々のベクトルに小数点が含まれていた場合は切り落とされます.
-     * @param vector3 ブロックの座標.
+     * @param vector ブロックの座標.
      */
-    public Pos(Vector3 vector3) {
-        this.x = (int)vector3.getX();
-        this.y = (int)vector3.getY();
-        this.z = (int)vector3.getZ();
+    public Pos(Vector3 vector) {
+        this.x = (int) Math.floor(vector.getX());
+        this.y = (int) Math.floor(vector.getY());
+        this.z = (int) Math.floor(vector.getZ());
     }
 
     /**

@@ -58,11 +58,10 @@ abstract public class SchematicRoomFactory extends NormalRoomFactory {
         try (EditSession editSession = WorldEdit.getInstance().newEditSession(BukkitAdapter.adapt(getDungeon().getWorld()))) {
             ClipboardHolder holder = new ClipboardHolder(clipboard);
             AffineTransform transform = new AffineTransform();
-            transform.rotateY(Direction.EAST.rad(direction));
-            holder.setTransform(transform);
+            transform = transform.rotateY(-Math.toDegrees(ORIGIN.rad(direction)));
+            holder.setTransform(holder.getTransform().combine(transform));
             Operation operation = holder.createPaste(editSession)
                     .to(origin.toBlockVector3())
-                    .ignoreAirBlocks(false)
                     .build();
             Operations.complete(operation);
         } catch (WorldEditException e) {

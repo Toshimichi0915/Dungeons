@@ -75,6 +75,7 @@ public enum Direction {
     /**
      * 方向ベクトルの方角を返します.
      * 方向ベクトルが45度の倍数の場合は, 結果が保証されないことに留意してください.
+     *
      * @param vector 方向ベクトル
      * @return 方向ベクトルの方角
      */
@@ -85,12 +86,14 @@ public enum Direction {
     /**
      * 方向ベクトルの方角を返します.
      * 方向ベクトルが45度の倍数の場合は, 結果が保証されないことに留意してください.
+     *
      * @param vector 方向ベクトル
      * @return 方向ベクトルの方角
      */
     public static Direction getDirection(Vector2 vector) {
         for (Direction direction : values()) {
-            if (Math.toDegrees(direction.rad(vector)) <= 45) {
+            double degrees = Math.toDegrees(direction.rad(vector));
+            if (-45 < degrees && degrees <= 45) {
                 return direction;
             }
         }

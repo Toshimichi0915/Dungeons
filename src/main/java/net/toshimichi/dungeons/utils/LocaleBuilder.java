@@ -121,6 +121,15 @@ public class LocaleBuilder {
     }
 
     /**
+     * {@link LocaleBuilder#player(Player)} で設定されたプレイヤーに文字列を送信します.
+     */
+    public void sendMessage() {
+        if (player != null) {
+            player.sendMessage(build());
+        }
+    }
+
+    /**
      * チャットカラーのデフォルトの有無を変更します.
      *
      * @param enabled 有効の場合は {@code true} そうでない場合は {@code false}

@@ -1,4 +1,4 @@
-version=17
+version=19
 general.lang.name=英語
 general.lang.native=English
 general.lang.english=English
@@ -90,6 +90,10 @@ enchant.featherfalling.3=Reduces fall damage by&c 90%
 enchant.respiration.1=Increases underwater breathing time by&e 15s
 enchant.respiration.2=Increases underwater breathing time by&e 30s
 enchant.respiration.3=Increases underwater breathing time by&e 45s
+enchant.tower=Creates a tower dungeon
+enchant.hub_0=Creates a branch point (Only available in a tower dungeon)
+enchant.passage_0=Creates a passage (Only available in a tower dungeon)
+enchant.upstairs_0=Creates upstairs (Only available in a tower dungeon)
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}Click an item to put in Mystic Well!
@@ -119,3 +123,6 @@ anvil.button.already_set=&cAnvil\n&7The result slot is not empty!
 anvil.button.no_xp=&cAnvil\n&7You need more&b {xp}&7 levels
 anvil.button.unknown=&cAnvil\n&7An unknown error has occurred
 anvil.button.invalid=&cAnvil\n&7These items cannot be combined with!
+
+world.create.no_dungeon=&cNo dungeon was found
+world.create.invalid_gateway=&cThe room entrance could not be created

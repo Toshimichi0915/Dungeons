@@ -34,11 +34,10 @@ public class YamlDungeonManager implements DungeonManager {
     }
 
     @Override
-    public Dungeon newDungeon(String factoryId) {
+    public Dungeon newDungeon(String factoryId) throws Exception {
         DungeonFactory factory = getDungeonFactoryById(factoryId);
-        if (factory == null) {
+        if (factory == null)
             throw new IllegalStateException("Specified factory ID is not in the dungeon manager: " + factoryId);
-        }
         String dungeonId = "dungeon-" + dungeonCounter++;
         Dungeon dungeon = factory.newDungeon(new File(baseDir, "world/" + dungeonId + "rooms"), dungeonId);
         dungeons.add(new DungeonData(dungeon, factory));
@@ -46,11 +45,10 @@ public class YamlDungeonManager implements DungeonManager {
     }
 
     @Override
-    public void load() {
+    public void load() throws Exception {
         File[] listFiles = baseDir.listFiles();
-        if (listFiles == null) {
+        if (listFiles == null)
             return;
-        }
         dungeonCounter = 0;
         for (File dungeonFile : listFiles) {
             YamlConfiguration dungeonConfig = new YamlConfiguration();
@@ -61,9 +59,8 @@ public class YamlDungeonManager implements DungeonManager {
             }
             String dungeonId = dungeonConfig.getString("id");
             DungeonFactory dungeonFactory = getDungeonFactoryById(dungeonConfig.getString("factory"));
-            if (dungeonFactory == null) {
+            if (dungeonFactory == null)
                 continue;
-            }
             Dungeon dungeon = dungeonFactory.newDungeon(new File(dungeonFile, "rooms"), dungeonId);
             dungeon.load(dungeonConfig);
             dungeons.add(new DungeonData(dungeon, dungeonFactory));
@@ -89,9 +86,8 @@ public class YamlDungeonManager implements DungeonManager {
 
     private DungeonFactory getDungeonFactoryById(String factoryId) {
         for (DungeonFactory factory : dungeonFactories) {
-            if (factory.getId().equals(factoryId)) {
+            if (factory.getId().equals(factoryId))
                 return factory;
-            }
         }
         return null;
     }

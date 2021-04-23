@@ -8,6 +8,8 @@ import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.transform.AffineTransform;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.RegionOperationException;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import net.toshimichi.dungeons.utils.Direction;
 import net.toshimichi.dungeons.utils.Pos;
@@ -15,6 +17,7 @@ import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.normal.NormalDungeon;
 import net.toshimichi.dungeons.world.normal.NormalRoom;
 import net.toshimichi.dungeons.world.normal.NormalRoomFactory;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
@@ -36,19 +39,30 @@ abstract public class SchematicRoomFactory extends NormalRoomFactory {
         return range.rotate(0, (int) Math.toDegrees(ORIGIN.rad(direction)) / 90, 0).move(origin);
     }
 
+    private void drawBox(Range range, Material material) {
+        range.getMinPoint().toBlock(getDungeon().getWorld()).setType(material);
+        range.getMaxPoint().toBlock(getDungeon().getWorld()).setType(material);
+    }
+
     @Override
     public List<? extends Range> getGateways(Pos origin, Direction direction) {
         ArrayList<Range> result = new ArrayList<>();
         for (Range range : getGateways()) {
             result.add(affine(range, origin, direction));
+//            drawBox(affine(range, origin, direction), Material.REDSTONE_BLOCK);
         }
         return result;
     }
 
     @Override
-    public Pos getArea(Pos origin, Direction direction) {
-        Range range = affine(new Range(clipboard.getRegion()), origin, direction);
-        return new Pos(range.getXLength(), range.getYLength(), range.getZLength());
+    public Range getArea(Pos origin, Direction direction) {
+        CuboidRegion region = clipboard.getRegion().getBoundingBox().clone();
+        try {
+            region.shift(clipboard.getOrigin().multiply(-1));
+        } catch (RegionOperationException e) {
+            e.printStackTrace();
+        }
+        return affine(new Range(region), origin, direction);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package net.toshimichi.dungeons;
 
+import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import com.sk89q.worldedit.extent.clipboard.io.BuiltInClipboardFormat;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import net.toshimichi.dungeons.commands.DungeonsCommand;
 import net.toshimichi.dungeons.enchants.EnchantManager;
 import net.toshimichi.dungeons.enchants.NbtEnchantManager;
@@ -83,8 +86,13 @@ import net.toshimichi.dungeons.enchants.wand.portal.Portal3;
 import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity1;
 import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity2;
 import net.toshimichi.dungeons.enchants.wand.sanctity.Sanctity3;
+import net.toshimichi.dungeons.enchants.wand.world.Hub0Enchant;
+import net.toshimichi.dungeons.enchants.wand.world.Passage0Enchant;
+import net.toshimichi.dungeons.enchants.wand.world.TowerEnchant;
+import net.toshimichi.dungeons.enchants.wand.world.Upstairs0Enchant;
 import net.toshimichi.dungeons.gui.GuiManager;
 import net.toshimichi.dungeons.gui.LocalGuiManager;
+import net.toshimichi.dungeons.lang.Locale;
 import net.toshimichi.dungeons.lang.*;
 import net.toshimichi.dungeons.lang.ipstack.IpStackApi;
 import net.toshimichi.dungeons.listeners.*;
@@ -97,6 +105,7 @@ import net.toshimichi.dungeons.utils.Pos;
 import net.toshimichi.dungeons.utils.Range;
 import net.toshimichi.dungeons.world.DungeonManager;
 import net.toshimichi.dungeons.world.YamlDungeonManager;
+import net.toshimichi.dungeons.world.tower.TowerDungeonFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -108,15 +117,10 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DungeonsPlugin extends JavaPlugin implements Dungeons {
 
@@ -190,6 +194,20 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
     @Override
     public Locale getDefaultLocale() {
         return defaultLocale;
+    }
+
+    private void loadSchematic(String resource, Map<String, Clipboard> schematics) throws IOException {
+        File f = new File(getDataFolder(), "schem/" + resource + ".schem");
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            try (FileOutputStream out = new FileOutputStream(f)) {
+                IOUtils.copy(getResource("schem/" + resource + ".schem"), out);
+            }
+        }
+        try (ClipboardReader reader = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getReader(new FileInputStream(f))) {
+            schematics.put(resource, reader.read());
+        }
     }
 
     private void copyLang(String locale) throws IOException {
@@ -306,9 +324,8 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
                 new Fixed1(),
                 new Wasp1(), new Wasp2(), new Wasp3(),
                 new FeatherFalling1(), new FeatherFalling2(), new FeatherFalling3(),
-                new Respiration1(), new Respiration2(), new Respiration3());
-        dungeonManager = new YamlDungeonManager(new File(getDataFolder(), "world"), new ArrayList<>());
-        dungeonManager.load();
+                new Respiration1(), new Respiration2(), new Respiration3(),
+                new TowerEnchant(), new Hub0Enchant(), new Passage0Enchant(), new Upstairs0Enchant());
         manaManager = new LocalManaManager(new File(getDataFolder(), "mana"));
         stash = new YamlStash(new File(getDataFolder(), "stash"));
         ipStackApi = new IpStackApi(getConfig().getString("ipstack.api-key"));
@@ -347,6 +364,23 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
         }
         localeManager = new YamlLocaleManager(defaultFactory, new File(getDataFolder(), "locale"), factories.toArray(new LocaleFactory[0]));
 
+        // load dungeons
+        HashMap<String, Clipboard> schematics = new HashMap<>();
+        try {
+            loadSchematic("tower/hub_0", schematics);
+            loadSchematic("tower/passage_0", schematics);
+            loadSchematic("tower/upstairs_0", schematics);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dungeonManager = new YamlDungeonManager(new File(getDataFolder(), "world"), Arrays.asList(new TowerDungeonFactory(schematics)));
+        try {
+            dungeonManager.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //Install commands
         getCommand("dungeons").setExecutor(new DungeonsCommand());
 
@@ -379,7 +413,11 @@ public class DungeonsPlugin extends JavaPlugin implements Dungeons {
     @Override
     public void onDisable() {
         Bukkit.getOnlinePlayers().forEach(enchantManager::disable);
-        dungeonManager.save();
+        try {
+            dungeonManager.save();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         services.forEach(Service::stop);
     }
 }

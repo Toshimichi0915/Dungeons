@@ -2,36 +2,18 @@ package net.toshimichi.dungeons.enchants.wand.portal;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
-import org.bukkit.Bukkit;
+import net.toshimichi.dungeons.enchants.wand.WandEnchanter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PortalEnchanter extends Enchanter implements Listener {
+public class PortalEnchanter extends WandEnchanter {
     public PortalEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);
-    }
-
-    @Override
-    protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
-    }
-
-    @Override
-    public void tick() {
-
-    }
-
-    @Override
-    protected void onDisabled() {
-        HandlerList.unregisterAll(this);
     }
 
     @EventHandler

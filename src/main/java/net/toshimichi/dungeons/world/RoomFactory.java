@@ -13,7 +13,7 @@ public interface RoomFactory {
 
     Room load(String id, ConfigurationSection section);
 
-    Pos getArea(Pos origin, Direction direction);
+    Range getArea(Pos origin, Direction direction);
 
     List<? extends Range> getGateways(Pos origin, Direction direction);
 

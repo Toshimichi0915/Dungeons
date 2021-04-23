@@ -19,9 +19,8 @@ public interface Dungeon {
 
     default Room getRoomById(String id) {
         for (Room room : getRooms()) {
-            if (room.getId().equals(id)) {
+            if (room.getId().equals(id))
                 return room;
-            }
         }
         return null;
     }
@@ -34,9 +33,8 @@ public interface Dungeon {
 
     default RoomFactory getRoomFactoryById(String id) {
         for (RoomFactory factory : getRoomFactories()) {
-            if (factory.getId().equals(id)) {
+            if (factory.getId().equals(id))
                 return factory;
-            }
         }
         return null;
     }

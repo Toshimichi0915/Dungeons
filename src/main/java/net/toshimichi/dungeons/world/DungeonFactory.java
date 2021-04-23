@@ -6,5 +6,5 @@ public interface DungeonFactory {
 
     String getId();
 
-    Dungeon newDungeon(File activeRoomSaveDir, String id);
+    Dungeon newDungeon(File activeRoomSaveDir, String id) throws Exception;
 }

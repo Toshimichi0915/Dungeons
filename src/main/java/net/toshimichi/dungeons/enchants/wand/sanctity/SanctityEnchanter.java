@@ -2,31 +2,21 @@ package net.toshimichi.dungeons.enchants.wand.sanctity;
 
 import net.toshimichi.dungeons.Dungeons;
 import net.toshimichi.dungeons.enchants.Enchant;
-import net.toshimichi.dungeons.enchants.Enchanter;
+import net.toshimichi.dungeons.enchants.wand.WandEnchanter;
 import net.toshimichi.dungeons.utils.SilentCooldown;
 import org.apache.commons.lang.math.RandomUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SanctityEnchanter extends Enchanter implements Listener {
+public class SanctityEnchanter extends WandEnchanter {
 
     public SanctityEnchanter(Enchant enchant, Player player, ItemStack itemStack) {
         super(enchant, player, itemStack);
-    }
-
-    @Override
-    protected void onEnabled() {
-        Bukkit.getPluginManager().registerEvents(this, Dungeons.getInstance().getPlugin());
     }
 
     @Override
@@ -35,14 +25,7 @@ public class SanctityEnchanter extends Enchanter implements Listener {
     }
 
     @Override
-    protected void onDisabled() {
-        HandlerList.unregisterAll(this);
-    }
-
-    @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!getPlayer().equals(e.getPlayer())) return;
-        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         int level = getEnchant().getLevel();
         if (SilentCooldown.getCooldown(getItemStack(), "enchant.sanctity.cooldown") > 1) return;
         if (!Dungeons.getInstance().getManaManager().consumeMana(getPlayer(), 20 * level)) return;
@@ -65,7 +48,6 @@ public class SanctityEnchanter extends Enchanter implements Listener {
             loc.add(RandomUtils.nextDouble() - 0.5, 0, RandomUtils.nextDouble() - 0.5);
             getPlayer().getWorld().spawnParticle(Particle.HEART, loc, 0, 0, 0.2, 0);
         }
-        e.setCancelled(true);
     }
 
     @Override

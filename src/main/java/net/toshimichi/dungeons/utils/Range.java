@@ -2,6 +2,7 @@ package net.toshimichi.dungeons.utils;
 
 import com.sk89q.worldedit.math.transform.AffineTransform;
 import com.sk89q.worldedit.regions.Region;
+import net.royawesome.jlibnoise.MathHelper;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.io.Serializable;
@@ -93,6 +94,54 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
         return maxPoint;
     }
 
+    @Override
+    public String toString() {
+        return "Range{" +
+                "pos1=" + pos1 +
+                ", pos2=" + pos2 +
+                ", minPoint=" + minPoint +
+                ", maxPoint=" + maxPoint +
+                '}';
+    }
+
+    /**
+     * 最小地点と最大地点の間を線形補間します.
+     *
+     * @param x 0から1までの値
+     * @param y 0から1までの値
+     * @param z 0から1までの値
+     * @return 線形補間された座標
+     */
+    public Pos lerp(double x, double y, double z) {
+        x = MathHelper.clamp(x, 0, 1);
+        y = MathHelper.clamp(y, 0, 1);
+        z = MathHelper.clamp(z, 0, 1);
+        if (x == 0 && y == 0 && z == 0) {
+            return getMinPoint();
+        } else if (x == 1 && y == 1 && z == 1) {
+            return getMaxPoint();
+        }
+        Pos min = getMinPoint();
+        Pos max = getMaxPoint();
+        return new Pos(MathHelper.lerp(min.getX(), max.getX(), x),
+                MathHelper.lerp(min.getY(), max.getY(), y),
+                MathHelper.lerp(min.getZ(), max.getZ(), z));
+    }
+
+    /**
+     * 指定された座標が範囲の中に含まれる場合は {@code true} そうでない場合は {@code false} を返します.
+     *
+     * @param pos 範囲の中にあるか確認したい座標
+     * @return 範囲の中にある場合は {@code true} そうでなければ {@code false}
+     */
+    public boolean contains(Pos pos) {
+        Pos min = getMinPoint();
+        Pos max = getMaxPoint();
+        return min.getX() <= pos.getX() && pos.getX() <= max.getX() &&
+                min.getY() <= pos.getY() && pos.getY() <= max.getY() &&
+                min.getZ() <= pos.getZ() && pos.getZ() <= max.getZ();
+    }
+
     /**
      * 範囲のx座標に関する長さを求めます.
      *
@@ -140,6 +189,7 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
 
     /**
      * このインスタンスによって表される立方体を, 指定された方向ベクトルに並行移動させます.
+     *
      * @param pos 方向ベクトル
      * @return 平行移動された立方体
      */
@@ -149,16 +199,15 @@ final public class Range implements Cloneable, Serializable, ConfigurationSerial
 
     /**
      * このインスタンスによって表される立方体を, 指定された軸回りに回転させます.
+     *
      * @param x {@code x軸の回転角 / 90}
      * @param y {@code y軸の回転角 / 90}
      * @param z {@code z軸の回転角 / 90}
      * @return 回転された立方体
      */
     public Range rotate(int x, int y, int z) {
-        AffineTransform transform = new AffineTransform();
-        transform.rotateX(x * 90);
-        transform.rotateY(y * 90);
-        transform.rotateZ(z * 90);
+        AffineTransform transform = new AffineTransform()
+                .rotateX(-x * 90).rotateY(-y * 90).rotateZ(-z * 90);
         return new Range(new Pos(transform.apply(getPos1().toVector3())),
                 new Pos(transform.apply(getPos2().toVector3())));
     }

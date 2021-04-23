@@ -34,7 +34,7 @@ abstract public class NormalRoom implements Room {
         this(dungeon, roomFactory, id);
         this.origin = origin;
         this.direction = direction;
-        this.area = new Range(origin, getRoomFactory().getArea(origin, direction));
+        this.area = getRoomFactory().getArea(origin, direction);
         this.usableGateways.addAll(getRoomFactory().getGateways(origin, direction));
     }
 

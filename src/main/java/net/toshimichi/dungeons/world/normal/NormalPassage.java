@@ -5,13 +5,15 @@ import net.toshimichi.dungeons.world.Passage;
 
 final public class NormalPassage implements Passage {
 
+    private final NormalDungeon dungeon;
     private final String id;
-    private final NormalRoom room1;
-    private final NormalRoom room2;
+    private final String room1;
+    private final String room2;
     private final Range gateway1;
     private final Range gateway2;
 
-    public NormalPassage(String id, NormalRoom room1, NormalRoom room2, Range gateway1, Range gateway2) {
+    public NormalPassage(NormalDungeon dungeon, String id, String room1, String room2, Range gateway1, Range gateway2) {
+        this.dungeon = dungeon;
         this.id = id;
         this.room1 = room1;
         this.room2 = room2;
@@ -26,7 +28,7 @@ final public class NormalPassage implements Passage {
 
     @Override
     public NormalRoom getRoom1() {
-        return room1;
+        return dungeon.getRoomById(room1);
     }
 
     @Override
@@ -36,7 +38,7 @@ final public class NormalPassage implements Passage {
 
     @Override
     public NormalRoom getRoom2() {
-        return room2;
+        return dungeon.getRoomById(room2);
     }
 
     @Override

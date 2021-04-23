@@ -7,9 +7,9 @@ public interface DungeonManager {
 
     List<DungeonFactory> getDungeonFactories();
 
-    Dungeon newDungeon(String factoryId);
+    Dungeon newDungeon(String factoryId) throws Exception;
 
-    void load();
+    void load() throws Exception;
 
-    void save();
+    void save() throws Exception;
 }

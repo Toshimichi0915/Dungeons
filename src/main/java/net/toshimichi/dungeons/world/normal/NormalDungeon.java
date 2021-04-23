@@ -90,6 +90,16 @@ abstract public class NormalDungeon implements Dungeon {
     }
 
     @Override
+    public NormalRoom getRoomById(String id) {
+        return (NormalRoom) Dungeon.super.getRoomById(id);
+    }
+
+    @Override
+    public NormalRoomFactory getRoomFactoryById(String id) {
+        return (NormalRoomFactory) Dungeon.super.getRoomFactoryById(id);
+    }
+
+    @Override
     public void save(ConfigurationSection section) {
         section.set("name", name);
         section.set("world", world.getUID().toString());
@@ -108,7 +118,6 @@ abstract public class NormalDungeon implements Dungeon {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void load(ConfigurationSection section) {
         name = section.getString("name");
@@ -119,11 +128,11 @@ abstract public class NormalDungeon implements Dungeon {
         ConfigurationSection passagesSection = section.getConfigurationSection("passages");
         if (passagesSection != null) {
             for (String passageId : passagesSection.getKeys(false)) {
-                NormalRoom room1 = (NormalRoom) getRoomById(passagesSection.getString(passageId + ".room1"));
-                NormalRoom room2 = (NormalRoom) getRoomById(passagesSection.getString(passageId + ".room2"));
+                String room1 = passagesSection.getString(passageId + ".room1");
+                String room2 = passagesSection.getString(passageId + ".room2");
                 Range gateway1 = (Range) passagesSection.get(passageId + ".gateway1");
                 Range gateway2 = (Range) passagesSection.get(passageId + ".gateway2");
-                passages.add(new NormalPassage(passageId, room1, room2, gateway1, gateway2));
+                passages.add(new NormalPassage(this, passageId, room1, room2, gateway1, gateway2));
                 passageIdCounter++;
             }
         }
@@ -133,9 +142,9 @@ abstract public class NormalDungeon implements Dungeon {
         ConfigurationSection roomsSection = section.getConfigurationSection("rooms");
         if (roomsSection != null) {
             for (String roomId : roomsSection.getKeys(false)) {
-                NormalRoomFactory factory = (NormalRoomFactory) getRoomFactoryById(roomsSection.getString(roomId + ".factory"));
+                NormalRoomFactory factory = getRoomFactoryById(roomsSection.getString(roomId + ".factory"));
                 NormalRoom room = factory.load(roomId, roomsSection.getConfigurationSection(roomId));
-                rooms.add(room);
+                addRoom(room);
                 roomIdCounter++;
             }
         }
@@ -150,9 +159,8 @@ abstract public class NormalDungeon implements Dungeon {
 
     public NormalPassage getPassageById(String id) {
         for (NormalPassage passage : passages) {
-            if (passage.getId().equals(id)) {
+            if (passage.getId().equals(id))
                 return passage;
-            }
         }
         return null;
     }
@@ -192,8 +200,8 @@ abstract public class NormalDungeon implements Dungeon {
     }
 
     public NormalPassage connect(Room room1, Range gateway1, Room room2, Range gateway2) {
-        NormalRoom normalRoom1 = (NormalRoom) getRoomById(room1.getId());
-        NormalRoom normalRoom2 = (NormalRoom) getRoomById(room2.getId());
+        NormalRoom normalRoom1 = getRoomById(room1.getId());
+        NormalRoom normalRoom2 = getRoomById(room2.getId());
         if (normalRoom1 == null || !normalRoom1.equals(room1)) {
             throw new IllegalStateException("Specified room1 is not in the dungeon: " + room1);
         }
@@ -208,7 +216,8 @@ abstract public class NormalDungeon implements Dungeon {
         normalRoom1.setUsableGateways(gateways1);
         normalRoom2.setUsableGateways(gateways2);
 
-        NormalPassage passage = new NormalPassage(newPassageId(), normalRoom1, normalRoom2, gateway1, gateway2);
+        NormalPassage passage = new NormalPassage(this, newPassageId(),
+                normalRoom1.getId(), normalRoom2.getId(), gateway1, gateway2);
 
         List<NormalPassage> passages1 = normalRoom1.getPassages();
         List<NormalPassage> passages2 = normalRoom2.getPassages();
@@ -216,17 +225,18 @@ abstract public class NormalDungeon implements Dungeon {
         passages2.add(passage);
         normalRoom1.setPassages(passages1);
         normalRoom1.setPassages(passages2);
+        addPassage(passage);
 
-        return new NormalPassage(newPassageId(), normalRoom1, normalRoom2, gateway1, gateway2);
+        return passage;
     }
 
     @Override
     public String newRoomId() {
-        return "room-" + roomIdCounter++;
+        return "room_" + roomIdCounter++;
     }
 
     public String newPassageId() {
-        return "passage-" + passageIdCounter++;
+        return "passage_" + passageIdCounter++;
     }
 
 }

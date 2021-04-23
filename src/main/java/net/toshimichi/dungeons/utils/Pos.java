@@ -2,6 +2,7 @@ package net.toshimichi.dungeons.utils;
 
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.math.Vector3;
+import net.royawesome.jlibnoise.MathHelper;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -16,6 +17,10 @@ import java.util.Map;
  * 整数で表される座標です.
  */
 final public class Pos implements Cloneable, Serializable, ConfigurationSerializable {
+
+    public static Pos ZERO = new Pos(0, 0, 0);
+    public static Pos ONE = new Pos(1, 1, 1);
+
     private final int x;
     private final int y;
     private final int z;
@@ -36,6 +41,7 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
     /**
      * {@link Vector} に対応するインスタンスを作成します.
      * また元々のベクトルに小数点が含まれていた場合は切り落とされます.
+     *
      * @param vector ブロックの座標.
      */
     public Pos(Vector vector) {
@@ -58,6 +64,7 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
     /**
      * {@link Vector3} に対応するインスタンスを作成します.
      * また元々のベクトルに小数点が含まれていた場合は切り落とされます.
+     *
      * @param vector ブロックの座標.
      */
     public Pos(Vector3 vector) {
@@ -134,6 +141,29 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
     }
 
     /**
+     * 指定された座標までの距離を返します.
+     * {@link Pos#distanceSq} よりも低速であることに留意してください.
+     *
+     * @param pos 座標
+     * @return 距離
+     */
+    public double distance(Pos pos) {
+        return MathHelper.sqrt(distanceSq(pos));
+    }
+
+    /**
+     * 指定された座標までの距離の2乗を返します.
+     *
+     * @param pos 座標
+     * @return 距離の2乗
+     */
+    public double distanceSq(Pos pos) {
+        return (getX() - pos.getX()) * (getX() - pos.getX())
+                + (getY() - pos.getY()) * (getY() - pos.getY())
+                + (getZ() - pos.getZ()) * (getZ() - pos.getZ());
+    }
+
+    /**
      * このインスタンスを {@link Location} に変換します.
      *
      * @param world {@link Location#getWorld()}
@@ -164,6 +194,7 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
 
     /**
      * このインスタンスを {@link Vector3} に変換します.
+     *
      * @return 変換された {@link Vector3}
      */
     public Vector3 toVector3() {
@@ -221,5 +252,14 @@ final public class Pos implements Cloneable, Serializable, ConfigurationSerializ
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Pos{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 }

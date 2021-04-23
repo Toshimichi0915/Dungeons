@@ -1,4 +1,4 @@
-version=17
+version=19
 general.lang.name=日本語
 general.lang.native=日本語
 general.lang.english=Japanese
@@ -90,6 +90,10 @@ enchant.featherfalling.3=落下ダメージを&c 90% 減少
 enchant.respiration.1=水中の呼吸時間を&e 15秒 &7増加
 enchant.respiration.2=水中の呼吸時間を&e 30秒 &7増加
 enchant.respiration.3=水中の呼吸時間を&e 45秒 &7増加
+enchant.tower=塔のダンジョンを作成する
+enchant.hub_0=分岐点を作成する (塔のダンジョンでのみ使用可能)
+enchant.passage_0=通路を作成する (塔のダンジョンでのみ使用可能)
+enchant.upstairs_0=上方向への階段を作成する (塔のダンジョンでのみ使用可能)
 
 mysticwell.title=Mystic Well
 mysticwell.not_set={color}錬金台に入れるアイテムをクリックしてください!
@@ -105,7 +109,6 @@ mysticwell.button.invalid=&cMystic Well\n&7このアイテムはエンチャン�
 mysticwell.button.not_set=&cMystic Well\n&7エンチャントするアイテムを錬金台に入れてください
 mysticwell.button.unknown=&cMystic Well\n&7不明なエラーが発生しました
 
-
 anvil.title=Anvil
 anvil.set={color}鉄床にアイテムが入っています!!\n{color}クリックしてアイテムを回収します
 anvil.left_not_set={color}鉄床の左スロットに入れるアイテムをクリックしてください!
@@ -120,3 +123,6 @@ anvil.button.already_set=&cAnvil\n&7合成スロットにアイテムが入っ�
 anvil.button.no_xp=&cAnvil\n&b {xp}&7 レベル足りません
 anvil.button.unknown=&cAnvil\n&7不明なエラーが発生しました
 anvil.button.invalid=&cAnvil\n&7これらのアイテムは合成できません!
+
+world.create.no_dungeon=&cダンジョンがありません
+world.create.invalid_gateway=&c部屋の入り口が作成できません
